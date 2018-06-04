@@ -1,0 +1,338 @@
+<% if(typeof(id) != "undefined"){ %>
+  <form class="layui-form" action="">
+      <div class="layui-form-item">
+          <div class="layui-inline">
+            <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>编号</span></label>
+            <div class="layui-inline">
+              <input name="id"  type="hidden" value="<%=id%>" />
+              <input name="code" value="<%=code%>" lay-verify="required" disabled=disabled lay-verType="tips" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-inline">
+            <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>状态</span></label>
+            <div class="layui-inline">
+              <select name="enableFlag" id="" lay-verify="required"  lay-verType="tips">
+                <option value="Y" <%if(enableFlag == 'Y'){%>selected<%}%> >启用</option>
+                <option value="N" <%if(enableFlag == 'N'){%>selected<%}%>>关闭</option>
+              </select>
+            </div>
+          </div>
+      </div>
+      <div class="layui-form-item">
+          <div class="layui-inline">
+            <label class="layui-form-label flex flex-align-items"><span>语言</span></label>
+            <div class="layui-inline">
+              <select name="lang" id="">
+                <option value="">---请选择---</option>
+                <option value="zh_TW" <%if(lang == 'zh_TW' || lang=='繁体'){%>selected<%}%>>繁体</option>
+                <option value="zh_CN" <%if(lang == 'zh_CN' || lang=='简体'){%>selected<%}%>>简体</option>
+                <option value="en_US" <%if(lang == 'en_US' || lang=='英文'){%>selected<%}%>>英文</option>
+              </select>
+            </div>
+          </div>
+          <div class="layui-inline">
+            <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>名称</span></label>
+            <div class="layui-inline">
+                <input type="tel" name="tplName" value="<%=tplName%>" lay-verify="required"  lay-verType="tips" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-inline pushdevices">
+          <label for="" class="layui-form-label flex flex-align-items "><span>推送设备</span></label>
+          <div class="layui-inline">
+            <input class="layui-inline" type="checkbox" name="pushDevices" value="ios" lay-skin="primary" <%if(pushDevices && pushDevices.indexOf("ios") != -1){%>checked<%}%> title="ios" >
+            <input class="layui-inline" type="checkbox" name="pushDevices" value="android"  lay-skin="primary" <%if(pushDevices && pushDevices.indexOf("android") != -1){%>checked<%}%> title="android">
+            <input class="layui-inline" type="checkbox" name="pushDevices" value="pcui"  lay-skin="primary" <%if(pushDevices && pushDevices.indexOf("pcui") != -1){%>checked<%}%> title="pcui">
+            <input class="layui-inline" type="checkbox" name="pushDevices" value="webui"  lay-skin="primary" <%if(pushDevices && pushDevices.indexOf("webui") != -1){%>checked<%}%> title="webui">
+          </div>
+        </div>
+      </div>
+       <div class="layui-form-item">
+          <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><span>消息类型</span></label>
+            <div class="layui-inline">
+              <select name="msgType" id="msgType" lay-verify="required" lay-verType="tips">
+                <option value="">---请选择---</option>
+                <option <%if(msgType == '1'){%>selected<%}%> value="1">营销消息</option>
+                <option <%if(msgType == '2'){%>selected<%}%> value="2">预警消息</option>
+              </select>
+            </div>
+          </div>
+      </div>
+      <div class="layui-form-item ">
+          <div class="layui-inline pushapp">
+            <label class="layui-form-label flex flex-align-items"><span>推送的APP</span></label>
+            <div class="layui-inline">
+                <input 
+                  class="layui-inline" 
+                  type="checkbox" 
+                  name="pushApp" 
+                  value="GWf1_GTS2_APP" 
+                  lay-skin="primary" 
+                  title="f1 GTS2 APP" 
+                  <%if(pushApp && pushApp.indexOf("GWf1_GTS2_APP") != -1){%>checked<%}%> >
+                <input 
+                  class="layui-inline" 
+                  type="checkbox" 
+                  name="pushApp" 
+                  value="H1_GTS2_APP"  
+                  lay-skin="primary" 
+                  title="H1 GTS2 APP" 
+                  <%if(pushApp &&  pushApp.indexOf("H1_GTS2_APP")!= -1 ){%>checked<%}%>>
+                <input 
+                  class="layui-inline" 
+                  type="checkbox" 
+                  name="pushApp" 
+                  value="f1DEMO_GTS2_APP"  
+                  lay-skin="primary" 
+                  title="f1DEMO GTS2 APP" 
+                  <%if(pushApp &&  pushApp.indexOf("f1DEMO_GTS2_APP")!= -1 ){%>checked<%}%>>
+                <input 
+                  class="layui-inline" 
+                  type="checkbox" 
+                  name="pushApp" 
+                  value="P1_GTS_APP"  
+                  lay-skin="primary" 
+                  title="P1 GTS APP" 
+                  <%if(pushApp && pushApp.indexOf("P1_GTS_APP") != -1 ){%>checked<%}%>>
+            </div>
+          </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-inline">
+          <label for="" class="layui-form-label flex flex-align-items"><span>推送对象</span></label>
+          <div class="layui-inline">
+            <select name="pushType" id="">
+              <option value="">---请选择---</option>
+              <option value="all" <%if(pushType == 'all'){%>selected<%}%>>推送所有人指定设备(all)</option>
+              <option value="tag" <%if(pushType == 'tag'){%>selected<%}%>>指定分组的人(tag)</option>
+              <option value="alias" <%if(pushType == 'alias'){%>selected<%}%>>指定人(alias)</option>
+              <option value="device" <%if(pushType == 'device'){%>selected<%}%>>指定设备(device)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="layui-form-item ">
+          <div class="layui-inline msgShowPosition">
+              <label class="layui-form-label flex flex-align-items"><span>展示位置</span></label>
+              <div class="layui-inline">
+                  <input 
+                    class="layui-inline" 
+                    type="checkbox" 
+                    name="msgShowPosition" 
+                    value="1" 
+                    lay-skin="primary" 
+                    <%if(msgShowPosition && msgShowPosition.indexOf('1') != '-1'){%>checked<%}%>
+                    title="弹出窗">
+                  <input 
+                    class="layui-inline"  
+                    type="checkbox" 
+                    name="msgShowPosition" 
+                    value="2"  
+                    <%if(msgShowPosition && msgShowPosition.indexOf('2') != '-1'){%>checked<%}%>
+                    lay-skin="primary" 
+                    title="跑马灯">
+                  <input 
+                    class="layui-inline"  
+                    type="checkbox" 
+                    name="msgShowPosition" 
+                    value="3"  
+                    <%if(msgShowPosition && msgShowPosition.indexOf('3') != '-1'){%>checked<%}%>
+                    lay-skin="primary" 
+                    title="工具栏">
+              </div>
+          </div>
+          <div class="layui-inline">
+            <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>内容类型</span></label>
+            <div class="layui-inline">
+                <select name="tplContentType" id="" lay-verify="required"  lay-verType="tips">
+                  <option value=""  <%if(tplContentType == null){%>selected<%}%>>---请选择---</option>
+                  <option value="1" <%if(tplContentType == '1'){%>selected<%}%> >图片</option>
+                  <option value="2" <%if(tplContentType == '2'){%>selected<%}%>>图文</option>
+                  <option value="3" <%if(tplContentType == '3'){%>selected<%}%>>其他</option>
+                </select>
+            </div>
+          </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-inline flex no-mr">
+          <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>内容</span></label>
+          <div class="layui-inline flex-item">
+            <textarea class="layui-textarea" name="tplContent" id="" lay-verify="required" lay-verType="tips"><%=tplContent%></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-inline flex no-mr">
+          <label for="" class="layui-form-label flex flex-align-items"><span>摘要</span></label>
+          <div class="layui-inline">
+            <textarea name="summary" id="" class="layui-textarea"><%=summary%></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-inline flex no-mr">
+          <label for="" class="layui-form-label flex flex-align-items"><span>备注</span></label>
+          <div class="layui-inline flex-item">
+            <textarea name="remark" id="" class="layui-textarea"><%=remark%></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-inline flex no-mr">
+          <label for="" class="layui-form-label flex flex-align-items"><span>其他信息</span></label>
+          <div class="layui-inline flex-item">
+            <textarea name="otherMsg" id="" class="layui-textarea"><%=otherMsg%></textarea>
+            <p style="color:red;">(放置地址等信息，请输入json格式)</p>
+          </div>
+        </div>
+      </div>
+      <button class="layui-btn node-submit" style="display:none;" lay-submit lay-filter="item"></button>
+    </form>
+  <% }else{ %>
+  <form class="layui-form" action="">
+    <div class="layui-form-item flex">
+        <div class="layui-inline">
+          <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>编号</span></label>
+          <div class="layui-inline">
+            <input name="code" lay-verify="required" lay-verType="tips" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>状态</span></label>
+          <div class="layui-inline">
+            <select name="enableFlag" id="" lay-verify="required"  lay-verType="tips">
+              <option value="Y">启用</option>
+              <option value="N">关闭</option>
+            </select>
+          </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+          <label class="layui-form-label flex flex-align-items"><span>语言</span></label>
+          <div class="layui-inline">
+            <select name="lang" id="lang">
+              <option value="zh_TW">繁体</option>
+              <option value="zh_CN">简体</option>
+              <option value="en_US">英文</option>
+            </select>
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>名称</span></label>
+          <div class="layui-inline">
+              <input type="tel" name="tplName" lay-verify="required"  lay-verType="tips" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+      </div>
+    <div class="layui-form-item">
+      <div class="layui-inline pushdevices">
+        <label for="" class="layui-form-label flex flex-align-items "><span>推送设备</span></label>
+        <input class="layui-inline" type="checkbox" name="pushDevices" value="ios" lay-skin="primary" title="ios" >
+        <input class="layui-inline" type="checkbox" name="pushDevices" value="android"  lay-skin="primary" title="android">
+        <input class="layui-inline" type="checkbox" name="pushDevices" value="pcui"  lay-skin="primary" title="pcui">
+        <input class="layui-inline" type="checkbox" name="pushDevices" value="webui"  lay-skin="primary" title="webui">
+      </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+          <label for="" class="layui-form-label flex flex-align-items"><span>消息类型</span></label>
+          <div class="layui-inline">
+             <select name="msgType" id="msgType" lay-verify="required" lay-verType="tips">
+              <option value="">---请选择---</option>
+              <option value="1">营销消息</option>
+              <option value="2">预警消息</option>
+            </select>
+          </div>
+         </div>
+     </div>
+    <div class="layui-form-item">
+        <div class="layui-inline pushapp">
+          <label class="layui-form-label flex flex-align-items"><span>推送的APP</span></label>
+          <div class="layui-inline">
+          	<input class="layui-inline" type="checkbox"  name="pushApp" value="GWf1_GTS2_APP" lay-skin="primary" title="f1 GTS2 APP">
+          </div>
+	        <div class="layui-inline">
+            	<input class="layui-inline" type="checkbox" name="pushApp" value="H1_GTS2_APP"  lay-skin="primary" title="H1 GTS2 APP">
+	        </div>
+	        <div class="layui-inline">
+	        	<input class="layui-inline" type="checkbox" name="pushApp" value="f1DEMO_GTS2_APP"  lay-skin="primary" title="f1DEMO GTS2 APP">
+	        </div>
+	        <div class="layui-inline">
+	        	<input class="layui-inline" type="checkbox" name="pushApp" value="P1_GTS_APP"  lay-skin="primary" title="P1 GTS APP">
+	        </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-inline">
+        <label for="" class="layui-form-label flex flex-align-items"><span>推送对象</span></label>
+        <div class="layui-inline">
+          <select name="pushType" id="">
+            <option value="">---请选择---</option>
+            <option value="all">推送所有人指定设备(all)</option>
+            <option value="tag">指定分组的人(tag)</option>
+            <option value="alias">指定人(alias)</option>
+            <option value="device">指定设备(device)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-inline msgShowPosition">
+        <label class="layui-form-label flex flex-align-items"><span>展示位置</span></label>
+        <div class="layui-inline">
+          <input class="layui-inline" type="checkbox" name="msgShowPosition" value="1" lay-skin="primary" title="弹出窗">
+          <input class="layui-inline"  type="checkbox" name="msgShowPosition" value="2"  lay-skin="primary" title="跑马灯">
+          <input class="layui-inline"  type="checkbox" name="msgShowPosition" value="3"  lay-skin="primary" title="工具栏">
+        </div>            
+      </div>
+      <div class="layui-inline">
+        <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>内容类型</span></label>
+        <div class="layui-inline">
+          <select name="tplContentType" id="" lay-verify="required"  lay-verType="tips">
+            <option value="">---请选择---</option>
+            <option value="1">图片</option>
+            <option value="2">图文</option>
+            <option value="3">其他</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-inline flex no-mr">
+        <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>内容</span></label>
+        <div class="layui-inline flex-item">
+          <textarea name="tplContent" id="" lay-verify="required" lay-verType="tips" class="layui-textarea"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-inline flex no-mr">
+        <label for="" class="layui-form-label flex flex-align-items"><span>摘要</span></label>
+        <div class="layui-inline flex-item">
+          <textarea name="summary" id="" class="layui-textarea"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-inline flex no-mr">
+        <label for="" class="layui-form-label flex flex-align-items"><span>备注</span></label>
+        <div class="layui-inline flex-item">
+          <textarea name="remark" id="" class="layui-textarea"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-inline flex no-mr">
+        <label for="" class="layui-form-label flex flex-align-items"><span>其他信息</span></label>
+        <div class="layui-inline flex-item">
+          <textarea name="otherMsg" id="" class="layui-textarea"></textarea>
+          <p style="color:red;">(放置地址等信息，请输入json格式)</p>
+        </div>
+      </div>
+    </div>
+    <button class="layui-btn node-submit" style="display:none;" lay-submit lay-filter="item"></button>
+  </form>
+  <% } %>

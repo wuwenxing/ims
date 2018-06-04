@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActItemsSettingDao">
+	<select id="findObject" resultType="ActItemsSetting" parameterType="java.lang.Long">
+		select * from act_items_setting where id = #{id}
+	</select>
+	<select id="findListByMap" parameterType="java.util.Map" resultType="ActItemsSetting">
+		select * from act_items_setting
+		where delete_flag != 'Y' 
+		<if test="itemNumber != null and itemNumber != '' ">
+			and item_number like CONCAT('%',#{itemNumber},'%')
+		</if>
+		<if test="itemName != null and itemName !='' ">
+			and item_name like CONCAT('%',#{itemName},'%')
+		</if>
+		<if test="itemType != null and itemType !='' ">
+			and item_type = #{itemType}
+		</if>
+		<if test="itemCategory != null and itemCategory !='' ">
+			and item_category = #{itemCategory}
+		</if>
+		<if test="enableFlag != null and enableFlag !='' ">
+			and enable_flag = #{enableFlag}
+		</if>
+		<if test="startDate != null ">
+			and start_date &gt;= #{startDate}
+		</if>
+		<if test="endDate != null">
+			and end_date &lt;= #{endDate}
+		</if>
+		<if test="companyId != null and companyId!=''">
+			and company_id  = #{companyId}
+		</if>
+	</select>
+	
+	<select id="findObjectByMap" parameterType="java.util.Map" resultType="ActItemsSetting">
+		select * from act_items_setting where 1=1
+		<if test="itemNumber != null and itemNumber != '' ">
+			and item_number = #{itemNumber}
+		</if>
+		<if test="itemName != null and itemName != '' ">
+			and item_name = #{itemName}
+		</if>
+		<if test="deleteFlag != null and deleteFlag !='' ">
+			and delete_flag = #{deleteFlag}
+		</if>
+		 limit 1
+	</select>
+  	<delete id="deleteBatch">
+		delete from act_items_setting where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from act_items_setting
+		where id = #{id}
+	</delete>
+	<insert id="save" parameterType="ActItemsSetting">
+		insert into act_items_setting (id, item_number, item_name,
+		item_usable_amount, item_stock_amount, item_type,
+		item_rate, start_date, end_date,
+		item_category, item_category_amount, item_unit,
+		item_price, create_user, create_ip,
+		create_date, update_user, update_ip,
+		update_date, version_no, delete_flag,
+		enable_flag, company_id)
+		values (#{id}, #{itemNumber,jdbcType=VARCHAR},
+		#{itemName,jdbcType=VARCHAR},
+		#{itemUsableAmount}, #{itemStockAmount}, #{itemType,jdbcType=VARCHAR},
+		#{itemRate}, #{startDate,jdbcType=TIMESTAMP},
+		#{endDate,jdbcType=TIMESTAMP},
+		#{itemCategory,jdbcType=VARCHAR}, #{itemCategoryAmount}, #{itemUnit,jdbcType=VARCHAR},
+		#{itemPrice}, #{createUser,jdbcType=VARCHAR},
+		#{createIp,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateIp,jdbcType=VARCHAR},
+		#{updateDate,jdbcType=TIMESTAMP}, #{versionNo},
+		#{deleteFlag,jdbcType=VARCHAR},
+		#{enableFlag,jdbcType=VARCHAR}, #{companyId})
+	</insert>
+	<update id="update" parameterType="ActItemsSetting">
+		update act_items_setting
+		set item_number = #{itemNumber,jdbcType=VARCHAR},
+		item_name = #{itemName,jdbcType=VARCHAR},
+		item_usable_amount = #{itemUsableAmount},
+		item_stock_amount = #{itemStockAmount},
+		item_type = #{itemType,jdbcType=VARCHAR},
+		item_rate = #{itemRate},
+		start_date = #{startDate,jdbcType=TIMESTAMP},
+		end_date = #{endDate,jdbcType=TIMESTAMP},
+		item_category = #{itemCategory,jdbcType=VARCHAR},
+		item_category_amount = #{itemCategoryAmount},
+		item_unit = #{itemUnit,jdbcType=VARCHAR},
+		item_price = #{itemPrice},
+		create_user = #{createUser,jdbcType=VARCHAR},
+		create_ip = #{createIp,jdbcType=VARCHAR},
+		create_date = #{createDate,jdbcType=TIMESTAMP},
+		update_user = #{updateUser,jdbcType=VARCHAR},
+		update_ip = #{updateIp,jdbcType=VARCHAR},
+		update_date = #{updateDate,jdbcType=TIMESTAMP},
+		version_no = #{versionNo},
+		delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+		enable_flag = #{enableFlag,jdbcType=VARCHAR},
+		company_id = #{companyId}
+		where id = #{id}
+	</update>
+	 
+ 
+  <select id="countItemActivityInUse" resultType="Integer">
+	    SELECT
+		    COUNT(1)
+	    FROM
+		      act_setting
+	    WHERE
+		      EXISTS (
+			          SELECT DISTINCT
+				              activity_periods
+			          FROM
+				              act_task_setting
+			          WHERE act_setting.activity_periods = act_task_setting.activity_periods and 
+				             EXISTS (select  task_setting_id from act_task_items where  item_number = #{itemNumber}  
+				                 and  act_task_setting.id=act_task_items.task_setting_id)
+				          
+		      ) 
+		      <if test="filterProposalStatus!=null and filterProposalStatus!=''">
+		         and proposal_status != #{filterProposalStatus}
+		      </if>
+		      <if test="isSettlement==0">
+		          and (is_settlement is null or is_settlement=0)
+		      </if>
+  </select>
+ 
+  <update id="updateActItemsAmount"  >
+  	update
+  		act_items_setting
+  	<set >
+	  	<if test="itemStockAmountStep !=null">
+	  	    item_stock_amount = item_stock_amount + #{itemStockAmountStep},
+	  	</if>
+	  	<if test="itemUsableAmountStep !=null">
+	  	    item_usable_amount = item_usable_amount + #{itemUsableAmountStep},
+	  	</if>
+	  	<if test="itemStockAmountStep != null or itemUsableAmountStep !=null" >
+		        update_date = now(),
+		</if>
+  	</set> 
+  	where item_number = #{itemNumber} and item_stock_amount>0 and item_usable_amount>0
+  </update>
+
+  <select id="getByGiftNumber" resultType="ActItemsSetting">
+    select * from act_items_setting
+    where item_number = #{giftNumber} limit 1
+  </select>
+
+</mapper>

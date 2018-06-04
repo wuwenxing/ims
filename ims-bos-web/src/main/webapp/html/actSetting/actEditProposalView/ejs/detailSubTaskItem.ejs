@@ -1,0 +1,39 @@
+<div class="items">
+  <%subTaskData.forEach(function(item,index){%>
+    <div class="levelItem subTask" id="<%=item.id%>">
+        <% var taskParams = subTaskConfig.params;%>
+        <input type="hidden" value="<%=subTaskConfig.code%>" name="code">
+        <div class="layui-inline subTaskParams">
+          <% taskParams.forEach(function(itm,idx){%>
+            <%if(itm.isShow){%>
+              <div class="layui-inline">
+                <%if(prizesLabel[itm.proName]){%>
+                  <span><%=prizesLabel[itm.proName]%></span> 
+                <%}%>
+              </div>
+              <div class="layui-inline">
+                <%if(itm.inputType == 'select'){%>
+                  <select name="<%=itm.proName%>" disabled  >
+                    <option value=""></option>
+                  </select>
+                <%}else if(itm.inputType == 'input'){%>
+                  <input type="text" class="layui-input" name="<%=itm.proName%>" disabled value="<%=item[itm.proName]%>" >
+                <%}else if(itm.inputType == 'label'){%>
+
+                <%}else {%>
+                  <input type="text" class="layui-input" name="<%=itm.proName%>" disabled value="<%=item[itm.proName]%>">
+                <%}%>
+              </div>
+              <div class="layui-inline">
+                <%if(itm.paramUnit){%>
+                  <span><%=dynamicList.itemsUnitMap[itm.paramUnit.defaultVal]%></span>
+                  <input type="hidden" value="<%=item[itm.paramUnit.proName]%>" name="<%=itm.paramUnit.proName%>">
+                <%}%>
+              </div>
+            <%}%>
+            <%})%>
+        </div>
+        <div class="prizeItem layui-inline"></div>
+    </div>
+    <%})%>
+</div>

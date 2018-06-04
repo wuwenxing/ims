@@ -1,0 +1,19 @@
+<%if(typeof(viewColumns) != 'undefined'){%>
+  <div class="layui-form-item">
+      <div class="layui-inline check-input" style="margin-left:15px;">
+          <input type="checkbox" name="stringCode" <% if(viewColumns.indexOf('stringCode') != -1){%>checked<%}%> lay-skin="switch" lay-text="允许|禁止">
+      </div>
+      <div class="layui-inline">
+          <label for="" class="layui-form-label">串码</label>
+      </div>
+  </div>
+<%}else{%>
+  <div class="layui-form-item">
+      <div class="layui-inline check-input" style="margin-left:15px;">
+          <input type="checkbox" name="stringCode" lay-skin="switch" lay-text="允许|禁止">
+      </div>
+      <div class="layui-inline">
+          <label for="" class="layui-form-label">串码</label>
+      </div>
+  </div>
+<%}%>

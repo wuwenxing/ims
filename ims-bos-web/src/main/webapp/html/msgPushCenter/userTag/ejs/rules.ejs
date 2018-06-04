@@ -1,0 +1,38 @@
+
+<div class="layui-form-item ruleItem">
+  <div class="layui-inline">
+    <label for="" class="layui-form-label flex flex-align-items">
+      <span>筛选规则</span>
+    </label>
+    <div class="layui-inline flex rules">
+      <input type="text" class="layui-input layui-input-sm"
+          id="cashDate" name="cashStartTime" placeholder="yyyy-mm-dd hh:mm:ss"
+          lay-verify="required"  lay-verType="tips"
+          >
+      <span class="middle">之后注册，超</span>
+      <div class="layui-inline days">
+        <input type="text" class="layui-input layui-input-xs no-border" name="noCashInDay" lay-verify="required|daysItem" lay-verType="tips">
+        <span class="append">天</span>
+      </div>
+      <span class="mrl-8">无入金</span>
+    </div>
+  </div>
+</div>
+<div class="layui-form-item ruleItem">
+  <div class="layui-inline">
+    <label for="" class="layui-form-label"></label>
+    <div class="layui-inline flex rules">
+        <input type="text" class="layui-input layui-input-sm" 
+          id="tradeDate" name="tradeStartTime" placeholder="yyyy-mm-dd hh:mm:ss"
+          lay-verify="required"  lay-verType="tips"
+          >
+        <span class="middle">之后注册，超</span>
+        <div class="layui-inline days">
+          <input type="text" class="layui-input layui-input-xs no-border" name="noTradeDay" lay-verify="required|daysItem" lay-verType="tips">
+          <span class="append">天</span>
+        </div>
+        <span class="mrl-8">无交易</span>        
+    </div>
+    <p class="tips-inner">日历选择最近2个月，填写不超过30天</p>
+  </div>
+</div>

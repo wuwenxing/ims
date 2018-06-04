@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:reg="http://www.dangdang.com/schema/ddframe/reg" xmlns:job="http://www.dangdang.com/schema/ddframe/job"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans.xsd 
+                        http://www.springframework.org/schema/context 
+                        http://www.springframework.org/schema/context/spring-context.xsd 
+                        http://www.dangdang.com/schema/ddframe/reg 
+                        http://www.dangdang.com/schema/ddframe/reg/reg.xsd 
+                        http://www.dangdang.com/schema/ddframe/job 
+                        http://www.dangdang.com/schema/ddframe/job/job.xsd">
+	<context:property-placeholder location="classpath:*.properties" />
+	<reg:zookeeper id="regCenter" server-lists="${zk.address}"
+		namespace="${namespace}" base-sleep-time-milliseconds="${baseSleepTimeMilliseconds}"
+		max-sleep-time-milliseconds="${maxSleepTimeMilliseconds}" max-retries="${maxRetries}" />
+ 	
+ 	<!-- FX -->
+	<!-- 处理FX真实客户资料数据清洗的job  -->
+	<job:simple id="actFxRealCustomerDataMergeJob1"
+		class="${actFxRealCustomerDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actFxRealCustomerDataMergeJob.shardingTotalCount}"
+		cron="${actFxRealCustomerDataMergeJob.cron}"
+		sharding-item-parameters="${actFxRealCustomerDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actFxRealCustomerDataMergeJob.monitorExecution}"
+		failover="${actFxRealCustomerDataMergeJob.failover}"
+		description="${actFxRealCustomerDataMergeJob.description}"
+		disabled="${actFxRealCustomerDataMergeJob.disabled}" overwrite="${actFxRealCustomerDataMergeJob.overwrite}" />
+
+	<!-- 处理FX模拟客户资料数据清洗的job -->
+	<job:simple id="actFxDemoCustomerDataMergeJob1"
+		class="${actFxDemoCustomerDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actFxDemoCustomerDataMergeJob.shardingTotalCount}"
+		cron="${actFxDemoCustomerDataMergeJob.cron}"
+		sharding-item-parameters="${actFxDemoCustomerDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actFxDemoCustomerDataMergeJob.monitorExecution}"
+		failover="${actFxDemoCustomerDataMergeJob.failover}"
+		description="${actFxDemoCustomerDataMergeJob.description}"
+		disabled="${actFxDemoCustomerDataMergeJob.disabled}" overwrite="${actFxDemoCustomerDataMergeJob.overwrite}" />
+	
+	<!-- 处理FX模拟交易数据清洗的job -->
+	<job:simple id="actFxDemoTradeDataMergeJob1"
+		class="${actFxDemoTradeDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actFxDemoTradeDataMergeJob.shardingTotalCount}"
+		cron="${actFxDemoTradeDataMergeJob.cron}"
+		sharding-item-parameters="${actFxDemoTradeDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actFxDemoTradeDataMergeJob.monitorExecution}"
+		failover="${actFxDemoTradeDataMergeJob.failover}"
+		description="${actFxDemoTradeDataMergeJob.description}"
+		disabled="${actFxDemoTradeDataMergeJob.disabled}" overwrite="${actFxDemoTradeDataMergeJob.overwrite}" />
+	
+	<!-- 处理FX真实交易数据清洗的job -->
+	<job:simple id="actFxRealTradeDataMergeJob1"
+		class="${actFxRealTradeDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actFxRealTradeDataMergeJob.shardingTotalCount}"
+		cron="${actFxRealTradeDataMergeJob.cron}"
+		sharding-item-parameters="${actFxRealTradeDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actFxRealTradeDataMergeJob.monitorExecution}"
+		failover="${actFxRealTradeDataMergeJob.failover}"
+		description="${actFxRealTradeDataMergeJob.description}"
+		disabled="${actFxRealTradeDataMergeJob.disabled}" overwrite="${actFxRealTradeDataMergeJob.overwrite}" />
+
+	<!-- 处理FX真实入金数据清洗的job -->
+	<job:simple id="actFxRealCashinDataMergeJob1"
+		class="${actFxRealCashinDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actFxRealCashinDataMergeJob.shardingTotalCount}"
+		cron="${actFxRealCashinDataMergeJob.cron}"
+		sharding-item-parameters="${actFxRealCashinDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actFxRealCashinDataMergeJob.monitorExecution}"
+		failover="${actFxRealCashinDataMergeJob.failover}"
+		description="${actFxRealCashinDataMergeJob.description}"
+		disabled="${actFxRealCashinDataMergeJob.disabled}" overwrite="${actFxRealCashinDataMergeJob.overwrite}" />
+	
+	<!-- 处理FX真实出金数据清洗的job -->
+	<job:simple id="actFxRealCashoutDataMergeJob1"
+		class="${actFxRealCashoutDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actFxRealCashoutDataMergeJob.shardingTotalCount}"
+		cron="${actFxRealCashoutDataMergeJob.cron}"
+		sharding-item-parameters="${actFxRealCashoutDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actFxRealCashoutDataMergeJob.monitorExecution}"
+		failover="${actFxRealCashoutDataMergeJob.failover}"
+		description="${actFxRealCashoutDataMergeJob.description}"
+		disabled="${actFxRealCashoutDataMergeJob.disabled}" overwrite="${actFxRealCashoutDataMergeJob.overwrite}" />
+		
+	<!-- Hx -->
+	<!-- 处理HX真实客户资料数据清洗的job -->
+	<!-- <job:simple id="imsHxRealCustomerDataMergeJob"
+		class="${imsHxRealCustomerDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${imsHxRealCustomerDataMergeJob.shardingTotalCount}"
+		cron="${imsHxRealCustomerDataMergeJob.cron}"
+		sharding-item-parameters="${imsHxRealCustomerDataMergeJob.shardingItemParameters}"
+		monitor-execution="${imsHxRealCustomerDataMergeJob.monitorExecution}"
+		failover="${imsHxRealCustomerDataMergeJob.failover}"
+		description="${imsHxRealCustomerDataMergeJob.description}"
+		disabled="${imsHxRealCustomerDataMergeJob.disabled}" overwrite="${imsHxRealCustomerDataMergeJob.overwrite}" /> -->
+
+	<!-- 处理Hx模拟客户资料数据清洗的job -->	
+	<!-- <job:simple id="imsHxDemoCustomerDataMergeJob"
+		class="${imsHxDemoCustomerDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${imsHxDemoCustomerDataMergeJob.shardingTotalCount}"
+		cron="${imsHxDemoCustomerDataMergeJob.cron}"
+		sharding-item-parameters="${imsHxDemoCustomerDataMergeJob.shardingItemParameters}"
+		monitor-execution="${imsHxDemoCustomerDataMergeJob.monitorExecution}"
+		failover="${imsHxDemoCustomerDataMergeJob.failover}"
+		description="${imsHxDemoCustomerDataMergeJob.description}"
+		disabled="${imsHxDemoCustomerDataMergeJob.disabled}" overwrite="${imsHxDemoCustomerDataMergeJob.overwrite}" /> -->
+	
+	<!-- 处理Hx模拟交易数据清洗的job -->
+	<!-- <job:simple id="imsHxDemoTradeDataMergeJob"
+		class="${imsHxDemoTradeDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${imsHxDemoTradeDataMergeJob.shardingTotalCount}"
+		cron="${imsHxDemoTradeDataMergeJob.cron}"
+		sharding-item-parameters="${imsHxDemoTradeDataMergeJob.shardingItemParameters}"
+		monitor-execution="${imsHxDemoTradeDataMergeJob.monitorExecution}"
+		failover="${imsHxDemoTradeDataMergeJob.failover}"
+		description="${imsHxDemoTradeDataMergeJob.description}"
+		disabled="${imsHxDemoTradeDataMergeJob.disabled}" overwrite="${imsHxDemoTradeDataMergeJob.overwrite}" /> -->
+	
+	<!-- 处理Hx真实交易数据清洗的job -->	
+	<!-- <job:simple id="imsHxRealTradeDataMergeJob"
+		class="${imsHxRealTradeDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${imsHxRealTradeDataMergeJob.shardingTotalCount}"
+		cron="${imsHxRealTradeDataMergeJob.cron}"
+		sharding-item-parameters="${imsHxRealTradeDataMergeJob.shardingItemParameters}"
+		monitor-execution="${imsHxRealTradeDataMergeJob.monitorExecution}"
+		failover="${imsHxRealTradeDataMergeJob.failover}"
+		description="${imsHxRealTradeDataMergeJob.description}"
+		disabled="${imsHxRealTradeDataMergeJob.disabled}" overwrite="${imsHxRealTradeDataMergeJob.overwrite}" /> -->
+
+	<!-- 处理Hx真实入金数据清洗的job -->
+	<!-- <job:simple id="imsHxRealCashinDataMergeJob"
+		class="${imsHxRealCashinDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${imsHxRealCashinDataMergeJob.shardingTotalCount}"
+		cron="${imsHxRealCashinDataMergeJob.cron}"
+		sharding-item-parameters="${imsHxRealCashinDataMergeJob.shardingItemParameters}"
+		monitor-execution="${imsHxRealCashinDataMergeJob.monitorExecution}"
+		failover="${imsHxRealCashinDataMergeJob.failover}"
+		description="${imsHxRealCashinDataMergeJob.description}"
+		disabled="${imsHxRealCashinDataMergeJob.disabled}" overwrite="${imsHxRealCashinDataMergeJob.overwrite}" /> -->
+	
+	<!-- 处理Hx真实出金数据清洗的job -->
+	<!-- <job:simple id="imsHxRealCashoutDataMergeJob"
+		class="${imsHxRealCashoutDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${imsHxRealCashoutDataMergeJob.shardingTotalCount}"
+		cron="${imsHxRealCashoutDataMergeJob.cron}"
+		sharding-item-parameters="${imsHxRealCashoutDataMergeJob.shardingItemParameters}"
+		monitor-execution="${imsHxRealCashoutDataMergeJob.monitorExecution}"
+		failover="${imsHxRealCashoutDataMergeJob.failover}"
+		description="${imsHxRealCashoutDataMergeJob.description}"
+		disabled="${imsHxRealCashoutDataMergeJob.disabled}" overwrite="${imsHxRealCashoutDataMergeJob.overwrite}" /> -->
+		
+	
+	<!-- HXFX -->
+	<!-- 处理HXFX真实客户资料数据清洗的job
+	<job:simple id="actHxfxRealCustomerDataMergeJob"
+		class="${actHxfxRealCustomerDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actHxfxRealCustomerDataMergeJob.shardingTotalCount}"
+		cron="${actHxfxRealCustomerDataMergeJob.cron}"
+		sharding-item-parameters="${actHxfxRealCustomerDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actHxfxRealCustomerDataMergeJob.monitorExecution}"
+		failover="${actHxfxRealCustomerDataMergeJob.failover}"
+		description="${actHxfxRealCustomerDataMergeJob.description}"
+		disabled="${actHxfxRealCustomerDataMergeJob.disabled}" overwrite="${actHxfxRealCustomerDataMergeJob.overwrite}" />--> 
+	
+	<!-- 处理HXFX真实交易数据清洗的job 
+	<job:simple id="actHxfxRealTradeDataMergeJob"
+		class="${actHxfxRealTradeDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actHxfxRealTradeDataMergeJob.shardingTotalCount}"
+		cron="${actHxfxRealTradeDataMergeJob.cron}"
+		sharding-item-parameters="${actHxfxRealTradeDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actHxfxRealTradeDataMergeJob.monitorExecution}"
+		failover="${actHxfxRealTradeDataMergeJob.failover}"
+		description="${actHxfxRealTradeDataMergeJob.description}"
+		disabled="${actHxfxRealTradeDataMergeJob.disabled}" overwrite="${actHxfxRealTradeDataMergeJob.overwrite}" />-->	
+
+	<!-- 处理HXFX真实入金数据清洗的job
+	<job:simple id="actHxfxRealCashinDataMergeJob"
+		class="${actHxfxRealCashinDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actHxfxRealCashinDataMergeJob.shardingTotalCount}"
+		cron="${actHxfxRealCashinDataMergeJob.cron}"
+		sharding-item-parameters="${actHxfxRealCashinDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actHxfxRealCashinDataMergeJob.monitorExecution}"
+		failover="${actHxfxRealCashinDataMergeJob.failover}"
+		description="${actHxfxRealCashinDataMergeJob.description}"
+		disabled="${actHxfxRealCashinDataMergeJob.disabled}" overwrite="${actHxfxRealCashinDataMergeJob.overwrite}" /> -->
+	
+	<!-- 处理HXFX真实出金数据清洗的job 
+	<job:simple id="actHxfxRealCashoutDataMergeJob"
+		class="${actHxfxRealCashoutDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actHxfxRealCashoutDataMergeJob.shardingTotalCount}"
+		cron="${actHxfxRealCashoutDataMergeJob.cron}"
+		sharding-item-parameters="${actHxfxRealCashoutDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actHxfxRealCashoutDataMergeJob.monitorExecution}"
+		failover="${actHxfxRealCashoutDataMergeJob.failover}"
+		description="${actHxfxRealCashoutDataMergeJob.description}"
+		disabled="${actHxfxRealCashoutDataMergeJob.disabled}" overwrite="${actHxfxRealCashoutDataMergeJob.overwrite}" />	-->
+		
+	<!-- 处理HXFX模拟客户资料数据清洗的job
+	<job:simple id="actHxfxDemoCustomerDataMergeJob"
+		class="${actHxfxDemoCustomerDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actHxfxDemoCustomerDataMergeJob.shardingTotalCount}"
+		cron="${actHxfxDemoCustomerDataMergeJob.cron}"
+		sharding-item-parameters="${actHxfxDemoCustomerDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actHxfxDemoCustomerDataMergeJob.monitorExecution}"
+		failover="${actHxfxDemoCustomerDataMergeJob.failover}"
+		description="${actHxfxDemoCustomerDataMergeJob.description}"
+		disabled="${actHxfxDemoCustomerDataMergeJob.disabled}" overwrite="${actHxfxDemoCustomerDataMergeJob.overwrite}" />--> 
+		
+	<!-- 处理HXFX模拟交易数据清洗的job 
+	<job:simple id="actHxfxDemoTradeDataMergeJob"
+		class="${actHxfxDemoTradeDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actHxfxDemoTradeDataMergeJob.shardingTotalCount}"
+		cron="${actHxfxDemoTradeDataMergeJob.cron}"
+		sharding-item-parameters="${actHxfxDemoTradeDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actHxfxDemoTradeDataMergeJob.monitorExecution}"
+		failover="${actHxfxDemoTradeDataMergeJob.failover}"
+		description="${actHxfxDemoTradeDataMergeJob.description}"
+		disabled="${actHxfxDemoTradeDataMergeJob.disabled}" overwrite="${actHxfxDemoTradeDataMergeJob.overwrite}" />-->	
+	
+	<!-- CF -->
+	<!-- 处理CF真实客户资料数据清洗的job -->
+	<!-- <job:simple id="actCfRealCustomerDataMergeJob1"
+		class="${actCfRealCustomerDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actCfRealCustomerDataMergeJob.shardingTotalCount}"
+		cron="${actCfRealCustomerDataMergeJob.cron}"
+		sharding-item-parameters="${actCfRealCustomerDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actCfRealCustomerDataMergeJob.monitorExecution}"
+		failover="${actCfRealCustomerDataMergeJob.failover}"
+		description="${actCfRealCustomerDataMergeJob.description}"
+		disabled="${actCfRealCustomerDataMergeJob.disabled}" overwrite="${actCfRealCustomerDataMergeJob.overwrite}" /> -->
+
+	<!-- 处理CF模拟客户资料数据清洗的job -->
+	<!-- <job:simple id="actCfDemoCustomerDataMergeJob1"
+		class="${actCfDemoCustomerDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actCfDemoCustomerDataMergeJob.shardingTotalCount}"
+		cron="${actCfDemoCustomerDataMergeJob.cron}"
+		sharding-item-parameters="${actCfDemoCustomerDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actCfDemoCustomerDataMergeJob.monitorExecution}"
+		failover="${actCfDemoCustomerDataMergeJob.failover}"
+		description="${actCfDemoCustomerDataMergeJob.description}"
+		disabled="${actCfDemoCustomerDataMergeJob.disabled}" overwrite="${actCfDemoCustomerDataMergeJob.overwrite}" /> -->
+	
+	<!-- 处理CF模拟交易数据清洗的job  -->
+	<!-- <job:simple id="actCfDemoTradeDataMergeJob1"
+		class="${actCfDemoTradeDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actCfDemoTradeDataMergeJob.shardingTotalCount}"
+		cron="${actCfDemoTradeDataMergeJob.cron}"
+		sharding-item-parameters="${actCfDemoTradeDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actCfDemoTradeDataMergeJob.monitorExecution}"
+		failover="${actCfDemoTradeDataMergeJob.failover}"
+		description="${actCfDemoTradeDataMergeJob.description}"
+		disabled="${actCfDemoTradeDataMergeJob.disabled}" overwrite="${actCfDemoTradeDataMergeJob.overwrite}" /> -->
+	
+	<!-- 处理CF真实交易数据清洗的job  -->
+	<!-- <job:simple id="actCfRealTradeDataMergeJob1"
+		class="${actCfRealTradeDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actCfRealTradeDataMergeJob.shardingTotalCount}"
+		cron="${actCfRealTradeDataMergeJob.cron}"
+		sharding-item-parameters="${actCfRealTradeDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actCfRealTradeDataMergeJob.monitorExecution}"
+		failover="${actCfRealTradeDataMergeJob.failover}"
+		description="${actCfRealTradeDataMergeJob.description}"
+		disabled="${actCfRealTradeDataMergeJob.disabled}" overwrite="${actCfRealTradeDataMergeJob.overwrite}" />	 -->
+
+	<!-- 处理CF真实入金数据清洗的job  -->
+	<!-- <job:simple id="actCfRealCashinDataMergeJob1"
+		class="${actCfRealCashinDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actCfRealCashinDataMergeJob.shardingTotalCount}"
+		cron="${actCfRealCashinDataMergeJob.cron}"
+		sharding-item-parameters="${actCfRealCashinDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actCfRealCashinDataMergeJob.monitorExecution}"
+		failover="${actCfRealCashinDataMergeJob.failover}"
+		description="${actCfRealCashinDataMergeJob.description}"
+		disabled="${actCfRealCashinDataMergeJob.disabled}" overwrite="${actCfRealCashinDataMergeJob.overwrite}" /> -->
+	
+	<!-- 处理CF真实出金数据清洗的job -->
+	<!-- <job:simple id="actCfRealCashoutDataMergeJob1"
+		class="${actCfRealCashoutDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actCfRealCashoutDataMergeJob.shardingTotalCount}"
+		cron="${actCfRealCashoutDataMergeJob.cron}"
+		sharding-item-parameters="${actCfRealCashoutDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actCfRealCashoutDataMergeJob.monitorExecution}"
+		failover="${actCfRealCashoutDataMergeJob.failover}"
+		description="${actCfRealCashoutDataMergeJob.description}"
+		disabled="${actCfRealCashoutDataMergeJob.disabled}" overwrite="${actCfRealCashoutDataMergeJob.overwrite}" /> -->
+		
+	<!-- PM -->
+	<!-- 处理PM真实客户资料数据清洗的job
+	<job:simple id="actPmRealCustomerDataMergeJob"
+		class="${actPmRealCustomerDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actPmRealCustomerDataMergeJob.shardingTotalCount}"
+		cron="${actPmRealCustomerDataMergeJob.cron}"
+		sharding-item-parameters="${actPmRealCustomerDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actPmRealCustomerDataMergeJob.monitorExecution}"
+		failover="${actPmRealCustomerDataMergeJob.failover}"
+		description="${actPmRealCustomerDataMergeJob.description}"
+		disabled="${actPmRealCustomerDataMergeJob.disabled}" overwrite="${actPmRealCustomerDataMergeJob.overwrite}" />--> 
+	
+	<!-- 处理PM真实交易数据清洗的job 
+	<job:simple id="actPmRealTradeDataMergeJob"
+		class="${actPmRealTradeDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actPmRealTradeDataMergeJob.shardingTotalCount}"
+		cron="${actPmRealTradeDataMergeJob.cron}"
+		sharding-item-parameters="${actPmRealTradeDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actPmRealTradeDataMergeJob.monitorExecution}"
+		failover="${actPmRealTradeDataMergeJob.failover}"
+		description="${actPmRealTradeDataMergeJob.description}"
+		disabled="${actPmRealTradeDataMergeJob.disabled}" overwrite="${actPmRealTradeDataMergeJob.overwrite}" />-->	
+
+	<!-- 处理PM真实入金数据清洗的job
+	<job:simple id="actPmRealCashinDataMergeJob"
+		class="${actPmRealCashinDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actPmRealCashinDataMergeJob.shardingTotalCount}"
+		cron="${actPmRealCashinDataMergeJob.cron}"
+		sharding-item-parameters="${actPmRealCashinDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actPmRealCashinDataMergeJob.monitorExecution}"
+		failover="${actPmRealCashinDataMergeJob.failover}"
+		description="${actPmRealCashinDataMergeJob.description}"
+		disabled="${actPmRealCashinDataMergeJob.disabled}" overwrite="${actPmRealCashinDataMergeJob.overwrite}" /> -->
+	
+	<!-- 处理PM真实出金数据清洗的job 
+	<job:simple id="actPmRealCashoutDataMergeJob"
+		class="${actPmRealCashoutDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actPmRealCashoutDataMergeJob.shardingTotalCount}"
+		cron="${actPmRealCashoutDataMergeJob.cron}"
+		sharding-item-parameters="${actPmRealCashoutDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actPmRealCashoutDataMergeJob.monitorExecution}"
+		failover="${actPmRealCashoutDataMergeJob.failover}"
+		description="${actPmRealCashoutDataMergeJob.description}"
+		disabled="${actPmRealCashoutDataMergeJob.disabled}" overwrite="${actPmRealCashoutDataMergeJob.overwrite}" />-->	
+		
+	<!-- 处理PM模拟客户资料数据清洗的job
+	<job:simple id="actPmDemoCustomerDataMergeJob"
+		class="${actPmDemoCustomerDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actPmDemoCustomerDataMergeJob.shardingTotalCount}"
+		cron="${actPmDemoCustomerDataMergeJob.cron}"
+		sharding-item-parameters="${actPmDemoCustomerDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actPmDemoCustomerDataMergeJob.monitorExecution}"
+		failover="${actPmDemoCustomerDataMergeJob.failover}"
+		description="${actPmDemoCustomerDataMergeJob.description}"
+		disabled="${actPmDemoCustomerDataMergeJob.disabled}" overwrite="${actPmDemoCustomerDataMergeJob.overwrite}" />--> 
+		
+	<!-- 处理PM模拟交易数据清洗的job 	
+	<job:simple id="actPmDemoTradeDataMergeJob"
+		class="${actPmDemoTradeDataMergeJob.class}"
+		registry-center-ref="regCenter"
+		sharding-total-count="${actPmDemoTradeDataMergeJob.shardingTotalCount}"
+		cron="${actPmDemoTradeDataMergeJob.cron}"
+		sharding-item-parameters="${actPmDemoTradeDataMergeJob.shardingItemParameters}"
+		monitor-execution="${actPmDemoTradeDataMergeJob.monitorExecution}"
+		failover="${actPmDemoTradeDataMergeJob.failover}"
+		description="${actPmDemoTradeDataMergeJob.description}"
+		disabled="${actPmDemoTradeDataMergeJob.disabled}" overwrite="${actPmDemoTradeDataMergeJob.overwrite}" />-->
+	
+</beans>

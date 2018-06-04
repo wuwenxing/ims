@@ -1,0 +1,39 @@
+<div class="inner-container">
+    <div class="layout-1 layui-searchPanel">
+        <div class="layui-searchPanel-item">
+            <h2 class="layui-searchPanel-title">
+                <span>查询条件</span>
+            </h2>
+            <div class="layui-searchPanel-content">
+                <form class="layui-form layui-row">
+                    <div class="layui-form-item layui-row layui-col-md12">
+                        <div class="search-item layui-inline layui-col-md3 layui-row">
+                            <label class="layui-form-inner-label layui-col-md3">账号</label>
+                            <div class="layui-inline layui-col-md7">
+                                <input type="text" name="userNo" placeholder="" autocomplete="off"
+                                        class="layui-input">
+                            </div>
+                        </div>
+                        <div class="search-item layui-inline layui-col-md3 layui-row">
+                            <label class="layui-form-inner-label layui-col-md3">姓名</label>
+                            <div class="layui-inline layui-col-md7">
+                                <input type="text" name="userName" placeholder="" autocomplete="off"
+                                        class="layui-input">
+                            </div>
+                        </div>
+                        <div class="search-btns layui-col-md3 layui-row layui-col-md-offset1">
+                            <div class="activeButton layui-row">
+                                <button class="layui-btn search layui-col-md5" lay-submit lay-filter="subSearch">查询</button>
+                                <button type="reset" class="layui-btn layui-btn-primary reset layui-col-md5">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="table" lay-filter="allotTable" id="allotTable"></div>
+    <form class="layui-form "> 
+        <button class="layui-btn save" lay-filter="save" lay-submit style="display:none;"></button>
+    </form>
+</div>

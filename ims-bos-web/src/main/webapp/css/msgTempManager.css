@@ -1,0 +1,30 @@
+.layui-layer-page .layui-layer-content {
+  padding: 0 !important;
+}
+
+.layui-layer-page .layui-layer-content .layui-form .layui-form-item .layui-tab {
+  padding: 0;
+  background-color: #FFF;
+}
+
+.layui-layer-page .layui-layer-content .layui-form .layui-form-item .layui-tab .layui-tab-content {
+  padding: 10px 0 0 0;
+  background-color: #ECEEF1;
+}
+
+.layui-layer-page .layui-layer-content .layui-form .layui-form-item .layui-tab .layui-tab-title, .layui-layer-page .layui-layer-content .layui-form .layui-form-item .layui-tab .layui-this {
+  border: none;
+}
+
+.layui-layer-page .layui-layer-content .layui-form .layui-form-item .layui-tab .layui-this {
+  border-radius: 4px 4px 0 0;
+  background-color: #ECEEF1;
+}
+
+.layui-layer-page .layui-layer-content .layui-form .layui-form-item .layui-tab .layui-this::after {
+  border: none;
+}
+
+.layui-layer-page .layui-layer-content .layui-form .layui-form-item.pad-30 {
+  padding: 0 30px 12px;
+}

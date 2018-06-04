@@ -1,0 +1,200 @@
+<% if(typeof(data.userId) != "undefined"){ %>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>账号</span></label>
+                <div class="layui-inline">
+                    <input 
+                    lay-verify="required|userNo"
+                    lay-verType="tips"
+                    <%if(type == 'view'){%>disabled<%}%> 
+                        type="text" class="layui-input" name="userNo" value="<%=data.userNo%>"> 
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items">姓名</label>
+                <div class="layui-inline">
+                    <input 
+                    lay-verify="userName"
+                    <%if(type == 'view'){%>disabled<%}%> 
+                        type="text" class="layui-input" name="userName" value="<%=data.userName%>">   
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>角色</span></label>
+                <div class="layui-inline">
+                    <select name="roleId" lay-filter="roleSel" lay-verify="required" lay-verType="tips" <%if(type=='view'){%>disabled<%}%> >
+                        <option value="">---请选择---</option>
+                        <% var pid = ''; %>
+                        <%roleList.forEach(function(item,index){%>
+                            <optgroup label="<%=item.companyName%>">
+                                <%item.roleList.forEach(function(itm,idx){%>
+                                <option 
+                                    value="<%=itm.roleId%>" 
+                                    data-pid="<%=itm.companyId%>" 
+                                    <%if(itm.roleId == data.roleId){%> selected <%}%>
+                                    <%if(itm.roleId == data.roleId){ pid = itm.companyId }%>
+                                ><%=itm.roleName%></option>
+                                <%})%>
+                            </optgroup> 
+                        <%})%>
+                    </select>
+                    <input type="hidden" value="<%=pid%>" name="companyId" id="companyId">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>状态</span></label>
+                <div class="layui-inline">
+                        <select name="enableFlag" 
+                        lay-verType="tips"
+                        lay-verify="required"
+                        <%if(type == 'view'){%>disabled<%}%> 
+                         >
+                            <option value="" <%if(!data.enableFlag){%>selected<%}%> >---请选择---</option>
+                            <option value="Y" <%if(data.enableFlag == 'Y'){%>selected<%}%>>启用</option>
+                            <option value="N" <%if(data.enableFlag == 'N'){%>selected<%}%>>禁用</option>
+                        </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items">手提电话</label>
+                <div class="layui-inline">
+                    <input type="tel" name="telephone"
+                        <%if(type != 'view'){%>
+                            lay-verType="tips"
+                            lay-verify="vphone"
+                        <%}%>
+                        <%if(type == 'view'){%>disabled<%}%> 
+                        class="layui-input" value="<%=data.telephone%>" >
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items">电邮</label>
+                <div class="layui-inline">
+                    <input type="text" name="email"
+                    <%if(type != "view"){%>
+                        lay-verType="tips"
+                        lay-verify="vemail"
+                    <%}%>
+                    <%if(type == 'view'){%>disabled<%}%> 
+                        class="layui-input" value="<%=data.email%>">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items">职位</label>
+                <div class="layui-inline">
+                    <input type="text" name="position"
+                    <%if(type == 'view'){%>disabled<%}%> 
+                        class="layui-input" value="<%=data.position%>">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text flex">
+            <label class="layui-form-label flex flex-align-items">职位描述</label>
+            <div class="layui-inline flex-item">
+                <textarea name="remark" class="layui-textarea" 
+                    <%if(type == 'view'){%>disabled<%}%> ><%=data.remark%></textarea>
+            </div>
+        </div>
+        <div style="display: none;">
+            <button class="node-submit" lay-submit <%if(type='edit'){%>lay-filter="seeAddRow"<%}%> ></button>
+        </div>
+    </form>
+<%}else{%>
+    <form class="layui-form aaa">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>账号</span></label>
+                <div class="layui-inline">
+                    <input type="text" lay-verType="tips" name="userNo" lay-verify="required|userNo" autocomplete="off" class="layui-input">
+
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items">姓名</label>
+                <div class="layui-inline">
+                    <input  type="text" lay-verify="userName" lay-verType="tips" name="userName" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>密码</span></label>
+                <div class="layui-inline">
+                    <input type="password" lay-verType="tips" id="password" name="password" lay-verify="required|password"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>确认密码</span></label>
+                <div class="layui-inline">
+                    <input type="password" lay-verType="tips" id="repassword" name="repassword" lay-verify="required|repassword"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>角色</span></label>
+                <div class="layui-inline">
+                    <select name="roleId" lay-verify="required" lay-verType="tips" lay-filter="roleSel">
+                        <option  value="" selected >---请选择---</option>
+                        <%roleList.forEach(function(item,index){%>
+                            <optgroup label="<%=item.companyName%>">
+                                <% item.roleList.forEach(function(itm,idx){ %>
+                                 <option  value="<%=itm.roleId%>" data-pid="<%=itm.companyId%>" ><%=itm.roleName%></option>
+                                <% }) %>
+                            </optgroup>
+                        <%})%>
+                        <input type="hidden" value="" name="companyId" id="companyId">
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>状态</span></label>
+                <div class="layui-inline">
+                    <select name="enableFlag" lay-verType="tips" lay-verify="required" <%if(type == 'view'){%> disabled <%}%> >
+                    <option value="" selected>---请选择---</option>
+                    <option value="Y">启用</option>
+                    <option value="N">禁用</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items">手提电话</label>
+                <div class="layui-inline">
+                    <input type="tel" lay-verType="tips" name="telephone" lay-verify="vphone" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items">电邮</label>
+                <div class="layui-inline">
+                    <input type="text" lay-verType="tips" name="email" lay-verify="vemail" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items">职位</label>
+                <div class="layui-inline">
+                    <input type="text" name="position" lay-verType="tips" name="position" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text flex ">
+            <label class="layui-form-label flex flex-align-items">职位描述</label>
+            <div class="layui-inline flex-item">
+                <textarea name="remark" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div style="display: none;">
+            <button class="node-submit layui-btn" lay-submit lay-filter="seeAddRow"></button>
+        </div>
+    </form>
+<%}%>

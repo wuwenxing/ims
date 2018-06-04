@@ -1,0 +1,31 @@
+@import "./variables.scss";
+.layui-layer-page {
+  .layui-layer-content {
+    padding: 0 !important;
+    .layui-form {
+      .layui-form-item {
+        .layui-tab {
+          padding: 0;
+          background-color: $bgWhite;
+          .layui-tab-content {
+            padding: 10px 0 0 0;
+            background-color: $bgColor-12;
+          }
+          .layui-tab-title,.layui-this {
+            border: none;
+          }
+          .layui-this{
+            border-radius: 4px 4px 0 0;
+            background-color: $bgColor-12;
+            &::after{
+              border:none;
+            }
+          }
+        }
+        &.pad-30 {
+          padding:  0 30px 12px;
+        }
+      }
+    }
+  }
+}

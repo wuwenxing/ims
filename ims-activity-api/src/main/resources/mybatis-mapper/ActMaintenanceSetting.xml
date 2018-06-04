@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActMaintenanceSettingDao" >
+  <resultMap id="BaseResultMap" type="com.gwghk.ims.activity.dao.entity.ActMaintenanceSetting" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="activity_periods" property="activityPeriods" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="effective_flag" property="effectiveFlag" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_ip" property="createIp" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_ip" property="updateIp" jdbcType="VARCHAR" />
+    <result column="version_no" property="versionNo" jdbcType="BIGINT" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="enable_flag" property="enableFlag" jdbcType="VARCHAR" />
+    <result column="company_id" property="companyId" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <select id="findListBySearch" parameterType="java.util.Map" resultType="com.gwghk.ims.activity.dao.entity.ActMaintenanceSettingWrapper">
+		select a.*,b.activity_name from act_maintenance_setting a,act_setting b where a.company_id = #{companyId} and a.activity_periods = b.activity_periods
+		<if test="activityPeriods != null and activityPeriods != '' ">
+			and a.activity_periods like  CONCAT('%',#{activityPeriods},'%')
+		</if>
+		<if test="activityName != null and activityName !='' ">
+			and b.activity_name like CONCAT('%',#{activityName},'%')
+		</if>
+		<if test="effectiveFlag != null and activityName !='' ">
+			and a.effective_flag =#{effectiveFlag}
+		</if>
+		<if test="enableFlag != null and enableFlag !='' ">
+			and a.enable_flag = #{enableFlag}
+		</if>
+		and a.delete_flag != 'Y' order by a.update_date desc
+	</select>
+	
+	<select id="findObject" resultType="com.gwghk.ims.activity.dao.entity.ActMaintenanceSetting" parameterType="java.lang.Integer" >
+	    select * from act_maintenance_setting
+	    where id = #{id,jdbcType=INTEGER} and delete_flag != 'Y'
+  	</select>
+  	
+  	<select id="findDisabledActMaintainByActivityPeriods" resultType="com.gwghk.ims.activity.dao.entity.ActMaintenanceSetting">
+    	select * from act_maintenance_setting where delete_flag!='Y' and effective_flag = 'Y' and enable_flag='Y' and end_time is null and activity_periods = #{activityPeriods}
+  	</select>
+  	
+  	<select id="findAll" resultType="com.gwghk.ims.activity.dao.entity.ActMaintenanceSetting">
+  		select * from act_maintenance_setting where delete_flag!='Y' and enable_flag='Y' and effective_flag = 'Y'
+  	</select>
+ 
+  <delete id="deleteBatch">
+	update act_maintenance_setting set delete_flag = 'Y' where delete_flag != 'Y' and id in
+	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		#{item}
+	</foreach>
+  </delete>
+ 
+  <insert id="save" parameterType="com.gwghk.ims.activity.dao.entity.ActMaintenanceSetting" >
+    insert into act_maintenance_setting
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="activityPeriods != null" >
+        activity_periods,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="effectiveFlag != null" >
+        effective_flag,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createIp != null" >
+        create_ip,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateIp != null" >
+        update_ip,
+      </if>
+      <if test="versionNo != null" >
+        version_no,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="activityPeriods != null" >
+        #{activityPeriods,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effectiveFlag != null" >
+        #{effectiveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createIp != null" >
+        #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateIp != null" >
+        #{updateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="versionNo != null" >
+        #{versionNo,jdbcType=BIGINT},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="enableFlag != null" >
+        #{enableFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.gwghk.ims.activity.dao.entity.ActMaintenanceSetting" >
+    update act_maintenance_setting
+    <set >
+      <if test="activityPeriods != null" >
+        activity_periods = #{activityPeriods,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+       <if test="effectiveFlag != null" >
+        effective_flag = #{effectiveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo,jdbcType=BIGINT},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER} and delete_flag != 'Y'
+  </update>
+  
+</mapper>

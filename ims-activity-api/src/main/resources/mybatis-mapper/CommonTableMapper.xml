@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.CommonTableDao" >
+    <update id="dropTableIfEXISTS">  
+        drop table  IF EXISTS ${tableName}     
+    </update>
+    <update id="dropActImsPrizeRecordTableIfEXISTS">  
+        drop table  IF EXISTS ims_prize_record_${activityPeriods}     
+    </update>  
+    
+     <update id="createActImsPrizeRecordTableTable" parameterType="String">  
+		 CREATE TABLE ims_prize_record_${activityPeriods} (
+		  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+		  `record_no` varchar(50) DEFAULT NULL COMMENT '流水号',
+		  `third_record_no` varchar(50) DEFAULT NULL COMMENT '第三方流水号',
+		  `task_record_id` int(11) DEFAULT '0' COMMENT '任务记录表主键ID',
+		  `act_no` varchar(50) DEFAULT NULL COMMENT '活动编号',
+		  `act_name` varchar(255) DEFAULT NULL COMMENT '活动名称',
+		  `account_no` varchar(20) DEFAULT NULL COMMENT '客户账号',
+		  `platform` varchar(20) DEFAULT NULL COMMENT '平台',
+		  `env` varchar(20) DEFAULT NULL COMMENT '真实还是模拟',
+		  `cust_name` varchar(255) DEFAULT NULL COMMENT '客户-姓名',
+		  `cust_mobile` varchar(30) DEFAULT NULL COMMENT '客户-手机号',
+		  `cust_email` varchar(255) DEFAULT NULL COMMENT '客户-邮箱',
+		  `item_type` varchar(20) DEFAULT NULL COMMENT '物品-类型',
+		  `item_category` varchar(255) DEFAULT NULL COMMENT '物品-种类',
+		  `item_no` varchar(30) DEFAULT NULL COMMENT '物品-编号',
+		  `item_name` varchar(255) DEFAULT NULL COMMENT '物品-名称',
+		  `item_amount` decimal(16,4) DEFAULT NULL COMMENT '物品-发放额度',
+		  `item_amount_unit` varchar(20) DEFAULT NULL COMMENT '物品-发放额度单位',
+		  `item_probability` decimal(16,4) DEFAULT NULL COMMENT '物品-中奖概率',
+		  `item_price` decimal(16,4) DEFAULT NULL COMMENT '物品-价格',
+		  `item_price_unit` varchar(20) DEFAULT NULL COMMENT '物品-价格单位',
+		  `gived_status` varchar(20) DEFAULT NULL COMMENT '发放状态',
+		  `gived_time` datetime DEFAULT NULL COMMENT '发放时间',
+		  `audit_status` varchar(20) DEFAULT NULL COMMENT '审核状态',
+		  `audit_time` datetime DEFAULT NULL COMMENT '审核时间',
+		  `use_start_time` datetime DEFAULT NULL COMMENT '物品-使用的开始时间',
+		  `use_end_time` datetime DEFAULT NULL COMMENT '物品-使用的结束时间',
+		  `task_code` varchar(50) DEFAULT NULL COMMENT '任务-编号',
+		  `rule_code` varchar(200) DEFAULT NULL COMMENT '规则识别码',
+		  `task_name` varchar(255) DEFAULT NULL COMMENT '任务-名称',
+		  `task_type` tinyint(1) DEFAULT NULL COMMENT '任务类型',
+		  `task_finished_time` datetime DEFAULT NULL COMMENT '任务-完成时间',
+		  `add_from_bos` tinyint(1) DEFAULT '0' COMMENT '是否后台手动添加(0: 否 1:是)',
+		  `is_auto` tinyint(1) DEFAULT NULL COMMENT '是否自动生成(0:系统生成 1：手动触发)',
+		  `sensitive_data` varchar(255) DEFAULT NULL COMMENT '敏感数据(例如：串码)',
+		  `other_msg` varchar(2048) DEFAULT NULL COMMENT '其他信息(json 格式)',
+		  `ext1` varchar(255) DEFAULT NULL COMMENT '扩展字段1',
+		  `ext2` varchar(255) DEFAULT NULL COMMENT '扩展字段2',
+		  `ext3` varchar(255) DEFAULT NULL COMMENT '扩展字段3',
+		  `ext4` varchar(255) DEFAULT NULL COMMENT '扩展字段4',
+		  `ext5` varchar(255) DEFAULT NULL COMMENT '扩展字段5',
+		  `remark` varchar(1024) DEFAULT NULL COMMENT '备注',
+		  `create_user` varchar(255) DEFAULT NULL,
+		  `create_ip` varchar(50) DEFAULT NULL,
+		  `create_date` datetime DEFAULT NULL,
+		  `update_user` varchar(255) DEFAULT NULL,
+		  `update_ip` varchar(50) DEFAULT NULL,
+		  `update_date` datetime DEFAULT NULL,
+		  `version_no` bigint(20) DEFAULT '0',
+		  `delete_flag` varchar(1) DEFAULT NULL,
+		  `enable_flag` varchar(1) DEFAULT NULL,
+		  `company_id` int(11) DEFAULT '0',
+		  PRIMARY KEY (`id`)
+		) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8
+     </update> 
+     
+     <update id="dropActImsPrizeRecordExtTableIfEXISTS">  
+        drop table  IF EXISTS ims_prize_record_ext_${activityPeriods}     
+    </update>  
+    
+     <update id="createActImsPrizeRecordExtTable" parameterType="String">  
+		 CREATE TABLE `ims_prize_record_ext_${activityPeriods}` (
+		  `id` bigint(11) NOT NULL AUTO_INCREMENT,
+		  `record_number` varchar(50) DEFAULT NULL COMMENT 'act_prize_record_fx中的流水号',
+		  `deal_number` varchar(50) DEFAULT NULL COMMENT '第三方处理的订单号（流水号）',
+		  `task_id` int(11) DEFAULT NULL COMMENT '发放记录的所属任务id(act_task_setting表外健)',
+		  `task_items_id` int(11) DEFAULT NULL COMMENT '外键,对应act_rw_task_items,act_wpdh_task_items表的id',
+		  `task_group` int(11) DEFAULT NULL COMMENT '发放记录的所属任务所属层级',
+		  `receive_trade_id` int(11) DEFAULT NULL COMMENT '达到要求发放的交易记录入库id',
+		  `receive_finish_time` datetime DEFAULT NULL COMMENT '达到要求发放的完成时间点',
+		  `need_trade_lots` double DEFAULT NULL COMMENT '需要交易手数（对赠金的任务)需留',
+		  `finished_trade_lots` double DEFAULT NULL COMMENT '已完成的交易手数（对赠金的任务)需留',
+		  `finished_lots_trade_id` int(11) DEFAULT NULL COMMENT '达到完成手数的id',
+		  `finished_lots_trade_time` datetime DEFAULT NULL COMMENT '达到完成手数的交易时间',
+		  `released_bonus` double DEFAULT NULL COMMENT '已释放的赠金',
+		  `release_type` tinyint(1) DEFAULT '1' COMMENT '1：表示立即，2:表示要达到手数后才能可取',
+		  `release_finish` int(11) DEFAULT '0' COMMENT '是否释放该笔贈金(当完成手数小于要求完成手数:0,否则为1(结算完成时，也会设置为1))',
+		  `create_user` varchar(255) DEFAULT NULL,
+		  `create_ip` varchar(20) DEFAULT NULL,
+		  `create_date` datetime DEFAULT NULL,
+		  `update_user` varchar(255) DEFAULT NULL,
+		  `update_ip` varchar(20) DEFAULT NULL,
+		  `update_date` datetime DEFAULT NULL,
+		  `version_no` bigint(20) DEFAULT '0',
+		  `delete_flag` varchar(1) DEFAULT NULL,
+		  `enable_flag` varchar(1) DEFAULT NULL,
+		  `company_id` int(11) DEFAULT '0',
+		  `withdrawal_start_trade_id` int(11) DEFAULT NULL COMMENT '开始记录完成手数的开始交易id',
+		  `withdrawal_start_time` datetime DEFAULT NULL COMMENT '开始记录完成手数的开始时间',
+		  `group_release` tinyint(4) DEFAULT NULL COMMENT '组释放标识',
+		  `settle_flag` tinyint(4) DEFAULT NULL COMMENT '可以做结算的标识',
+		  `ext1` varchar(255) DEFAULT NULL COMMENT '扩展字段1',
+		  `ext2` varchar(255) DEFAULT NULL COMMENT '扩展字段2',
+		  `ext3` varchar(255) DEFAULT NULL COMMENT '扩展字段3',
+		  `ext4` varchar(255) DEFAULT NULL COMMENT '扩展字段4',
+		  `ext5` varchar(255) DEFAULT NULL COMMENT '扩展字段5',
+		  `cumulative_trade_id` int(11) DEFAULT NULL COMMENT '完成手数累计达到的交易id，用来判断结算前该笔记录是否已经释放完',
+		  PRIMARY KEY (`id`),
+		  UNIQUE KEY `uk_act_prize_record_fx_record_number` (`record_number`) USING BTREE,
+		  KEY `idx_act_prize_record_ext_number_settlement` (`record_number`),
+		  KEY `idx_act_prize_record_ext_finish_type_number_time` (`release_finish`,`release_type`,`record_number`)
+		) ENGINE=InnoDB AUTO_INCREMENT=33896 DEFAULT CHARSET=utf8 COMMENT='奖品发放记录扩展表';
+     </update> 
+     
+     <update id="dropActImsTaskRecordTableIfEXISTS">  
+        drop table  IF EXISTS ims_task_record_${activityPeriods}     
+    </update>  
+    
+     <update id="createActImsTaskRecordTable" parameterType="String">  
+		 CREATE TABLE `ims_task_record_${activityPeriods}` (
+		  `id` int(11) NOT NULL AUTO_INCREMENT,
+		  `account_no` varchar(50) NOT NULL COMMENT '账号',
+		  `account_type` varchar(50) DEFAULT NULL COMMENT '账号类型 demo|real',
+		  `platform` varchar(20) DEFAULT NULL,
+		  `act_task_setting_id` int(11) NOT NULL COMMENT '任务设置ID',
+		  `sub_task_setting_id` int(11) DEFAULT NULL COMMENT '子任务ID',
+		  `last_sub_task` bit(1) DEFAULT NULL COMMENT '是否最后一个子任务',
+		  `act_no` varchar(100) DEFAULT NULL,
+		  `task_item_id` int(11) DEFAULT NULL,
+		  `item_no` varchar(100) DEFAULT NULL COMMENT '任务物品',
+		  `task_code` varchar(100) DEFAULT NULL COMMENT '任务编号',
+		  `task_param_lot` int(11) DEFAULT NULL COMMENT '任务参数--手数',
+		  `task_param_amount` int(11) DEFAULT NULL COMMENT '任务参数--金额',
+		  `finish_lot` decimal(11,0) DEFAULT NULL COMMENT '任务完成手数',
+		  `finish_amount` decimal(11,4) DEFAULT NULL COMMENT '任务完成金额（亏损金额）',
+		  `finish_count` int(11) DEFAULT '0' COMMENT '完成次数',
+		  `item_amount` decimal(11,4) DEFAULT NULL COMMENT '任务发放金额',
+		  `item_type` varchar(100) DEFAULT NULL,
+		  `item_amount_unit` varchar(20) DEFAULT NULL COMMENT '任务发放金额单位',
+		  `need_trade_lot` decimal(11,4) DEFAULT NULL COMMENT '要求交易手数',
+		  `equal_value` decimal(11,4) DEFAULT NULL COMMENT '等额价值（目前只有：模拟币）',
+		  `is_prize_record` int(11) DEFAULT NULL COMMENT '该任务是否发放记录 -1不可发放 0未发放 1需更新任务 2已发放',
+		  `task_record_time` datetime DEFAULT NULL COMMENT '发放记录时间，如果为空则为任务完成时间',
+		  `task_finish_time` datetime DEFAULT NULL COMMENT '任务完成时间',
+		  `is_task_end` bit(1) DEFAULT NULL COMMENT '标注活动是否结束了，表示不能在进行',
+		  `remark` varchar(1024) DEFAULT NULL COMMENT '备注',
+		  `create_user` varchar(255) DEFAULT NULL,
+		  `create_ip` varchar(20) DEFAULT NULL,
+		  `create_date` datetime DEFAULT NULL,
+		  `update_user` varchar(255) DEFAULT NULL,
+		  `update_ip` varchar(20) DEFAULT NULL,
+		  `update_date` datetime DEFAULT NULL,
+		  `version_no` bigint(20) DEFAULT '0',
+		  `delete_flag` varchar(1) DEFAULT NULL,
+		  `enable_flag` varchar(1) DEFAULT NULL,
+		  `company_id` int(11) DEFAULT '0',
+		  `task_group` int(11) DEFAULT NULL COMMENT '分组序号',
+		  PRIMARY KEY (`id`),
+		  KEY `index_checktask` (`account_no`,`platform`,`act_task_setting_id`) USING BTREE
+		) ENGINE=InnoDB AUTO_INCREMENT=2395 DEFAULT CHARSET=utf8;
+     </update> 
+      
+        
+     <select id="existTable" parameterType="String" resultType="Integer">  
+     	select 
+     		count(1) 
+        from 
+        	INFORMATION_SCHEMA.TABLES
+        where
+        	TABLE_SCHEMA=#{schema} and TABLE_NAME=#{tableName}
+     </select>
+</mapper>

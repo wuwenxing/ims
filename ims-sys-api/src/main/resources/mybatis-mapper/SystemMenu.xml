@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.sys.api.dao.inf.SystemMenuDao">
+	<select id="findListByMap" parameterType="java.util.Map" resultType="SystemMenu">
+		select * from t_system_menu 
+		<where>
+			<if test="menuType != null and menuType !='' ">
+				and menu_type = #{menuType}
+			</if>
+			<if test="menuCode != null and menuCode !='' ">
+				and menu_code = #{menuCode}
+			</if>
+			<if test="menuItem != null and menuItem !='' ">
+				and menu_item = #{menuItem}
+			</if>
+			<if test="menuNameCn != null and menuNameCn !='' ">
+				and menu_name_cn = #{menuNameCn}
+			</if>
+			<if test="menuNameEn != null and menuNameEn !='' ">
+				and menu_name_en = #{menuNameEn}
+			</if>
+			<if test="menuNameTw != null and menuNameTw !='' ">
+				and menu_name_tw = #{menuNameTw}
+			</if>
+			<if test="parentMenuCode != null and parentMenuCode !='' ">
+				and parent_menu_code = #{parentMenuCode}
+			</if>
+			<if test="enableFlag != null and enableFlag !='' ">
+				and enable_flag = #{enableFlag}
+			</if>
+	    	and delete_flag != 'Y' order by menu_type, order_code
+		</where>
+	</select>
+	<select id="findListByCompanyId" resultType="SystemMenu">
+		select * from t_system_menu where company_id = #{0}
+		and delete_flag != 'Y'
+		order by order_code asc
+	</select>
+	<select id="findListByUserIdAndCompanyId" resultType="SystemMenu">
+		select a.* from t_system_menu a
+		left join t_system_menu_role b on a.menu_id = b.menu_id
+		where b.role_id = (select role_id from t_system_user where user_id = #{0})
+		and a.delete_flag != 'Y'
+		order by a.order_code asc
+	</select>
+	<select id="findListByUserNoAndCompanyId" resultType="SystemMenu">
+		select a.* from t_system_menu a
+		left join t_system_menu_role b on a.menu_id = b.menu_id
+		where b.role_id = (select role_id from t_system_user where user_no = #{0})
+		and a.delete_flag != 'Y'
+		order by a.order_code asc
+	</select>
+	<select id="findMenuListByRoleId" parameterType="java.lang.Long" resultType="SystemMenu">
+		select a.* from t_system_menu a
+		left join t_system_menu_role b on a.menu_id = b.menu_id
+		where b.role_id = #{roleId,jdbcType=BIGINT}
+		and a.delete_flag != 'Y'
+		order by a.order_code asc
+	</select>
+	<select id="findObject" parameterType="java.lang.Long" resultType="SystemMenu">
+		select * from t_system_menu
+		where menu_id = #{roleId,jdbcType=BIGINT}
+	</select>
+	<select id="findByMenuCode" resultType="SystemMenu" >
+	   select * from t_system_menu where menu_code = #{0}
+	   and menu_type = 1
+	   and delete_flag != 'Y'
+	</select>
+	<select id="findByMenuCodeAndParentMenuCode" resultType="SystemMenu" >
+	   select * from t_system_menu where menu_code = #{0}
+	   and parent_menu_code = #{1}
+	   and delete_flag != 'Y'
+	</select>
+	<select id="findListByParentMenuCode" resultType="SystemMenu" >
+	   select * from t_system_menu where parent_menu_code = #{0}
+	   and delete_flag != 'Y' order by order_code
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from t_system_menu where menu_id = #{menuId,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByMenuCode">
+		delete from t_system_menu where menu_code = #{0}
+	</delete>
+  	<delete id="deleteBatch">
+		delete from t_system_menu where menu_id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<insert id="save" parameterType="SystemMenu">
+		<selectKey resultType="java.lang.Long" order="AFTER"
+			keyProperty="menuId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into t_system_menu (menu_id, menu_code, parent_menu_code,
+		menu_name_en, menu_name_cn,
+		menu_name_tw, menu_type, menu_item, order_code,
+		menu_url, create_date, create_ip,
+		create_user, delete_flag, enable_flag,
+		update_date, update_ip, update_user,
+		version_no, company_id)
+		values (#{menuId,jdbcType=BIGINT}, #{menuCode,jdbcType=VARCHAR},
+		#{parentMenuCode,jdbcType=VARCHAR},
+		#{menuNameEn,jdbcType=VARCHAR}, #{menuNameCn,jdbcType=VARCHAR},
+		#{menuNameTw,jdbcType=VARCHAR}, #{menuType,jdbcType=VARCHAR}, #{menuItem,jdbcType=VARCHAR},
+		#{orderCode,jdbcType=BIGINT},
+		#{menuUrl,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createIp,jdbcType=VARCHAR},
+		#{createUser,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR},
+		#{enableFlag,jdbcType=VARCHAR},
+		#{updateDate,jdbcType=TIMESTAMP}, #{updateIp,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR},
+		#{versionNo,jdbcType=BIGINT}, #{companyId,jdbcType=BIGINT})
+	</insert>
+	
+	<update id="updateMenuCodeByParentMenuCode">
+		update t_system_menu set parent_menu_code = #{0} 
+		where parent_menu_code = #{1}
+	</update>
+	<update id="update" parameterType="SystemMenu">
+		update t_system_menu
+		set menu_code = #{menuCode,jdbcType=VARCHAR},
+				parent_menu_code = #{parentMenuCode,jdbcType=VARCHAR},
+				menu_name_en = #{menuNameEn,jdbcType=VARCHAR},
+				menu_name_cn = #{menuNameCn,jdbcType=VARCHAR},
+				menu_name_tw = #{menuNameTw,jdbcType=VARCHAR},
+				menu_type = #{menuType,jdbcType=VARCHAR},
+				menu_item = #{menuItem,jdbcType=VARCHAR},
+				order_code = #{orderCode,jdbcType=BIGINT},
+				menu_url = #{menuUrl,jdbcType=VARCHAR},
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+				create_ip = #{createIp,jdbcType=VARCHAR},
+				create_user = #{createUser,jdbcType=VARCHAR},
+				delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+				enable_flag = #{enableFlag,jdbcType=VARCHAR},
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+				update_ip = #{updateIp,jdbcType=VARCHAR},
+				update_user = #{updateUser,jdbcType=VARCHAR},
+				version_no = #{versionNo,jdbcType=BIGINT},
+				company_id = #{companyId,jdbcType=BIGINT}
+		where menu_id = #{menuId,jdbcType=BIGINT}
+	</update>
+</mapper>

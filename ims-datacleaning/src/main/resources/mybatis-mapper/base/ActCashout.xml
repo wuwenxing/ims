@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.datacleaning.dao.inf.base.ActCashoutDao" >
+  
+  <select id="selectLastActCashoutRecord" resultType="ActCashout">
+ 	select * from act_cashout_real order by approve_date desc limit 1
+ </select>
+
+   <insert id="insertGts2" parameterType="java.util.Map" >
+   	insert into act_cashout_real (
+		company_id,
+		account_no,
+		platform,
+		pno,
+		trans_amount,
+		approve_date,
+		create_date,
+		update_date,
+		enable_flag,delete_flag,
+		push_flag
+	) select
+		account.company_id,
+		proposal.account_no,
+		account.platform platform,
+		proposal.pno,
+		proposal.trans_amount,
+		date_add(proposal.approve_date, interval 8 hour),
+		now(),
+		now(),
+		'Y','N','0'
+	from
+		t_cashout_proposal_real proposal
+	inner join t_account_info_real account 
+		on account.gts2_account_id = proposal.gts2_account_id 
+			and account.company_id=#{companyId}
+	where
+		proposal.proposal_status = '2'
+		and proposal.cus_tran_type=200
+		<if test="lastUpdateDate != null" >
+	    	and approve_date &gt; #{lastUpdateDate} and approve_date &lt; #{lastUpdateDateEnd}
+		</if> 
+		<if test="lastUpdateDateBegin!=null and lastUpdateDateEnd!=null">
+		    and approve_date between  #{lastUpdateDateBegin} and #{lastUpdateDateEnd}
+		</if>
+	on duplicate key update 
+		trans_amount = proposal.trans_amount,
+		update_date = now()
+  </insert>
+
+	<insert id="save" parameterType="ActCashout" >
+		insert into act_cashout_real (id, company_id, account_no, 
+	      platform, pno, trans_amount, 
+	      approve_date, enable_flag, 
+	      delete_flag, source,create_date,update_date,push_flag)
+	    values (#{id,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{accountNo,jdbcType=VARCHAR}, 
+	      #{platform,jdbcType=VARCHAR}, #{pno,jdbcType=VARCHAR}, #{transAmount}, 
+	      #{approveDate,jdbcType=TIMESTAMP},  #{enableFlag,jdbcType=VARCHAR}, 
+	      #{deleteFlag,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR},
+	       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},'0')
+	    on duplicate key update
+	    	trans_amount = #{transAmount},
+	    	update_date = #{updateDate,jdbcType=TIMESTAMP}
+	</insert>
+	
+	<select id="findUnpushCashout" resultType="ActCashout">
+		select id,account_no,platform from act_cashout_real where push_flag='0' order by id asc;
+	</select>
+	
+	<update id="batchUpdatePushStatus" parameterType="java.lang.Long">
+		update act_cashout_real set push_flag='1' where push_flag='0' and id &lt;= #{id}
+	</update>
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActProposalModifyDetailDao" >
+  <select id="findListByMap" resultType="ActProposalModifyDetail" parameterType="java.util.Map" >
+    select * from act_proposal_modify_detail where 1=1
+    <if test="pno != null and pno != ''" >
+		and pno = #{pno}
+    </if>
+    <if test="modifyType != null and modifyType != ''" >
+		and modify_type = #{modifyType}
+    </if>
+    <if test="fieldName != null and fieldName != ''" >
+		and field_name = #{fieldName}
+    </if>
+    <if test="fieldType != null and fieldType != ''" >
+		and field_type = #{fieldType}
+    </if>
+    <if test="fromValue != null and fromValue != ''" >
+		and from_value = #{fromValue}
+    </if>
+  </select>
+  <select id="findObject" resultType="ActProposalModifyDetail" parameterType="java.lang.Integer" >
+    select * from act_proposal_modify_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  	<delete id="deleteBatch">
+		delete from act_proposal_modify_detail where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from act_proposal_modify_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="save" parameterType="ActProposalModifyDetail" >
+    insert into act_proposal_modify_detail (id, pno, modify_type, 
+      field_name, field_type, from_value, 
+      to_value, from_verion_no, to_verion_no, 
+      record_id, record_parent_id, create_date, 
+      create_ip, create_user, delete_flag, 
+      enable_flag, update_date, update_ip, 
+      update_user, version_no, company_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{pno,jdbcType=VARCHAR}, #{modifyType,jdbcType=VARCHAR}, 
+      #{fieldName,jdbcType=VARCHAR}, #{fieldType,jdbcType=VARCHAR}, #{fromValue,jdbcType=VARCHAR}, 
+      #{toValue,jdbcType=VARCHAR}, #{fromVerionNo,jdbcType=INTEGER}, #{toVerionNo,jdbcType=INTEGER}, 
+      #{recordId,jdbcType=INTEGER}, #{recordParentId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createIp,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
+      #{enableFlag,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateIp,jdbcType=VARCHAR}, 
+      #{updateUser,jdbcType=VARCHAR}, #{versionNo,jdbcType=BIGINT}, #{companyId,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="update" parameterType="ActProposalModifyDetail" >
+    update act_proposal_modify_detail
+    set pno = #{pno,jdbcType=VARCHAR},
+      modify_type = #{modifyType,jdbcType=VARCHAR},
+      field_name = #{fieldName,jdbcType=VARCHAR},
+      field_type = #{fieldType,jdbcType=VARCHAR},
+      from_value = #{fromValue,jdbcType=VARCHAR},
+      to_value = #{toValue,jdbcType=VARCHAR},
+      from_verion_no = #{fromVerionNo,jdbcType=INTEGER},
+      to_verion_no = #{toVerionNo,jdbcType=INTEGER},
+      record_id = #{recordId,jdbcType=INTEGER},
+      record_parent_id = #{recordParentId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_ip = #{updateIp,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      version_no = #{versionNo,jdbcType=BIGINT},
+      company_id = #{companyId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

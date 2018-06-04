@@ -1,0 +1,29 @@
+<form class="layui-form upload-form">
+    <div class="layui-form-item flex">
+        <div class="layui-inline upload-content flex-item no-mr flex flex-horizon-between">
+            <div class="layui-inline no-mr flex-item">
+                <input type="text" readonly class="template layui-input" id="uploadUserExcel" placeholder="点击选择excel文件">
+            </div>
+            <div class="layui-inline download" id="downloadTempl">
+                <a href="javascript:;">下载模板</a>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item flex">
+        <label class="layui-form-label flex flex-align-items"><span>提示信息</span></label>
+        <div class="layui-inline flex-item">
+            <textarea name="remark" id='remark' placeholder="返回结果信息" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item no-mb upload-tips">
+        <div class="layui-inline">
+            <h4><i class="icon-tips"></i><span class="tips-title">温馨提示：</span></h4>
+            <p>1.上传文件类型：可支持.xls、.xlsx格式的excel文件。</p>
+            <p>2.文件大小不能超过5M。</p>
+        </div>
+    </div>
+    <div style="display: none;">
+        <button class="node-submit upload-btn" lay-submit lay-filter="batchUploadUser"></button>
+    </div>
+</form>
+

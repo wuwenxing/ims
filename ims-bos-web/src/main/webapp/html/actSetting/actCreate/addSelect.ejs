@@ -1,0 +1,15 @@
+<form class="layui-form">
+    <%data.forEach(function(item, index){%>
+        <div class="layui-form-item <%if(index == data.length -1){%> no-mb <%}%>">
+            <div class="layui-inline no-mr">
+                <input type="radio" name="activityType" value="<%=item.dictCode%>" title="<%=item.dictNameCn%>">
+            </div>
+        </div>
+    <%})%>
+    <button class="node-submit" lay-filter="seeAddRow" lay-submit style="display:none;"></button>
+</form>
+
+    
+    
+    
+    

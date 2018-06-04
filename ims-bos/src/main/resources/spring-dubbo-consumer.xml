@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:sysConfig.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+	<dubbo:application name="ims-bos-consumer" />
+
+	<!-- 使用multicast广播注册中心暴露发现服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="${zk.address}" />
+	<!-- 系统管理 -->
+	<dubbo:reference id="systemLogDubboService" interface="com.gwghk.ims.common.inf.sys.SystemLogDubboService"
+		 retries="0" check="false" timeout="60000" />
+	<dubbo:reference id="systemUserDubboService" interface="com.gwghk.ims.common.inf.sys.SystemUserDubboService"
+		 retries="0" check="false" timeout="60000" />
+	<dubbo:reference id="systemMenuDubboService" interface="com.gwghk.ims.common.inf.sys.SystemMenuDubboService"
+		 retries="0" check="false" timeout="60000" />
+	<dubbo:reference id="systemMenuUserDubboService" interface="com.gwghk.ims.common.inf.sys.SystemMenuUserDubboService"
+		 retries="0" check="false" timeout="60000" />
+	<dubbo:reference id="systemDictDubboService" interface="com.gwghk.ims.common.inf.sys.SystemDictDubboService"
+		 retries="0" check="false" timeout="60000" />
+	<!-- 基础设置 -->
+	<dubbo:reference id="keyValDubboService" interface="com.gwghk.ims.common.inf.sys.KeyValDubboService"
+		 retries="0" check="false" timeout="60000" />
+	<!-- 活动管理 -->
+	<dubbo:reference id="actItemsSettingDubboService" interface="com.gwghk.ims.common.inf.activity.ActItemsSettingDubboService"
+		 retries="0" check="false" timeout="60000" />
+	<dubbo:reference id="actSettingDubboService" interface="com.gwghk.ims.common.inf.activity.ActSettingDubboService"
+		 retries="0" check="false" timeout="60000" />
+	<dubbo:reference id="sequenceDubboService" interface="com.gwghk.ims.common.inf.activity.SequenceDubboService"
+		 retries="0" check="false" timeout="60000" />
+		 
+</beans>

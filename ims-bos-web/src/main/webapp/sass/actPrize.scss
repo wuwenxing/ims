@@ -1,0 +1,50 @@
+@import "./variables.scss";
+.m-container{
+}
+
+.layui-layer {
+  .prizeItem{
+      .insert-tr {
+        border:solid 1px $blColor-00;
+        font-size: 0;
+        border-radius: 4px;
+        .layui-inline {
+          font-size: 14px;
+          .layui-input {
+            border:none;
+          }
+        }
+        .unitItem {
+          font-size: 14px;
+          border-left:solid 1px $blColor-00;          
+          .layui-form-select {
+            width: 56px;
+            border: none;
+          }
+          .layui-input {
+            width: 56px;
+            padding-left: 16px;
+            padding-right: 8px;
+          }
+          .unit {
+            padding:0 16px;
+            height: 32px;
+            line-height: 32px;
+            display: inline-block;
+          }
+        }
+      }
+  }
+}
+.layui-layer-content{
+    padding:10px 10px 0 10px;
+    box-sizing: border-box;
+}
+.layui-form {
+    select.itemUnit + .layui-form-select {
+      width: 100px;
+      .layui-input {
+        width: 100px;
+      }
+    }
+  }

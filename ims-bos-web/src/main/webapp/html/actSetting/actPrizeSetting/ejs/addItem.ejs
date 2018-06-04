@@ -1,0 +1,292 @@
+<% if(typeof(id) != 'undefined'){ %>
+    <form class="layui-form prizeItem detail" >
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品编号</span></label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" disabled  value="<%=itemNumber%>" name="itemNumber" lay-verify="required" lay-verType="tips">
+                    <input type="hidden" name="id" id="id" value="<%=id%>"/>
+                    <input type="hidden" name="itemType"  id="itemType" value="<%=itemType%>"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品名称</span></label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" <%if(actUseFlag || itemType == 'withGold' || itemType == "tokenCoin" || itemType == "analogCoin" ){%> disabled <%}%>  id="itemName"  value="<%=itemName%>"  name="itemName" lay-verify="required|itemName" lay-verType="tips">
+                </div>
+            </div>
+        </div>
+        <% if(itemType=='real'){ %>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品数量</span></label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" id="itemStockAmount" value="<%=itemStockAmount%>"  name="itemStockAmount"  lay-verify="required|number|itemNumber" lay-verType="tips">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><span>物品价格</span></label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input"  name="itemPrice" value="<%=itemPrice%>"  name="itemPrice"  lay-verType="tips">
+                </div>
+            </div>
+        </div>
+        <%}%>
+        <% if(itemType == 'withGold' || itemType == "tokenCoin" || itemType == "analogCoin"){ %>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>金额</span></label>
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input" id="virtualCoin" <%if(actUseFlag){%> disabled <%}%>  id="itemPrice" name="itemPrice" lay-verify="required|itemPrice"  value="<%=itemPrice%>"  lay-verType="tips">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品状态</span></label>
+                    <div class="layui-inline">
+                        <select name="enableFlag" id="" lay-verify="required" lay-verType="tips" >
+                            <option value="Y" <%if(enableFlag == 'Y'){%> selected <%}%> >启用</option>
+                            <option value="N" <%if(enableFlag == 'N'){%> selected <%}%> >禁用</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+        <%if(itemType == 'interface'){%>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label flex flex-align-items"><span>物品种类</span></label>
+                    <div class="layui-inline">
+                        <select name="itemCategory" id="virtualItem" <%if(itemType == 'virtual' || itemType=='interface'){%> lay-filter="itemCategory" <%}%> <%if(actUseFlag){%> disabled <%}%> >
+                            <%itemCategorys.forEach(function(item,index){
+                               if(itemType=='interface' && item.value=="string_code"){
+                               }else{   %>
+                                    <option value="<%=item.value%>" <%if(itemCategory == item.value){%> selected <%}%> ><%=item.name%></option>
+                            <% } })%>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品数量</span></label>
+                    <div class="layui-inline">
+                        <input type="text" id="itemStockAmount" class="layui-input" value="<%=itemStockAmount%>" name="itemStockAmount" lay-verify="required|number|itemNumber"  lay-verType="tips">
+                    </div>
+                </div>
+            </div>
+        <%}%>    
+        <%if(itemType == 'virtual'){%>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label flex flex-align-items"><span>物品种类</span></label>
+                    <div class="layui-inline">
+                        <select name="itemCategory" id="virtualItem" <%if(itemType == 'virtual' || itemType=='interface'){%> lay-filter="itemCategory" <%}%> <%if(actUseFlag){%> disabled <%}%> >
+                            <%itemCategorys.forEach(function(item,index){
+                                if(itemType=='interface' && item.value=="string_code"){
+                                }else{   %>
+                                    <option value="<%=item.value%>" <%if(itemCategory == item.value){%> selected <%}%> ><%=item.name%></option>
+                            <% } })%>
+                        </select>
+                    </div>
+                </div>
+                <%if(itemType == 'virtual'){%>
+                    <div class="insert-tr layui-inline"></div>
+                <%}else{%>
+                    <div class="layui-inline">
+                        <label for="" class="layui-form-label flex flex-align-items"><span>物品数量</span></label>
+                        <div class="layui-inline">
+                            <input type="text" id="itemStockAmount" class="layui-input" value="<%=itemStockAmount%>" name="itemStockAmount" lay-verify="required|number|itemNumber"  lay-verType="tips">
+                        </div>
+                    </div>
+                <%}%>
+            </div>
+            <%if(itemType == "virtual"){%>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label for="" class="layui-form-label flex flex-align-items"><span>物品数量</span></label>
+                        <div class="layui-inline">
+                            <input type="text" id="itemStockAmount" class="layui-input" value="<%=itemStockAmount%>" name="itemStockAmount" lay-verify="required|number|itemNumber"  lay-verType="tips">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label for="" class="layui-form-label flex flex-align-items"><span>物品状态</span></label>
+                        <div class="layui-inline">
+                            <select name="enableFlag" id="" lay-verify="required" lay-verType="tips" >
+                                <option value="">--请选择--</option>
+                                <option value="Y" <% if(enableFlag == 'Y'){%> selected <%}%>>启用</option>
+                                <option value="N" <% if(enableFlag == 'N'){%> selected <%}%>>禁用</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            <%}%>
+        <%}%>    
+        <% if(itemType=='real'  || itemType == 'interface'){ %>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label flex flex-align-items"><span>物品状态</span></label>
+                    <div class="layui-inline">
+                        <select name="enableFlag" id="" lay-verify="required" lay-verType="tips" >
+                            <option value="">--请选择--</option>
+                            <option value="Y" <% if(enableFlag == 'Y'){%> selected <%}%>>启用</option>
+                            <option value="N" <% if(enableFlag == 'N'){%> selected <%}%>>禁用</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        <%}%>
+        <div class="layui-form-item">
+            <div class="layui-inline no-mr">
+                <label for="" class="layui-form-label flex flex-align-items"><span>物品有效时间</span></label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" value="<%=startDate%>" id="date1" placeholder="yyyy-mm-dd hh:mm:ss" name="startDate"  lay-verify="required|sdatetime" lay-verType="tips">
+                </div>
+            </div>
+            <div class="layui-inline"> 至 </div>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" value="<%=endDate%>" id="date2" placeholder="yyyy-mm-dd hh:mm:ss" name="endDate" lay-verify="required|edatetime" lay-verType="tips">
+            </div>
+        </div>
+        <div style="display:none;">
+            <button class="layui-btn editPrize" lay-submit lay-filter="editPrize"></button>
+        </div>
+    </form>
+<%}else{%>
+    <form class="layui-form prizeItem">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品编号</span></label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" value="<%=itemNumber%>" name="itemNumber" lay-verify="required" lay-verType="tips">
+                    <input type="hidden" name="itemType" id="itemType" value="<%=itemType%>"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品名称</span></label>
+                <div class="layui-inline">
+                    <% if(itemType == 'withGold'){ %>
+                        <input type="text" class="layui-input" id="itemName"  name="itemName" readonly=readonly value="奖励金额">
+                    <%}else if(itemType == "tokenCoin"){%>
+                        <input type="text" class="layui-input" id="itemName"  name="itemName" readonly=readonly value="代币">
+                    <%} else if( itemType == "analogCoin"){%>
+                        <input type="text" class="layui-input" id="itemName"  name="itemName" readonly=readonly value="模拟币">
+                    <%}else {%>
+                        <input type="text" class="layui-input" id="itemName"  name="itemName" value="" lay-verify="required|itemName" lay-verType="tips">
+                    <%}%>
+                </div>
+            </div>
+        </div>
+        <% if(itemType == 'virtual' || itemType == 'interface'){ %>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label flex flex-align-items"><em class="required"></em><span>物品种类</span></label>
+                    <div class="layui-inline">
+                        <select name="itemCategory" id="virtualItem"  lay-verify="required" lay-verType="tips"
+                            <%if(itemType == 'virtual' || itemType == 'interface'){%> lay-filter="itemCategory" <%}%>
+                        >
+                            <option value="" selected>--请选择--</option>
+                            <%if(itemCategorys.length){%>
+                                <%for(var i=0;i<itemCategorys.length;i++){%>
+                                    <%if(itemType != 'virtual' && itemCategorys[i].value == 'string_code'){%>
+                                        <% continue; %>
+                                    <%}%>
+                                    <option value="<%=itemCategorys[i].value%>"><%=itemCategorys[i].name%></option>
+                                <%}%>
+                            <%}%>
+                        </select>
+                    </div>
+                </div>
+                <%if(itemType == 'virtual'){%>
+                    <div class="insert-tr layui-inline"></div>
+                <%}else{%>
+                    <div class="layui-inline">
+                        <label for="" class="layui-form-label flex flex-align-items"><em class="required"></em><span>物品数量</span></label>
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" name="itemStockAmount" lay-verify="required|number|itemNumber"  lay-verType="tips">
+                        </div>
+                    </div>
+                <%}%>
+            </div>
+            <%if(itemType == "virtual"){%>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label for="" class="layui-form-label flex flex-align-items"><em class="required"></em><span>物品数量</span></label>
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" name="itemStockAmount" lay-verify="required|number|itemNumber"  lay-verType="tips">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label for="" class="layui-form-label flex flex-align-items"><em class="required"></em><span>物品状态</span></label>
+                        <div class="layui-inline">
+                            <select name="enableFlag" id="" lay-verify="required" lay-verType="tips">
+                                <option value="Y" selected>启用</option>
+                                <option value="N">禁用</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            <%}%>
+        <%}%>
+        <% if(itemType=='real'){%>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label flex flex-align-items"><em class="required"></em><span>物品数量</span></label>
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input" name="itemStockAmount"  lay-verify="required|number|itemNumber" lay-verType="tips">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label flex flex-align-items"><span>物品价格</span></label>
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input"  name="itemPrice"   name="giftName"  lay-verType="tips" >
+                    </div>
+                </div>
+            </div>
+        <%}%>
+        <% if(itemType == 'withGold' || itemType == "tokenCoin" || itemType == "analogCoin"){ %>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label flex flex-align-items"><em class="required"></em><span>金额</span></label>
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input"  id="virtualCoin" name="itemPrice" lay-verify="required|itemPrice"  lay-verType="tips">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label flex flex-align-items"><em class="required"></em><span>物品状态</span></label>
+                    <div class="layui-inline">
+                        <select name="enableFlag" id="" lay-verify="required" lay-verType="tips">
+                            <option value="Y" selected>启用</option>
+                            <option value="N">禁用</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        <%}%>
+        <% if(itemType=='real'  || itemType == 'interface'){ %>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label flex flex-align-items"><em class="required"></em><span>物品状态</span></label>
+                    <div class="layui-inline">
+                        <select name="enableFlag" id="" lay-verify="required" lay-verType="tips">
+                            <option value="Y" selected>启用</option>
+                            <option value="N">禁用</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        <%}%>
+        <div class="layui-form-item">
+            <div class="layui-inline no-mr">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品有效时间</span></label>
+            </div>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" id="date1" placeholder="yyyy-mm-dd hh:mm:ss" name="startDate" lay-verType="tips" lay-verify="required|sdatetime"  >
+            </div>
+            <div class="layui-inline"> 至 </div>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" id="date2" placeholder="yyyy-mm-dd hh:mm:ss" name="endDate" lay-verType="tips" lay-verify="required|edatetime">
+            </div>
+        </div>
+        <div style="display:none;">
+            <button class="layui-btn addPrize" lay-submit lay-filter="addPrize"></button>
+        </div>
+    </form>
+<%}%>

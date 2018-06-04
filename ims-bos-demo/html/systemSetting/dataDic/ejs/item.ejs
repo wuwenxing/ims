@@ -1,0 +1,65 @@
+<form class="layui-form">
+    <table class="f-table">
+        <tbody> 
+            <tr>
+                <td class="align"><label>上级编号</label><em class="mustInput"></em></td>
+                <td colspan="3">
+                    <input type="text" name="parentDictCode" id="parentDictCode"  class="layui-input" disabled>
+                    <input type="hidden" name="dictType" value="<%=data.dictType%>"  />
+                    <input type="hidden" name="dictId" value="<%=data.dictId%>"  />
+                </td>
+            </tr>
+            <tr>
+                <td class="align"> <label for="">编号</label><em class="mustInput"></em></td>
+                <td>
+                    <input type="text" value="<%=data.dictCode%>"   <%=data.disabled%> lay-verify="dictCode" name="dictCode" id="dictCode" class="layui-input">
+                </td>
+                <td class="align"> <label for="">名称(英文)</label><em class="mustInput"></em></td>
+                <td>
+                    <input type="text" value="<%=data.dictNameEn%>"  <%=data.disabled%>  lay-verify="dictNameEn" name="dictNameEn" id="dictNameEn" class="layui-input">
+                </td>
+            </tr>
+            <tr>
+                <td class="align"> <label for="">名称(简体)</label><em class="mustInput"></em></td>
+                <td>
+                    <input type="text"  value="<%=data.dictNameCn%>"  lay-verify="dictNameCn" name="dictNameCn" id="dictNameCn" class="layui-input">
+                </td>    
+                <td class="align"> <label for="">名称(繁体)</label> <em class="mustInput"></em></td>
+                <td>
+                    <input type="text" value="<%=data.dictNameTw%>" <%=data.read%> lay-verify="dictNameTw" name="dictNameTw" id="dictNameTw" class="layui-input">
+                </td> 
+            </tr>
+            <tr>
+                <td class="align"> <label for="">排序</label> <em class="mustInput"></em></td>
+                <td class="sort-td">
+                   <button class="layui-btn layui-btn-xs decrease"><i class="layui-icon">&#xe603;</i></button>  
+                   <input type="text" lay-verify="orderCode" name="orderCode" value="<%=data.orderCode%>" id="orderCode" class="layui-input layui-input-reset">
+                   <button class="layui-btn layui-btn-xs add"><i class="layui-icon">&#xe602;</i></button>
+                </td>
+                <td class="align"><label for="">状态</label><em class="mustInput"></em></td>
+                <td>
+                    <select name="enableFlag" lay-verify="enableFlag" id="">
+                        <option value="Y" selected>启用</option>
+                        <option value="N" >禁用</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="align"> <label for="">所属公司</label> <em class="mustInput"></em></td>
+                <td>
+                    <select name="companyId" id="companyId">
+                        <option value="0" selected>--共有公司公用--</option>
+                        <option value="1">wh</option>
+                         
+                    </select>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div style="display: none;">
+            <button class="node-submit" lay-submit lay-filter="seeAddRow"></button>
+    </div>
+</form>

@@ -1,0 +1,302 @@
+@charset 'utf-8';
+@import './variables.scss';
+@import "./layuiform.scss";
+/*****************************列表条件搜索style******************************/
+.layui-searchPanel {
+  margin-bottom: 20px;
+  background: $bgWhite;
+  .layui-searchPanel-item {
+    .layui-searchPanel-title {
+      padding: 0 40px ;
+      box-sizing: border-box;
+      height: 52px;
+      line-height: 52px;
+      background: $bgWhite;
+      position: relative;
+      font-size: 14px;
+      color:$fontColor-00;
+      &:after{
+        position: absolute;
+        left: 28px;
+        top: 20px;
+        content: "";
+        display: block;
+        width: 4px;
+        height: 12px;
+        background: $bgColor-13;
+      }
+    }
+    .layui-searchPanel-content {
+      margin-top: 12px;
+      padding: 0 40px ;
+      box-sizing: border-box;
+      padding-bottom: 32px;
+      .layui-input,.layui-form-select {
+        width: 100%;
+        height: 30px;
+      }
+      .search-item {
+        height: 32px;
+        border-radius: 4px;
+        border:solid 1px $blColor-00;
+        .layui-form-grid-label {
+          border-right: solid 1px $blColor-00;
+          padding: 0px;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+          position: relative;
+          .required {
+            position: absolute;
+            color: $fontColor-05;
+            font-size: 20px;
+            left: -13px;
+            font-weight: bold;
+            top: 5px;
+          }
+        }
+        &:hover {
+          border-color:$blColor-04;
+          .layui-form-grid-label {
+            border-color:$blColor-04;
+          }
+        }
+        .layui-input {
+          border:none !important;
+        }
+      }
+      .layui-form-item  {
+        .date-str{
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+        }
+        .date-input {
+          // width: auto;
+          &.end {
+            width: 83.33333333%
+          }
+        }
+      }
+      .search-btns {
+        margin-top: 0;
+        float: right;
+        .activeButton {
+          font-size: 0;
+          text-align: right;
+          .layui-btn {
+            // width: 88px;
+            height: 32px;
+            line-height: 20px;
+            border-radius: 4px;
+            border:solid 1px $bgColor-13;
+            text-align: center;
+            &.search,&.node-search {
+              background: $bgColor-13;
+              color:$bgWhite;
+            }
+            &.reset {
+              color:$bgColor-13;
+              border:solid 1px $bgColor-13;
+              background: $bgWhite;
+              // margin-left: 20px;
+            }
+          } 
+        }
+      }
+    }
+    .layui-searchPanelMore-icon {
+      position: absolute;
+      right: 15px;
+    }
+  }
+}
+/*****************************列表操作按钮style************************************/
+.layout-2 {
+  font-size: 0;//消除inline-block间距
+  background: $bgWhite;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 24px;
+  height: 76px;
+  box-sizing: border-box;
+  .layui-btn {
+    background: $bgWhite;
+    color:$fontColor-04;
+    font-size: 14px;
+    height: 44px;
+    margin-left: 16px;
+    &:nth-child(1){
+      margin-left: 0px;
+    }
+    &:hover {
+      color:$fontColor-08;
+      background: $bgColor-11;
+      .iconfont, a {
+        color:$fontColor-08;
+      }
+    }
+    .iconfont {
+      color:$fontColor-04;
+      font-size: 22px !important;
+      width:32px;
+      height: 32px;
+      margin-right: 6px;
+      margin-top: 6px;
+      display: inline-block;
+    }
+    .btn-text{
+      line-height: 44px;
+      height: 44px;
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+}
+/***************************************列表部分样式************************************/
+.layout-3 {
+  padding-bottom: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  box-sizing: border-box;
+  background: $bgWhite;
+  .layui-table-view {
+    border:none;
+    margin: 0;
+    .layui-table-cell {
+      color:$fontColor-06;
+    }
+    .layui-table-header {
+      background: $bgColor-09;
+      .layui-table-cell {
+        font-weight: bold;
+      }
+    }
+    .layui-table-main {
+      .layui-table {
+        td[data-field=activityPeriods], td[data-field=activityName] ,td[data-field=pno]{
+          .layui-table-cell {
+            color:$fontColor-08;
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  .layui-laypage {
+    width: 100%;
+    text-align: right;
+    .layui-laypage-curr .layui-laypage-em {
+      background: $fontColor-08;
+    }
+    a:hover {
+      color:$fontColor-08;
+    }
+  }
+}
+
+
+
+//layui-form-checkbox
+.layui-form-checkbox[lay-skin=primary]:hover i{
+  border-color:$fontColor-08;
+}
+.layui-form-checked[lay-skin=primary] i {
+  border-color:$fontColor-08;
+  background-color:$fontColor-08;
+}
+.table {
+  .layui-form-item {
+    .layui-form-label {
+      padding: 0 10px;
+    } 
+    .layui-input,.layui-form-select {
+      width: 100%;
+    }
+  }
+}
+
+/*********************************页面弹窗(layer)样式重置*****************************/
+.layui-layer {
+  .layui-layer-title {
+    height: 56px;
+    line-height: 56px;
+    color:$fontColor-06;
+    font-weight: bold;
+    font-size: 16px;
+    padding-left: 32px;
+    background: $bgWhite;
+    border-bottom:none; 
+  }
+  .layui-layer-content {
+    box-sizing: content-box;
+    @extend .layui-form ;
+    @extend .upload-form ; 
+  }
+  .layui-layer-btn {
+    padding: 8px 32px 24px;
+    box-sizing: border-box;
+    text-align: right;
+    a {
+      padding: 5px 29px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 4px;
+      text-align: center;
+      margin: 0;
+      margin-left: 12px;
+    }
+    .layui-layer-btn0,.layui-layer-btn1,.layui-layer-btn2,.layui-layer-btn3 {
+      border-color:$fontColor-08;
+      background: $bgColor-13;
+    }
+  }
+}
+.layui-layer-dialog .layui-layer-content{
+  padding: 0px 32px 8px !important;
+}
+.layui-layer-page .layui-layer-content {
+  padding: 0px 32px 0 !important;
+}
+.layui-layer-page .layui-layer-btn {
+  padding-top: 8px !important;
+}
+.upload-form {
+  .upload-content {
+    border:solid 1px $blColor-00;
+    border-radius: 4px;
+    .layui-input {
+      border:none;
+      width: 100%;
+      cursor: pointer;
+    }
+    .download {
+      width: 104px;
+      text-align: center;
+      line-height: 32px;
+      position: relative;
+      &::after{
+        display: block;
+        content: "";
+        width: 1px;
+        height: 20px;
+        background: $blColor-02;
+        position: absolute;
+        z-index: 1;
+        top: 6px;
+      }
+      a {
+        color:$fontColor-08;
+      }
+    }
+  }
+  .upload-tips {
+    color:$fontColor-09;
+    font-size: 12px;
+    line-height: 24px;
+    .tips-title {
+      margin-left: 4px;
+    }
+  }
+}

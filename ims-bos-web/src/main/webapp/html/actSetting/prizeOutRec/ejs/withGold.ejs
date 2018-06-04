@@ -1,0 +1,44 @@
+<div class="layui-inline">
+    <%if(itemType != "virtual" && itemType != "real"){%>
+        <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>奖励额度</span></label>
+        <div class="layui-inline">
+            <%if( itemType == "interface"){%>
+                <input type="text" class="layui-input itemPrice" name="itemParamVal" value="" 
+                <%if(itemCategory == "member_vip"){%>
+                    lay-verify="required|itemParamValInt" 
+                <%}else{%>
+                    lay-verify="required|itemParamVal" 
+                <%}%>
+                lay-verType="tips">           
+            <%}else{%>
+                <input type="text" lay-verify="required|itemParamVal" lay-verType="tips" class="layui-input itemPrice" name="itemParamVal" value="<%=itemParamVal%>">
+            <%}%>
+        </div>
+    <%}%>
+    <div class="layui-inline">
+        <%if( itemType == "interface"){%>
+            <%if(itemCategory == "mobile_charge"){%>
+                <span id="unitAdd_coin">元</span>
+                <input type="hidden" name="itemParamValUnit" value="USD">
+            <%}else if(itemCategory == "member_vip"){%>
+                <span id="unitAdd_coin">月</span>
+                <input type="hidden" name="itemParamValUnit" value="Month">
+            <%}else if(itemCategory == "mobile_data"){%>
+                <select  name="itemParamValUnit" id="unitAdd_coin">
+                    <option value="M">M</option>
+                    <option value="G">G</option>
+                </select>
+            <%}%>
+        <%}else{%>
+            <input type="hidden" name="itemParamValUnit" value="<%=itemParamValUnit%>">
+        <%}%>
+    </div>
+</div>
+<%if(itemType == "withGold"){%>
+    <div class="layui-inline withGold">
+        <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>交易手数</span></label>
+        <div class="layui-inline">
+            <input type="text" class="layui-input tradeLots" value="<%=tradeNum%>" lay-verify="required|itemParamValInt" lay-verType="tips" name="tradeLots">
+        </div>
+    </div>
+<%}%>

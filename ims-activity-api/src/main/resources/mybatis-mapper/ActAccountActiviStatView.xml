@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActAccountActiviStatViewDao" >
+
+
+	<sql id="base_column_list_view_sql">
+		select
+			a.*
+			,b.activity_name, b.activity_type, b.tag_code, b.start_time, b.end_time, b.finish_days, b.proposal_status
+			,c.condition_val
+		
+		from act_account_activi_stat a
+		
+		join act_setting b on (b.activity_periods = a.act_no)
+		
+		left join act_condition_setting c on c.activity_periods = a.act_no
+		
+		where a.delete_flag = 'N' 
+	</sql>
+	<select id="findListByView" resultType="ActAccountActiviStatView" parameterType="java.util.Map">
+		<include refid="base_column_list_view_sql"></include>
+		<if test="actNo != null and actNo != ''">
+			and a.act_no = #{actNo}
+		</if>
+		<if test="actName != null and actName != ''">
+			and a.act_name = #{actName}
+		</if>
+		and (b.tag_code is null or b.tag_code =''
+			<if test="tagCodes != null">
+		     or b.tag_code in
+			    <foreach collection="tagCodes" open="(" close=")" index="index" item="item"  separator=",">
+			      #{item}
+			    </foreach>
+		   	</if>
+		)
+		<if test="startTimeStr != null and startTimeStr != ''">
+			and b.start_time &gt;= #{startTimeStr}
+		</if>
+		<if test="endTimeStr != null and endTimeStr != ''">
+			and b.end_time &lt;= #{endTimeStr}
+		</if>
+		<if test="conditionVal != null and conditionVal != ''">
+			and c.condition_val like CONCAT('%',#{conditionVal},'%')
+		</if>
+		<if test="accountNo != null and accountNo != ''">
+			and a.account_no = #{accountNo}
+		</if>
+		<if test="custMobile != null and custMobile != ''">
+			and a.cust_mobile = #{custMobile}
+		</if>
+		<if test="platform != null and platform != ''">
+			and a.platform = #{platform}
+		</if>
+		<if test="platforms != null">
+			and a.platform in   
+			<foreach item="item" index="index" collection="platforms" open="(" separator="," close=")">  
+			#{item}  
+			</foreach>
+		</if>
+		<if test="realSettlementFlag != null">
+		    <if test="realSettlementFlag == true">
+		       and a.settle_status = 3
+		    </if>
+			 <if test="realSettlementFlag == false">
+		       and a.settle_status != 3
+		    </if>
+		</if>
+		<if test="enableFlag != null and enableFlag !='' ">
+			and a.enable_flag = #{enableFlag}
+		</if>
+		<if test="companyId != null">
+			and a.company_id = #{companyId}
+		</if>
+	</select>
+	
+	<select id="findViewById" parameterType="java.lang.Long" resultType="ActAccountActiviStatView">
+		<include refid="base_column_list_view_sql"></include>
+		and a.id=#{id}
+	</select>
+	
+</mapper>

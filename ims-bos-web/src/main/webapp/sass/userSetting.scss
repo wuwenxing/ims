@@ -1,0 +1,19 @@
+@import "./variables.scss";
+.m-container {
+  background: $bgColor-04;
+  box-sizing: border-box;
+  .layout-2 {
+    background: $bgWhite;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 24px;
+    height: 76px;
+    box-sizing: border-box;
+  }
+  .layout-3 {
+    background: $bgWhite;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
+  }
+}

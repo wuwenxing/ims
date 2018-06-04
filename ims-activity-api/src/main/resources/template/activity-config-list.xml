@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean name="actTemplateContextContainer" class="com.gwghk.ims.activity.context.ActTemplateContextContainer">
+        <property name="actTemplateList">
+            <map>
+                <entry key="rw">
+                    <ref bean="rwTemplateConfig"/>
+                </entry>
+                 <entry key="rjzj">
+                    <ref bean="rjzjTemplateConfig"/>
+                </entry>
+                 <entry key="cj">
+                    <ref bean="cjTemplateConfig"/>
+                </entry>
+                 <entry key="wpdh">
+                    <ref bean="wpdhTemplateConfig"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <import resource="activity-config-tasks.xml"/>
+    <import resource="activity-config-rw.xml"/>
+    <import resource="activity-config-rjzj.xml"/>
+    <import resource="activity-config-cj.xml"/>
+    <import resource="activity-config-wpdh.xml"/>
+</beans>

@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.MisOrderDao" >
+
+	<select id="findObject" resultType="ImsOrder" parameterType="java.lang.Long">
+	    select * from ims_order where id = #{id}
+  	</select>
+
+	<select id="findObjectByMap" resultType="ImsOrder"  parameterType="map">
+		select * from ims_order where 
+		 delete_flag='N'
+		 <if test="recordNumber != null">
+		 	and record_number=#{recordNumber}
+		 </if>
+		 limit 1
+	</select>
+  	
+  	<select id="listByPage" resultType="ImsOrder">
+		SELECT *
+		FROM ims_order
+		WHERE delete_flag != 'Y'
+		<if test="accountNo != null and accountNo != '' ">
+	    	and account_no LIKE CONCAT('%',#{accountNo},'%')
+	    </if>
+        <if test="recordNumber != null and recordNumber != '' ">
+	    	and record_number LIKE CONCAT('%',#{recordNumber},'%')
+	    </if>
+	    <if test="activityPeriods != null and activityPeriods != '' ">
+	    	and activity_periods = #{activityPeriods}
+	    </if>
+	    <if test="activityName != null and activityName != ''" >
+	        and activity_name like CONCAT('%',#{activityName},'%')
+	    </if>
+	    <if test="itemsName != null and itemsName != ''" >
+	        and items_name like CONCAT('%',#{itemsName},'%')
+	    </if>
+	     <if test="itemsCode != null and itemsCode != ''" >
+	        and items_code like CONCAT('%',#{itemsCode},'%')
+	    </if>
+	    <if test="mobile != null and mobile != ''" >
+	        and mobile = #{mobile}
+	    </if>
+	    <if test="chineseName != null and chineseName != ''" >
+	        and chinese_name like CONCAT('%',#{chineseName},'%')
+	    </if>
+	    <if test="taskName != null and taskName != ''" >
+	        and task_name like CONCAT('%',#{taskName},'%')
+	    </if>
+	    <if test="deliveryStatus != null" >
+	         and delivery_status = #{deliveryStatus}
+	    </if>
+   </select>
+   
+   <insert id="save" parameterType="com.gwghk.ims.activity.dao.entity.ImsOrder" >
+    insert into ims_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordNumber != null" >
+        record_number,
+      </if>
+      <if test="activityPeriods != null" >
+        activity_periods,
+      </if>
+      <if test="activityName != null" >
+        activity_name,
+      </if>
+      <if test="taskCode != null" >
+        task_code,
+      </if>
+      <if test="taskName != null" >
+        task_name,
+      </if>
+      <if test="itemsCode != null" >
+        items_code,
+      </if>
+      <if test="itemsName != null" >
+        items_name,
+      </if>
+      <if test="accountNo != null" >
+        account_no,
+      </if>
+      <if test="chineseName != null" >
+        chinese_name,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="region != null" >
+        region,
+      </if>
+      <if test="detailAddress != null" >
+        detail_address,
+      </if>
+      <if test="deliveryStatus != null" >
+        delivery_status,
+      </if>
+      <if test="deliveryDate != null" >
+        delivery_date,
+      </if>
+      <if test="expressNo != null" >
+        express_no,
+      </if>
+      <if test="expressCompany != null" >
+        express_company,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createIp != null" >
+        create_ip,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateIp != null" >
+        update_ip,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="versionNo != null" >
+        version_no,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+       <if test="givedStatus != null" >
+        gived_status,
+      </if>
+       <if test="auditStatus != null" >
+        audit_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="recordNumber != null" >
+        #{recordNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="activityPeriods != null" >
+        #{activityPeriods,jdbcType=VARCHAR},
+      </if>
+      <if test="activityName != null" >
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCode != null" >
+        #{taskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemsCode != null" >
+        #{itemsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemsName != null" >
+        #{itemsName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNo != null" >
+        #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="chineseName != null" >
+        #{chineseName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null" >
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="detailAddress != null" >
+        #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryStatus != null" >
+        #{deliveryStatus,jdbcType=BIT},
+      </if>
+      <if test="deliveryDate != null" >
+        #{deliveryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expressNo != null" >
+        #{expressNo,jdbcType=VARCHAR},
+      </if>
+      <if test="expressCompany != null" >
+        #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createIp != null" >
+        #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateIp != null" >
+        #{updateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versionNo != null" >
+        #{versionNo,jdbcType=BIGINT},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="enableFlag != null" >
+        #{enableFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="givedStatus != null" >
+        #{givedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  	
+  	<update id="update" parameterType="ImsOrder">
+	    update ims_order
+	    <set >
+	      <if test="recordNumber != null" >
+	        record_number = #{recordNumber,jdbcType=VARCHAR},
+	      </if>
+	      <if test="activityPeriods != null" >
+	        activity_periods = #{activityPeriods,jdbcType=VARCHAR},
+	      </if>
+	      <if test="activityName != null" >
+	        activity_name = #{activityName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="taskCode != null" >
+	        task_code = #{taskCode,jdbcType=VARCHAR},
+	      </if>
+	      <if test="taskName != null" >
+	        task_name = #{taskName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="itemsCode != null" >
+	        items_code = #{itemsCode,jdbcType=VARCHAR},
+	      </if>
+	      <if test="itemsName != null" >
+	        items_name = #{itemsName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="accountNo != null" >
+	        account_no = #{accountNo,jdbcType=VARCHAR},
+	      </if>
+	      <if test="chineseName != null" >
+	        chinese_name = #{chineseName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="mobile != null" >
+	        mobile = #{mobile,jdbcType=VARCHAR},
+	      </if>
+	      <if test="region != null" >
+	        region = #{region,jdbcType=VARCHAR},
+	      </if>
+	      <if test="detailAddress != null" >
+	        detail_address = #{detailAddress,jdbcType=VARCHAR},
+	      </if>
+	      <if test="deliveryStatus != null" >
+	        delivery_status = #{deliveryStatus},
+	      </if>
+	      <if test="deliveryDate != null" >
+	        delivery_date = #{deliveryDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="expressNo != null" >
+	        express_no = #{expressNo,jdbcType=VARCHAR},
+	      </if>
+	      <if test="expressCompany != null" >
+	        express_company = #{expressCompany,jdbcType=VARCHAR},
+	      </if>
+	      <if test="remark != null" >
+	        remark = #{remark,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createUser != null" >
+	        create_user = #{createUser,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createIp != null" >
+	        create_ip = #{createIp,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createDate != null" >
+	        create_date = #{createDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="updateUser != null" >
+	        update_user = #{updateUser,jdbcType=VARCHAR},
+	      </if>
+	      <if test="updateIp != null" >
+	        update_ip = #{updateIp,jdbcType=VARCHAR},
+	      </if>
+	      <if test="updateDate != null" >
+	        update_date = #{updateDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="versionNo != null" >
+	        version_no = #{versionNo,jdbcType=BIGINT},
+	      </if>
+	      <if test="deleteFlag != null" >
+	        delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+	      </if>
+	      <if test="enableFlag != null" >
+	        enable_flag = #{enableFlag,jdbcType=VARCHAR},
+	      </if>
+	      <if test="companyId != null" >
+	        company_id = #{companyId,jdbcType=INTEGER},
+	      </if>
+	       <if test="givedStatus != null" >
+	        gived_status = #{givedStatus,jdbcType=VARCHAR},
+	      </if>
+	      <if test="auditStatus != null" >
+	        audit_status = #{auditStatus,jdbcType=VARCHAR},
+	      </if>
+	    </set>
+	    where id = #{id,jdbcType=INTEGER}
+  	</update>
+</mapper>

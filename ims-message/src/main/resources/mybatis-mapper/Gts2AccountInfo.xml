@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.message.dao.inf.Gts2AccountInfoDao" >
+  
+  <insert id="save" parameterType="Gts2AccountInfo" >
+    insert into t_account_info_${env} (id, company_id, gts2_customer_id, 
+      gts2_account_id, agent_code, account_group_id, 
+      account_type, currency, sale_person, 
+      invite_code, account_no, information_from, 
+      credit_authorize_date, application_date, 
+      cashin_trade_no, lock_withdrawal, first_attempted_deposit_time, 
+      attempted_deposit, bill_collection_method, cgse_active_date, 
+      cgse_process_status, cgse_status, activate_time, 
+      migrate_data_activate_time, platform, create_user, 
+      create_ip, create_date, update_user, 
+      update_ip, update_date, version_no, 
+      open_account_date, migrate_type, remark
+      )
+    values (#{id,jdbcType=BIGINT}, #{companyId,jdbcType=BIGINT}, #{gts2CustomerId,jdbcType=BIGINT}, 
+      #{gts2AccountId,jdbcType=BIGINT}, #{agentCode,jdbcType=CHAR}, #{accountGroupId,jdbcType=BIGINT}, 
+      #{accountType,jdbcType=CHAR}, #{currency,jdbcType=CHAR}, #{salePerson,jdbcType=CHAR}, 
+      #{inviteCode,jdbcType=CHAR}, #{accountNo,jdbcType=CHAR}, #{informationFrom,jdbcType=CHAR}, 
+      #{creditAuthorizeDate,jdbcType=TIMESTAMP}, #{applicationDate,jdbcType=TIMESTAMP}, 
+      #{cashinTradeNo,jdbcType=CHAR}, #{lockWithdrawal,jdbcType=CHAR}, #{firstAttemptedDepositTime,jdbcType=TIMESTAMP}, 
+      #{attemptedDeposit,jdbcType=CHAR}, #{billCollectionMethod,jdbcType=CHAR}, #{cgseActiveDate,jdbcType=TIMESTAMP}, 
+      #{cgseProcessStatus,jdbcType=CHAR}, #{cgseStatus,jdbcType=CHAR}, #{activateTime,jdbcType=TIMESTAMP}, 
+      #{migrateDataActivateTime,jdbcType=TIMESTAMP}, #{platform,jdbcType=CHAR}, #{createUser,jdbcType=CHAR}, 
+      #{createIp,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=CHAR}, 
+      #{updateIp,jdbcType=CHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{versionNo,jdbcType=INTEGER}, 
+      #{openAccountDate,jdbcType=TIMESTAMP}, #{migrateType,jdbcType=CHAR}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+ 
+  <update id="update" parameterType="Gts2AccountInfo" >
+    update t_account_info_${env}
+    <set >
+      <if test="id != null" >
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="gts2CustomerId != null" >
+        gts2_customer_id = #{gts2CustomerId,jdbcType=BIGINT},
+      </if>
+      <if test="gts2AccountId != null" >
+        gts2_account_id = #{gts2AccountId,jdbcType=BIGINT},
+      </if>
+      <if test="agentCode != null" >
+        agent_code = #{agentCode,jdbcType=CHAR},
+      </if>
+      <if test="accountGroupId != null" >
+        account_group_id = #{accountGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="accountType != null" >
+        account_type = #{accountType,jdbcType=CHAR},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=CHAR},
+      </if>
+      <if test="salePerson != null" >
+        sale_person = #{salePerson,jdbcType=CHAR},
+      </if>
+      <if test="inviteCode != null" >
+        invite_code = #{inviteCode,jdbcType=CHAR},
+      </if>
+      <if test="accountNo != null" >
+        account_no = #{accountNo,jdbcType=CHAR},
+      </if>
+      <if test="informationFrom != null" >
+        information_from = #{informationFrom,jdbcType=CHAR},
+      </if>
+      <if test="creditAuthorizeDate != null" >
+        credit_authorize_date = #{creditAuthorizeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicationDate != null" >
+        application_date = #{applicationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cashinTradeNo != null" >
+        cashin_trade_no = #{cashinTradeNo,jdbcType=CHAR},
+      </if>
+      <if test="lockWithdrawal != null" >
+        lock_withdrawal = #{lockWithdrawal,jdbcType=CHAR},
+      </if>
+      <if test="firstAttemptedDepositTime != null" >
+        first_attempted_deposit_time = #{firstAttemptedDepositTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attemptedDeposit != null" >
+        attempted_deposit = #{attemptedDeposit,jdbcType=CHAR},
+      </if>
+      <if test="billCollectionMethod != null" >
+        bill_collection_method = #{billCollectionMethod,jdbcType=CHAR},
+      </if>
+      <if test="cgseActiveDate != null" >
+        cgse_active_date = #{cgseActiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cgseProcessStatus != null" >
+        cgse_process_status = #{cgseProcessStatus,jdbcType=CHAR},
+      </if>
+      <if test="cgseStatus != null" >
+        cgse_status = #{cgseStatus,jdbcType=CHAR},
+      </if>
+      <if test="activateTime != null" >
+        activate_time = #{activateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="migrateDataActivateTime != null" >
+        migrate_data_activate_time = #{migrateDataActivateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp,jdbcType=CHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo,jdbcType=INTEGER},
+      </if>
+      <if test="openAccountDate != null" >
+        open_account_date = #{openAccountDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="migrateType != null" >
+        migrate_type = #{migrateType,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+
+
+</mapper>

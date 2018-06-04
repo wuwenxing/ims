@@ -1,0 +1,40 @@
+<form class="layui-form">
+  <div class="form-list-item">
+    <!-- 模板下载 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">模板下载</label>
+      <div class="layui-input-inline">
+        <button class="layui-btn">模板下载</button>
+      </div>
+    </div>
+  </div>
+  <div class="form-list-item">
+    <!-- 上载文件 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">上载文件</label>
+      <div class="layui-input-inline">
+        <div class="layui-upload">
+          <button type="button" class="layui-btn layui-btn-normal" id="normalItem">选择文件</button> (支持.xls; .xlsx格式excel文件)
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="form-list-item">
+    <!-- 注意事项 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">注意事项</label>
+      <div class="layui-input-inline">
+        <ul class="list-unstyled">
+          <li>1) 物品编号，所属活动，物品名称，物品中奖率为必填项
+          </li>
+          <li>2) 物品中奖率为小数，如：0.2，即20%</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="options-bar">
+    <button class="layui-btn" lay-submit lay-filter="editFormMutipleSubmit">提交</button>
+  </div>
+</form>

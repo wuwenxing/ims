@@ -1,0 +1,11 @@
+<% data.forEach(function(item,index){%>
+    <dt><%=item.typeName%></dt>
+    <% item.child.forEach(function(itm,idx){%>
+        <dd lay-value="<%=itm.name%>">
+            <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                <span><%=itm.name%></span>
+                <i class="layui-icon"></i>
+            </div>
+        </dd>
+    <%})%>
+<%})%>

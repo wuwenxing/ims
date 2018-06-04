@@ -1,0 +1,27 @@
+
+    <form class="layui-form prizeItem">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label for="" class="layui-form-label">串码<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <input type="text" width="450" class="layui-input" value="<%=data.stringCode%>" name="stringCode" lay-verify="required" lay-verType="tips">
+							<input type="hidden" name="id" value="<%=data.id%>"/>
+							
+							
+                        </div>
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+        <div style="display:none;">
+            
+            <button class="node-submit" lay-submit lay-filter="editCode"></button>
+        </div>
+    </form>

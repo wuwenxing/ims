@@ -1,0 +1,51 @@
+<div class="items">
+    <%subTaskData.forEach(function(item,index){%>
+      <div class="levelItem subTask">
+          <% var taskParams = subTaskConfig.params;%>
+          <div class="layui-inline subTaskParams">
+            <% taskParams.forEach(function(itm,idx){%>
+              <%if(itm.isShow){%>
+                <div class="layui-inline">
+                  <%if(prizesLabel[itm.proName]){%>
+                    <span><%=prizesLabel[itm.proName]%></span> 
+                  <%}%>
+                </div>
+                <div class="layui-inline">
+                  <%if(itm.inputType == 'select'){%>
+                    <select name="<%=itm.proName%>"  >
+                      <option value=""></option>
+                    </select>
+                  <%}else if(itm.inputType == 'input'){%>
+                    <input type="text" class="layui-input" 
+                      <%if(itm.required){%> 
+                          lay-verify='required|<%=itm.validType%>' 
+                      <%}else{%>
+                          lay-verify='<%=itm.validType%>' 
+                      <%}%>
+                      name="<%=itm.proName%>" value="<%=item[itm.proName]%>" >
+                  <%}else if(itm.inputType == 'label'){%>
+  
+                  <%}else {%>
+                    <input type="text" class="layui-input" name="<%=itm.proName%>" value="<%=item[itm.proName]%>">
+                  <%}%>
+                </div>
+                <div class="layui-inline">
+                  <%if(itm.paramUnit){%>
+                    <div class="layui-inline <%=itm.paramUnit.unitType%>"><%=dynamicList.itemsUnitMap[itm.paramUnit.defaultVal]%></div>
+                    <input type="hidden" class="<%=itm.paramUnit.unitType%>" value="<%=item[itm.paramUnit.proName]%>" name="<%=itm.paramUnit.proName%>">
+                  <%}%>
+                </div>
+              <%}%>
+              <%})%>
+              <div class="layui-inline"> 
+                  <button class="layui-btn addLevelPrize">添加</button>
+                  <button class="layui-btn delLevel">删除</button>
+              </div>
+              <%if(model == 'edit'){%>
+                <input type="hidden" value="<%=item.id%>" name="id">
+              <%}%>
+          </div>
+          <div class="prizeItem"></div>
+      </div>
+      <%})%>
+  </div>

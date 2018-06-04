@@ -1,0 +1,266 @@
+<form action="" class="layui-form">
+  <div class="layui-form-item pad-30">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>编号</span>
+      </label>
+      <div class="layui-inline">
+        <input type="text" class="layui-input" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>名称</span>
+      </label>
+      <div class="layui-inline">
+        <input type="text" class="layui-input" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item pad-30">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>语言</span>
+      </label>
+      <div class="layui-inline">
+        <select name="" id="" name="tplLanguage" lay-verify="required" lay-verType="tips">
+          <option value="zh_TW">繁体</option>
+          <option value=zh_CN"">简体</option>
+          <option value="en_US">英文</option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>状态</span>
+      </label>
+      <div class="layui-inline">
+        <select name="" id="" lay-verify="required" lay-verType="tips">
+          <option value="zh_TW">繁体</option>
+          <option value=zh_CN"">简体</option>
+          <option value="en_US">英文</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item pad-30">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>类型</span>
+      </label>
+      <div class="layui-inline">
+        <select id="" name="tplType" lay-verify="required" lay-verType="tips">
+          <option value="act_warm_up">活动预热</option>
+          <option value="item_issue">物品发放</option>
+          <option value="act_progress">活动进度</option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>活动预热</span>
+      </label>
+      <div class="layui-inline">
+        <select name="actWarmUp" id="" lay-verify="required" lay-verType="tips">
+          <option value="wake_user">唤醒沉默用户</option>
+          <option value=act_notice"">活动通知</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item pad-30 channelItem">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>渠道</span>
+      </label>
+      <div class="layui-inline">
+          <input class="layui-inline" type="checkbox" name="pushChannelList" 
+            value="SMS" lay-skin="primary" title="SMS" lay-filter="channelItem" checked>
+          <input class="layui-inline" type="checkbox" name="pushChannelList" 
+            value="APP" lay-skin="primary" title="APP" lay-filter="channelItem" checked>
+          <input class="layui-inline" type="checkbox" name="pushChannelList" 
+            value="PCUI" lay-skin="primary" title="PCUI" lay-filter="channelItem" checked>
+          <input class="layui-inline" type="checkbox" name="pushChannelList" 
+            value="WeChat" lay-skin="primary" title="WeChat" lay-filter="channelItem" checked>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-tab" lay-filter="channelTab">
+      <ul class="layui-tab-title">
+        <li class="layui-this SMS-TabItem" lay-id="SMS-TabItem">SMS</li>
+        <li class="APP-TabItem" lay-id="APP-TabItem">APP</li>
+        <li class="PCUI-TabItem" lay-id="PCUI-TabItem">PCUI</li>
+        <li class="WeChat-TabItem" lay-id="WeChat-TabItem">WeChat</li>
+      </ul>
+      <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show SMS-TabItem">
+            <div class="layui-form-item pad-30 flex">
+              <div class="layui-inline flex flex-item no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                  <em class="required">*</em>
+                  <span>推送内容</span>
+                </label>
+                <div class="layui-inline flex-item">
+                  <textarea name="contentList" class="layui-textarea"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="layui-form-item pad-30 flex">
+              <div class="layui-inline flex flex-item no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                  <span>扩展信息</span>
+                </label>
+                <div class="layui-inline flex-item">
+                  <textarea name="extList" class="layui-textarea"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="layui-form-item pad-30 flex">
+              <div class="layui-inline flex flex-item no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                  <span>备注</span>
+                </label>
+                <div class="layui-inline flex-item">
+                  <textarea name="remarkList" class="layui-textarea"></textarea>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="layui-tab-item APP-TabItem">
+            <div class="layui-form-item pad-30 flex">
+              <div class="layui-inline flex flex-item no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                  <em class="required">*</em>
+                  <span>推送的APP</span>
+                </label>
+                <div class="layui-inline flex-item">
+                  <input class="layui-inline" type="checkbox" name="pushAppList" 
+                    value="FX_GTS2" lay-skin="primary" title="FX_GTS2" lay-filter="pushAppSel">
+                  <input class="layui-inline" type="checkbox" name="pushAppList" 
+                    value="FXDEMO_GTS2" lay-skin="primary" title="FXDEMO_GTS2" lay-filter="pushAppSel">
+                </div>
+              </div>
+            </div>
+            <div class="layui-form-item pad-30 flex">
+              <div class="layui-inline flex flex-item no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                  <em class="required">*</em>
+                  <span>推送内容</span>
+                </label>
+                <div class="layui-inline flex-item">
+                  <textarea name="contentList" class="layui-textarea"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="layui-form-item pad-30 flex">
+              <div class="layui-inline flex flex-item no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                  <span>扩展信息</span>
+                </label>
+                <div class="layui-inline flex-item">
+                  <textarea name="extList" class="layui-textarea"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="layui-form-item pad-30 flex">
+              <div class="layui-inline flex flex-item no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                  <span>备注</span>
+                </label>
+                <div class="layui-inline flex-item">
+                  <textarea name="remarkList" class="layui-textarea"></textarea>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="layui-tab-item PCUI-TabItem">
+            <div class="layui-form-item pad-30 flex">
+              <div class="layui-inline flex flex-item no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                  <em class="required">*</em>
+                  <span>推送的PCUI</span>
+                </label>
+                <div class="layui-inline flex-item">
+                  <input class="layui-inline" type="checkbox" name="pushPcuiTypeList" 
+                    value="FX GTS2 PCUI" lay-skin="primary" title="FX GTS2 PCUI" lay-filter="pushPcuiSel">
+                </div>
+              </div>
+            </div>
+            <div class="layui-form-item pad-30 flex">
+              <div class="layui-inline flex flex-item no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                  <em class="required">*</em>
+                  <span>推送内容</span>
+                </label>
+                <div class="layui-inline flex-item">
+                  <textarea name="contentList" class="layui-textarea"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="layui-form-item pad-30 flex">
+              <div class="layui-inline flex flex-item no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                  <span>扩展信息</span>
+                </label>
+                <div class="layui-inline flex-item">
+                  <textarea name="extList" class="layui-textarea"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="layui-form-item pad-30 flex">
+              <div class="layui-inline flex flex-item no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                  <span>备注</span>
+                </label>
+                <div class="layui-inline flex-item">
+                  <textarea name="remarkList" class="layui-textarea"></textarea>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="layui-tab-item WeChat-TabItem">
+            <div class="layui-form-item pad-30 flex">
+              <div class="layui-inline flex flex-item no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                  <em class="required">*</em>
+                  <span>推送内容</span>
+                </label>
+                <div class="layui-inline flex-item">
+                  <textarea name="contentList" class="layui-textarea"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="layui-form-item pad-30 flex">
+              <div class="layui-inline flex flex-item no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                  <span>扩展信息</span>
+                </label>
+                <div class="layui-inline flex-item">
+                  <textarea name="extList" class="layui-textarea"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="layui-form-item pad-30 flex">
+              <div class="layui-inline flex flex-item no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                  <span>备注</span>
+                </label>
+                <div class="layui-inline flex-item">
+                  <textarea name="remarkList" class="layui-textarea"></textarea>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="layui-btn node-submit" style="display:none;" lay-submit lay-filter="addItem"></button>
+</form>

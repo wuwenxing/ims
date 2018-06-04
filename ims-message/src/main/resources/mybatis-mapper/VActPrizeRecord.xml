@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.message.dao.inf.VActPrizeRecordDao" >
+  	<sql id="Base_Column_List">
+		select a.id, a.activity_periods, a.record_number,a.ref_record_number,a.env,
+		a.account_no,a.guest_name, a.guest_phone,a.guest_email,a.guest_from,
+		a.guest_ip,a.guest_platForm,a.gift_amount,a.gift_amount_unit,
+		a.gift_price,a.gift_price_unit,a.issuing_status,a.audit_status,a.send_status,
+		a.gift_number,a.lottery_status, a.lottery_time,a.add_from_bos,a.task_title,a.create_date,
+		a.create_ip, a.create_user, a.delete_flag, a.enable_flag, a.update_date,
+		a.update_ip, a.update_user,a.version_no,a.company_id,a.other_msg,
+        b.deal_start_time,b.deal_end_time,b.finish_time,b.deal_number,b.settlement_time,
+        b.receive_trade_id,b.receive_finish_time,b.withdrawal_start_trade_id,b.withdrawal_start_time,b.need_trade_lots,b.finished_trade_lots,
+        b.task_id,b.task_items_id,b.task_group, 
+        d.gift_name,d.item_category as 'giftCategory',d.gift_type,b.release_type,b.released_bonus,b.group_release,b.settle_flag,
+        b.finished_lots_trade_id,b.finished_lots_trade_time,a.ref_account_no,a.real_ref_update_date,
+        a.use_end_time
+		from (act_prize_record a 
+		   join act_prize_record_ext b on (a.record_number = b.record_number)
+		   left join act_items_setting d on (d.gift_number = a.gift_number)
+		   )
+		   where a.delete_flag !='Y' 
+	</sql>
+
+  	<select id="getBonusDemoPrizeIssuing" resultType="VActPrizeRecord"  parameterType="java.lang.String">     
+	    <include refid="Base_Column_List" /> 
+	    	and a.account_no=#{accountNo}
+	    	and a.guest_platForm=#{platform}
+	    	and d.gift_type='withGold'
+			and withdrawal_start_time is not null
+			and a.send_status=0 
+			and a.issuing_status = 'issuing'
+			and audit_status='auditPass'
+			and a.gift_amount>0
+			and release_finish=0
+			and a.env='demo'
+		order by 
+			a.id
+		limit 1
+  	</select>
+
+</mapper>

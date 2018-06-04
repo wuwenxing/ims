@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.sys.api.dao.inf.SystemMenuRoleDao" >
+  <select id="findListByMap" resultType="SystemMenuRole" parameterType="java.util.Map" >
+    select * from t_system_menu_role where delete_flag != 'Y'
+	<if test="roleId != null">
+		and role_id = #{roleId}
+	</if>
+	<if test="menuId != null">
+		and menu_id = #{menuId}
+	</if>
+	<if test="companyId != null">
+		and company_id = #{companyId}
+	</if>
+  </select>
+  <select id="findObject" resultType="SystemMenuRole" parameterType="java.lang.Long" >
+    select * from t_system_menu_role
+    where menu_role_id = #{menuRoleId,jdbcType=BIGINT}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from t_system_menu_role
+    where menu_role_id = #{menuRoleId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByRoleId" parameterType="java.lang.Long" >
+    delete from t_system_menu_role where role_id = #{roleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" parameterType="SystemMenuRole" >
+	<selectKey resultType="java.lang.Long" order="AFTER"
+		keyProperty="menuRoleId">
+		SELECT LAST_INSERT_ID()
+	</selectKey>
+    insert into t_system_menu_role (menu_role_id, menu_id, role_id, 
+      create_date, create_ip, create_user, 
+      delete_flag, enable_flag, update_date, 
+      update_ip, update_user, version_no, 
+      company_id)
+    values (#{menuRoleId,jdbcType=BIGINT}, #{menuId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createIp,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=VARCHAR}, #{enableFlag,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{updateIp,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{versionNo,jdbcType=BIGINT}, 
+      #{companyId,jdbcType=BIGINT})
+  </insert>
+  <update id="update" parameterType="SystemMenuRole" >
+    update t_system_menu_role
+    set menu_id = #{menuId,jdbcType=BIGINT},
+      role_id = #{roleId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_ip = #{updateIp,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      version_no = #{versionNo,jdbcType=BIGINT},
+      company_id = #{companyId,jdbcType=BIGINT}
+    where menu_role_id = #{menuRoleId,jdbcType=BIGINT}
+  </update>
+</mapper>

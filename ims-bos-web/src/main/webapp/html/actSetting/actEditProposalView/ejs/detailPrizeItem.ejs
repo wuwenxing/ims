@@ -1,0 +1,106 @@
+<%if(taskItems && taskItems.length > 0){%>
+    <%taskItems.forEach(function(sItem, index){%>
+    <div class="prize-item layui-row" id="<%=sItem.id%>">
+        <div>
+            <div class="prizeName">
+                <select name="itemNumber" id="" lay-filter="addItemCode" disabled>
+                    <option data-category="<%=sItem.itemCategory%>" selected value="<%=sItem.itemNumber%>" data-type="<%=sItem.itemType%>" ><%=sItem.itemName%></option>
+                </select>
+            </div>    
+            <% var itemCategory = ''; %>
+            <% var unitAttr = prizeUnit[sItem.itemType]; %>
+            <% var params = unitAttr.params; %>
+            <div class="layui-inline layui-row layui-col-md12">
+                <% params.forEach(function(pitm,idx){ %>
+                    <div class="layui-inline prize-unit layui-col-md3 layui-row <%if(idx%3 != 0){%> layui-col-md-offset1 <%}%>" >
+                        <%if(prizesLabel[pitm.proName]){%>
+                            <label for="" class="layui-form-grid-label <% if( pitm.proName == 'receiveMaxMoney'){%> layui-col-md7 <%}else{%> layui-col-md5 <%}%> "><%=prizesLabel[pitm.proName]%></label>                            
+                        <%}else if(pitm.label){%>
+                            <label for="" class="layui-form-grid-label <% if( pitm.proName == 'receiveMaxMoney'){%> layui-col-md7 <%}else{%> layui-col-md5 <%}%> "><%=pitm.label%></label>
+                        <%}else{%>
+                            <%if(unitAttr.itemType == "interface" && pitm.proName == "itemParamVal"){%>
+                                <label for="" class="layui-form-grid-label layui-col-md5">公式</label>
+                            <%}else if(unitAttr.itemType == "withGold" && pitm.proName == "itemParamVal"){%>
+                                <label for="" class="layui-form-grid-label layui-col-md5">奖励额度</label>
+                            <%}else if(unitAttr.itemType == "analogCoin" && pitm.proName == "itemParamVal"){%>
+                                <label for="" class="layui-form-grid-label layui-col-md5">模拟币</label>
+                            <%}else if(unitAttr.itemType == "tokenCoin" && pitm.proName == "itemParamVal"){%>
+                                <label for="" class="layui-form-grid-label layui-col-md5">代币</label>
+                            <%}%>
+                        <%}%>
+                        <div class="layui-inline
+                            <%if(pitm.proName == 'infParamX'){%>
+                                layui-col-md12 
+                            <%}else if(pitm.proName == 'receiveMaxMoney'){%> 
+                                layui-col-md7 
+                            <%}%> ">
+
+                            <%if(pitm.inputType == 'select'){%>
+                                <select name="<%=pitm.proName%>" id="" disabled>
+                                    <option value="<%=sItem[pitm.proName]%>" selected><%=sItem[pitm.proName]%></option>
+                                </select>
+                            <%}else if(pitm.inputType == 'label') {%>
+                                <div class="layui-inline <%=pitm.proName%>"><%=pitm.desc%></div>
+                            <%}else{%>
+                                <input type="text" class="layui-input" 
+                                    name="<%=pitm.proName%>"
+                                    <% var required = pitm.required || ''; %>
+                                    data-valid = "<%=pitm.validType%>"
+                                    <%if(pitm.validType){%> lay-verify="<%=required%>|<%=pitm.proName%>" <%}%>
+                                    value = "<%=sItem[pitm.proName]%>"
+                                    disabled
+                                >
+                            <%}%>
+                        </div>
+                        <%if(pitm.dynamicUnit){%>
+                            <%if(prizeCategory){%>
+                                <%if(pitm.paramUnitMap[prizeCategory].inputType == "label"){%>
+                                    <div class="layui-inline <%=pitm.paramUnitMap[prizeCategory].unitType%>" ><%=dynamicList.itemsUnitMap[pitm.paramUnitMap[prizeCategory].defaultVal]%></div>
+                                <%}else if(pitm.paramUnitMap[prizeCategory].inputType == 'select'){%>
+                                    <div class="appendSelect layui-inline">
+                                      <select name="<%=pitm.paramUnitProName%>" id="">
+                                        <%if(pitm.paramUnitMap[prizeCategory].options){%>
+                                          <%pitm.paramUnitMap[prizeCategory].options.forEach(function(dyItem,dyIndex){%>
+                                            <option value="<%=dyItem.key%>"><%=dyItem.title%></option>
+                                          <%})%>
+                                        <%}%>
+                                      </select>
+                                    </div>
+                                <%}else{%>
+                                    <div class="append"><%=dynamicList.itemsUnitMap[pitm.paramUnitMap[prizeCategory].defaultVal]%></div>
+                                <%}%>
+                            <%}else{%>
+                                <div class="layui-inline appendSelect">
+                                    <select name="<%=pitm.paramUnitProName%>" id="">
+                                        <%for(ppitm in pitm.paramUnitMap){%>
+                                            <option value="<%=ppitm%>" class="<%=pitm.paramUnitMap[ppitm].unitType%>"><%=dynamicList.itemsUnitMap[pitm.paramUnitMap[ppitm].defaultVal]%></option>
+                                        <%}%>
+                                    </select>
+                                </div>
+                            <%}%>
+                        <%}else{%>
+                            <%if(pitm.paramUnit){%>
+                                <%if(pitm.paramUnit.inputType == 'select'){%>
+                                    <div class="layui-inline appendSelect">
+                                        <select name="" id="" disabled>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                <%}else if(pitm.paramUnit.inputType == 'label'){%>
+                                    <div class="append layui-inline"><%=dynamicList.itemsUnitMap[pitm.paramUnit.defaultVal]%></div>
+                                    <input type="hidden" value="<%=pitm.paramUnit.defaultVal%>" name="<%=pitm.paramUnit.proName%>">
+                                <%}else{%>
+                                    <div class="append layui-inline"><%=dynamicList.itemsUnitMap[pitm.paramUnit.defaultVal]%></div>
+                                    <input type="hidden" value="<%=pitm.paramUnit.defaultVal%>" name="<%=pitm.paramUnit.proName%>">
+                                <%}%>
+                            <%}else{%>
+                                    
+                            <%}%>
+                        <%}%>
+                    </div>
+                <%})%>
+            </div>
+        </div>
+    </div>
+    <%})%>
+<%}%>

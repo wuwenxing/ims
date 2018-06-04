@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ImsTaskRecordDao">
+	
+	
+  <select id="findObject" resultType="com.gwghk.ims.activity.dao.entity.ImsTaskRecord" parameterType="java.util.Map" >
+    select * from ims_task_record_${actNo}
+    where delete_flag = 'N' and id = #{id}
+  </select>
+  <select id="findById" resultType="com.gwghk.ims.activity.dao.entity.ImsTaskRecord">
+  	select * from ims_task_record_${actNo} where delete_flag = 'N' and id = #{id}
+  </select>
+  <select id="findObjectByMap" resultType="com.gwghk.ims.activity.dao.entity.ImsTaskRecord" parameterType="java.util.Map" >
+    select * from ims_task_record
+    where delete_flag = 'N' 
+    <if test="accountNo != null and accountNo != '' ">
+		and account_no = #{accountNo}
+	</if>
+	<if test="actTaskSettingId != null and actTaskSettingId != '' ">
+		and act_task_setting_id = #{actTaskSettingId}
+	</if>
+	<if test="subTaskSettingId != null and subTaskSettingId != '' ">
+		and sub_task_setting_id = #{subTaskSettingId}
+	</if>
+	<if test="platform != null and platform != '' ">
+		and platform = #{platform}
+	</if>
+	<if test="isPrizeRecord != null and isPrizeRecord != ''">
+		and is_prize_record = #{isPrizeRecord}
+	</if>
+	<if test="taskGroup != null">
+		and task_group = #{taskGroup}
+	</if>
+	<if test="startTimeStr != null and startTimeStr != ''">
+		and taskFinishTime &gt;= #{startTimeStr}
+	</if>
+	<if test="endTimeStr != null and endTimeStr != ''">
+		and taskFinishTime &lt;= #{endTimeStr}
+	</if>
+  </select>
+  <select id="findMaxTaskFinishTime" resultType="java.util.Date" parameterType="java.util.Map" >
+    select max(task_finish_time) from ims_task_record_${actNo}
+    where delete_flag = 'N'
+    <if test="accNo != null and accNo != '' ">
+		and account_no = #{accNo}
+	</if>
+	<if test="taskSettingId != null and taskSettingId != '' ">
+		and act_task_setting_id = #{taskSettingId}
+	</if>
+	<if test="taskGroup != null and taskGroup != '' ">
+		and task_group = #{taskGroup}
+	</if>
+	<if test="subTaskSettingId != null and subTaskSettingId != '' ">
+		and sub_task_setting_id = #{subTaskSettingId}
+	</if>
+	<if test="platform != null and platform != '' ">
+		and platform = #{platform}
+	</if>
+  </select>
+  <select id="findListByMap" resultType="com.gwghk.ims.activity.dao.entity.ImsTaskRecord" parameterType="java.util.Map" >
+    select * from ims_task_record_${actNo}
+    where delete_flag = 'N' 
+    <if test="accountNo != null and accountNo != '' ">
+		and account_no = #{accountNo}
+	</if>
+	<if test="actTaskSettingId != null and actTaskSettingId != '' ">
+		and act_task_setting_id = #{actTaskSettingId}
+	</if>
+	<if test="subTaskSettingId != null and subTaskSettingId != '' ">
+		and sub_task_setting_id = #{subTaskSettingId}
+	</if>
+	<if test="platform != null and platform != '' ">
+		and platform = #{platform}
+	</if>
+	<if test="itemNo != null and itemNo != '' ">
+		and item_no = #{itemNo}
+	</if>
+	<if test="taskGroup != null">
+		and task_group = #{taskGroup}
+	</if>
+	<if test="isPrizeRecord != null and isPrizeRecord != '' ">
+		and is_prize_record = #{isPrizeRecord}
+	</if>
+  </select>
+  
+  <select id="findNeedRecordList" resultType="com.gwghk.ims.activity.dao.entity.ImsTaskRecord" parameterType="java.util.Map" >
+    select * from ims_task_record_${actNo}
+    where delete_flag = 'N' and is_prize_record not in (-1,2)
+  </select>
+ 
+  <insert id="save" parameterType="com.gwghk.ims.activity.dao.entity.ImsTaskRecord" >
+     insert into ims_task_record_${actNo}
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accountNo != null" >
+        account_no,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="actTaskSettingId != null" >
+        act_task_setting_id,
+      </if>
+      <if test="subTaskSettingId != null" >
+        sub_task_setting_id,
+      </if>
+      <if test="lastSubTask != null" >
+        last_sub_task,
+      </if>
+      <if test="actNo != null" >
+        act_no,
+      </if>
+      <if test="taskItemId != null" >
+        task_item_id,
+      </if>
+      <if test="itemNo != null" >
+        item_no,
+      </if>
+      <if test="taskCode != null" >
+        task_code,
+      </if>
+      <if test="taskParamLot != null" >
+        task_param_lot,
+      </if>
+      <if test="taskParamAmount != null" >
+        task_param_amount,
+      </if>
+      <if test="finishLot != null" >
+        finish_lot,
+      </if>
+      <if test="finishAmount != null" >
+        finish_amount,
+      </if>
+      <if test="finishCount != null" >
+        finish_count,
+      </if>
+      
+      <if test="itemAmount != null" >
+        item_amount,
+      </if>
+      <if test="itemAmountUnit != null" >
+        item_amount_unit,
+      </if>
+      <if test="needTradeLot != null" >
+        need_trade_lot,
+      </if>
+      <if test="equalValue != null" >
+        equal_value,
+      </if>
+      <if test="isPrizeRecord != null" >
+        is_prize_record,
+      </if>
+      <if test="taskRecordTime != null" >
+        task_record_time,
+      </if>
+      <if test="taskFinishTime != null" >
+        task_finish_time,
+      </if>
+      <if test="isTaskEnd != null" >
+        is_task_end,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createIp != null" >
+        create_ip,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateIp != null" >
+        update_ip,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="versionNo != null" >
+        version_no,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="itemType != null" >
+        item_type,
+      </if>
+      <if test="taskGroup != null">
+		task_group,
+	 </if>
+      <if test="accountType != null">
+		account_type,
+	 </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountNo != null" >
+        #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="actTaskSettingId != null" >
+        #{actTaskSettingId,jdbcType=INTEGER},
+      </if>
+      <if test="subTaskSettingId != null" >
+        #{subTaskSettingId,jdbcType=INTEGER},
+      </if>
+	  <if test="lastSubTask != null" >
+        #{lastSubTask,jdbcType=BIT},
+      </if>
+      <if test="actNo != null" >
+        #{actNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taskItemId != null" >
+        #{taskItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNo != null" >
+        #{itemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCode != null" >
+        #{taskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskParamLot != null" >
+        #{taskParamLot,jdbcType=INTEGER},
+      </if>
+      <if test="taskParamAmount != null" >
+        #{taskParamAmount,jdbcType=INTEGER},
+      </if>
+      <if test="finishLot != null" >
+        #{finishLot,jdbcType=DECIMAL},
+      </if>
+      <if test="finishAmount != null" >
+        #{finishAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="finishCount != null" >
+        #{finishCount,jdbcType=INTEGER},
+      </if>
+      
+      <if test="itemAmount != null" >
+        #{itemAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="itemAmountUnit != null" >
+        #{itemAmountUnit,jdbcType=DECIMAL},
+      </if>
+      <if test="needTradeLot != null" >
+        #{needTradeLot,jdbcType=DECIMAL},
+      </if>
+      <if test="equalValue != null" >
+        #{equalValue,jdbcType=DECIMAL},
+      </if>
+      <if test="isPrizeRecord != null" >
+        #{isPrizeRecord,jdbcType=INTEGER},
+      </if>
+      <if test="taskRecordTime != null" >
+        #{taskRecordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskFinishTime != null" >
+        #{taskFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isTaskEnd != null" >
+        #{isTaskEnd,jdbcType=BIT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createIp != null" >
+        #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateIp != null" >
+        #{updateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versionNo != null" >
+        #{versionNo,jdbcType=BIGINT},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="enableFlag != null" >
+        #{enableFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="itemType != null" >
+        #{itemType,jdbcType=VARCHAR},
+      </if>
+       <if test="taskGroup != null" >
+        #{taskGroup,jdbcType=INTEGER},
+      </if>
+       <if test="accountType != null" >
+        #{accountType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+ <update id="update" parameterType="com.gwghk.ims.activity.dao.entity.ImsTaskRecord" >
+    update ims_task_record_${actNo}
+    <set >
+      <if test="accountNo != null" >
+        account_no = #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="actTaskSettingId != null" >
+        act_task_setting_id = #{actTaskSettingId,jdbcType=INTEGER},
+      </if>
+      <if test="subTaskSettingId != null" >
+        sub_task_setting_id = #{subTaskSettingId,jdbcType=INTEGER},
+      </if>
+      <if test="lastSubTask != null" >
+        last_sub_task = #{lastSubTask,jdbcType=BIT},
+      </if>
+      <if test="actNo != null" >
+        act_no = #{actNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taskItemId != null" >
+        task_item_id = #{taskItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNo != null" >
+        item_no = #{itemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCode != null" >
+        task_code = #{taskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskParamLot != null" >
+        task_param_lot = #{taskParamLot,jdbcType=INTEGER},
+      </if>
+      <if test="taskParamAmount != null" >
+        task_param_amount = #{taskParamAmount,jdbcType=INTEGER},
+      </if>
+      <if test="finishLot != null" >
+        finish_lot = #{finishLot,jdbcType=DECIMAL},
+      </if>
+      <if test="finishAmount != null" >
+        finish_amount = #{finishAmount,jdbcType=DECIMAL},
+      </if>
+       <if test="finishCount != null" >
+        finish_count = #{finishCount,jdbcType=INTEGER},
+      </if>
+      
+      <if test="itemAmount != null" >
+        item_amount = #{itemAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="itemAmountUnit != null" >
+        item_amount_unit = #{itemAmountUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="needTradeLot != null" >
+        need_trade_lot = #{needTradeLot,jdbcType=DECIMAL},
+      </if>
+      <if test="equalValue != null" >
+        equal_value = #{equalValue,jdbcType=DECIMAL},
+      </if>
+      <if test="isPrizeRecord != null" >
+        is_prize_record = #{isPrizeRecord,jdbcType=INTEGER},
+      </if>
+      <if test="taskRecordTime != null" >
+        task_record_time = #{taskRecordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskFinishTime != null" >
+        task_finish_time = #{taskFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isTaskEnd != null" >
+        is_task_end = #{isTaskEnd,jdbcType=BIT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo,jdbcType=BIGINT},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+       <if test="taskGroup != null" >
+        task_group = #{taskGroup,jdbcType=INTEGER},
+      </if>
+       <if test="itemType != null" >
+        item_type = #{itemType,jdbcType=INTEGER},
+      </if>
+       <if test="accountType != null" >
+        account_type = #{accountType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

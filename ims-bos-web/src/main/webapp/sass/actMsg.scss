@@ -1,0 +1,110 @@
+@import "./variables.scss";
+@import "./layuiform.scss";
+.m-container {
+ .layui-form {
+   .layui-form-item {
+     padding-bottom: 8px;
+     .layui-form-radio {
+       width: 90px;
+     }
+     .middleText {
+       color:$fontColor-08;
+     }
+     .rules {
+      height: 32px;
+      line-height: 32px;
+      padding-bottom: 12px;
+      .middle {
+        margin: 0 8px;
+      }
+      .layui-input-xs {
+        width: 70px;
+        padding-right: 22px;
+      }
+      .days {
+        border:solid 1px $blColor-00;
+        position: relative;
+        border-radius: 4px;
+        .append {
+          position: absolute;
+          right: 10px;
+          top: 0px;
+          color: $fontColor-11; 
+        }
+      }
+    }
+    .tips-inner {
+      font-size: 12px;
+      color:$fontColor-12;
+      padding-left: 68px
+    }
+   }
+ } 
+  .btns {
+    text-align: center;
+  }
+  .card {
+    background: $bgWhite;
+    margin-bottom: 16px;
+    padding-left: 32px;
+    width: 100%;
+    box-sizing: border-box;
+    &.act-progress {
+      margin-bottom: 0;
+    }
+    &.top {
+      padding: 16px 32px;
+      box-sizing: border-box;
+      width: 100%;
+      height: 64px;
+    }
+    .title {
+      padding-left: 4px;
+      width: 100%;
+      height: 48px;
+      line-height: 48px;
+      box-sizing: border-box;
+      font-size: 16px;
+      font-weight: bold;
+      position: relative;   
+      margin-bottom: 8px;    
+      &::after {
+       position: absolute;
+       width: 4px;
+       height: 12px;
+       top: 18px;
+       left: -8px;
+       background: $bgColor-13;
+       display: block;
+       content: "";
+      }
+    }
+  }
+  .task-list {
+    .task {
+      padding-right: 20px;
+      .taskNum {
+        height: 32px;
+        line-height: 32px;
+        background: $bgColor-14;
+        font-weight: bold;
+        font-size: 14px;
+        padding-left: 20px;
+        box-sizing: border-box;
+        margin-bottom: 8px;
+      }
+      .task-name {
+        margin-bottom: 8px;
+      }
+    }
+  }
+}
+.mrl-8,.ml-8 {
+  margin-left: 8px;
+}
+.mr-8 {
+  margin-right: 8px;
+}
+.bolder {
+  font-weight: bold;
+}

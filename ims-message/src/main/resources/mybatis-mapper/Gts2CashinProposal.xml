@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.message.dao.inf.Gts2CashinProposalDao" >
+ 
+  <insert id="save" parameterType="Gts2CashinProposal" >
+    insert into t_cashin_proposal_${env} (id, gts2_customer_id, gts2_account_id, 
+      account_group_id, account_no, customer_no, 
+      agent_code, cus_tran_type, platform, 
+      jointime, account_currency, pay_amount, 
+      pay_currency, trans_amount, trans_currency, 
+      exchange_rate, gateway_code, bank_pay_name, 
+      issue_bank_name, bank_pay_account, bank_pay_method, 
+      cheque_no, lock_withdrawal, unlock_withdrawal_time, 
+      fee, deposit_fee, information_from, 
+      remark, deposit_bankname, deposit_bank_account, 
+      deposit_bank_accounttype, deposit_national_transfercode, 
+      deposit_bank_address, deposit_bank_country, deposit_province, 
+      deposit_bank_city, deposit_bank_branch, deposit_type, 
+      flag_withdraw, flag_withdraw_update_user, pno, 
+      proposal_status, is_auto_approve, proposer, 
+      pre_approver, approver, canceller, 
+      proposal_date, pre_approve_date, approve_date, 
+      cancel_date, customer_group_id, create_user, 
+      create_ip, create_date, update_user, 
+      update_ip, update_date, version_no, 
+      cashin_channel, flag_withdraw_update_date, gateway_currency, 
+      refer_pno, status, deposit_file_path, 
+      deposit_file_name)
+    values (#{id,jdbcType=BIGINT}, #{gts2CustomerId,jdbcType=BIGINT}, #{gts2AccountId,jdbcType=BIGINT}, 
+      #{accountGroupId,jdbcType=BIGINT}, #{accountNo,jdbcType=CHAR}, #{customerNo,jdbcType=CHAR}, 
+      #{agentCode,jdbcType=CHAR}, #{cusTranType,jdbcType=INTEGER}, #{platform,jdbcType=CHAR}, 
+      #{jointime,jdbcType=TIMESTAMP}, #{accountCurrency,jdbcType=CHAR}, #{payAmount,jdbcType=DOUBLE}, 
+      #{payCurrency,jdbcType=CHAR}, #{transAmount,jdbcType=DOUBLE}, #{transCurrency,jdbcType=CHAR}, 
+      #{exchangeRate,jdbcType=DOUBLE}, #{gatewayCode,jdbcType=CHAR}, #{bankPayName,jdbcType=CHAR}, 
+      #{issueBankName,jdbcType=CHAR}, #{bankPayAccount,jdbcType=CHAR}, #{bankPayMethod,jdbcType=CHAR}, 
+      #{chequeNo,jdbcType=CHAR}, #{lockWithdrawal,jdbcType=CHAR}, #{unlockWithdrawalTime,jdbcType=TIMESTAMP}, 
+      #{fee,jdbcType=DOUBLE}, #{depositFee,jdbcType=DOUBLE}, #{informationFrom,jdbcType=CHAR}, 
+      #{remark,jdbcType=CHAR}, #{depositBankname,jdbcType=CHAR}, #{depositBankAccount,jdbcType=CHAR}, 
+      #{depositBankAccounttype,jdbcType=CHAR}, #{depositNationalTransfercode,jdbcType=CHAR}, 
+      #{depositBankAddress,jdbcType=CHAR}, #{depositBankCountry,jdbcType=CHAR}, #{depositProvince,jdbcType=CHAR}, 
+      #{depositBankCity,jdbcType=CHAR}, #{depositBankBranch,jdbcType=CHAR}, #{depositType,jdbcType=CHAR}, 
+      #{flagWithdraw,jdbcType=BIT}, #{flagWithdrawUpdateUser,jdbcType=CHAR}, #{pno,jdbcType=CHAR}, 
+      #{proposalStatus,jdbcType=CHAR}, #{isAutoApprove,jdbcType=BIT}, #{proposer,jdbcType=CHAR}, 
+      #{preApprover,jdbcType=CHAR}, #{approver,jdbcType=CHAR}, #{canceller,jdbcType=CHAR}, 
+      #{proposalDate,jdbcType=TIMESTAMP}, #{preApproveDate,jdbcType=TIMESTAMP}, #{approveDate,jdbcType=TIMESTAMP}, 
+      #{cancelDate,jdbcType=TIMESTAMP}, #{customerGroupId,jdbcType=BIGINT}, #{createUser,jdbcType=CHAR}, 
+      #{createIp,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=CHAR}, 
+      #{updateIp,jdbcType=CHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{versionNo,jdbcType=INTEGER}, 
+      #{cashinChannel,jdbcType=CHAR}, #{flagWithdrawUpdateDate,jdbcType=TIMESTAMP}, #{gatewayCurrency,jdbcType=CHAR}, 
+      #{referPno,jdbcType=CHAR}, #{status,jdbcType=LONGVARCHAR}, #{depositFilePath,jdbcType=LONGVARCHAR}, 
+      #{depositFileName,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <update id="update" parameterType="Gts2CashinProposal" >
+    update t_cashin_proposal_${env}
+    <set >
+      <if test="gts2CustomerId != null" >
+        gts2_customer_id = #{gts2CustomerId,jdbcType=BIGINT},
+      </if>
+      <if test="gts2AccountId != null" >
+        gts2_account_id = #{gts2AccountId,jdbcType=BIGINT},
+      </if>
+      <if test="accountGroupId != null" >
+        account_group_id = #{accountGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="accountNo != null" >
+        account_no = #{accountNo,jdbcType=CHAR},
+      </if>
+      <if test="customerNo != null" >
+        customer_no = #{customerNo,jdbcType=CHAR},
+      </if>
+      <if test="agentCode != null" >
+        agent_code = #{agentCode,jdbcType=CHAR},
+      </if>
+      <if test="cusTranType != null" >
+        cus_tran_type = #{cusTranType,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=CHAR},
+      </if>
+      <if test="jointime != null" >
+        jointime = #{jointime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountCurrency != null" >
+        account_currency = #{accountCurrency,jdbcType=CHAR},
+      </if>
+      <if test="payAmount != null" >
+        pay_amount = #{payAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="payCurrency != null" >
+        pay_currency = #{payCurrency,jdbcType=CHAR},
+      </if>
+      <if test="transAmount != null" >
+        trans_amount = #{transAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="transCurrency != null" >
+        trans_currency = #{transCurrency,jdbcType=CHAR},
+      </if>
+      <if test="exchangeRate != null" >
+        exchange_rate = #{exchangeRate,jdbcType=DOUBLE},
+      </if>
+      <if test="gatewayCode != null" >
+        gateway_code = #{gatewayCode,jdbcType=CHAR},
+      </if>
+      <if test="bankPayName != null" >
+        bank_pay_name = #{bankPayName,jdbcType=CHAR},
+      </if>
+      <if test="issueBankName != null" >
+        issue_bank_name = #{issueBankName,jdbcType=CHAR},
+      </if>
+      <if test="bankPayAccount != null" >
+        bank_pay_account = #{bankPayAccount,jdbcType=CHAR},
+      </if>
+      <if test="bankPayMethod != null" >
+        bank_pay_method = #{bankPayMethod,jdbcType=CHAR},
+      </if>
+      <if test="chequeNo != null" >
+        cheque_no = #{chequeNo,jdbcType=CHAR},
+      </if>
+      <if test="lockWithdrawal != null" >
+        lock_withdrawal = #{lockWithdrawal,jdbcType=CHAR},
+      </if>
+      <if test="unlockWithdrawalTime != null" >
+        unlock_withdrawal_time = #{unlockWithdrawalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=DOUBLE},
+      </if>
+      <if test="depositFee != null" >
+        deposit_fee = #{depositFee,jdbcType=DOUBLE},
+      </if>
+      <if test="informationFrom != null" >
+        information_from = #{informationFrom,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=CHAR},
+      </if>
+      <if test="depositBankname != null" >
+        deposit_bankname = #{depositBankname,jdbcType=CHAR},
+      </if>
+      <if test="depositBankAccount != null" >
+        deposit_bank_account = #{depositBankAccount,jdbcType=CHAR},
+      </if>
+      <if test="depositBankAccounttype != null" >
+        deposit_bank_accounttype = #{depositBankAccounttype,jdbcType=CHAR},
+      </if>
+      <if test="depositNationalTransfercode != null" >
+        deposit_national_transfercode = #{depositNationalTransfercode,jdbcType=CHAR},
+      </if>
+      <if test="depositBankAddress != null" >
+        deposit_bank_address = #{depositBankAddress,jdbcType=CHAR},
+      </if>
+      <if test="depositBankCountry != null" >
+        deposit_bank_country = #{depositBankCountry,jdbcType=CHAR},
+      </if>
+      <if test="depositProvince != null" >
+        deposit_province = #{depositProvince,jdbcType=CHAR},
+      </if>
+      <if test="depositBankCity != null" >
+        deposit_bank_city = #{depositBankCity,jdbcType=CHAR},
+      </if>
+      <if test="depositBankBranch != null" >
+        deposit_bank_branch = #{depositBankBranch,jdbcType=CHAR},
+      </if>
+      <if test="depositType != null" >
+        deposit_type = #{depositType,jdbcType=CHAR},
+      </if>
+      <if test="flagWithdraw != null" >
+        flag_withdraw = #{flagWithdraw,jdbcType=BIT},
+      </if>
+      <if test="flagWithdrawUpdateUser != null" >
+        flag_withdraw_update_user = #{flagWithdrawUpdateUser,jdbcType=CHAR},
+      </if>
+      <if test="pno != null" >
+        pno = #{pno,jdbcType=CHAR},
+      </if>
+      <if test="proposalStatus != null" >
+        proposal_status = #{proposalStatus,jdbcType=CHAR},
+      </if>
+      <if test="isAutoApprove != null" >
+        is_auto_approve = #{isAutoApprove,jdbcType=BIT},
+      </if>
+      <if test="proposer != null" >
+        proposer = #{proposer,jdbcType=CHAR},
+      </if>
+      <if test="preApprover != null" >
+        pre_approver = #{preApprover,jdbcType=CHAR},
+      </if>
+      <if test="approver != null" >
+        approver = #{approver,jdbcType=CHAR},
+      </if>
+      <if test="canceller != null" >
+        canceller = #{canceller,jdbcType=CHAR},
+      </if>
+      <if test="proposalDate != null" >
+        proposal_date = #{proposalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="preApproveDate != null" >
+        pre_approve_date = #{preApproveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveDate != null" >
+        approve_date = #{approveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelDate != null" >
+        cancel_date = #{cancelDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerGroupId != null" >
+        customer_group_id = #{customerGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp,jdbcType=CHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo,jdbcType=INTEGER},
+      </if>
+      <if test="cashinChannel != null" >
+        cashin_channel = #{cashinChannel,jdbcType=CHAR},
+      </if>
+      <if test="flagWithdrawUpdateDate != null" >
+        flag_withdraw_update_date = #{flagWithdrawUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gatewayCurrency != null" >
+        gateway_currency = #{gatewayCurrency,jdbcType=CHAR},
+      </if>
+      <if test="referPno != null" >
+        refer_pno = #{referPno,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="depositFilePath != null" >
+        deposit_file_path = #{depositFilePath,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="depositFileName != null" >
+        deposit_file_name = #{depositFileName,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+ 
+</mapper>

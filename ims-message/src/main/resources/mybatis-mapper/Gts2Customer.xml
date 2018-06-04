@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.message.dao.inf.Gts2CustomerDao" >
+  
+  <insert id="save" parameterType="Gts2Customer" >
+    insert into t_customer_${env} (id, gts2_customer_id, company_id, 
+      customer_number, loginname, password, 
+      agent_code, open_platform, customer_category, 
+      create_time, last_login_time, last_login_ip, 
+      title, chinese_name, english_last_name, 
+      english_first_name, id_document, id_document_other, 
+      id_document_number, id_document_number_md5, id_document_country, 
+      id_document_country_other, nationality, nationality_other, 
+      home_phone_prefix, home_phone, mobile_phone_prefix, 
+      mobile_phone, address_consistent, province, 
+      country, country_other, postal_code, 
+      email, information_from, is_agreement, 
+      golden_comment, email_service, errorcount, 
+      max_credit_count, first_deposit_platform, first_deposit_date, 
+      first_active_account_no, first_active_date, verify_method, 
+      first_active_platform, i_born_in_us, i_am_not_american, 
+      i_am_us_citizen, is_demo, is_migrate_data, 
+      success_login_count, fail_login_count, customer_group_id, 
+      create_user, create_ip, create_date, 
+      update_user, update_ip, update_date, 
+      version_no, open_from, first_withdraw_gts2_account_id, 
+      first_withdraw_platform, first_withdraw_date, 
+      first_deposit_gts2_account_id, open_customer_date, 
+      encode_password_type, migrate_type, open_ip, 
+     address, remark
+      )
+    values (#{id,jdbcType=BIGINT}, #{gts2CustomerId,jdbcType=BIGINT}, #{companyId,jdbcType=BIGINT}, 
+      #{customerNumber,jdbcType=BIGINT}, #{loginname,jdbcType=CHAR}, #{password,jdbcType=CHAR}, 
+      #{agentCode,jdbcType=CHAR}, #{openPlatform,jdbcType=CHAR}, #{customerCategory,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{lastLoginIp,jdbcType=CHAR}, 
+      #{title,jdbcType=CHAR}, #{chineseName,jdbcType=CHAR}, #{englishLastName,jdbcType=CHAR}, 
+      #{englishFirstName,jdbcType=CHAR}, #{idDocument,jdbcType=CHAR}, #{idDocumentOther,jdbcType=CHAR}, 
+      #{idDocumentNumber,jdbcType=CHAR}, #{idDocumentNumberMd5,jdbcType=CHAR}, #{idDocumentCountry,jdbcType=CHAR}, 
+      #{idDocumentCountryOther,jdbcType=CHAR}, #{nationality,jdbcType=CHAR}, #{nationalityOther,jdbcType=CHAR}, 
+      #{homePhonePrefix,jdbcType=CHAR}, #{homePhone,jdbcType=CHAR}, #{mobilePhonePrefix,jdbcType=CHAR}, 
+      #{mobilePhone,jdbcType=CHAR}, #{addressConsistent,jdbcType=BIT}, #{province,jdbcType=CHAR}, 
+      #{country,jdbcType=CHAR}, #{countryOther,jdbcType=CHAR}, #{postalCode,jdbcType=CHAR}, 
+      #{email,jdbcType=CHAR}, #{informationFrom,jdbcType=CHAR}, #{isAgreement,jdbcType=INTEGER}, 
+      #{goldenComment,jdbcType=INTEGER}, #{emailService,jdbcType=CHAR}, #{errorcount,jdbcType=INTEGER}, 
+      #{maxCreditCount,jdbcType=DOUBLE}, #{firstDepositPlatform,jdbcType=CHAR}, #{firstDepositDate,jdbcType=TIMESTAMP}, 
+      #{firstActiveAccountNo,jdbcType=CHAR}, #{firstActiveDate,jdbcType=TIMESTAMP}, #{verifyMethod,jdbcType=CHAR}, 
+      #{firstActivePlatform,jdbcType=CHAR}, #{iBornInUs,jdbcType=BIT}, #{iAmNotAmerican,jdbcType=BIT}, 
+      #{iAmUsCitizen,jdbcType=BIT}, #{isDemo,jdbcType=BIT}, #{isMigrateData,jdbcType=BIT}, 
+      #{successLoginCount,jdbcType=INTEGER}, #{failLoginCount,jdbcType=INTEGER}, #{customerGroupId,jdbcType=BIGINT}, 
+      #{createUser,jdbcType=CHAR}, #{createIp,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=CHAR}, #{updateIp,jdbcType=CHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{versionNo,jdbcType=INTEGER}, #{openFrom,jdbcType=CHAR}, #{firstWithdrawGts2AccountId,jdbcType=BIGINT}, 
+      #{firstWithdrawPlatform,jdbcType=CHAR}, #{firstWithdrawDate,jdbcType=TIMESTAMP}, 
+      #{firstDepositGts2AccountId,jdbcType=BIGINT}, #{openCustomerDate,jdbcType=TIMESTAMP}, 
+      #{encodePasswordType,jdbcType=CHAR}, #{migrateType,jdbcType=CHAR}, #{openIp,jdbcType=CHAR}, 
+      #{address,jdbcType=LONGVARCHAR}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  
+  <update id="update" parameterType="Gts2Customer" >
+    update t_customer_${env}
+    <set >
+      <if test="gts2CustomerId != null" >
+        gts2_customer_id = #{gts2CustomerId,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="customerNumber != null" >
+        customer_number = #{customerNumber,jdbcType=BIGINT},
+      </if>
+      <if test="loginname != null" >
+        loginname = #{loginname,jdbcType=CHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="agentCode != null" >
+        agent_code = #{agentCode,jdbcType=CHAR},
+      </if>
+      <if test="openPlatform != null" >
+        open_platform = #{openPlatform,jdbcType=CHAR},
+      </if>
+      <if test="customerCategory != null" >
+        customer_category = #{customerCategory,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip = #{lastLoginIp,jdbcType=CHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=CHAR},
+      </if>
+      <if test="chineseName != null" >
+        chinese_name = #{chineseName,jdbcType=CHAR},
+      </if>
+      <if test="englishLastName != null" >
+        english_last_name = #{englishLastName,jdbcType=CHAR},
+      </if>
+      <if test="englishFirstName != null" >
+        english_first_name = #{englishFirstName,jdbcType=CHAR},
+      </if>
+      <if test="idDocument != null" >
+        id_document = #{idDocument,jdbcType=CHAR},
+      </if>
+      <if test="idDocumentOther != null" >
+        id_document_other = #{idDocumentOther,jdbcType=CHAR},
+      </if>
+      <if test="idDocumentNumber != null" >
+        id_document_number = #{idDocumentNumber,jdbcType=CHAR},
+      </if>
+      <if test="idDocumentNumberMd5 != null" >
+        id_document_number_md5 = #{idDocumentNumberMd5,jdbcType=CHAR},
+      </if>
+      <if test="idDocumentCountry != null" >
+        id_document_country = #{idDocumentCountry,jdbcType=CHAR},
+      </if>
+      <if test="idDocumentCountryOther != null" >
+        id_document_country_other = #{idDocumentCountryOther,jdbcType=CHAR},
+      </if>
+      <if test="nationality != null" >
+        nationality = #{nationality,jdbcType=CHAR},
+      </if>
+      <if test="nationalityOther != null" >
+        nationality_other = #{nationalityOther,jdbcType=CHAR},
+      </if>
+      <if test="homePhonePrefix != null" >
+        home_phone_prefix = #{homePhonePrefix,jdbcType=CHAR},
+      </if>
+      <if test="homePhone != null" >
+        home_phone = #{homePhone,jdbcType=CHAR},
+      </if>
+      <if test="mobilePhonePrefix != null" >
+        mobile_phone_prefix = #{mobilePhonePrefix,jdbcType=CHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        mobile_phone = #{mobilePhone,jdbcType=CHAR},
+      </if>
+      <if test="addressConsistent != null" >
+        address_consistent = #{addressConsistent,jdbcType=BIT},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=CHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=CHAR},
+      </if>
+      <if test="countryOther != null" >
+        country_other = #{countryOther,jdbcType=CHAR},
+      </if>
+      <if test="postalCode != null" >
+        postal_code = #{postalCode,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=CHAR},
+      </if>
+      <if test="informationFrom != null" >
+        information_from = #{informationFrom,jdbcType=CHAR},
+      </if>
+      <if test="isAgreement != null" >
+        is_agreement = #{isAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="goldenComment != null" >
+        golden_comment = #{goldenComment,jdbcType=INTEGER},
+      </if>
+      <if test="emailService != null" >
+        email_service = #{emailService,jdbcType=CHAR},
+      </if>
+      <if test="errorcount != null" >
+        errorcount = #{errorcount,jdbcType=INTEGER},
+      </if>
+      <if test="maxCreditCount != null" >
+        max_credit_count = #{maxCreditCount,jdbcType=DOUBLE},
+      </if>
+      <if test="firstDepositPlatform != null" >
+        first_deposit_platform = #{firstDepositPlatform,jdbcType=CHAR},
+      </if>
+      <if test="firstDepositDate != null" >
+        first_deposit_date = #{firstDepositDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstActiveAccountNo != null" >
+        first_active_account_no = #{firstActiveAccountNo,jdbcType=CHAR},
+      </if>
+      <if test="firstActiveDate != null" >
+        first_active_date = #{firstActiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifyMethod != null" >
+        verify_method = #{verifyMethod,jdbcType=CHAR},
+      </if>
+      <if test="firstActivePlatform != null" >
+        first_active_platform = #{firstActivePlatform,jdbcType=CHAR},
+      </if>
+      <if test="iBornInUs != null" >
+        i_born_in_us = #{iBornInUs,jdbcType=BIT},
+      </if>
+      <if test="iAmNotAmerican != null" >
+        i_am_not_american = #{iAmNotAmerican,jdbcType=BIT},
+      </if>
+      <if test="iAmUsCitizen != null" >
+        i_am_us_citizen = #{iAmUsCitizen,jdbcType=BIT},
+      </if>
+      <if test="isDemo != null" >
+        is_demo = #{isDemo,jdbcType=BIT},
+      </if>
+      <if test="isMigrateData != null" >
+        is_migrate_data = #{isMigrateData,jdbcType=BIT},
+      </if>
+      <if test="successLoginCount != null" >
+        success_login_count = #{successLoginCount,jdbcType=INTEGER},
+      </if>
+      <if test="failLoginCount != null" >
+        fail_login_count = #{failLoginCount,jdbcType=INTEGER},
+      </if>
+      <if test="customerGroupId != null" >
+        customer_group_id = #{customerGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp,jdbcType=CHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo,jdbcType=INTEGER},
+      </if>
+      <if test="openFrom != null" >
+        open_from = #{openFrom,jdbcType=CHAR},
+      </if>
+      <if test="firstWithdrawGts2AccountId != null" >
+        first_withdraw_gts2_account_id = #{firstWithdrawGts2AccountId,jdbcType=BIGINT},
+      </if>
+      <if test="firstWithdrawPlatform != null" >
+        first_withdraw_platform = #{firstWithdrawPlatform,jdbcType=CHAR},
+      </if>
+      <if test="firstWithdrawDate != null" >
+        first_withdraw_date = #{firstWithdrawDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstDepositGts2AccountId != null" >
+        first_deposit_gts2_account_id = #{firstDepositGts2AccountId,jdbcType=BIGINT},
+      </if>
+      <if test="openCustomerDate != null" >
+        open_customer_date = #{openCustomerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="encodePasswordType != null" >
+        encode_password_type = #{encodePasswordType,jdbcType=CHAR},
+      </if>
+      <if test="migrateType != null" >
+        migrate_type = #{migrateType,jdbcType=CHAR},
+      </if>
+      <if test="openIp != null" >
+        open_ip = #{openIp,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  
+  <select id="getByGts2CustomerId" parameterType="Gts2Customer" resultType="Gts2Customer">
+  	select * from t_customer_${env} where gts2_customer_id=#{gts2CustomerId}
+  </select>
+</mapper>

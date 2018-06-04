@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActTaskItemsDao">
+  <sql id="Base_Column_sql" >
+     select a.*,b.item_name,b.item_type,b.item_category,b.item_price from act_task_items a 
+      left join act_items_setting b on b.item_number=a.item_number
+      left join act_task_setting c on c.id=a.task_setting_id
+  </sql>
+ 
+  <select id="findListWrapperByMap" resultType="ActTaskItemsWrapper" parameterType="java.util.Map">
+		<include refid="Base_Column_sql" />  where  
+		  a.delete_flag != 'Y' and a.enable_flag = 'Y'
+		<if test="taskSettingId != null and taskSettingId != '' ">
+			and a.task_setting_id = #{taskSettingId}
+		</if>
+		<if test="activityPeriods != null and activityPeriods != '' ">
+			and c.activity_periods = #{activityPeriods}
+		</if>
+		order by a.task_setting_id asc,a.id asc
+   </select>
+  <select id="findObjectByMap" resultType="ActTaskItems" parameterType="java.util.Map">
+		select * from act_task_items where delete_flag = 'N' and enable_flag = 'Y'
+		<if test="taskSettingId != null and taskSettingId != '' ">
+			and task_setting_id = #{taskSettingId}
+		</if>
+		<if test="itemNumber != null and itemNumber != '' ">
+			and item_number = #{itemNumber}
+		</if>
+   </select>
+   
+   
+  <select id="findObject" resultType ="ActTaskItems"  >
+    select  * from act_task_items where id = #{id}
+  </select>
+  <delete id="delete">
+	 delete from act_task_items where id = #{id}
+  </delete>
+  <delete id="deleteBatch">
+	delete from act_task_items where id in
+	<foreach item="item" index="index" collection="list" open="("
+		separator="," close=")">
+		#{item}
+	</foreach>
+   </delete>
+ 
+  <insert id="save" parameterType="ActTaskItems" useGeneratedKeys="true" keyProperty="id">
+    insert into act_task_items (id, task_setting_id, item_number,params_val,
+      enable_flag, delete_flag, 
+      create_user, create_date, create_ip, 
+      update_user, update_date, update_ip, 
+      version_no, company_id)
+      values (#{id}, #{taskSettingId}, #{itemNumber}, #{paramsVal},  
+      #{enableFlag}, #{deleteFlag}, 
+      #{createUser}, #{createDate}, #{createIp}, 
+      #{updateUser}, #{updateDate}, #{updateIp}, 
+      #{versionNo}, #{companyId})
+  </insert>
+  
+  <update id="update" parameterType="ActTaskItems" >
+    update act_task_items
+    set task_setting_id = #{taskSettingId},
+      item_number = #{itemNumber},
+      params_val = #{paramsVal},
+      enable_flag = #{enableFlag},
+      delete_flag = #{deleteFlag},
+      update_user = #{updateUser},
+      update_date = #{updateDate},
+      update_ip = #{updateIp},
+      version_no = #{versionNo},
+      company_id = #{companyId}
+    where id = #{id}
+  </update>
+     
+  <update id="updateByMap"  parameterType="java.util.Map" >
+    update act_task_items
+    <set >
+      <if test="taskSettingId != null" >
+        task_setting_id = #{taskSettingId},
+      </if>
+      <if test="itemNumber != null and itemNumber !='' " >
+        item_number = #{itemNumber},
+      </if>
+      <if test="paramsVal != null and paramsVal!=''" >
+        params_val = #{paramsVal},
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag = #{enableFlag},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+</mapper>

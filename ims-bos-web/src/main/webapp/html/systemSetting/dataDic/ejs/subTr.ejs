@@ -1,0 +1,37 @@
+<%data.forEach(function(item,index){%>
+  <tr data-index="<%=pidx%>-<%=index%>" class="index_<%=pidx%>" data-id="<%=item.dictId%>">
+    <td data-field="0"><div class="layui-table-cell laytable-cell-1-0 laytable-cell-numbers"></div></td>
+    <%# <td data-field="1" align="center" data-off="true">
+      <div class="layui-table-cell laytable-cell-1-1"> 
+        <button class="layui-btn layui-btn layui-btn-sm" lay-event="detail" lay-title="查看"><i class="layui-icon"></i>查看 </button> 
+        <button class="layui-btn layui-btn-normal layui-btn layui-btn-sm" lay-event="edit"><iclass="layui-icon">修改 </iclass="layui-icon"></button> 
+        <button class="layui-btn layui-btn-danger layui-btn layui-btn-sm" lay-event="del"><i class="layui-icon"></i>删除 </button> 
+      </div>
+    </td> %>
+    <td data-field="1">
+      <div class="layui-table-cell laytable-cell-1-1 laytable-cell-checkbox">
+        <% console.log("item",item);%>
+        <input type="checkbox" name="layTableCheckbox" lay-skin="primary" data-id="<%=item.dictId%>" data-pcode="<%=item.parentDictCode%>">
+        <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon"></i></div>
+      </div>
+    </td>
+    <td data-field="dictCode">
+      <div class="layui-table-cell laytable-cell-1-dictCode"><%=item.dictCode%></div>
+    </td>
+    <td data-field="dictNameEn">
+      <div class="layui-table-cell laytable-cell-1-dictNameEn"><%=item.dictNameEn%></div>
+    </td>
+    <td data-field="dictNameCn">
+      <div class="layui-table-cell laytable-cell-1-dictNameCn"><%=item.dictNameCn%></div>
+    </td>
+    <td data-field="dictNameTw">
+      <div class="layui-table-cell laytable-cell-1-dictNameTw"><%=item.dictNameTw%></div>
+    </td>
+    <td data-field="enableFlag">
+      <div class="layui-table-cell laytable-cell-1-enableFlag"> <%if(item.enableFlag == 'Y'){%> 启用 <%}else{%>禁用<%}%></div>
+    </td>
+    <td data-field="experience">
+      <div class="layui-table-cell laytable-cell-1-experience"><%=item.companyName%></div>
+    </td>
+  </tr>
+<%})%>

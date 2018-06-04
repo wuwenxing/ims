@@ -1,0 +1,122 @@
+<% if(pattern == "normal"){ %>
+
+    <form action="" class="layui-form">
+        <table class="layui-table">
+        <tbody>
+            <tr>
+            <td>上级名称/编号</td>
+            <td colspan="3">2016-11-29</td>
+            </tr>
+            <tr>
+            <td>类型*</td>
+            <td>
+                <select name="type"  lay-verify="required"  lay-verType="tips">
+                    <option value="1" <%if(type =='1'){%> selected <%}%>>菜单</option>
+                    <option value="2" <%if(type =='2'){%> selected <%}%>>功能</option>
+                </select> 
+            </td>
+            <td>状态*</td>
+            <td>
+                <select name="status"  lay-verify="required" lay-verType="tips">
+                    <option value="1" <%if(type =='1'){%> selected <%}%> >启用</option>
+                    <option value="0" <%if(type =='2'){%> selected <%}%>>禁用</option>
+                </select>
+            </td>
+            </tr>
+            <tr>
+            <td>编号*</td>
+            <td><input type="text" value="<%=num%>" name="num" lay-verify="required" lay-verType="tips" class="layui-input"></td>
+            <td>名称(英文)*</td>
+            <td><input type="text" value="<%=name_en%>" name="name_en" lay-verify="required" lay-verType="tips" class="layui-input"></td>
+            </tr>
+            <tr>
+            <td>名称(简体)*</td>
+            <td><input type="text" value="<%=name%>" name="name" lay-verify="required" lay-verType="tips" class="layui-input"></td>
+            <td>名称(繁体)*</td>
+            <td><input type="text" value="<%=name_fan%>" name="name_fan" lay-verify="required" lay-verType="tips" class="layui-input"></td>
+            </tr>
+            <tr>
+            <td>排序*</td>
+            <td colspan="3"> 
+                <button class="layui-btn layui-btn-xs decrease" type="button" ><i class="layui-icon">&#xe603;</i></button>
+                <input type="text"  value="<%=sort%>" name="order" lay-verify="number" class="layui-input layui-input-reset sort" value="1">
+                <button  class="layui-btn layui-btn-xs add" type="button"><i class="layui-icon">&#xe602;</i></button>
+            </td>
+            </tr>
+            <tr>
+            <td>请求URL</td>
+            <td colspan="3"><input name="url" value="<%=url%>" type="text" lay-verify="url" class="layui-input"></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div class="btns fr">
+                            <button class="layui-btn" lay-submit lay-filter="menu-form"><i class="layui-icon"></i>保存</button>
+                            <button class="layui-btn layui-btn-primary" type="reset"><i class="layui-icon"></i>重置</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+    </form>
+
+<% }else{ %>
+
+    <form action="" class="layui-form add-form">
+        <table class="layui-table">
+        <tbody>
+            <tr>
+            <td>上级名称/编号</td>
+            <td colspan="3">2016-11-29</td>
+            </tr>
+            <tr>
+            <td>类型*</td>
+            <td>
+                <select name="type"  lay-verify="required"  lay-verType="tips">
+                    <option value="1">菜单</option>
+                    <option value="2">功能</option>
+                </select> 
+            </td>
+            <td>状态*</td>
+            <td>
+                <select name="status"  lay-verify="required" lay-verType="tips">
+                    <option value="1">启用</option>
+                    <option value="2">禁用</option>
+                </select>
+            </td>
+            </tr>
+            <tr>
+            <td>编号*</td>
+            <td><input type="text" name="num" lay-verify="required" lay-verType="tips" class="layui-input"></td>
+            <td>名称(英文)*</td>
+            <td><input type="text" name="name_en" lay-verify="required" lay-verType="tips" class="layui-input"></td>
+            </tr>
+            <tr>
+            <td>名称(简体)*</td>
+            <td><input type="text" name="name" lay-verify="required" lay-verType="tips" class="layui-input"></td>
+            <td>名称(繁体)*</td>
+            <td><input type="text" name="name_fan" lay-verify="required" lay-verType="tips" class="layui-input"></td>
+            </tr>
+            <tr>
+            <td>排序*</td>
+            <td colspan="3"> 
+                <button class="layui-btn layui-btn-xs decrease"  type="button" ><i class="layui-icon">&#xe603;</i></button>
+                <input type="text"  name="order" lay-verify="number" class="layui-input layui-input-reset sort" value="1">
+                <button class="layui-btn layui-btn-xs add"  type="button" ><i class="layui-icon">&#xe602;</i></button>
+            </td>
+            </tr>
+            <tr>
+            <td>请求URL</td>
+            <td colspan="3"><input name="url" type="text" lay-verify="url" class="layui-input"></td>
+            </tr>
+            <tr class="realBtns" style="display:none;">
+                <td colspan="4">
+                    <div class="btns fr">
+                            <button class="layui-btn" lay-submit lay-filter="add-form"><i class="layui-icon"></i>确定</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+    </form>
+
+<% } %>

@@ -1,0 +1,3423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  
+   <!-- 自由兑换，循环型任务 -->
+    <bean id="free_exchange" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="free_exchange"/>
+        <property name="desc" value="自由兑换，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="limitTimes" value="1"/>
+        <property name="taskItemTypes" value="real,virtual,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+                <entry key="real">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="real">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="virtual">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="virtual">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+					              <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <!-- 自定义任务，循环型任务 -->
+    <bean id="zdy_task" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="zdy_task"/>
+        <property name="desc" value="自定义任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="limitTimes" value="1"/>
+        <property name="taskItemTypes" value="real,virtual,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+                <entry key="real">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="real">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="virtual">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="virtual">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+					              <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <!-- 注册模拟账号，单次型任务 -->
+    <bean id="add_demo_account" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="add_demo_account"/>
+        <property name="desc" value="注册模拟账号，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="limitTimes" value="1"/>
+        <property name="taskAccountType" value="demo"/>
+        <property name="taskItemTypes" value="real,virtual,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <!-- 模拟账号平仓次数，循环型任务 -->
+    <bean id="demo_close_times" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="demo_close_times"/>
+        <property name="desc" value="模拟账号平仓次数，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="demo"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX次"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="int"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="TIMES"/>
+			                    <property name="desc" value="次"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+                <entry key="real">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="real">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+                <entry key="virtual">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="virtual">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="interface">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="interface">
+                     <property name="params">
+				          <list>
+			                  <ref bean="issueRule"/><!-- 发放额度规则 （公式 ) -->
+			                  <ref bean="isSueRule_infPramMax"/><!-- 发放额度规则 （公式 ) 最高额度 -->
+			                  <ref bean="isSueRule_infParamX"/><!-- 发放额度规则 （公式 ) 接口物品X值-->
+			                  <ref bean="isSueRule_infParamY"/><!-- 发放额度规则 （公式 ) 接口物品Y值-->
+			                  <ref bean="isSueRule_infParamZ"/><!-- 发放额度规则 （公式 ) 接口物品Z值-->
+			                  <ref  bean="equalValue"/><!-- 等额值-->
+			                  <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+			                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+					              <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+     <!-- 模拟账号平仓手数，循环型任务 -->
+    <bean id="demo_close_lot" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="demo_close_lot"/>
+        <property name="desc" value="模拟账号平仓手数，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="demo"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX手"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="LOT"/>
+			                    <property name="desc" value="手"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+                <entry key="real">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="real">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="virtual">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="virtual">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="interface">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="interface">
+                     <property name="params">
+				          <list>
+			                  <ref bean="issueRule"/><!-- 发放额度规则 （公式 ) -->
+			                  <ref bean="isSueRule_infPramMax"/><!-- 发放额度规则 （公式 ) 最高额度 -->
+			                  <ref bean="isSueRule_infParamX"/><!-- 发放额度规则 （公式 ) 接口物品X值-->
+			                  <ref bean="isSueRule_infParamY"/><!-- 发放额度规则 （公式 ) 接口物品Y值-->
+			                  <ref bean="isSueRule_infParamZ"/><!-- 发放额度规则 （公式 ) 接口物品Z值-->
+			                  <ref  bean="equalValue"/><!-- 等额值-->
+			                  <ref  bean="itemProbability"/><!-- 概率-->
+			                  <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+			                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+     <!-- 模拟账号单笔平仓盈利，循环型任务 -->
+    <bean id="demo_close_profit" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="demo_close_profit"/>
+        <property name="desc" value="模拟账号单笔平仓盈利，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="demo"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX元"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="money"/>
+			                    <property name="defaultVal"  value="RMB"/>
+			                    <property name="desc" value="元"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+                <entry key="real">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="real">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="virtual">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="virtual">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="interface">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="interface">
+                     <property name="params">
+				          <list>
+			                  <ref bean="issueRule"/><!-- 发放额度规则 （公式 ) -->
+			                  <ref bean="isSueRule_infPramMax"/><!-- 发放额度规则 （公式 ) 最高额度 -->
+			                  <ref bean="isSueRule_infParamX"/><!-- 发放额度规则 （公式 ) 接口物品X值-->
+			                  <ref bean="isSueRule_infParamY"/><!-- 发放额度规则 （公式 ) 接口物品Y值-->
+			                  <ref bean="isSueRule_infParamZ"/><!-- 发放额度规则 （公式 ) 接口物品Z值-->
+			                  <ref  bean="equalValue"/><!-- 等额值-->
+			                  <ref  bean="itemProbability"/><!-- 概率-->
+			                  <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+			                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+     <!-- 模拟账号单笔平仓亏损，循环型任务 -->
+    <bean id="demo_close_loss" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="demo_close_loss"/>
+        <property name="desc" value="模拟账号单笔平仓亏损，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="demo"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX元"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="money"/>
+			                    <property name="defaultVal"  value="RMB"/>
+			                    <property name="desc" value="元"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+                <entry key="real">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="real">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="virtual">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="virtual">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="interface">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="interface">
+                     <property name="params">
+				          <list>
+			                  <ref bean="issueRule"/><!-- 发放额度规则 （公式 ) -->
+			                  <ref bean="isSueRule_infPramMax"/><!-- 发放额度规则 （公式 ) 最高额度 -->
+			                  <ref bean="isSueRule_infParamX"/><!-- 发放额度规则 （公式 ) 接口物品X值-->
+			                  <ref bean="isSueRule_infParamY"/><!-- 发放额度规则 （公式 ) 接口物品Y值-->
+			                  <ref bean="isSueRule_infParamZ"/><!-- 发放额度规则 （公式 ) 接口物品Z值-->
+			                  <ref  bean="equalValue"/><!-- 等额值-->
+			                  <ref  bean="itemProbability"/><!-- 概率-->
+			                  <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+			                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+     <!-- 模拟账号单笔平仓盈利%，循环型任务 -->
+    <bean id="demo_close_profit_percent" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="demo_close_profit_percent"/>
+        <property name="desc" value="模拟账号单笔平仓盈利%，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="demo"/>
+         <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX元"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="money"/>
+			                    <property name="defaultVal"  value="RMB"/>
+			                    <property name="desc" value="元"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount_percent"/><!-- 发放额度-->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxMoney"/><!-- 最高领取金额-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount_percent"/><!-- 发放额度-->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxMoney"/><!-- 最高领取金额-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					             <ref  bean="issueAmount_percent"/><!-- 发放额度-->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="receiveMaxMoney"/><!-- 最高领取金额-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+     <!-- 模拟账号单笔平仓亏损%，循环型任务 -->
+    <bean id="demo_close_loss_percent" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="demo_close_loss_percent"/>
+        <property name="desc" value="模拟账号单笔平仓亏损%，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="demo"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX元"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="money"/>
+			                    <property name="defaultVal"  value="RMB"/>
+			                    <property name="desc" value="元"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount_percent"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxMoney"/><!-- 最高领取金额-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount_percent"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxMoney"/><!-- 最高领取金额-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount_percent"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="receiveMaxMoney"/><!-- 最高领取金额-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+      <!-- 模拟账号累计平仓次数，单次型任务 -->
+    <bean id="demo_total_close_times" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="demo_total_close_times"/>
+        <property name="desc" value="模拟账号累计平仓次数，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="taskAccountType" value="demo"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX次"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="int"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="TIMES"/>
+			                    <property name="desc" value="次"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="interface">
+                   <ref bean="interface"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+     <!-- 模拟账号累计平仓手数，单次型任务 -->
+    <bean id="demo_total_close_lot" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="demo_total_close_lot"/>
+        <property name="desc" value="模拟账号累计平仓手数，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="taskAccountType" value="demo"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX手"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="LOT"/>
+			                    <property name="desc" value="手"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="interface">
+                   <ref bean="interface"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+    </bean>
+ 
+     <!-- 模拟账号平仓盈利总额，单次型任务 -->
+    <bean id="demo_total_close_profit" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="demo_total_close_profit"/>
+        <property name="desc" value="模拟账号平仓盈利总额，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="taskAccountType" value="demo"/>
+         <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX元"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="money"/>
+			                    <property name="defaultVal"  value="RMB"/>
+			                    <property name="desc" value="元"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="interface">
+                   <ref bean="interface"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+     </bean>
+    
+    
+     <!-- 模拟账号平仓亏损总额，单次型任务 -->
+    <bean id="demo_total_close_loss" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="demo_total_close_loss"/>
+        <property name="desc" value="模拟账号平仓亏损总额，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="taskAccountType" value="demo"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX元"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="money"/>
+			                    <property name="defaultVal"  value="RMB"/>
+			                    <property name="desc" value="元"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="interface">
+                   <ref bean="interface"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+     </bean>
+     
+  
+    <!-- 模拟账号开仓次数，循环型任务 -->
+    <bean id="demo_open_times" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="demo_open_times"/>
+        <property name="desc" value="模拟账号开仓次数，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="demo"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX次"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="int"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="TIMES"/>
+			                    <property name="desc" value="次"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+                <entry key="real">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="real">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="virtual">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="virtual">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="interface">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="interface">
+                     <property name="params">
+				          <list>
+			                  <ref bean="issueRule"/><!-- 发放额度规则 （公式 ) -->
+			                  <ref bean="isSueRule_infPramMax"/><!-- 发放额度规则 （公式 ) 最高额度 -->
+			                  <ref bean="isSueRule_infParamX"/><!-- 发放额度规则 （公式 ) 接口物品X值-->
+			                  <ref bean="isSueRule_infParamY"/><!-- 发放额度规则 （公式 ) 接口物品Y值-->
+			                  <ref bean="isSueRule_infParamZ"/><!-- 发放额度规则 （公式 ) 接口物品Z值-->
+			                  <ref  bean="equalValue"/><!-- 等额值-->
+			                  <ref  bean="itemProbability"/><!-- 概率-->
+			                  <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+			                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+					              <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <!-- 模拟账号开仓手数，循环型任务 -->
+    <bean id="demo_open_lot" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="demo_open_lot"/>
+        <property name="desc" value="模拟账号开仓手数，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="demo"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX手"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="LOT"/>
+			                    <property name="desc" value="手"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+                <entry key="real">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="real">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="virtual">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="virtual">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="interface">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="interface">
+                     <property name="params">
+				          <list>
+			                  <ref bean="issueRule"/><!-- 发放额度规则 （公式 ) -->
+			                  <ref bean="isSueRule_infPramMax"/><!-- 发放额度规则 （公式 ) 最高额度 -->
+			                  <ref bean="isSueRule_infParamX"/><!-- 发放额度规则 （公式 ) 接口物品X值-->
+			                  <ref bean="isSueRule_infParamY"/><!-- 发放额度规则 （公式 ) 接口物品Y值-->
+			                  <ref bean="isSueRule_infParamZ"/><!-- 发放额度规则 （公式 ) 接口物品Z值-->
+			                  <ref  bean="equalValue"/><!-- 等额值-->
+			                  <ref  bean="itemProbability"/><!-- 概率-->
+			                  <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+			                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+					              <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+    
+    <!--模拟账号累计开仓次数，单次型任务 -->
+    <bean id="demo_total_open_times" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="demo_total_open_times"/>
+        <property name="desc" value="模拟账号累计开仓次数，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="taskAccountType" value="demo"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX次"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="int"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="TIMES"/>
+			                    <property name="desc" value="次"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="interface">
+                   <ref bean="interface"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+     <!-- 模拟账号累计开仓手数，单次型任务 -->
+    <bean id="demo_total_open_lot" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="demo_total_open_lot"/>
+        <property name="desc" value="模拟账号累计开仓手数，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="taskAccountType" value="demo"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX手"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="LOT"/>
+			                    <property name="desc" value="手"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="interface">
+                   <ref bean="interface"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+    
+     <!-- 注册真实账号，单次型任务 -->
+    <bean id="add_real_account" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="add_real_account"/>
+        <property name="desc" value="注册真实账号，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="limitTimes" value="1"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+    
+     <!-- 真实账号激活，单次型任务 -->
+    <bean id="real_activation" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_activation"/>
+        <property name="desc" value="真实账号激活，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="limitTimes" value="1"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+				        <property name="proName" value="taskItemVal"/>
+				        <property name="desc" value="参数XXX元"/>
+				        <property name="required" value="true"/>
+				        <property name="validType" value="zeroDecimalTwo"/>
+				         <property name="paramUnit">
+				               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+				                    <property name="proName" value="taskItemValUnit"/>
+				                    <property name="unitType"  value="money"/>
+				                    <property name="defaultVal"  value="RMB"/>
+				                    <property name="desc" value="元"/>
+				               </bean>
+				        </property>
+			  </bean>
+			  <bean name="taskItemTime" class="com.gwghk.ims.activity.context.ParamBean">
+				        <property name="proName" value="taskItemTime"/>
+				        <property name="desc" value="XXX小时"/>
+				        <property name="required" value="true"/>
+				        <property name="validType" value="zeroDecimalTwo"/>
+				         <property name="paramUnit">
+				               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+				                    <property name="proName" value="taskItemTimeUnit"/>
+				                    <property name="unitType"  value="cycleTime"/>
+				                    <property name="defaultVal"  value="HOUR"/>
+				                    <property name="desc" value="小时"/>
+				               </bean>
+				        </property>
+			  </bean>
+           </list>
+         </property>
+         <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="interface">
+                     <ref bean="interface"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+      <!-- 真实账号入金 -->
+    <bean name="real_deposit" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_deposit"/>
+        <property name="desc" value="真实账号入金"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="limitTimes" value="1"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+                 <bean name="taskItemTime" class="com.gwghk.ims.activity.context.ParamBean">
+				        <property name="proName" value="taskItemTime"/>
+				        <property name="desc" value="XXX小时"/>
+				        <property name="required" value="true"/>
+				        <property name="validType" value="zeroDecimalTwo"/>
+				         <property name="paramUnit">
+				               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+				                    <property name="proName" value="taskItemTimeUnit"/>
+				                    <property name="unitType"  value="cycleTime"/>
+				                    <property name="defaultVal"  value="HOUR"/>
+				                    <property name="desc" value="小时"/>
+				               </bean>
+				        </property>
+			  </bean>
+           </list>
+         </property>
+        <property name="subTaskConfig">
+               <bean  class="com.gwghk.ims.activity.context.ActTaskBean">
+               <property name="proName" value="taskItemCode"/>
+		        <property name="code" value="real_deposit"/>
+		        <property name="desc" value="真实账号入金"/>
+		        <property name="isCycleTask" value="false"/>
+		        <property name="taskAccountType" value="real"/>
+		        <property name="params">
+		           <list>
+			               <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+					        <property name="proName" value="taskItemVal"/>
+					        <property name="desc" value="参数XXX元"/>
+					        <property name="required" value="true"/>
+					        <property name="validType" value="zeroDecimalTwo"/>
+					         <property name="paramUnit">
+					               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+					                    <property name="proName" value="taskItemValUnit"/>
+					                    <property name="unitType"  value="money"/>
+					                    <property name="defaultVal"  value="RMB"/>
+					                    <property name="desc" value="元"/>
+					               </bean>
+					        </property>
+					      </bean>
+					      <bean name="taskItemVal2" class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="taskItemVal2"/>
+						        <property name="desc" value="参数XXX元"/>
+						        <property name="required" value="true"/>
+						        <property name="validType" value="zeroDecimalTwo"/>
+						         <property name="paramUnit">
+						               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+						                    <property name="proName" value="taskItemVal2Unit"/>
+						                    <property name="unitType"  value="money"/>
+						                    <property name="defaultVal"  value="RMB"/>
+						                    <property name="desc" value="元"/>
+						               </bean>
+						        </property>
+					     </bean>
+		           </list>
+		         </property>
+		         <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+		        <property name="taskItemsMap">
+		            <map>
+		               <entry key="real">
+		                   <ref bean="real"/>  
+		               </entry>
+		               <entry key="virtual">
+		                   <ref bean="virtual"/>  
+		               </entry>
+		               <entry key="interface">
+		                     <ref bean="interface"/>  
+		               </entry>
+		               <entry key="analogCoin">
+		                     <ref bean="analogCoin_select"/> 
+		               </entry>
+		               <entry key="tokenCoin">
+		                     <ref bean="tokenCoin_select"/> 
+		               </entry>
+		               <entry key="withGold">
+		                    <ref bean="withGold_select"/> 
+		               </entry>
+		            </map>
+		        </property>
+		      </bean>
+        </property>
+    </bean>
+     
+     <!-- 真实账号累计入金 -->
+    <bean name="real_deposit_total" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_deposit_total"/>
+        <property name="desc" value="真实账号累计入金"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="limitTimes" value="1"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+                 <bean name="taskItemTime" class="com.gwghk.ims.activity.context.ParamBean">
+				        <property name="proName" value="taskItemTime"/>
+				        <property name="desc" value="XXX天"/>
+				        <property name="required" value="true"/>
+				        <property name="validType" value="zeroDecimalTwo"/>
+				         <property name="paramUnit">
+				               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+				                    <property name="proName" value="taskItemTimeUnit"/>
+				                    <property name="unitType"  value="cycleTime"/>
+				                    <property name="defaultVal"  value="DAY"/>
+				                    <property name="desc" value="天"/>
+				               </bean>
+				        </property>
+			  </bean>
+           </list>
+         </property>
+        <property name="subTaskConfig">
+               <bean  class="com.gwghk.ims.activity.context.ActTaskBean">
+               <property name="proName" value="taskItemCode"/>
+		        <property name="code" value="real_deposit_total"/>
+		        <property name="desc" value="真实账号累计入金"/>
+		        <property name="isCycleTask" value="false"/>
+		        <property name="taskAccountType" value="real"/>
+		        <property name="params">
+		           <list>
+			               <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+					        <property name="proName" value="taskItemVal"/>
+					        <property name="desc" value="参数XXX元"/>
+					        <property name="required" value="true"/>
+					        <property name="validType" value="zeroDecimalTwo"/>
+					         <property name="paramUnit">
+					               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+					                    <property name="proName" value="taskItemValUnit"/>
+					                    <property name="unitType"  value="money"/>
+					                    <property name="defaultVal"  value="RMB"/>
+					                    <property name="desc" value="元"/>
+					               </bean>
+					        </property>
+					      </bean>
+					      <bean name="taskItemVal2" class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="taskItemVal2"/>
+						        <property name="desc" value="参数XXX元"/>
+						        <property name="required" value="true"/>
+						        <property name="validType" value="zeroDecimalTwo"/>
+						         <property name="paramUnit">
+						               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+						                    <property name="proName" value="taskItemVal2Unit"/>
+						                    <property name="unitType"  value="money"/>
+						                    <property name="defaultVal"  value="RMB"/>
+						                    <property name="desc" value="元"/>
+						               </bean>
+						        </property>
+					     </bean>
+		           </list>
+		         </property>
+		         <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+		        <property name="taskItemsMap">
+		            <map>
+		               <entry key="real">
+		                   <ref bean="real"/>  
+		               </entry>
+		               <entry key="virtual">
+		                   <ref bean="virtual"/>  
+		               </entry>
+		               <entry key="interface">
+		                     <ref bean="interface"/>  
+		               </entry>
+		               <entry key="analogCoin">
+		                     <ref bean="analogCoin_select"/> 
+		               </entry>
+		               <entry key="tokenCoin">
+		                     <ref bean="tokenCoin_select"/> 
+		               </entry>
+		               <entry key="withGold">
+		                    <ref bean="withGold_select"/> 
+		               </entry>
+		            </map>
+		        </property>
+		      </bean>
+        </property>
+    </bean>
+    
+    <!-- 真实账号累计净入金-->
+    <bean name="real_net_deposit_total" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_net_deposit_total"/>
+        <property name="desc" value="真实账号累计净入金"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="limitTimes" value="1"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="subTaskConfig">
+               <bean  class="com.gwghk.ims.activity.context.ActTaskBean">
+               <property name="proName" value="taskItemCode"/>
+		        <property name="code" value="real_net_deposit_total"/>
+		        <property name="desc" value="真实账号累计净入金"/>
+		        <property name="isCycleTask" value="false"/>
+		        <property name="taskAccountType" value="real"/>
+		        <property name="params">
+		           <list>
+			               <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+					        <property name="proName" value="taskItemVal"/>
+					        <property name="desc" value="参数XXX元"/>
+					        <property name="required" value="true"/>
+					        <property name="validType" value="zeroDecimalTwo"/>
+					         <property name="paramUnit">
+					               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+					                    <property name="proName" value="taskItemValUnit"/>
+					                    <property name="unitType"  value="money"/>
+					                    <property name="defaultVal"  value="RMB"/>
+					                    <property name="desc" value="元"/>
+					               </bean>
+					        </property>
+					      </bean>
+					      <bean name="taskItemVal2" class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="taskItemVal2"/>
+						        <property name="desc" value="参数XXX元"/>
+						        <property name="required" value="true"/>
+						        <property name="validType" value="zeroDecimalTwo"/>
+						         <property name="paramUnit">
+						               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+						                    <property name="proName" value="taskItemVal2Unit"/>
+						                    <property name="unitType"  value="money"/>
+						                    <property name="defaultVal"  value="RMB"/>
+						                    <property name="desc" value="元"/>
+						               </bean>
+						        </property>
+					     </bean>
+		           </list>
+		         </property>
+		         <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+		        <property name="taskItemsMap">
+		            <map>
+		               <entry key="real">
+		                   <ref bean="real"/>  
+		               </entry>
+		               <entry key="virtual">
+		                   <ref bean="virtual"/>  
+		               </entry>
+		               <entry key="interface">
+		                     <ref bean="interface"/>  
+		               </entry>
+		               <entry key="analogCoin">
+		                     <ref bean="analogCoin_select"/> 
+		               </entry>
+		               <entry key="tokenCoin">
+		                     <ref bean="tokenCoin_select"/> 
+		               </entry>
+		               <entry key="withGold">
+		                    <ref bean="withGold_select"/> 
+		               </entry>
+		            </map>
+		        </property>
+		      </bean>
+        </property>
+    </bean>
+ 
+  <!-- 真实账号新客累计净入金-->
+    <bean name="real_net_deposit_total_newCustomer" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_net_deposit_total_newCustomer"/>
+        <property name="desc" value="真实账号新客累计净入金"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="limitTimes" value="1"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+                 <bean name="taskItemTime" class="com.gwghk.ims.activity.context.ParamBean">
+				        <property name="proName" value="taskItemTime"/>
+				        <property name="desc" value="XXX小时"/>
+				        <property name="required" value="true"/>
+				        <property name="validType" value="zeroDecimalTwo"/>
+				         <property name="paramUnit">
+				               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+				                    <property name="proName" value="taskItemTimeUnit"/>
+				                    <property name="unitType"  value="cycleTime"/>
+				                    <property name="defaultVal"  value="HOUR"/>
+				                    <property name="desc" value="小时"/>
+				               </bean>
+				        </property>
+			     </bean>
+			     <bean name="issuingType" class="com.gwghk.ims.activity.context.ParamBean">
+				        <property name="proName" value="issuingType"/>
+				         <property name="desc" value="发放方式 "/>
+				         <property name="label" value="发放方式 "/>
+                         <property name="required" value="true"/>
+				         <property name="inputType" value="select"/>
+				         <property name="isDynamict" value="true"/>
+			     </bean>
+           </list>
+         </property>
+        <property name="subTaskConfig">
+               <bean  class="com.gwghk.ims.activity.context.ActTaskBean">
+               <property name="proName" value="taskItemCode"/>
+		        <property name="code" value="real_net_deposit_total"/>
+		        <property name="desc" value="真实账号新客累计净入金"/>
+		        <property name="isCycleTask" value="false"/>
+		        <property name="taskAccountType" value="real"/>
+		        <property name="params">
+		           <list>
+			               <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+					        <property name="proName" value="taskItemVal"/>
+					        <property name="desc" value="参数XXX元"/>
+					        <property name="required" value="true"/>
+					        <property name="validType" value="zeroDecimalTwo"/>
+					         <property name="paramUnit">
+					               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+					                    <property name="proName" value="taskItemValUnit"/>
+					                    <property name="unitType"  value="money"/>
+					                    <property name="defaultVal"  value="RMB"/>
+					                    <property name="desc" value="元"/>
+					               </bean>
+					        </property>
+					      </bean>
+					      <bean name="taskItemVal2" class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="taskItemVal2"/>
+						        <property name="desc" value="参数XXX元"/>
+						        <property name="required" value="true"/>
+						        <property name="validType" value="zeroDecimalTwo"/>
+						         <property name="paramUnit">
+						               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+						                    <property name="proName" value="taskItemVal2Unit"/>
+						                    <property name="unitType"  value="money"/>
+						                    <property name="defaultVal"  value="RMB"/>
+						                    <property name="desc" value="元"/>
+						               </bean>
+						        </property>
+					     </bean>
+		           </list>
+		         </property>
+		         <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+		        <property name="taskItemsMap">
+		            <map>
+		               <entry key="real">
+		                   <ref bean="real"/>  
+		               </entry>
+		               <entry key="virtual">
+		                   <ref bean="virtual"/>  
+		               </entry>
+		               <entry key="interface">
+		                     <ref bean="interface"/>  
+		               </entry>
+		               <entry key="analogCoin">
+		                     <ref bean="analogCoin_select"/> 
+		               </entry>
+		               <entry key="tokenCoin">
+		                     <ref bean="tokenCoin_select"/> 
+		               </entry>
+		               <entry key="withGold">
+		                    <ref bean="withGold_select"/> 
+		               </entry>
+		            </map>
+		        </property>
+		      </bean>
+        </property>
+    </bean>
+     <!-- 真实账号平仓次数，循环型任务 -->
+    <bean id="real_close_times" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_close_times"/>
+        <property name="desc" value="真实账号平仓次数，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX次"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="int"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="TIMES"/>
+			                    <property name="desc" value="次"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+                <entry key="real">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="real">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="virtual">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="virtual">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="interface">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="interface">
+                     <property name="params">
+				          <list>
+			                  <ref bean="issueRule"/><!-- 发放额度规则 （公式 ) -->
+			                  <ref bean="isSueRule_infPramMax"/><!-- 发放额度规则 （公式 ) 最高额度 -->
+			                  <ref bean="isSueRule_infParamX"/><!-- 发放额度规则 （公式 ) 接口物品X值-->
+			                  <ref bean="isSueRule_infParamY"/><!-- 发放额度规则 （公式 ) 接口物品Y值-->
+			                  <ref bean="isSueRule_infParamZ"/><!-- 发放额度规则 （公式 ) 接口物品Z值-->
+			                  <ref  bean="equalValue"/><!-- 等额值-->
+			                  <ref  bean="itemProbability"/><!-- 概率-->
+			                  <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+			                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+					              <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+    
+     <!-- 真实账号平仓手数，循环型任务 -->
+    <bean id="real_close_lot" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_close_lot"/>
+        <property name="desc" value="真实账号平仓手数，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX手"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="LOT"/>
+			                    <property name="desc" value="手"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+                <entry key="real">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="real">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="virtual">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="virtual">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="interface">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="interface">
+                     <property name="params">
+				          <list>
+			                  <ref bean="issueRule"/><!-- 发放额度规则 （公式 ) -->
+			                  <ref bean="isSueRule_infPramMax"/><!-- 发放额度规则 （公式 ) 最高额度 -->
+			                  <ref bean="isSueRule_infParamX"/><!-- 发放额度规则 （公式 ) 接口物品X值-->
+			                  <ref bean="isSueRule_infParamY"/><!-- 发放额度规则 （公式 ) 接口物品Y值-->
+			                  <ref bean="isSueRule_infParamZ"/><!-- 发放额度规则 （公式 ) 接口物品Z值-->
+			                  <ref  bean="equalValue"/><!-- 等额值-->
+			                  <ref  bean="itemProbability"/><!-- 概率-->
+			                  <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+			                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+    
+       <!-- 真实账号单笔平仓盈利，循环型任务 -->
+    <bean id="real_close_profit" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_close_profit"/>
+        <property name="desc" value="真实账号单笔平仓盈利，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX元"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="money"/>
+			                    <property name="defaultVal"  value="RMB"/>
+			                    <property name="desc" value="元"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+                <entry key="real">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="real">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="virtual">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="virtual">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="interface">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="interface">
+                     <property name="params">
+				          <list>
+			                  <ref bean="issueRule"/><!-- 发放额度规则 （公式 ) -->
+			                  <ref bean="isSueRule_infPramMax"/><!-- 发放额度规则 （公式 ) 最高额度 -->
+			                  <ref bean="isSueRule_infParamX"/><!-- 发放额度规则 （公式 ) 接口物品X值-->
+			                  <ref bean="isSueRule_infParamY"/><!-- 发放额度规则 （公式 ) 接口物品Y值-->
+			                  <ref bean="isSueRule_infParamZ"/><!-- 发放额度规则 （公式 ) 接口物品Z值-->
+			                  <ref  bean="equalValue"/><!-- 等额值-->
+			                  <ref  bean="itemProbability"/><!-- 概率-->
+			                  <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+			                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+     <!-- 真实账号单笔平仓亏损，循环型任务 -->
+    <bean id="real_close_loss" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_close_loss"/>
+        <property name="desc" value="真实账号单笔平仓亏损，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX元"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="money"/>
+			                    <property name="defaultVal"  value="RMB"/>
+			                    <property name="desc" value="元"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+                <entry key="real">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="real">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="virtual">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="virtual">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="interface">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="interface">
+                     <property name="params">
+				          <list>
+			                  <ref bean="issueRule"/><!-- 发放额度规则 （公式 ) -->
+			                  <ref bean="isSueRule_infPramMax"/><!-- 发放额度规则 （公式 ) 最高额度 -->
+			                  <ref bean="isSueRule_infParamX"/><!-- 发放额度规则 （公式 ) 接口物品X值-->
+			                  <ref bean="isSueRule_infParamY"/><!-- 发放额度规则 （公式 ) 接口物品Y值-->
+			                  <ref bean="isSueRule_infParamZ"/><!-- 发放额度规则 （公式 ) 接口物品Z值-->
+			                  <ref  bean="equalValue"/><!-- 等额值-->
+			                  <ref  bean="itemProbability"/><!-- 概率-->
+			                  <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+			                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+     <!-- 真实账号单笔平仓盈利%，循环型任务 -->
+    <bean id="real_close_profit_percent" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_close_profit_percent"/>
+        <property name="desc" value="真实账号单笔平仓盈利%，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="real"/>
+         <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX元"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="money"/>
+			                    <property name="defaultVal"  value="RMB"/>
+			                    <property name="desc" value="元"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount_percent"/><!-- 发放额度-->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxMoney"/><!-- 最高领取金额-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount_percent"/><!-- 发放额度-->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxMoney"/><!-- 最高领取金额-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount_percent"/><!-- 发放额度-->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="receiveMaxMoney"/><!-- 最高领取金额-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+     <!-- 真实账号单笔平仓亏损%，循环型任务 -->
+    <bean id="real_close_loss_percent" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_close_loss_percent"/>
+        <property name="desc" value="真实账号单笔平仓亏损%，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX元"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="money"/>
+			                    <property name="defaultVal"  value="RMB"/>
+			                    <property name="desc" value="元"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount_percent"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxMoney"/><!-- 最高领取金额-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount_percent"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxMoney"/><!-- 最高领取金额-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount_percent"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="receiveMaxMoney"/><!-- 最高领取金额-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+      <!-- 真实账号累计平仓次数，单次型任务 -->
+    <bean id="real_total_close_times" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_total_close_times"/>
+        <property name="desc" value="真实账号累计平仓次数，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX次"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="int"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="TIMES"/>
+			                    <property name="desc" value="次"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="interface">
+                   <ref bean="interface"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+     <!-- 真实账号累计平仓手数，单次型任务 -->
+    <bean id="real_total_close_lot" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_total_close_lot"/>
+        <property name="desc" value="真实账号累计平仓手数，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX手"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="LOT"/>
+			                    <property name="desc" value="手"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="interface">
+                   <ref bean="interface"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+    </bean>
+ 
+     <!-- 真实账号平仓盈利总额，单次型任务 -->
+    <bean id="real_total_close_profit" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_total_close_profit"/>
+        <property name="desc" value="真实账号平仓盈利总额，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="taskAccountType" value="real"/>
+         <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX元"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="money"/>
+			                    <property name="defaultVal"  value="RMB"/>
+			                    <property name="desc" value="元"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="interface">
+                   <ref bean="interface"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+     </bean>
+    
+    
+     <!-- 真实账号平仓亏损总额，单次型任务 -->
+    <bean id="real_total_close_loss" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_total_close_loss"/>
+        <property name="desc" value="真实账号平仓亏损总额，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX元"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="money"/>
+			                    <property name="defaultVal"  value="RMB"/>
+			                    <property name="desc" value="元"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="interface">
+                   <ref bean="interface"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+     </bean>
+     
+      <!-- 真实账号开仓次数，循环型任务 -->
+    <bean id="real_open_times" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_open_times"/>
+        <property name="desc" value="真实账号开仓次数，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX次"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="int"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="TIMES"/>
+			                    <property name="desc" value="次"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+                <entry key="real">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="real">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="virtual">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="virtual">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="interface">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="interface">
+                     <property name="params">
+				          <list>
+			                  <ref bean="issueRule"/><!-- 发放额度规则 （公式 ) -->
+			                  <ref bean="isSueRule_infPramMax"/><!-- 发放额度规则 （公式 ) 最高额度 -->
+			                  <ref bean="isSueRule_infParamX"/><!-- 发放额度规则 （公式 ) 接口物品X值-->
+			                  <ref bean="isSueRule_infParamY"/><!-- 发放额度规则 （公式 ) 接口物品Y值-->
+			                  <ref bean="isSueRule_infParamZ"/><!-- 发放额度规则 （公式 ) 接口物品Z值-->
+			                  <ref  bean="equalValue"/><!-- 等额值-->
+			                  <ref  bean="itemProbability"/><!-- 概率-->
+			                  <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+			                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+					              <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <!-- 真实账号开仓手数，循环型任务 -->
+    <bean id="real_open_lot" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_open_lot"/>
+        <property name="desc" value="真实账号开仓手数，循环型任务"/>
+        <property name="isCycleTask" value="true"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX手"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="LOT"/>
+			                    <property name="desc" value="手"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+                <entry key="real">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="real">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="virtual">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="virtual">
+                     <property name="params">
+				          <list>
+				               <ref  bean="equalValue"/><!-- 等额值-->
+				               <ref  bean="itemProbability"/><!-- 概率-->
+				               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="interface">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="interface">
+                     <property name="params">
+				          <list>
+			                  <ref bean="issueRule"/><!-- 发放额度规则 （公式 ) -->
+			                  <ref bean="isSueRule_infPramMax"/><!-- 发放额度规则 （公式 ) 最高额度 -->
+			                  <ref bean="isSueRule_infParamX"/><!-- 发放额度规则 （公式 ) 接口物品X值-->
+			                  <ref bean="isSueRule_infParamY"/><!-- 发放额度规则 （公式 ) 接口物品Y值-->
+			                  <ref bean="isSueRule_infParamZ"/><!-- 发放额度规则 （公式 ) 接口物品Z值-->
+			                  <ref  bean="equalValue"/><!-- 等额值-->
+			                  <ref  bean="itemProbability"/><!-- 概率-->
+			                  <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+			                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+				              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				          </list>
+				      </property>
+                  </bean>
+               </entry>
+               <entry key="analogCoin">
+                     <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="analogCoin">
+			            <property name="params">
+				             <list>
+				                <ref  bean="issueAmount"/><!-- 发放额度 -->
+				                <ref  bean="equalValue"/><!-- 等额值-->
+				                <ref  bean="itemProbability"/><!-- 概率-->
+				                <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					            <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+				             </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="tokenCoin">
+                  <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="tokenCoin">
+			            <property name="params">
+				             <list>
+					               <ref  bean="issueAmount"/><!-- 发放额度 -->
+					               <ref  bean="equalValue"/><!-- 等额值-->
+					               <ref  bean="itemProbability"/><!-- 概率-->
+					               <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+					               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+						           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+               <entry key="withGold">
+                    <bean   class="com.gwghk.ims.activity.context.ActTaskItemBean" parent="withGold">
+			            <property name="params">
+				             <list>
+					              <ref  bean="issueAmount"/><!-- 发放额度 -->
+					              <ref  bean="equalValue"/><!-- 等额值-->
+					              <ref  bean="itemProbability"/><!-- 概率-->
+					              <ref  bean="tradeNum"/><!-- 交易手数 -->
+					              <ref  bean="receiveMaxNum"/><!-- 最高领取次数-->
+				                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+					              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+					         </list>
+				        </property>
+                     </bean>
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+    
+    <!--真实账号累计开仓次数，单次型任务 -->
+    <bean id="real_total_open_times" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_total_open_times"/>
+        <property name="desc" value="真实账号累计开仓次数，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX次"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="int"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="TIMES"/>
+			                    <property name="desc" value="次"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="interface">
+                   <ref bean="interface"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+     <!-- 真实账号累计开仓手数，单次型任务 -->
+    <bean id="real_total_open_lot" class="com.gwghk.ims.activity.context.ActTaskBean">
+        <property name="proName" value="taskItemCode"/>
+        <property name="code" value="real_total_open_lot"/>
+        <property name="desc" value="真实账号累计开仓手数，单次型任务"/>
+        <property name="isCycleTask" value="false"/>
+        <property name="taskAccountType" value="real"/>
+        <property name="params">
+           <list>
+              <bean name="taskItemVal" class="com.gwghk.ims.activity.context.ParamBean">
+			        <property name="proName" value="taskItemVal"/>
+			        <property name="desc" value="参数XXX手"/>
+			        <property name="required" value="true"/>
+			        <property name="validType" value="gtZeroDecimalTwo"/>
+			        <property name="paramUnit">
+			               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+			                    <property name="proName" value="taskItemValUnit"/>
+			                    <property name="unitType"  value="other"/>
+			                    <property name="defaultVal"  value="LOT"/>
+			                    <property name="desc" value="手"/>
+			               </bean>
+			        </property>
+			  </bean>
+           </list>
+        </property>
+        <property name="taskItemTypes" value="real,virtual,interface,analogCoin,tokenCoin,withGold"/>
+        <property name="taskItemsMap">
+            <map>
+               <entry key="real">
+                   <ref bean="real"/>  
+               </entry>
+               <entry key="interface">
+                   <ref bean="interface"/>  
+               </entry>
+               <entry key="virtual">
+                   <ref bean="virtual"/>  
+               </entry>
+               <entry key="analogCoin">
+                     <ref bean="analogCoin"/> 
+               </entry>
+               <entry key="tokenCoin">
+                     <ref bean="tokenCoin"/> 
+               </entry>
+               <entry key="withGold">
+                    <ref bean="withGold"/> 
+               </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <!-- 奖励物品 默认通用参数配置-->
+   <bean name="real" class="com.gwghk.ims.activity.context.ActTaskItemBean">
+         <property name="proName" value="itemNumber"/>
+	     <property name="itemType" value="real"/>
+	     <property name="desc" value="实物"/>
+	      <property name="params">
+	          <list>
+	               <ref  bean="equalValue"/><!-- 等额值-->
+	               <ref  bean="itemProbability"/><!-- 概率-->
+	               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+	               <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+	          </list>
+	      </property>
+	</bean>
+
+   <bean name="virtual" class="com.gwghk.ims.activity.context.ActTaskItemBean">
+      <property name="proName" value="itemNumber"/>
+     <property name="itemType" value="virtual"/>
+     <property name="desc" value="虚拟物品"/>
+      <property name="params">
+          <list>
+               <ref  bean="equalValue"/><!-- 等额值-->
+               <ref  bean="itemProbability"/><!-- 概率-->
+               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+	           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+          </list>
+      </property>
+    </bean>
+
+   <bean name="interface" class="com.gwghk.ims.activity.context.ActTaskItemBean">
+        <property name="proName" value="itemNumber"/>
+        <property name="itemType" value="interface"/>
+        <property name="desc" value="接口物品"/>
+         <property name="params">
+             <list>
+                  <ref bean="issueRule"/><!-- 发放额度规则 （公式 ) -->
+                  <ref bean="isSueRule_infPramMax"/><!-- 发放额度规则 （公式 ) 最高额度 -->
+                  <ref bean="isSueRule_infParamX"/><!-- 发放额度规则 （公式 ) 接口物品X值-->
+                  <ref bean="isSueRule_infParamY"/><!-- 发放额度规则 （公式 ) 接口物品Y值-->
+                  <ref bean="isSueRule_infParamZ"/><!-- 发放额度规则 （公式 ) 接口物品Z值-->
+                  <ref  bean="equalValue"/><!-- 等额值-->
+                  <ref  bean="itemProbability"/><!-- 概率-->
+                  <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+	              <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+             </list>
+         </property>
+	 </bean>
+
+   <bean name="analogCoin" class="com.gwghk.ims.activity.context.ActTaskItemBean">
+       <property name="proName" value="itemNumber"/>
+        <property name="itemType" value="analogCoin"/>
+        <property name="desc" value="模拟币"/>
+         <property name="params">
+             <list>
+                <ref  bean="issueAmount"/><!-- 发放额度 -->
+                <ref  bean="equalValue"/><!-- 等额值-->
+                <ref  bean="itemProbability"/><!-- 概率-->
+                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+	           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+             </list>
+         </property>
+  </bean>
+ <bean name="analogCoin_select" class="com.gwghk.ims.activity.context.ActTaskItemBean">
+       <property name="proName" value="itemNumber"/>
+        <property name="itemType" value="analogCoin"/>
+        <property name="desc" value="模拟币"/>
+         <property name="params">
+             <list>
+               <ref  bean="issueAmount_select"/><!-- 发放额度 元/%-->
+                <ref  bean="equalValue"/><!-- 等额值-->
+                <ref  bean="itemProbability"/><!-- 概率-->
+                <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+	           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+             </list>
+         </property>
+  </bean>
+   <bean name="tokenCoin" class="com.gwghk.ims.activity.context.ActTaskItemBean">
+        <property name="proName" value="itemNumber"/>
+        <property name="itemType" value="tokenCoin"/>
+        <property name="desc" value="模拟币"/>
+         <property name="params">
+             <list>
+               <ref  bean="issueAmount"/><!-- 发放额度 -->
+               <ref  bean="equalValue"/><!-- 等额值-->
+               <ref  bean="itemProbability"/><!-- 概率-->
+               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+	           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+             </list>
+         </property>
+	</bean>
+ 
+ <bean name="tokenCoin_select" class="com.gwghk.ims.activity.context.ActTaskItemBean">
+        <property name="proName" value="itemNumber"/>
+        <property name="itemType" value="tokenCoin"/>
+        <property name="desc" value="模拟币"/>
+         <property name="params">
+             <list>
+               <ref  bean="issueAmount_select"/><!-- 发放额度 元/%-->
+               <ref  bean="equalValue"/><!-- 等额值-->
+               <ref  bean="itemProbability"/><!-- 概率-->
+               <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+	           <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+             </list>
+         </property>
+	</bean>
+
+  <bean name="withGold" class="com.gwghk.ims.activity.context.ActTaskItemBean">
+       <property name="proName" value="itemNumber"/>
+        <property name="itemType" value="withGold"/>
+        <property name="desc" value="赠金"/>
+         <property name="params">
+             <list>
+		         <ref  bean="issueAmount"/><!-- 发放额度 -->
+		         <ref  bean="equalValue"/><!-- 等额值-->
+		         <ref  bean="itemProbability"/><!-- 概率-->
+		         <ref  bean="tradeNum"/><!-- 交易手数 -->
+                 <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+	             <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+             </list>
+         </property>
+  </bean>
+  
+  <bean name="withGold_select" class="com.gwghk.ims.activity.context.ActTaskItemBean">
+       <property name="proName" value="itemNumber"/>
+        <property name="itemType" value="withGold"/>
+        <property name="desc" value="赠金"/>
+         <property name="params">
+             <list>
+		         <ref  bean="issueAmount_select"/><!-- 发放额度 元/%-->
+		         <ref  bean="equalValue"/><!-- 等额值-->
+		         <ref  bean="itemProbability"/><!-- 概率-->
+		         <ref  bean="tradeNum_select"/><!-- 交易手数 %或Lot -->
+                 <ref  bean="frequencyTime"/><!-- 频率时间 天-->
+	             <ref  bean="frequencyNum"/><!-- 频率时间个数 -->
+             </list>
+         </property>
+  </bean>
+  
+<!-- 物品参数 -->
+ <bean name="issueAmount" class="com.gwghk.ims.activity.context.ParamBean">
+       <property name="proName" value="itemParamVal"/>
+       <property name="desc" value="发放额度"/>
+       <property name="validType" value="gtZeroDecimalTwo"/>
+       <property name="required" value="true"/>
+        <property name="paramUnit">
+              <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+                   <property name="proName" value="itemParamValUnit"/>
+                   <property name="unitType"  value="money"/>
+                   <property name="defaultVal"  value="RMB"/>
+                   <property name="desc" value="元"/>
+              </bean>
+       </property>
+ </bean>
+ 
+ <bean name="issueAmount_percent" class="com.gwghk.ims.activity.context.ParamBean">
+       <property name="proName" value="itemParamVal"/>
+       <property name="desc" value="发放额度"/>
+       <property name="validType" value="gtZeroDecimalTwo"/>
+       <property name="required" value="true"/>
+        <property name="paramUnit">
+              <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+                   <property name="proName" value="itemParamValUnit"/>
+                   <property name="unitType"  value="other"/>
+                   <property name="defaultVal"  value="%"/>
+                   <property name="desc" value="%"/>
+              </bean>
+       </property>
+ </bean>
+		      
+<bean name="issueAmount_select" class="com.gwghk.ims.activity.context.ParamBean">
+   <property name="proName" value="itemParamVal"/>
+       <property name="desc" value="发放额度 下拉%或元"/>
+       <property name="validType" value="gtZeroDecimalTwo"/>
+       <property name="required" value="true"/>
+       <property name="dynamicUnit" value="true"/>
+       <property name="paramUnitProName"  value="itemParamValUnit" />
+       <property name="paramUnitMap">
+            <map>
+              <entry key="RMB">
+	              <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+	                   <property name="proName" value="itemParamValUnit"/>
+	                   <property name="unitType"  value="money"/>
+	                   <property name="defaultVal"  value="RMB"/>
+	                   <property name="desc" value="元"/>
+	              </bean>
+            </entry>
+             <entry key="USD">
+	              <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+	                   <property name="proName" value="itemParamValUnit"/>
+	                   <property name="unitType"  value="money"/>
+	                   <property name="defaultVal"  value="USD"/>
+	                   <property name="desc" value="美元"/>
+	              </bean>
+            </entry>
+		     <entry key="%">
+		         <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+		             <property name="proName" value="tradeNumUnit"/>
+		             <property name="unitType"  value="other"/>
+		             <property name="defaultVal"  value="%"/>
+		             <property name="desc" value="%"/>
+	             </bean> 
+		     </entry>
+	      </map>    
+       </property>
+ </bean>  
+ 
+ <bean name="frequencyTime" class="com.gwghk.ims.activity.context.ParamBean">
+       <property name="proName" value="frequencyTime"/>
+       <property name="desc" value="频率时间单位,eg:1天"/>
+       <property name="label" value="领取限制"/>
+       <property name="validType" value="int"/>
+        <property name="paramUnit">
+              <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+                   <property name="proName" value="frequencyTimeUnit"/>
+                   <property name="unitType"  value="cycleTime"/>
+                   <property name="defaultVal"  value="DAY"/>
+                   <property name="desc" value="天"/>
+              </bean>
+       </property>
+  </bean>
+  
+ <bean name="frequencyNum" class="com.gwghk.ims.activity.context.ParamBean">
+	 <property name="proName" value="frequencyNum"/>
+	 <property name="desc" value="频率时间个数,eg:1个"/>
+	 <property name="validType" value="int"/>
+	  <property name="paramUnit">
+	        <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+	             <property name="proName" value="frequencyNumUnit"/>
+	             <property name="unitType"  value="other"/>
+	             <property name="defaultVal"  value="NUM"/>
+	             <property name="desc" value="个"/>
+	        </bean>
+	 </property>
+ </bean>
+  <bean name="tradeNum" class="com.gwghk.ims.activity.context.ParamBean">
+	 <property name="proName" value="tradeNum"/>
+	 <property name="desc" value="平仓手数"/>
+	 <property name="validType" value="zeroDecimalTwo"/>
+	 <property name="required" value="true"/>
+	  <property name="paramUnit">
+	        <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+	             <property name="proName" value="tradeNumUnit"/>
+	             <property name="unitType"  value="other"/>
+	             <property name="defaultVal"  value="LOT"/>
+	             <property name="desc" value="手"/>
+	        </bean>
+	 </property>
+ </bean>
+ <bean name="tradeNum_select" class="com.gwghk.ims.activity.context.ParamBean">
+	 <property name="proName" value="tradeNum"/>
+	 <property name="desc" value="平仓手数 下拉%或手"/>
+	 <property name="validType" value="zeroDecimalTwo"/>
+	 <property name="required" value="true"/>
+	 <property name="paramUnitProName"  value="tradeNumUnit" />
+	 <property name="dynamicUnit" value="true" />
+	 <property name="paramUnitMap">
+	     <map>
+	         <entry key="LOT">
+		         <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+		             <property name="proName" value="tradeNumUnit"/>
+		             <property name="unitType"  value="other"/>
+		             <property name="defaultVal"  value="LOT"/>
+		             <property name="desc" value="手"/>
+	             </bean> 
+		     </entry>
+		      <entry key="%">
+		         <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+		             <property name="proName" value="tradeNumUnit"/>
+		             <property name="unitType"  value="other"/>
+		             <property name="defaultVal"  value="%"/>
+		             <property name="desc" value="%"/>
+	             </bean> 
+		     </entry>
+	     </map>
+	 </property>
+ </bean>
+ <bean name="receiveMaxNum" class="com.gwghk.ims.activity.context.ParamBean">
+       <property name="proName" value="receiveMaxNum"/>
+       <property name="desc" value="最高领取次数,eg:10次"/>
+       <property name="label" value="最高领取次数"/>
+       <property name="validType" value="int"/>
+       <property name="required" value="true"/>
+        <property name="paramUnit">
+              <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+                   <property name="proName" value="receiveMaxNumUnit"/>
+                   <property name="unitType"  value="other"/>
+                   <property name="defaultVal"  value="TIMES"/>
+                   <property name="desc" value="次"/>
+              </bean>
+       </property>
+  </bean>
+  
+   <bean name="receiveMaxMoney" class="com.gwghk.ims.activity.context.ParamBean">
+       <property name="proName" value="receiveMaxMoney"/>
+       <property name="desc" value="最高领取金额,eg:100元"/>
+       <property name="label" value="最高领取金额"/>
+       <property name="validType" value="zeroDecimalTwo"/>
+       <property name="required" value="true"/>
+       <property name="paramUnit">
+              <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+                    <property name="proName" value="receiveMaxNumUnit"/>
+                    <property name="unitType"  value="money"/>
+	                <property name="defaultVal"  value="RMB"/>
+	                <property name="desc" value="元"/>
+              </bean>
+       </property>
+  </bean>
+ <!-- 发放额度规则 (公式 ) -->
+ <bean name="issueRule" class="com.gwghk.ims.activity.context.ParamBean">
+        <property name="proName" value="itemParamVal"/>
+        <property name="desc" value="公式 eg:X*Y*Z"/>
+        <property name="inputType" value="select"/>
+        <property name="isDynamict" value="true"/>
+        <property name="required" value="true"/>
+        <property name="dynamicUnit" value="true"/>
+        <property name="paramUnitProName"  value="itemParamValUnit"/>
+        <property name="paramUnitMap">
+               <map>
+                  <entry key="mobile_data">
+                       <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+	                    <property name="proName" value="itemParamValUnit"/>
+	                    <property name="unitType"  value="size"/>
+	                    <property name="defaultVal"  value="M"/>
+	                    <property name="dynamicVal"  value="mobile_data"/>
+	                    <property name="desc" value="流量：M"/>
+                       </bean>
+                  </entry>
+                  <entry key="mobile_charge">
+                       <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+	                    <property name="proName" value="itemParamValUnit"/>
+	                    <property name="unitType"  value="money"/>
+	                    <property name="defaultVal"  value="RMB"/>
+	                     <property name="dynamicVal"  value="mobile_charge"/>
+	                    <property name="desc" value="话费:元"/>
+                      </bean>
+                  </entry>
+                  <entry key="member_vip">
+                       <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+	                    <property name="proName" value="itemParamValUnit"/>
+	                    <property name="unitType"  value="cycleTime"/>
+	                    <property name="defaultVal"  value="MONTH"/>
+	                     <property name="dynamicVal"  value="member_vip"/>
+	                    <property name="desc" value="会员：月"/>
+                      </bean>
+                  </entry>
+               </map>
+        </property>
+ </bean>
+ <bean name="isSueRule_infPramMax" class="com.gwghk.ims.activity.context.ParamBean">
+        <property name="proName" value="infParamMax"/>
+        <property name="desc" value="最高额度"/>
+        <property name="validType" value="gtZeroDecimalTwo"/>
+        <property name="required" value="true"/>
+        <property name="dynamicUnit" value="true"/>
+        <property name="paramUnitProName"  value="itemParamValUnit" />
+        <property name="paramUnitMap">
+               <map>
+                  <entry key="mobile_data">
+                       <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+	                    <property name="proName" value="itemParamValUnit"/>
+	                    <property name="unitType"  value="size"/>
+	                    <property name="inputType" value="select"/>
+	                    <property name="defaultVal"  value="M"/>
+	                    <property name="desc" value="流量：M"/>
+	                     <property name="options">
+				          <list>
+				             <bean  class="com.gwghk.ims.common.common.Kuak">
+				                    <property name="key" value="M"/>
+				                    <property name="title" value="M"/>
+				               </bean>
+				               <bean class="com.gwghk.ims.common.common.Kuak">
+				                    <property name="key" value="G"/>
+				                    <property name="title" value="G"/>
+				               </bean>
+				          </list>
+				        </property>
+                       </bean>
+                  </entry>
+                  <entry key="mobile_charge">
+                       <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+	                    <property name="proName" value="itemParamValUnit"/>
+	                    <property name="unitType"  value="money"/>
+	                    <property name="defaultVal"  value="RMB"/>
+	                    <property name="desc" value="话费:元"/>
+                      </bean>
+                  </entry>
+                  <entry key="member_vip">
+                       <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+	                    <property name="proName" value="itemParamValUnit"/>
+	                    <property name="unitType"  value="cycleTime"/>
+	                    <property name="defaultVal"  value="MONTH"/>
+	                    <property name="desc" value="会员：月"/>
+                      </bean>
+                  </entry>
+               </map>
+        </property>
+ </bean>
+ <bean name="isSueRule_infParamX" class="com.gwghk.ims.activity.context.ParamBean">
+	  <property name="proName" value="infParamX"/>
+	  <property name="desc" value="接口物品X值,x=当前真实账号激活条件金额值"/>
+	  <property name="inputType" value="label"/>
+	  <property name="readOnly" value="true"/>
+ </bean>
+ <bean name="isSueRule_infParamY" class="com.gwghk.ims.activity.context.ParamBean">
+	  <property name="proName" value="infParamY"/>
+	  <property name="desc" value="接口物品Y值"/>
+	  <property name="label" value="Y="/>
+	  <property name="required" value="true"/>
+	  <property name="validType" value="zeroDecimalTwo"/>
+</bean>
+<bean name="isSueRule_infParamZ" class="com.gwghk.ims.activity.context.ParamBean">
+	  <property name="proName" value="infParamZ"/>
+	  <property name="desc" value="接口物品Z值"/>
+	  <property name="label" value="Z="/>
+	  <property name="required" value="true"/>
+	  <property name="validType" value="zeroDecimalTwo"/>
+</bean>
+ <bean name="equalValue" class="com.gwghk.ims.activity.context.ParamBean">
+	  <property name="proName" value="equalValue"/>
+	  <property name="desc" value="等额值"/>
+	  <property name="label" value="等额值"/>
+	  <property name="validType" value="zeroDecimalTwo"/>
+	  <property name="defaultVal"  value="0"/>
+	  <property name="actTypes" value="wpdh"/>
+ </bean>
+ <bean name="itemProbability" class="com.gwghk.ims.activity.context.ParamBean">
+	  <property name="proName" value="itemProbability"/>
+	  <property name="desc" value="概率"/>
+	  <property name="label" value="概率"/>
+	  <property name="validType" value="zeroDecimalFour"/>
+	  <property name="defaultVal"  value="1"/>
+	  <property name="actTypes" value="wpdh"/>
+ </bean>
+
+</beans>

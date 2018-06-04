@@ -1,0 +1,30 @@
+
+<%if(typeof(data.unit) == 'undefined'){%>
+    <div class="layui-inline no-mr">
+        <input type="text" class="layui-input" <%if(data.actUseFlag){%> disabled <%}%> value="<%=data.itemCategoryAmount%>" lay-verify="required|number|itemNumber" lay-verType="tips" id="itemCategoryAmount" name="itemCategoryAmount">        
+    </div>
+    <div class="layui-inline unitItem">
+        <%if(data.itemCategory == 'mobile_data'){%>
+            <select name="itemUnit" lay-filter="itemUnit" id="itemUnit" <%if(data.actUseFlag){%> disabled <%}%> >
+                <option value="M" <%if(data.itemUnit == 'M'){%> selected <%}%> >M</option>
+                <option value="G" <%if(data.itemUnit == 'G'){%> selected <%}%> >G</option>
+            </select>
+        <%}else{%>
+            <span class="unit"><%=unit%></span>
+        <%}%>
+    </div>
+<%}else{%>
+    <div class="layui-inline no-mr">
+        <input type="text" class="layui-input" lay-verify="required|number|itemNumber" lay-verType="tips" id="itemCategoryAmount" name="itemCategoryAmount">
+    </div>
+    <div class="layui-inline unitItem">
+        <%if(data.value == 'mobile_data'){%>
+            <select name="itemUnit" lay-filter="itemUnit" id="itemUnit">
+                <option value="M">M</option>
+                <option value="G">G</option>
+            </select>
+        <%}else{%>
+            <span class="unit"><%=data.unit%></span>
+        <%}%>
+    </div>
+<%}%>

@@ -1,0 +1,19 @@
+.m-container{
+    .layout-3{
+        .layui-table{
+            td[data-field=activityPeriods],td[data-field=activityName]{
+                text-decoration: underline;
+                color: #009688;
+                cursor: pointer;
+            }
+        }
+    }
+    .layui-textarea{
+        width: 300px;
+        height: 200px;
+        resize: none;
+        &.remark{
+            height: 150px;
+        }
+    }
+}

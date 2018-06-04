@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.sys.api.dao.inf.SystemRoleDao" >
+  <select id="findListByMap" resultType="SystemRole" parameterType="java.util.Map" >
+    select * from t_system_role
+    <where>
+		<if test="roleCode != null and roleCode != '' ">
+			and role_code like CONCAT('%',#{roleCode},'%')
+		</if>
+		<if test="roleName != null and roleName !='' ">
+			and role_name like CONCAT('%',#{roleName},'%')
+		</if>
+		<if test="enableFlag != null and enableFlag !='' ">
+			and enable_flag = #{enableFlag}
+		</if>
+		<if test="companyId != null">
+			and company_id = #{companyId}
+		</if>
+		and delete_flag != 'Y'
+	</where>
+  </select>
+  <select id="findObject" resultType="SystemRole" parameterType="java.lang.Long" >
+    select * from t_system_role where role_id = #{roleId,jdbcType=BIGINT}
+  </select>
+	<select id="findObjectByMap" parameterType="java.util.Map" resultType="SystemRole">
+		select * from t_system_role
+		<where>
+			<if test="roleCode != null and roleCode !='' ">
+				and role_code = #{roleCode}
+			</if>
+			<if test="companyId != null">
+				and company_id = #{companyId}
+			</if>
+			and delete_flag != 'Y'
+		</where>
+	</select>
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from t_system_role where role_id = #{roleId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteBatch">
+	delete from t_system_role where role_id in
+	<foreach item="item" index="index" collection="list" open="("
+		separator="," close=")">
+		#{item}
+	</foreach>
+  </delete>
+  <insert id="save" parameterType="SystemRole" >
+	<selectKey resultType="java.lang.Long" order="AFTER"
+		keyProperty="roleId">
+		SELECT LAST_INSERT_ID()
+	</selectKey>
+    insert into t_system_role (role_id, role_code, role_name, 
+      company_id, create_date, create_ip, 
+      create_user, delete_flag, enable_flag, 
+      update_date, update_ip, update_user, 
+      version_no)
+    values (#{roleId,jdbcType=BIGINT}, #{roleCode,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{createIp,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, #{enableFlag,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{updateIp,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, 
+      #{versionNo,jdbcType=BIGINT})
+  </insert>
+  <update id="update" parameterType="SystemRole" >
+    update t_system_role
+    set role_code = #{roleCode,jdbcType=VARCHAR},
+      role_name = #{roleName,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_ip = #{updateIp,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      version_no = #{versionNo,jdbcType=BIGINT}
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </update>
+</mapper>

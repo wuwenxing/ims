@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.sys.api.dao.inf.SystemUserDao">
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="SystemUser">
+		select a.*, b.role_name from t_system_user a
+		left join t_system_role b on a.role_id = b.role_id
+		<where>
+			<if test="userNo != null and userNo != '' ">
+				and a.user_no like CONCAT('%',#{userNo},'%')
+			</if>
+			<if test="userName != null and userName !='' ">
+				and a.user_name like CONCAT('%',#{userName},'%')
+			</if>
+			<if test="position != null and position !='' ">
+				and a.position like CONCAT('%',#{position},'%')
+			</if>
+			<if test="telephone != null and telephone !='' ">
+				and a.user_name like CONCAT('%',#{telephone},'%')
+			</if>
+			<if test="email != null and email !='' ">
+				and a.user_name like CONCAT('%',#{email},'%')
+			</if>
+			<if test="remark != null and remark !='' ">
+				and a.remark like CONCAT('%',#{remark},'%')
+			</if>
+			<if test="enableFlag != null and enableFlag !='' ">
+				and a.enable_flag = #{enableFlag}
+			</if>
+			<if test="roleId != null">
+				and a.role_id = #{roleId}
+			</if>
+			<if test="companyId != null">
+				and a.company_id = #{companyId}
+			</if>
+		</where>
+		<if test="orderByClause != null and orderByClause != ''">
+			order by ${orderByClause} 
+		</if>
+	</select>
+
+	<select id="findObject" resultType="SystemUser">
+		select * from t_system_user
+		where user_id = #{userId}
+	</select>
+
+	<select id="findByUserNo" resultType="SystemUser">
+		select * from t_system_user
+		where user_no = #{0}
+		and delete_flag != 'Y'
+	</select>
+
+	<select id="findByUserNoAndCompanyId" resultType="SystemUser">
+		select * from t_system_user
+		where user_no = #{0}
+		and company_id = #{1}
+		and delete_flag != 'Y'
+	</select>
+	
+	<insert id="save" parameterType="SystemUser">
+		<selectKey resultType="java.lang.Long" order="AFTER"
+			keyProperty="userId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into t_system_user (user_id, role_id, user_no,
+		user_name, password, email,
+		position, telephone, login_times,
+		last_login_date, remark, company_id,
+		create_date, create_ip, create_user,
+		delete_flag, enable_flag, update_date,
+		update_ip, update_user, version_no
+		)
+		values (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT},
+		#{userNo,jdbcType=VARCHAR},
+		#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+		#{position,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR},
+		#{loginTimes,jdbcType=INTEGER},
+		#{lastLoginDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT},
+		#{createDate,jdbcType=TIMESTAMP}, #{createIp,jdbcType=VARCHAR},
+		#{createUser,jdbcType=VARCHAR},
+		#{deleteFlag,jdbcType=VARCHAR}, #{enableFlag,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP},
+		#{updateIp,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR},
+		#{versionNo,jdbcType=BIGINT}
+		)
+	</insert>
+	
+	<update id="update" parameterType="SystemUser" >
+	    update t_system_user
+	    set role_id = #{roleId,jdbcType=BIGINT},
+	        user_no = #{userNo,jdbcType=VARCHAR},
+	        user_name = #{userName,jdbcType=VARCHAR},
+	        password = #{password,jdbcType=VARCHAR},
+	        email = #{email,jdbcType=VARCHAR},
+	        position = #{position,jdbcType=VARCHAR},
+	        telephone = #{telephone,jdbcType=VARCHAR},
+	        login_times = #{loginTimes,jdbcType=INTEGER},
+	        last_login_date = #{lastLoginDate,jdbcType=TIMESTAMP},
+	        remark = #{remark,jdbcType=VARCHAR},
+	        company_id = #{companyId,jdbcType=BIGINT},
+	        create_date = #{createDate,jdbcType=TIMESTAMP},
+	        create_ip = #{createIp,jdbcType=VARCHAR},
+	        create_user = #{createUser,jdbcType=VARCHAR},
+	        delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+	        enable_flag = #{enableFlag,jdbcType=VARCHAR},
+	        update_date = #{updateDate,jdbcType=TIMESTAMP},
+	        update_ip = #{updateIp,jdbcType=VARCHAR},
+	        update_user = #{updateUser,jdbcType=VARCHAR},
+	        version_no = #{versionNo,jdbcType=BIGINT}
+	    where user_id = #{userId}
+  	</update>
+  	
+  	<delete id="deleteBatch">
+		delete from t_system_user where user_id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

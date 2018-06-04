@@ -1,0 +1,366 @@
+@import './variables.scss';
+.m-container{
+    background:$bgColor-04;
+}
+.layui-form {
+  background: transparent;
+  // width: 1600px;
+  .layui-form-base, .layui-form-exp{
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    background: $bgWhite;
+  }
+  .layui-form-prize {
+    background: $bgWhite;
+    padding: 0 20px 30px 20px;
+    box-sizing: border-box;
+    .layui-btn {
+      background: $bgColor-06;
+      padding: 0;
+      border-radius: 4px;
+      color:$bgWhite;
+      width: 96px;
+      height: 36px;
+      // margin-left: 16px;
+    }
+  }
+  .table {
+    width: 100%;
+    .title {
+      // height: 54px;
+      padding: 19px 0 19px 28px;
+      position: relative;
+      z-index: 10;
+      background: $bgWhite;
+      p {
+        line-height: 16px;
+        font-size: 16px;
+        color:$fontColor-00;
+        padding-left:12px; 
+        &::before {
+          width: 4px;
+          height: 12px;
+          background: $bgColor-05;
+          content: "";
+          clear: both;
+          position: absolute;
+          left: 28px;
+          top: 21px;
+        }
+      }
+      .type {
+        color:$fontColor-01;
+        font-size: 12px;
+        margin-left: 8px;
+      }
+    }
+    .layui-form-item {
+      padding-left: 28px;
+      box-sizing: border-box;
+      &:nth-child(1){
+        padding-top: 20px;
+      }
+      &.textarea-item {
+        padding-right: 88px;
+      }
+      &.datetime {
+        padding-right: 90px;
+      }
+      margin-bottom: 20px;
+      .layui-form-grid-label {
+        padding: 0;
+        text-align: left;
+        height: 32px;
+        .required{
+          width: 16px;
+          display: inline-block;
+          color:$bgColor-05;
+          font-weight: bolder;
+          font-style: normal;
+          font-size: 20px;
+        }
+      }
+      .layui-inline {
+        margin-bottom: 0;
+        margin-right: 0;
+        &.input-append {
+          position: relative;
+          .append {
+            position: absolute;
+            display: inline-block;
+            vertical-align: middle;
+            right: 10px;
+            top: 0;
+            line-height: 32px;
+            height: 32px;
+          }
+        }
+        .layui-input {  
+          height: 32px;
+          // width: 272px;
+          border-radius: 4px;
+          border-color:$blColor-00;
+          caret-color:#007DFF;
+          &:focus {
+          }
+        }
+      }
+      .layui-textarea {
+        resize: none;
+        min-height: 50px;
+        text-indent: 20px;
+        background: $bgColor-08;
+        resize: vertical;
+      }
+      .uploadContent {
+        width:694px;
+        height: 32px;
+        border-radius: 4px;
+        border:$blColor-00 solid 1px;
+        .layui-btn {
+          padding: 0;
+          background: transparent;
+          color:$fontColor-01;
+          &.sel {
+            padding-left: 20px;
+            width: 550px;
+            text-align: left;
+          } 
+          &.template{
+          color:$fontColor-01;
+            width: 140px;
+            height: 32px;
+            position: relative;
+            &::before {
+              position: absolute;
+              display: block;
+              content:'';
+              height: 20px;
+              left: 0;
+              top: 10px;
+              width: 1px;
+              background: $blColor-00;
+            }
+
+          }
+
+        }
+      }
+      .upload-btn {
+        background: $bgColor-13;
+        padding: 0;
+        border-radius: 4px;
+        color:$bgWhite;
+        width: 96px;
+        height: 32px;
+        line-height: 32px;
+        margin-left: 16px;
+        border: none;
+      }
+      .prds {
+        height: 52px;
+        position: relative;
+        // border:solid 1px $blColor-00;
+        textarea {
+          border-radius: 4px;
+          border:solid 1px $blColor-00;
+          padding-right: 92px;
+        }
+        .prd-btns {
+          position: absolute;
+          right: 0;
+          top: 0;
+          padding-top: 0;
+          .layui-form-select dl {
+            top: 56px;
+          }
+          .select-btn { 
+            width: 92px;
+            height: 32px;
+            line-height: 52px;
+            padding: 0;
+            background: transparent;
+            text-align: center;
+            color: $bgColor-06;
+            border: none;
+            cursor: pointer;
+            &::before {
+              position: absolute;
+              display: block;
+              content: "";
+              width: 1px;
+              height: 22px;
+              top:15px;
+              background: $blColor-02;
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
+.layui-form .layui-form-prize {
+  .title {
+    padding-left: 8px;
+    p::before{
+      left: 8px;
+    }
+  }
+  .tr {
+    padding: 0 20px;
+    background: $bgWhite;
+    padding-bottom: 10px;
+  }
+  .outter {
+    background: $bgColor-09;
+    position: relative;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+    .del {
+      position: absolute;
+      right: 20px;
+      top: 8px;
+      font-size: 20px;
+      z-index: 10;
+      .icon-close{
+        width: 32px;
+        height: 32px;
+        background: url('../images/close_icon_32_32.svg');
+        display: block;
+      }
+    }
+    .prize-table {
+      .tbody {
+        .prize-item{
+          margin-bottom: 30px;
+          .prizeName {
+            width: 272px;
+            margin-bottom: 20px;
+          }
+        }
+        .subTask {
+          margin-bottom: 20px;
+          .subTaskParams {
+            margin-bottom: 20px;
+          }
+        }
+        .prizeItem ,.prize-params,.prize-item{
+          .prize-unit {
+            border:solid 1px $blColor-00;
+            position: relative;
+            border-radius: 4px;
+            height: 32px;
+            margin-bottom: 20px;
+
+            &.layui-col-ml20 {
+              margin-left: 20px;
+            }
+            .layui-form-grid-label {
+              border-right: solid 1px $blColor-00;
+              height: 32px;
+              line-height: 32px;
+              text-align: center;
+              color:rgba(19,22,38,0.54);
+              display: inline-block;
+              padding: 0 10px;
+            }
+            .append {
+              position: absolute;
+              right: 10px;
+              top: 0px;
+              line-height: 32px;
+            }
+            .appendSelect {
+              position: absolute;
+              right: 0;
+              top: 0;
+              .layui-form-select {
+                width: 70px;
+              }
+            }
+            .layui-input {
+              border: none;
+              height: 32px;
+              background: transparent;
+            }
+            &:hover {
+              border-color:$blColor-04;
+              .layui-form-grid-label {
+                border-color:$blColor-04;
+              }
+            }
+          }
+        }
+      }
+    }
+    .task-desc {
+      height: 100px;
+      border:solid 1px $blColor-00;
+      border-radius: 4px;
+      background: $bgWhite;
+    }
+    .del-prize {
+      background: transparent;
+      color:$fontColor-02;
+    }
+    .add-prize {
+      border:solid 1px $bgColor-13;
+      color:$bgColor-13;
+      border-radius: 4px;
+      background: $bgWhite;
+    }
+  }
+}
+.btns {
+  height: 64px;
+  margin: 0 auto;
+  text-align: center;
+  box-sizing: border-box;
+  .layui-btn {
+    height: 32px;
+    line-height: 32px;
+    width: 132px;
+    border-radius: 4px;//$bgColor-04
+    &.submit {
+      color:$bgWhite;
+      background: $bgColor-13;
+    }
+    &.back {
+      border:solid 1px $bgColor-13;
+      color:$bgColor-13;
+      background: $bgWhite;
+    }
+  }
+}
+.task {
+  height: 64px;
+  background: $bgColor-13;
+  color:$bgWhite;
+  margin-top: 12px;
+  margin-bottom: 14px;
+  border-radius: 4px;
+  .layui-btn {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    text-align: center;
+    line-height: 64px;
+    padding: 0;
+  }
+}
+//svg
+.tips {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: url("../images/note_icon.svg");
+  margin-right: 4px;
+}
+.date-to {
+  width: 54px;
+  text-align: center;
+}
+.redBorder {
+  border:solid 1px red !important;
+}

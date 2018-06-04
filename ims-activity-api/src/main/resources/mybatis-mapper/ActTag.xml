@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActTagDao">
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="ActTag">
+		select * from act_tag where company_id = #{companyId}
+		<if test="tagCode != null and tagCode != '' ">
+			and tag_code like CONCAT('%',#{tagCode},'%')
+		</if>
+		<if test="tagName != null and tagName !='' ">
+			and tag_name like CONCAT('%',#{tagName},'%')
+		</if>
+		<if test="tagVal != null and tagVal !=''">
+			and tag_val like CONCAT('%',#{tagVal},'%')
+		</if>
+		<if test="enableFlag != null and enableFlag !=''">
+			and enable_flag = #{enableFlag}
+		</if>
+		and delete_flag = 'N'
+	</select>
+
+	<select id="findObject" parameterType="java.lang.Long" resultType="ActTag">
+		select * from act_tag where id = #{0}
+	</select>
+
+	<select id="findByCode" resultType="ActTag">
+		select * from act_tag where tag_code = #{0} and company_id = #{1} and delete_flag = 'N'
+	</select>
+
+	<insert id="save" parameterType="ActTag">
+		insert into act_tag (id, tag_code, tag_name, 
+	      tag_val, remark, create_date, 
+	      create_ip, create_user, delete_flag, 
+	      enable_flag, update_date, update_ip, 
+	      update_user, version_no, company_id
+	      )
+	    values (#{id,jdbcType=BIGINT}, #{tagCode,jdbcType=VARCHAR}, #{tagName,jdbcType=VARCHAR}, 
+	      #{tagVal,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+	      #{createIp,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
+	      #{enableFlag,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateIp,jdbcType=VARCHAR}, 
+	      #{updateUser,jdbcType=VARCHAR}, #{versionNo,jdbcType=BIGINT}, #{companyId,jdbcType=BIGINT}
+        )
+	</insert>
+
+	<update id="update" parameterType="ActTag">
+		update act_tag
+	    <set>
+	      <if test="tagCode != null" >
+	        tag_code = #{tagCode,jdbcType=VARCHAR},
+	      </if>
+	      <if test="tagName != null" >
+	        tag_name = #{tagName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="tagVal != null" >
+	        tag_val = #{tagVal,jdbcType=VARCHAR},
+	      </if>
+	      <if test="remark != null" >
+	        remark = #{remark,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createDate != null" >
+	        create_date = #{createDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="createIp != null" >
+	        create_ip = #{createIp,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createUser != null" >
+	        create_user = #{createUser,jdbcType=VARCHAR},
+	      </if>
+	      <if test="deleteFlag != null" >
+	        delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+	      </if>
+	      <if test="enableFlag != null" >
+	        enable_flag = #{enableFlag,jdbcType=VARCHAR},
+	      </if>
+	      <if test="updateDate != null" >
+	        update_date = #{updateDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="updateIp != null" >
+	        update_ip = #{updateIp,jdbcType=VARCHAR},
+	      </if>
+	      <if test="updateUser != null" >
+	        update_user = #{updateUser,jdbcType=VARCHAR},
+	      </if>
+	      <if test="versionNo != null" >
+	        version_no = #{versionNo,jdbcType=BIGINT},
+	      </if>
+	      <if test="companyId != null" >
+	        company_id = #{companyId,jdbcType=BIGINT},
+	      </if>
+	    </set>
+	    where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<delete id="deleteBatch">
+		delete from act_tag where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

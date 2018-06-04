@@ -1,0 +1,35 @@
+<form action="" class="layui-form upload-form">
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">
+        <em class="required">*</em>
+        <span>所属标签名称</span>
+      </label>
+      <div class="layui-inline">
+        <select name="tagCode" id="" lay-verify="required" lay-verType="tips">
+          <option value="">--请选择--</option>
+          <option value="FX_其他标签用户">FX_其他标签用户</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline  upload-content flex-item no-mr flex flex-horizon-between">
+      <div class="layui-inline no-mr flex-item">
+        <input type="text" class="template layui-input sel" id="uploadFile" readonly placeholder="点击选择客户标签文件">
+      </div>
+      <div class="layui-inline download" id="downloadTempl">
+          <a class="template" href="">下载模板</a>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item no-mb upload-tips">
+      <div class="layui-inline">
+          <h4><i class="tips"></i><span class="tips-title">温馨提示：</span></h4>
+          <p>1.上传文件类型：可支持.xls、.xlsx格式的excel文件。</p>
+          <p>2.交易账号列为必填项。</p>
+      </div>
+  </div>
+  <input type="hidden" value="" id="filePath">
+  <button type="button" class="upload-btn" id="uploadBtn" style="display:none;" lay-submit lay-filter="uploadItem"></button>
+</form>

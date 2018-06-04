@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.message.dao.inf.ActTradeRecordDao">
+	<select id="getCleanTrade" parameterType="java.util.Map" resultType="ActTradeRecord">
+	   	select
+			account.company_id company_id,
+			account_no,
+			account.platform platform,
+			positionid position_no,
+			p_id order_no,
+			displayname product,
+			type product_type,
+			(case 
+				when reason in(1,2,4,81,82,84) then 'in'
+				else 'out'
+			end) trade_type,
+			execvolume trade_lot,
+			profit profit,
+			commission commission,
+			swap swap,
+			date_add(exectime, interval 8 hour) trade_time,
+			now() create_date,
+			now() update_date
+		from
+			gts2deal_${env} deal
+		inner join t_account_info_${env} account 
+			on deal.accountid = account.gts2_account_id 
+				and account.company_id=${companyId}
+		left join (
+			select distinct
+				name,
+				displayname,
+				type
+			FROM
+				gts2symbol_${env}
+			where
+				status = 0
+				and companyid=${companyId}
+		) s on deal.symbol = s. name
+		where
+			deal.id=#{id}
+    </select>
+  
+    <select id="getTrade" parameterType="ActTradeRecord" resultType="ActTradeRecord">
+	  	select * from act_trade_record_real  where account_no=#{accountNo} and platform=#{platform} and order_no=#{orderNo}
+	  		and trade_type=#{tradeType}
+    </select>
+  
+	<insert id="save" parameterType="ActTradeRecord">
+		insert into
+		act_trade_record_${env} (company_id,
+		account_no,
+		platform, position_no,
+		order_no,
+		product, product_type,
+		trade_type,
+		trade_lot, profit,
+		commission,
+		swap, channel,trade_time,open_time,
+		delete_flag,
+		create_date,
+		update_date,
+		push_flag
+		)
+		values
+		(#{companyId},
+		#{accountNo},
+		#{platform},
+		#{positionNo},
+		#{orderNo},
+		#{product},
+		#{productType},
+		#{tradeType},
+		#{tradeLot},
+		#{profit},
+		#{commission},
+		#{swap},
+		#{channel},
+		#{tradeTime},
+		#{openTime},
+		#{deleteFlag},
+		#{createDate},
+		#{updateDate},
+		'0'
+		)
+	</insert>
+
+	<update id="update" parameterType="ActTradeRecord">
+		update act_trade_record_${env}
+		<set>
+			<if test="companyId != null">
+				company_id = #{companyId},
+			</if>
+			<if test="accountNo != null">
+				account_no = #{accountNo},
+			</if>
+			<if test="platform != null">
+				platform = #{platform},
+			</if>
+			<if test="positionNo != null">
+				position_no = #{positionNo},
+			</if>
+			<if test="orderNo != null">
+				order_no = #{orderNo},
+			</if>
+			<if test="product != null">
+				product = #{product},
+			</if>
+			<if test="productType != null">
+				product_type = #{productType},
+			</if>
+			<if test="tradeType != null">
+				trade_type = #{tradeType},
+			</if>
+			<if test="tradeLot != null">
+				trade_lot = #{tradeLot},
+			</if>
+			<if test="profit != null">
+				profit = #{profit},
+			</if>
+			<if test="commission != null">
+				commission = #{commission},
+			</if>
+			<if test="swap != null">
+				swap = #{swap},
+			</if>
+			<if test="tradeTime != null">
+				trade_time = #{tradeTime},
+			</if>
+			<if test="openTime != null">
+				open_time = #{openTime},
+			</if>
+			<if test="channel != null">
+				channel = #{channel},
+			</if>
+			<if test="versionNo != null">
+				version_no = #{versionNo},
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag = #{deleteFlag},
+			</if>
+			<if test="createUser != null">
+				create_user = #{createUser},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate},
+			</if>
+			<if test="createIp != null">
+				create_ip = #{createIp},
+			</if>
+			<if test="updateUser != null">
+				update_user = #{updateUser},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<select id="findObjectByMap" parameterType="java.util.Map" resultType="ActTradeRecord">
+		select * from act_trade_record_${env} 
+		<where>
+			<if test="accountNo!=null">
+				account_no=#{accountNo}
+			</if>
+			<if test="platform!=null">
+				and platform=#{platform}
+			</if>
+			<if test="orderNo != null">
+				and order_no = #{orderNo}
+			</if>
+			<if test="tradeType != null">
+				and trade_type = #{tradeType}
+			</if>
+			<if test="positionNo!=null">
+				and position_no = #{positionNo}
+			</if>
+		</where> 
+	</select>
+</mapper>

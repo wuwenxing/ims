@@ -1,0 +1,77 @@
+<form action="" class="layui-form">
+  <div class="layui-form-item">
+    <div class="layui-inline flex no-mr">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>账号</span>
+      </label>
+      <div class="layui-inline flex-item">
+        <textarea name="pushAccountNos" id="" class="layui-textarea" lay-verify="required" lay-verType="tips"></textarea>
+      </div>
+    </div>
+    <p class="tips-inner">多个账号用英文逗号隔开</p>
+  </div>
+  <div class="layui-form-item channelItem">
+    <div class="layui-inline flex no-mr">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>渠道</span>
+      </label>
+      <div class="layui-inline flex-item">
+        <input class="layui-inline" type="checkbox" name="pushChannelList" 
+          value="SMS" lay-skin="primary" title="SMS" lay-filter="channelSel">
+        <input class="layui-inline" type="checkbox" name="pushChannelList" 
+          value="APP" lay-skin="primary" title="APP" lay-filter="channelSel">
+        <input class="layui-inline" type="checkbox" name="pushChannelList" 
+          value="PCUI" lay-skin="primary" title="PCUI" lay-filter="channelSel">
+        <input class="layui-inline" type="checkbox" name="pushChannelList" 
+          value="WeChat" lay-skin="primary" title="WeChat" lay-filter="channelSel">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline flex no-mr">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>消息名称</span>
+      </label>
+      <div class="layui-inline flex-item">
+        <input class="layui-input" name="msgName" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline flex no-mr">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>内容</span>
+      </label>
+      <div class="layui-inline flex-item">
+        <input class="layui-input" name="content" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline flex no-mr">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <span>备注</span>
+      </label>
+      <div class="layui-inline flex-item">
+        <textarea class="layui-textarea" name="remark"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline flex no-mr">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>发送时间</span>
+      </label>
+      <div class="layui-inline flex-item">
+        <input class="layui-input" name="sendTimeStr" id="sendDate" placeholder="yyyy:mm:dd hh:mm:ss" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+  </div>
+  <button class="layui-btn node-submit" style="display:none;" lay-filter="addPushMsgItem" lay-submit></button>
+</form>
+    

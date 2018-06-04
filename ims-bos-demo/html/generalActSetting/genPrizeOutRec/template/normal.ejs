@@ -1,0 +1,142 @@
+<form class="layui-form">
+  <div class="form-list-item">
+    <!-- 所属活动 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">所属活动</label>
+      <div class="layui-input-inline">
+        <select name="activityPeriodsAdd">
+          <option value="">---请选择---</option>
+        </select>
+      </div>
+    </div>
+    <!-- 客户账号 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">客户账号</label>
+      <div class="layui-input-inline">
+        <input type="text" name="accountNo" class="layui-input" value="<%=accountNo%>">
+      </div>
+    </div>
+  </div>
+  <div class="form-list-item">
+    <!-- 客户手机号	 -->
+    <div class="layui-inline">
+      <label class="layui-form-label"> 客户手机号 </label>
+      <div class="layui-input-inline">
+        <input type="text" name="guestPhone" class="layui-input" value="<%=guestPhone%>">
+      </div>
+    </div>
+    <!-- 入金 -->
+    <div class="layui-inline">
+      <label class="layui-form-label"> 入金</label>
+      <div class="layui-input-inline">
+        <input type="text" name="deposit" class="layui-input" value="<%=deposit%>">
+      </div>
+    </div>
+  </div>
+  <div class="form-list-item">
+    <!-- 交易手数	 -->
+    <div class="layui-inline">
+      <label class="layui-form-label"> 交易手数 </label>
+      <div class="layui-input-inline">
+        <input type="text" name="tradeLot" class="layui-input" value="<%=tradeLot%>">
+      </div>
+    </div>
+    <!-- 排序 -->
+    <div class="layui-inline">
+      <label class="layui-form-label"> 排序</label>
+      <div class="layui-input-inline">
+        <input type="text" name="lotterySort" class="layui-input" value="<%=lotterySort%>">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-list-item">
+    <!-- 完成状态 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">完成状态</label>
+      <div class="layui-input-inline">
+        <select name="lotteryStatus">
+          <option value="">---请选择---</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 完成时间 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">完成时间</label>
+      <div class="layui-input-inline">
+        <input type="text" name="lotteryTime" required lay-verify="required" class="layui-input" id="lotteryTime" value="<%=lotteryTime%>">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-list-item">
+    <!-- 发放物品 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">发放物品</label>
+      <div class="layui-input-inline">
+        <select>
+          <option value="">---请选择---</option>
+        </select>
+        <p class="flex-container">
+          <input type="text" name="giftNumber" class="layui-input" value="<%=giftNumber%>">(可直接输入物品名称)</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-list-item">
+    <!-- 发放概率 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">发放概率</label>
+      <div class="layui-input-inline flex-block">
+        <input type="text" name="giftProbability" class="layui-input" value="<%=giftProbability%>">
+      </div>
+    </div>
+
+    <!-- 是否发放 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">是否发放</label>
+      <div class="layui-input-inline flex-block">
+        <select name="isGived">
+          <option value="">---请选择---</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="form-list-item">
+    <!-- 是否有效 -->
+    <div class="layui-inline">
+      <label class="layui-form-label mutiple-line">是否有效</label>
+      <div class="layui-input-inline">
+        <select name="enableFlag">
+          <option value="Y">有效</option>
+          <option value="N">无效</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 后台添加 -->
+    <div class="layui-inline">
+      <label class="layui-form-label mutiple-line">后台添加</label>
+      <div class="layui-input-inline">
+        <select name="addFromBos">
+          <option value="Y">是</option>
+          <option value="N">否</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="options-bar">
+    <% if(edit){%>
+      <button class="layui-btn" lay-submit lay-filter="editFormEdit">修改</button>
+      <%}else{%>
+        <button class="layui-btn" lay-submit lay-filter="editFormSubmit">提交</button>
+        <%}%>
+
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+  </div>
+</form>

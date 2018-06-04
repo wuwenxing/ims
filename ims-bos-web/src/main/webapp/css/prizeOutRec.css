@@ -1,0 +1,20 @@
+.layui-form-item .layui-input-inline {
+  width: auto;
+  height: 38px;
+  line-height: 38px;
+}
+
+.downTemplate {
+  margin-right: 34px;
+}
+
+.tips {
+  display: inline-block;
+  width: 250px;
+  color: red;
+  font-size: 12px;
+}
+
+.upload-btn {
+  margin-left: 34px;
+}

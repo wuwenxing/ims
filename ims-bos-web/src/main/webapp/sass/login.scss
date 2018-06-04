@@ -1,0 +1,103 @@
+@import "fonts";
+.m-login {
+  background-color: #EAEAEA;
+  min-height: 700px;
+  height: 100%;
+  min-width: 1200px;
+  .layout-1 {
+    position: relative;
+    box-sizing: border-box;
+    padding-left:400px;
+    top: 50%;
+    left: 50%;
+    margin-left: -440px;
+    margin-top: -315px;
+    display: inline-block;
+    width: 880px;
+    height: 630px;
+    border-radius: 4px;
+    background-color: #fff;
+    .item-1 {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width:400px;
+      height: 100%;
+    }
+    .item-2 {
+      position: absolute;
+      left: 400px;
+      top: 0;
+      padding: 80px 70px;
+      width: 480px;
+      box-sizing: border-box;
+      .welcome{
+        width:100%;
+        font-size: 18px;
+        color: #31343A;
+        margin-bottom: 12px;
+      }
+      .title {
+        width:100%;
+        font-weight: bold;
+        font-size: 26px;
+        color:#212327;
+        margin-bottom: 50px;
+      }
+      .loginFrom {
+        .label{
+          text-align: left;
+          font-size: 14px;
+          color:#afafaf;
+          margin-bottom: 20px;
+        }
+        .username,.pwd{
+          width: 100%;
+          height: 24px;
+          margin-bottom: 40px;
+          border:none;
+          border-bottom:solid 1px #d8d8d8;
+          font-size: 18px;
+          color:#212327;
+        }
+        .img{
+          width: 90px;
+          height: 28px;
+        }
+        .checknum{
+          width: 230px;
+          height: 24px;
+          margin-right: 20px;          
+          font-size: 18px;
+          border:none;
+          color:#212327;
+          border-bottom:solid 1px #d8d8d8;
+          margin-bottom: 20px;
+        }
+        .msg{
+          color: #ff3b30;
+          font-size:18px;
+          margin-bottom: 18px;
+          visibility: hidden;
+        }
+        .login-btn,.reset-btn{
+          width: 144px;
+          height: 48px;
+          border: none;
+          border-radius: 24px;
+          font-size: 18px;
+          cursor: pointer;
+        }
+        .login-btn{
+          color:#fff;
+          background: #6f7484;
+        }
+        .reset-btn{
+          color:#5d616f;
+          background: #fff;
+          border:solid 1px #6f7484;
+        }
+      }
+    }
+  }
+}

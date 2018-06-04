@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.MisMallItemDao">
+
+	<select id="findObject" resultType="ImsMallItem" parameterType="java.lang.Long">
+	    select mi.*,ist.item_usable_amount as mallItemsNum,
+	    ist.start_date as startDate,
+	    ist.end_date as endDate,
+	    ast.activity_name,
+	    ts.task_desc as taskSettingName,
+	    ist.item_name 
+	    from ims_mall_items mi 
+	    left join act_setting ast on mi.activity_periods=ast.activity_periods
+	    left join act_task_setting ts on mi.task_setting_id=ts.id 
+	    left join act_items_setting ist on mi.ref_act_items_code=ist.item_number
+	    
+	    where mi.id = #{id} limit 1
+  	</select>
+  	
+  	<select id="listByPage" resultType="ImsMallItem">
+		select a.*
+			, b.activity_name as activityName
+			, c.item_name as itemName
+			, c.item_usable_amount as mallItemsNum
+			, c.start_date as startDate
+			, c.end_date as endDate
+			, c.item_type as itemsType
+			, d.task_code 
+			, d.taskSettingName
+			 
+		from ims_mall_items a
+		left join act_setting b on a.activity_periods = b.activity_periods and a.company_id = b.company_id
+		left join act_items_setting c on a.ref_act_items_code = c.item_number
+		left join (
+				SELECT 
+					b.id,
+					case when b.task_desc is null or b.task_desc =''  then
+						a.task_name
+				  else 	
+						b.task_desc
+					end as taskSettingName,
+					a.task_code,
+					a.company_id
+				FROM  
+				act_task_custom_setting  a, act_task_setting b
+				where a.task_code = b.task_item_code
+				and a.company_id = b.company_id
+				and a.company_id = #{companyId}
+		)  d on a.task_setting_id = d.id and a.company_id = d.company_id
+		where a.company_id = #{companyId}
+		
+        <if test="activityPeriods != null and activityPeriods != '' ">
+	    	and a.activity_periods LIKE CONCAT('%',#{activityPeriods},'%')
+	    </if>
+	    <if test="activityName != null and activityName != ''" >
+	        and b.activity_name like CONCAT('%',#{activityName},'%')
+	    </if>
+	    and (b.tag_code is null  or b.tag_code =''
+	         <if test="tagCodes != null">
+		    or b.tag_code in
+		    <foreach collection="tagCodes" open="(" close=")" index="index" item="item"  separator=",">
+		      #{item}
+		    </foreach>
+		   </if>
+       )
+	    <if test="mallItemsType != null and mallItemsType != ''">
+	    	and c.item_type = #{mallItemsType}
+	    </if>
+	    <if test="mallItemsCode != null and mallItemsCode != '' ">
+	    	and a.ref_act_items_code LIKE CONCAT('%',#{mallItemsCode},'%')
+	    </if>
+	    <if test="mallItemsName != null and mallItemsName != '' ">
+	    	and a.mall_items_name LIKE CONCAT('%',#{mallItemsName},'%')
+	    </if>
+	    <if test="taskName != null and taskName != '' ">
+	    	and d.taskSettingName LIKE CONCAT('%',#{taskName},'%')
+	    </if>
+	    <if test="taskCode != null and taskCode != '' ">
+	    	and d.task_code LIKE CONCAT('%',#{taskCode},'%')
+	    </if>
+	     <if test="enableFlag != null and enableFlag != ''">
+	    	and a.enable_flag = #{enableFlag}
+	    </if>
+	    and a.delete_flag != 'Y'
+   </select>
+  	
+  	<insert id="save" parameterType="ImsMallItem">
+	    insert into ims_mall_items (id, task_setting_id, activity_periods, mall_items_type, 
+	      ref_act_items_code, mall_items_name, img_name, 
+	      img_url, mall_items_desc, publish_date,create_user, 
+	      create_ip, create_date, update_user, 
+	      update_ip, update_date, version_no, 
+	      delete_flag, enable_flag, company_id
+	      )
+	    values (#{id,jdbcType=INTEGER}, #{taskSettingId,jdbcType=INTEGER}, #{activityPeriods,jdbcType=VARCHAR}, #{mallItemsType,jdbcType=VARCHAR}, 
+	      #{refActItemsCode,jdbcType=VARCHAR}, #{mallItemsName,jdbcType=VARCHAR}, #{imgName,jdbcType=VARCHAR}, 
+	      #{imgUrl,jdbcType=VARCHAR}, #{mallItemsDesc,jdbcType=VARCHAR},#{publishDate,jdbcType=VARCHAR},#{createUser,jdbcType=VARCHAR}, 
+	      #{createIp,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+	      #{updateIp,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{versionNo,jdbcType=BIGINT}, 
+	      #{deleteFlag,jdbcType=VARCHAR}, #{enableFlag,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER}
+	      )
+  	</insert>
+  	
+  	<update id="update" parameterType="ImsMallItem">
+	    update ims_mall_items
+	    <set>
+		  <if test="taskSettingId != null" >
+		     task_setting_id = #{taskSettingId,jdbcType=INTEGER},
+	      </if>
+		  <if test="activityPeriods != null" >
+		     activity_periods = #{activityPeriods,jdbcType=VARCHAR},
+	      </if>
+	      <if test="mallItemsType != null" >
+	         mall_items_type = #{mallItemsType,jdbcType=VARCHAR},
+	      </if>
+	      <if test="refActItemsCode != null" >
+	         ref_act_items_code = #{refActItemsCode,jdbcType=VARCHAR},
+	      </if>
+	      <if test="mallItemsName != null" >
+	         mall_items_name = #{mallItemsName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="imgName != null" >
+	         img_name = #{imgName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="imgUrl != null" >
+	         img_url = #{imgUrl,jdbcType=VARCHAR},
+	      </if>
+	      <if test="mallItemsDesc != null" >
+	         mall_items_desc = #{mallItemsDesc,jdbcType=VARCHAR},
+	      </if>
+	      <if test="publishDate != null" >
+	         publish_date = #{publishDate,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createUser != null" >
+	         create_user = #{createUser,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createIp != null" >
+	         create_ip = #{createIp,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createDate != null" >
+	         create_date = #{createDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="updateUser != null" >
+	         update_user = #{updateUser,jdbcType=VARCHAR},
+	      </if>
+	      <if test="updateIp != null" >
+	         update_ip = #{updateIp,jdbcType=VARCHAR},
+	      </if>
+	      <if test="updateDate != null" >
+	         update_date = #{updateDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="versionNo != null" >
+	         version_no = #{versionNo,jdbcType=BIGINT},
+	      </if>
+	      <if test="deleteFlag != null" >
+	         delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+	      </if>
+	      <if test="enableFlag != null" >
+	         enable_flag = #{enableFlag,jdbcType=VARCHAR},
+	      </if>
+	      <if test="companyId != null" >
+	         company_id = #{companyId,jdbcType=INTEGER},
+	      </if>
+	    </set>
+	    where id = #{id,jdbcType=INTEGER}
+  	</update>
+  	
+  	<delete id="deleteBatch">
+		delete from ims_mall_items 
+	 	WHERE 
+	 	<if test="ids != null ">
+			id in 
+		 	<foreach collection="ids" open="(" close=")" index="index" item="item"  separator=",">
+	        	#{item}
+	     	</foreach>
+     	</if>
+     	<if test="ids == null ">
+       		1 = 2
+     	</if>
+  	</delete>
+  	
+  	<update id="batchSoftDel">
+  		update ims_mall_items set delete_flag='Y' WHERE 
+	 	<if test="ids != null ">
+			id in 
+		 	<foreach collection="ids" open="(" close=")" index="index" item="item"  separator=",">
+	        	#{item}
+	     	</foreach>
+     	</if>
+     	<if test="ids == null ">
+       		1 = 2
+     	</if>
+  	</update>
+</mapper>

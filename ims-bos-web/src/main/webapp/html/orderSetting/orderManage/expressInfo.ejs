@@ -1,0 +1,163 @@
+    <div style="margin-top:10px"></div>
+<% if(isUpdate=="1"){ %>
+<form action="2323232" class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>客户账号</span></label>
+            <div class="layui-inline">
+                <input type="text" value="<%=data.accountNo%>" class="layui-input" readonly>
+            </div>
+        </div>  
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>手机号</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" name="mobile" value="<%=data.mobile%>">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品编号</span></label>
+            <div class="layui-inline">
+                <input type="text" value="<%=data.itemsCode%>" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品名称</span></label>
+            <div class="layui-inline">
+                <input type="text" value="<%=data.itemsName%>" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>客户姓名</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" name="chineseName" value="<%=data.chineseName%>">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><span>收货地址</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" name="detailAddress" value="<%=data.detailAddress%>">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <a class="layui-btn layui-btn-sm modify-shipping-address-btn"><i class="layui-icon"></i>修改</a>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>快递公司</span></label>
+            <div class="layui-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="expressCompany" value="<%=data.expressCompany%>">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物流单号</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" lay-verify="required" name="expressNo" value="<%=data.expressNo%>">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><span>发放日期</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" id="deliveryDate" placeholder="yyyy:mm:dd hh:mm:ss" value="<%=data.deliveryDate%>">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item no-mb">
+        <div class="layui-inline flex">
+            <label for="" class="layui-form-label flex flex-align-items"><span>备注</span></label>
+            <div class="layui-inline flex-item">
+                <textarea name="remark" id="" class="layui-textarea"><%=data.remark%></textarea>
+            </div>  
+        </div>
+    </div>
+    <input type="hidden" name="id" id="express-info-id" value="<%=data.id%>"/>
+    <button class="layui-btn edit-btn" style="display:none;" lay-submit lay-filter="editDeliveryInfo"></button>
+</form>
+<%}else{%>
+<form action="2323232" class="layui-form" >
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>客户账号</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" value="<%=data.accountNo%>" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>手机号</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" disabled name="mobile" value="<%=data.mobile%>">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品编号</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" value="<%=data.itemsCode%>" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品名称</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" value="<%=data.itemsName%>" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>客户姓名</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" disabled name="chineseName" value="<%=data.chineseName%>">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><span>收货地址</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" disabled name="detailAddress" value="<%=data.detailAddress%>">
+            </div>
+        </div>
+    </div>    
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>快递公司</span></label>
+            <div class="layui-inline">
+                <input type="text"  disabled class="layui-input" name="expressCompany" value="<%=data.expressCompany%>">
+            </div>
+        </div>  
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物流单号</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" disabled  name="expressNo" value="<%=data.expressNo%>">
+            </div>
+        </div>
+    </div>   
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><span>发放日期</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" disabled id="deliveryDate" placeholder="yyyy:mm:dd hh:mm:ss" value="<%=data.deliveryDate%>">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item no-mb">
+        <div class="layui-inline flex">
+            <label for="" class="layui-form-label flex flex-align-items"><span>备注</span></label>
+            <div class="layui-inline flex-item">
+                <textarea name="remark" id="" disabled class="layui-textarea"><%=data.remark%></textarea>
+            </div> 
+        </div>
+    </div>
+    <input type="hidden" name="id" id="express-info-id" value="<%=data.id%>"/>
+    <button class="layui-btn edit-btn" style="display:none;" lay-submit lay-filter="editDeliveryInfo"></button>
+</form>
+<%}%>

@@ -1,0 +1,10 @@
+<% data.forEach(function(item, index){ %>
+<li class="layui-nav-item layui-row">
+    <a class="" href="javascript:;"><%=item.menuName%></a>
+    <dl class="layui-nav-child" data-index="<%=index%>">
+        <% item.child.forEach(function(itm,idx){ %>
+            <dd><a data-href="html/<%=item.parent%>/<%=itm.url%>" data-id="<%=itm.url.replace(/\.html/,'')%>"><i class="layui-icon" style="font-size:20px;margin-right:5px;">&#xe621;</i><span><%=itm.name%></span></a></dd>
+        <% }) %>
+    </dl>
+</li>
+<% }) %>

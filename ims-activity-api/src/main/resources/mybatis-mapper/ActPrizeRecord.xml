@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActPrizeRecordDao" >
+  <update id="updateByPrimaryKey" parameterType="ActPrizeRecord" >
+    update act_prize_record
+    <set >
+      <if test="accountNo != null" >
+        account_no = #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="guestName != null" >
+        guest_name = #{guestName,jdbcType=VARCHAR},
+      </if>
+      <if test="guestPhone != null" >
+        guest_phone = #{guestPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="guestEmail != null" >
+        guest_email = #{guestEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="guestFrom != null" >
+        guest_from = #{guestFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and remark!='' " >
+        remark = #{remark},
+      </if>
+      <if test="guestIp != null" >
+        guest_ip = #{guestIp,jdbcType=VARCHAR},
+      </if>
+      <if test="guestPlatForm != null and guestPlatForm !=''" >
+        guest_platForm = #{guestPlatForm,jdbcType=VARCHAR},
+      </if>
+      <if test="taskTitle != null and taskTitle !='' " >
+        task_title = #{taskTitle},
+      </if>
+
+      <if test="giftNumber != null and giftNumber!=''" >
+        gift_number = #{giftNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="giftAmount != null" >
+        gift_amount = #{giftAmount},
+      </if>
+      <if test="giftAmountUnit != null  and giftAmountUnit !=''" >
+        gift_amount_unit = #{giftAmountUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="giftPrice != null" >
+        gift_price = #{giftPrice},
+      </if>
+       <if test="giftPriceUnit != null  and giftPriceUnit !='' " >
+        gift_price_unit = #{giftPriceUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="issuingStatus != null  and issuingStatus !='' " >
+        issuing_status = #{issuingStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null  and auditStatus !=''" >
+        audit_status = #{auditStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sendStatus != null" >
+        send_status = #{sendStatus},
+      </if>
+      <if test="giftNumber != null" >
+        gift_number = #{giftNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="giftName != null" >
+        gift_name = #{giftName,jdbcType=VARCHAR},
+      </if>
+      <if test="giftProbability != null" >
+        gift_probability = #{giftProbability,jdbcType=DECIMAL},
+      </if>
+      <if test="lotteryStatus != null" >
+        lottery_status = #{lotteryStatus,jdbcType=BIT},
+      </if>
+      <if test="lotterySort != null" >
+        lottery_sort = #{lotterySort,jdbcType=INTEGER},
+      </if>
+      <if test="lotteryTime != null" >
+        lottery_time = #{lotteryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useStartTime != null" >
+        use_start_time = #{useStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useEndTime != null" >
+        use_end_time = #{useEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isUsed != null" >
+        is_used = #{isUsed,jdbcType=BIT},
+      </if>
+      <if test="addFromBos != null" >
+        add_from_bos = #{addFromBos,jdbcType=BIT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  
+  <select id="selectByRecordNumber" resultType="ActPrizeRecord">
+    select 
+    * 
+    from act_prize_record
+    where record_number = #{recordNumber}
+  </select>
+  
+  <select id="findWaitPrizeRecords"  resultType="ActPrizeRecord">
+     select * 
+     from act_prize_record_${activityPeriods}
+     WHERE   send_status >0 and enable_flag = 'Y' and delete_flag !='Y' 
+      <if test="accountNo != null and accountNo !=''  " >
+        and account_no = #{accountNo} 
+      </if>
+      <if test="guestPlatForm != null and guestPlatForm !=''" >
+        and guest_platForm = #{guestPlatForm}
+      </if>
+     order by lottery_time asc
+  </select>  
+  
+  <select id="updateIssuingStatus" parameterType="ActPrizeRecord">
+  	update act_prize_record_${activityPeriods} set gived_status = #{issuingStatus,jdbcType=VARCHAR} where id=#{id}
+  </select>
+  
+</mapper>

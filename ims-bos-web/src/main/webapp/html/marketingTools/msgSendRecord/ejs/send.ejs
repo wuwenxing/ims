@@ -1,0 +1,16 @@
+<form action="" class="layui-form">
+  <div class="layui-form-item">
+    <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>手机号</span></label>
+    <div class="layui-inline no-mr">
+      <input type="text" class="layui-input" name="mobile" lay-verify="required|phone" lay-verType="tips">
+    </div>
+  </div>
+  <div class="layui-form-item flex no-mb">
+    <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>短信内容</span></label>
+    <div class="layui-inline no-mr flex-item">
+      <textarea id="" name="content" lay-verify="required" class="layui-textarea" lay-verType="tips"> 
+      </textarea>
+    </div>
+  </div>
+  <button class="layui-btn addItem" lay-submit lay-filter="addItem" style="display:none;"></button>
+</form>

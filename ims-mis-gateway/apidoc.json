@@ -1,0 +1,8 @@
+{
+  "name": "IMS API Doc",
+  "version": "0.0.0",
+  "description": "IMS API Doc",
+  "title": "IMS API Doc",
+  "url" : "http://localhost:9066/ims-mis-gateway",
+  "sampleUrl": "http://localhost:9066/ims-mis-gateway"
+}

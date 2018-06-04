@@ -1,0 +1,77 @@
+<%if(typeof(id) != "undefined"){%>
+<form action="" class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>所属活动</span></label>
+            <div class="layui-inline">
+                <select name="activityPeriods" id="activityPeriods">
+                    <% actNumList.forEach(function(item, index){%>
+                        <option value="<%=item.activityPeriods%>" <% if(activityPeriods==item.activityPeriods){%>selected<%}%> ><%=item.activityPeriods%></option>
+                    <%})%>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>维护时间</span></label>
+        <div class="layui-inline">
+            <input type="text" class="layui-input" name="startTime" lay-verify="required" lay-verType="tips" value="<%=startTime%>"" id="startTime" placeholder="开始时间" >
+        </div>
+        <div class="layui-inline">  至 </div>
+        <div class="layui-inline">
+            <span class="required"></span>
+            <input type="text" class="layui-input" name="endTime" lay-verify="required" lay-verType="tips" value="<%=endTime%>"" id="endTime" placeholder="结束时间">
+        </div>
+    </div>
+    <div class="layui-form-item no-mb">
+        <div class="layui-inline">
+            <label class="layui-form-label flex flex-align-items"><span>生效</span></label>
+            <div class="layui-inline">
+                <select name="effectiveFlag" id="effectiveFlag">
+                    <option <%if(effectiveFlag == 'N'){%> selected <%}%> value="N" >否</option>
+                    <option <%if(effectiveFlag == 'Y'){%> selected <%}%>  value="Y" >是</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" value="<%=id%>" id="id" name="id" />
+    <button class="layui-btn node-submit" style="display:none;" lay-submit lay-filter="addItem"></button>
+</form>
+<%}else{%>
+<form action="" class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label flex flex-align-items"><span class="required">*</span><span>所属活动</span></label>
+            <div class="layui-inline">
+                <select name="activityPeriods" id="activityPeriods">
+                    <% actNumList.forEach(function(item, index){%>
+                        <option value="<%=item.activityPeriods%>"><%=item.activityPeriods%></option>
+                    <%})%>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label flex flex-align-items"><span class="required">*</span><span>维护时间</span></label>
+        <div class="layui-inline">
+            <input type="text" class="layui-input" name="startTime" id="startTime"  lay-verify="required" lay-verType="tips" placeholder="开始时间" >
+        </div>
+        <div class="layui-inline">  至 </div>
+        <div class="layui-inline">
+            <input type="text" class="layui-input" name="endTime" id="endTime"  lay-verify="required" lay-verType="tips" placeholder="结束时间">
+        </div>
+    </div>
+    <div class="layui-form-item no-mb">
+        <div class="layui-inline">
+            <label class="layui-form-label flex flex-align-items"><span>生效</span></label>
+            <div class="layui-inline">
+                <select name="effectiveFlag" id="">
+                    <option value="N" selected>否</option>
+                    <option value="Y">是</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <button class="layui-btn node-submit" style="display:none;" lay-submit lay-filter="addItem"></button>
+</form>
+<%}%>

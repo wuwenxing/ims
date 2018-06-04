@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActTradeRecordDao">
+	<select id="getSumLot" resultType="java.lang.Double" parameterType="java.util.Map">
+		select sum(outTrade.trade_lot)
+		from act_trade_record_${env}_${companyCode} outTrade
+			JOIN act_trade_record_${env}_${companyCode} inTrade
+		where
+			inTrade.position_no=outTrade.position_no
+			and inTrade.company_id=outTrade.company_id
+			and inTrade.platform=outTrade.platform
+			and outTrade.company_id = #{companyId}
+			and outTrade.platform = #{platform}
+			and outTrade.account_no = #{accountNo}
+			and outTrade.trade_type='out'
+			and inTrade.trade_type='in'
+			and outTrade.trade_time between #{tradeStartTime} and #{tradeEndTime}
+			and inTrade.trade_time between #{tradeStartTime} and #{tradeEndTime}
+			<if test="product != null">
+				and outTrade.product in
+				<foreach item="item" index="index" collection="product" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="ActTradeRecord">
+		select * from act_trade_record_${env} where 1=1
+		<if test="accountNo != null and accountNo !=''">
+			and account_no = #{accountNo}
+		</if>
+		<if test="platform != null and platform !=''">
+			and platform = #{platform}
+		</if>
+		<if test="positionId != null and positionId !=''">
+			and position_no = #{positionId}
+		</if>
+		<if test="tradeType != null and tradeType !=''">
+			and trade_type = #{tradeType}
+		</if>
+		<if test="product != null and product !=''">
+			and product = #{product}
+		</if>
+		<if test="tradeStartTime !=null and tradeStartTime!=''">
+      		and create_date &gt;= #{tradeStartTime}
+       </if>
+       <if test="tradeEndTime !=null and tradeEndTime!=''">
+      	    and create_date &lt;= #{tradeEndTime}
+       </if>
+	</select>
+	
+	<resultMap id="BaseResultMap" type="ActTradeRecord">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="company_id" property="companyId" jdbcType="BIGINT" />
+		<result column="account_no" property="accountNo" jdbcType="VARCHAR" />
+		<result column="platform" property="platform" jdbcType="VARCHAR" />
+		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+		<result column="product" property="product" jdbcType="VARCHAR" />
+		<result column="product_type" property="productType" jdbcType="VARCHAR" />
+		<result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
+		<result column="trade_lot" property="tradeLot"   />
+		<result column="profit" property="profit" jdbcType="DECIMAL" />
+		<result column="commission" property="commission" jdbcType="DECIMAL" />
+		<result column="swap" property="swap" jdbcType="DECIMAL" />
+		<result column="trade_time" property="tradeTime" jdbcType="TIMESTAMP" />
+		<result column="in_trade_time" property="inTradeTime" jdbcType="TIMESTAMP" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="create_ip" property="createIp" jdbcType="VARCHAR" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="delete_flag" property="deleteFlag" jdbcType="VARCHAR" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+		<result column="update_ip" property="updateIp" jdbcType="VARCHAR" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		outTrade.id, outTrade.order_no, outTrade.platform, outTrade.account_no, outTrade.product_type, outTrade.trade_type, outTrade.trade_lot,
+		outTrade.profit,outTrade.trade_time, inTrade.trade_time   in_trade_time,outTrade.create_date,outTrade.create_ip,outTrade.create_user,outTrade.delete_flag,outTrade.update_date,
+		outTrade.update_ip,outTrade.update_user, outTrade.version_no, outTrade.company_id
+	</sql>
+	
+	<select id="getTradeRecordList" resultMap="BaseResultMap" parameterType="java.util.Map">
+	   select 
+           <include refid="Base_Column_List" />
+		from 
+			(act_trade_record_${env}  outTrade ,act_trade_record_${env}  inTrade)
+		where 
+		    inTrade.trade_type='in'  
+		    and outTrade.trade_type='out' 
+		    and inTrade.position_no = outTrade.position_no 
+		    and inTrade.company_id = outTrade.company_id 
+		    and inTrade.platform = outTrade.platform
+			and outTrade.platform = #{platform}
+			and outTrade.account_no = #{accountNo}			
+			and outTrade.trade_time between #{tradeStartTime} and #{tradeEndTime}
+			<if test="inTradeStartTime != null and inTradeEndTime != null" >
+			   and inTrade.trade_time between #{inTradeStartTime} and #{inTradeEndTime}
+			</if>
+			<if test="excludeDate!=null">
+				<foreach item="item" index="index" collection="excludeDate"> 
+					<choose>
+						<when test="item.dateBegin!=null and item.dateEnd!=null">
+							and inTrade.trade_time not between #{item.dateBegin} and #{item.dateEnd}
+						</when>
+						<otherwise>
+							and inTrade.trade_time &lt; #{item.dateBegin}
+						</otherwise>
+					</choose>
+				</foreach>
+				<foreach item="item" index="index" collection="excludeDate"> 
+					<choose>
+						<when test="item.dateBegin!=null and item.dateEnd!=null">
+							and outTrade.trade_time not between #{item.dateBegin} and #{item.dateEnd}
+						</when>
+						<otherwise>
+							and outTrade.trade_time &lt; #{item.dateBegin}
+						</otherwise>
+					</choose>
+				</foreach>
+			</if>
+			<if test="product != null" >
+				and outTrade.product in 
+				<foreach item="item" index="index" collection="product" 
+					       open="(" separator="," close=")">  
+				      #{item}  
+				 </foreach>
+			</if>
+			<if test="platform!= null and accountNo !=null">
+				and outTrade.account_no=#{accountNo} and outTrade.platform = #{platform}
+			</if>
+			<if test="tradeId!=null">
+				and outTrade.id &gt; #{tradeId}
+			</if>
+			<if test="receiveTradeId!=null">
+				and outTrade.id &gt; #{receiveTradeId}
+				and inTrade.id &gt; #{receiveTradeId}
+			</if>
+			 order by outTrade.trade_time asc,outTrade.id asc
+	</select>
+</mapper>

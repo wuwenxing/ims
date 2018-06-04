@@ -1,0 +1,99 @@
+<form action="" class="layui-form">
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">推送的APP</label>
+      <input class="layui-input-inline" type="checkbox" name="pushApp" value="GWFX_GTS2_APP" lay-skin="primary" title="FX GTS2 APP" checked="">
+      <input class="layui-input-inline" type="checkbox" name="pushApp" value="HX_GTS2_APP"  lay-skin="primary" title="HX GTS2 APP">
+      <input class="layui-input-inline" type="checkbox" name="pushApp" value="FXDEMO_GTS2_APP"  lay-skin="primary" title="FXDEMO GTS2 APP">
+      <input class="layui-input-inline" type="checkbox" name="pushApp" value="PM_GTS_APP"  lay-skin="primary" title="PM GTS APP">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">推送对象</label>
+      <div class="layui-input-block">
+        <select name="pushType" id="">
+          <option value="">---请选择---</option>
+          <option value="all">推送所有人指定设备(all)</option>
+          <option value="tag">指定分组的人(tag)</option>
+          <option value="alias">指定人(alias)</option>
+          <option value="device">指定设备(device)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">账号</label>
+      <div class="layui-input-block">
+        <textarea class="layui-textarea" name="recipents" id="" cols="30" rows="10"></textarea>
+        <p class="tips">(多个账号请使用，隔开)</p>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">消息标题</label>
+      <div class="layui-input-block">
+        <input type="text" class="layui-input" name="title" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">内容类型</label>
+      <div class="layui-input-block">
+        <select name="contentType" id="" lay-verify="required" lay-verType="tips">
+          <option value="">---请选择---</option>
+          <option value="1">图片</option>
+          <option value="2">图文</option>
+          <option value="3">其他</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">消息内容</label>
+      <div class="layui-input-block">
+        <textarea class="layui-textarea" name="content" id="" cols="30" rows="10" lay-verify="required" lay-verType="tips"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">消息摘要</label>
+      <div class="layui-input-block">
+        <textarea class="layui-textarea" name="summary" id="" cols="30" rows="10" ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">消息展示位置</label>
+      <div class="layui-input-block">
+        <input class="layui-input-inline" type="checkbox" name="msgShowPosition" value="1" lay-skin="primary" title="弹出窗">
+        <input class="layui-input-inline"  type="checkbox" name="msgShowPosition" value="2"  lay-skin="primary" title="跑马灯">
+        <input class="layui-input-inline"  type="checkbox" name="msgShowPosition" value="3"  lay-skin="primary" title="工具栏">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">发送时间</label>
+      <div class="layui-input-block">
+        <input type="text" class="layui-input" id="sendDate" name="">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+      <div class="layui-inline">
+        <label for="" class="layui-form-label">其他信息</label>
+        <div class="layui-input-block">
+          <textarea class="layui-textarea" name="otherMsg" id="" cols="30" rows="10" ></textarea>
+          <p class="tips">(放置地址等信息，请输入json格式)</p>
+        </div>
+      </div>
+  </div>
+  <button class="layui-btn addItem" lay-submit lay-filter="addItem" style="display:none;"></button>
+</form>

@@ -1,0 +1,55 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.sys.api.dao.inf.SystemLogDao">
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="SystemLog">
+		select * from t_system_log
+		<where>
+			<if test="userNo != null and userNo != '' ">
+				and user_no like CONCAT('%',#{userNo},'%')
+			</if>
+			<if test="createIp != null and createIp !='' ">
+				and create_ip like CONCAT('%',#{createIp},'%')
+			</if>
+			<if test="method != null and method !='' ">
+				and method like CONCAT('%',#{method},'%')
+			</if>
+			<if test="params != null and params !='' ">
+				and params like CONCAT('%',#{params},'%')
+			</if>
+			<if test="logType != null and logType !='' ">
+				and log_type like CONCAT('%',#{logType},'%')
+			</if>
+			<if test="startTime != null ">
+				and create_date &gt;= #{startTime}
+			</if>
+			<if test="endTime != null">
+				and create_date &lt;= #{endTime}
+			</if>
+			<if test="companyId != null">
+				and company_id = #{companyId}
+			</if>
+			and delete_flag != 'Y'
+		</where>
+	</select>
+	<select id="findObject" parameterType="java.lang.Long" resultType="SystemLog">
+		select * from t_system_log where id = #{id,jdbcType=BIGINT}
+	</select>
+	<insert id="save" parameterType="SystemLog">
+		insert into t_system_log (id, user_no, log_type, method,
+		params, descr, broswer,
+		update_ip, update_user, version_no,
+		update_date, create_user, create_ip,
+		create_date, delete_flag, enable_flag,
+		company_id)
+		values (#{id,jdbcType=INTEGER}, #{userNo,jdbcType=VARCHAR},
+		#{logType,jdbcType=VARCHAR},
+		#{method,jdbcType=VARCHAR},
+		#{params,jdbcType=VARCHAR}, #{descr,jdbcType=VARCHAR}, #{broswer,jdbcType=VARCHAR},
+		#{updateIp,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR},
+		#{versionNo,jdbcType=BIGINT},
+		#{updateDate,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{createIp,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=VARCHAR},
+		#{enableFlag,jdbcType=VARCHAR},
+		#{companyId,jdbcType=BIGINT})
+	</insert>
+</mapper>

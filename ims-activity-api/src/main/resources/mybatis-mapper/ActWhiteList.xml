@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActWhiteListDao" >
+  <select id="findListBySearch" resultType="com.gwghk.ims.activity.dao.entity.ActWhiteListWrapper" parameterType="java.util.Map">
+    select  a.*,b.activity_name  from act_white_list a,act_setting b  where a.delete_flag = 'N' and a.company_id = #{companyId} and a.activity_periods = b.activity_periods
+    <if test="activityPeriods != null and activityPeriods != '' ">
+		and a.activity_periods like  CONCAT('%',#{activityPeriods},'%')
+	</if>
+	<if test="activityName != null and activityName !='' ">
+		and b.activity_name like CONCAT('%',#{activityName},'%')
+	</if>
+    <if test="accountNo != null and accountNo != ''" >
+		and account_no = #{accountNo}
+    </if>
+    <if test="mobile != null and mobile != ''" >
+		and mobile = #{mobile}
+    </if>
+    <if test="platform != null and platform != ''" >
+		and platform = #{platform}
+    </if>
+    <if test="env != null and env != ''" >
+		and env = #{env}
+    </if>
+    <if test="approver != null and approver != ''" >
+		and a.approver = #{approver}
+    </if>
+    <if test="proposalStatus != null and proposalStatus != ''" >
+		and a.proposal_status = #{proposalStatus}
+    </if>
+    <if test="createDateStartTime != null and createDateStartTime != ''">
+			and a.approve_date &gt;= #{createDateStartTime}
+	</if>
+	<if test="createDateEndTime != null and createDateEndTime != ''">
+		and a.approve_date &lt;= #{createDateEndTime}
+	</if>
+  </select>
+  <select id="findListByMap" resultType="com.gwghk.ims.activity.dao.entity.ActWhiteList" parameterType="java.util.Map">
+    select  *  from act_white_list where delete_flag = 'N'
+    <if test="activityPeriods != null and activityPeriods != '' ">
+		and activity_periods = #{activityPeriods}
+	</if>
+    <if test="accountNo != null and accountNo != ''" >
+		and account_no = #{accountNo}
+    </if>
+    <if test="mobile != null and mobile != ''" >
+		and mobile = #{mobile}
+    </if>
+    <if test="platform != null and platform != ''" >
+		and platform = #{platform}
+    </if>
+    <if test="env != null and env != ''" >
+		and env = #{env}
+    </if>
+    <if test="approver != null and approver != ''" >
+		and approver = #{approver}
+    </if>
+    <if test="proposalStatus != null and proposalStatus != ''" >
+		and proposal_status = #{proposalStatus}
+    </if>
+    <if test="startTimeStr != null and startTimeStr != ''">
+			and approve_date &gt;= #{startTimeStr}
+	</if>
+	<if test="endTimeStr != null and endTimeStr != ''">
+		and approve_date &lt;= #{endTimeStr}
+	</if>
+  </select>
+  <select id="findObject" resultType="ActWhiteList" parameterType="java.lang.Integer" >
+    select * from act_white_list
+    where id = #{id,jdbcType=INTEGER} and delete_flag = 'N' 
+  </select>
+  	<delete id="deleteBatch">
+		update act_white_list set delete_flag = 'Y' where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+  <insert id="save" parameterType="ActWhiteList" >
+    insert into act_white_list (id, account_no, mobile, 
+      platform, env, activity_periods, 
+      remark, enable_flag, delete_flag, 
+      create_user, create_date, create_ip, 
+      update_user, update_date, update_ip, 
+      version_no, company_id,approver,approve_date,proposal_status)
+    values (#{id,jdbcType=INTEGER}, #{accountNo,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{platform,jdbcType=VARCHAR}, #{env,jdbcType=VARCHAR}, #{activityPeriods,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{enableFlag,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createIp,jdbcType=VARCHAR}, 
+      #{updateUser,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateIp,jdbcType=VARCHAR}, 
+      #{versionNo,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER},#{approver,jdbcType=VARCHAR},
+      #{approveDate,jdbcType=TIMESTAMP},#{proposalStatus,jdbcType=VARCHAR})
+  </insert>
+  <update id="update" parameterType="ActWhiteList" >
+    update act_white_list
+    set account_no = #{accountNo,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=VARCHAR},
+      env = #{env,jdbcType=VARCHAR},
+      activity_periods = #{activityPeriods,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_ip = #{updateIp,jdbcType=VARCHAR},
+      version_no = #{versionNo,jdbcType=INTEGER},
+      company_id = #{companyId,jdbcType=INTEGER},
+      approver = #{approver,jdbcType=VARCHAR},
+      approve_date = #{approveDate,jdbcType=TIMESTAMP},
+      proposal_status = #{proposalStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

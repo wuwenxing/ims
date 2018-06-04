@@ -1,0 +1,184 @@
+<% if(data != null){ %>
+    <form class="layui-form prizeItem">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label for="" class="layui-form-label">物品编号<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" value="<%=data.giftNumber%>" name="giftNumber" lay-verify="required" lay-verType="tips">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <label for="" class="layui-form-label">物品名称<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" value="<%=data.giftName%>"  name="giftName" lay-verify="required" lay-verType="tips"> 
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label for="" class="layui-form-label">物品种类<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>    
+                        <div class="layui-inline">
+                            <select name="itemCategory" id=""  lay-verify="required" lay-verType="tips">
+                                <option value="" selected>--请选择--</option>
+                                <option value="mobile-data" <%if(data.itemCategory == 'mobile_data'){%> selected <%}%> >流量</option>
+                                <option value="mobile-charge" <%if(data.itemCategory == 'mobile_charge'){%> selected <%}%>>话费</option>
+                                <option value="mobile-vip" <%if(data.itemCategory == 'mobile_vip'){%> selected <%}%>>会员</option>
+                                <option value="mobile-vip" <%if(data.itemCategory == 'mobile_vip'){%> selected <%}%>>串码物品</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <label for="" class="layui-form-label">物品数量<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" value="<%=data.giftAmount%>" name="giftAmount" lay-verify="required|number" lay-verType="tips">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label for="" class="layui-form-label">物品状态<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td colspan="3">
+                        <div class="layui-inline">
+                            <select name="enableFlag" id="" lay-verify="required" lay-verType="tips">
+                                <option value="">--请选择--</option>
+                                <option value="1" <% if(data.enableFlag == 'Y'){%> selected <%}%> >启用</option>
+                                <option value="0" <% if(data.enableFlag == 'N'){%> selected <%}%>>禁用</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label for="" class="layui-form-label">物品有效时间</label>
+                        </div>
+                    </td>
+                    <td colspan="3">
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" value="<%=data.startDate%>" id="date1" placeholder="yyyy-mm-dd hh:mm:ss" name="startTime" lay-verType="tips">
+                        </div>
+                        <div class="layui-inline"> 至 </div>
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" value="<%=data.endDate%>" id="date2" placeholder="yyyy-mm-dd hh:mm:ss" name="endTime" lay-verType="tips">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="display:none;">
+            <button class="layui-btn editPrize" lay-submit lay-filter="editPrize"></button>
+        </div>
+    </form>
+<%}else{%>
+    <form class="layui-form prizeItem">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label for="" class="layui-form-label">物品编号<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" name="giftNumber" lay-verify="required" lay-verType="tips">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <label for="" class="layui-form-label">物品名称<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" name="giftName" lay-verify="required" lay-verType="tips"> 
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label for="" class="layui-form-label">物品种类<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <select name="itemCategory" id=""  lay-verify="required" lay-verType="tips">
+                                <option value="" selected>--请选择--</option>
+                                <option value="mobile-data">流量</option>
+                                <option value="mobile-charge">话费</option>
+                                <option value="mobile-vip">会员</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <label for="" class="layui-form-label">物品数量<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" name="giftAmount" lay-verify="required|number" lay-verType="tips">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label for="" class="layui-form-label">物品状态<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td colspan="3">
+                        <div class="layui-inline">
+                            <select name="enableFlag" id="" lay-verify="required" lay-verType="tips">
+                                <option value="">--请选择--</option>
+                                <option value="1" selected>启用</option>
+                                <option value="0">禁用</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label for="" class="layui-form-label">物品有效时间</label>
+                        </div>
+                    </td>
+                    <td colspan="3">
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" id="date1" placeholder="yyyy-mm-dd hh:mm:ss" name="startTime" lay-verType="tips">
+                        </div>
+                        <div class="layui-inline"> 至 </div>
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" id="date2" placeholder="yyyy-mm-dd hh:mm:ss" name="endTime" lay-verType="tips">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="display:none;">
+            <button class="layui-btn addPrize" lay-submit lay-filter="addPrize"></button>
+        </div>
+    </form>
+<%}%>

@@ -1,0 +1,187 @@
+@import "./variables.scss";
+.layui-layout-body {
+    .layui-nav-bar {
+        display: none;
+    }
+    .layui-side {
+        width: 240px;
+        overflow: hidden;
+        .left-top{
+            height: 60px;
+            background:$bgColor-00;
+            .layui-logo{
+                overflow: hidden;
+                background: $bgColor-13;
+                text-align: center;
+                line-height: 60px;
+            }
+        }
+        .layui-side-scroll{
+            overflow: hidden;
+            width: 240px;
+            background-color:$bgColor-01; 
+            .layui-nav-tree{
+              width: 100%;
+              background-color: $bgColor-01;
+              .layui-this {
+                background: $bgColor-03;  
+                a {
+                  background: $bgColor-03;
+                }
+              }
+              .layui-nav-item{
+                line-height: 64px;
+                a.menu {
+                    height: 64px;
+                    line-height: 64px;
+                    padding: 0 16px 0 24px;
+                    color:$fontWhite;
+                    font-size: 16px;
+                    &:hover {
+                        background: transparent;
+                    }
+                    .layui-nav-more {
+                        width:32px;
+                        height: 32px;
+                        border-style: none;
+                        background: url("../images/web_arrow_less_normal.svg");
+                        top: 18px;
+                        margin-top: 0;
+                        position: absolute;
+                    }
+                    .menu-icon {
+                        margin-right: 16px;
+                    }
+                }
+                .layui-nav-child {
+                  max-height: 420px;
+                  overflow-y: auto;
+                  overflow-x: hidden;
+                  &::-webkit-scrollbar{
+                    display: none;
+                  }
+                  dd {
+                    background: $bgColor-02;
+                    &.layui-this {
+                      background: $bgColor-03;
+                      a {
+                        background: $bgColor-03;
+                      }
+                      &:after {
+                        content: "";
+                        width:4px;
+                        height: 40px;
+                        left: 236px;
+                        background: $bgColor-17;
+                        display: block;
+                      }
+                    }
+                    &:hover {
+                      background: $bgColor-03;
+                    }
+                    a {
+                      padding-left: 64px;
+                      font-size: 14px;
+                      color:$fontWhite;
+                    }
+                  }
+                }
+              }
+              .layui-nav-itemed {
+                & > a .layui-nav-more {
+                    margin-top: 0;
+                    border-style: none;
+                    transform: rotate(180deg);
+                    transition:all 0.15s;
+                }
+              }
+            }
+        }
+    }   
+    .layui-body {
+        left:240px;
+        overflow: hidden;
+        height: 100%;
+        .right-top {
+            height: 60px;
+            width: 100%;
+            background: $bgColor-11;
+            .layui-nav {
+                background: transparent;
+                .layui-nav-item {
+                    a {
+                        color:$fontColor-00;
+                        &:hover{
+                            color: $fontColor-08;
+                        }
+                    }
+                }
+                .layui-this:after {
+                    background: transparent;
+                }
+                .layui-nav-more {
+                    width:32px;
+                    height: 32px;
+                    border-style: none;
+                    margin-top: 0;
+                    position: absolute;
+                    background: url("../images/arrow.svg");
+                    top: 14px;
+                    right: -10px;
+                }
+                .layui-nav-mored {
+                    transform: rotate(180deg);
+                    transition:all 0.2s;
+                }
+            }
+        }
+        .layui-tab {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            box-sizing: border-box;
+            .layui-tab-title {
+              padding: 22px 0 0 40px;
+              border:none;
+              height: 42px;
+              li {
+                line-height: 42px;
+              }
+              .layui-this {
+                background:$bgColor-04;
+                border-radius: 4px 4px 0 0;
+                &::after{
+                  border:none;
+                  border-radius: none;
+                }
+                
+              }
+            }
+            .layui-tab-content {
+                padding: 0;
+                height: 100%;
+                box-sizing: border-box;
+                padding-bottom: 50px;
+                .layui-tab-item {
+                    background: $bgColor-04;
+                    padding: 30px;
+                    box-sizing: border-box;
+                    overflow-y: auto;
+                    height: 100%;
+                }
+            }
+        }
+
+    }
+}
+@media screen and (max-width:1336px) {
+    .layui-body {
+        .layui-tab-content {
+            .layui-tab-item.layui-show {
+                iframe {
+                    min-width: 1049px;
+                }
+            }
+        }
+    }
+}

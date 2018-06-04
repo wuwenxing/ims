@@ -1,0 +1,17 @@
+
+<% data.forEach(function(item, index){ %>
+    <% if(item.checked){ %>
+        <div class="menu-item layui-row">
+            <h4><%=item.name%></h4>
+            <ul class="list layui-clear" data-index="<%=index%>"> 
+                <%if(item.children){%>  
+                    <%item.children.forEach(function(itm,idx){%>
+                        <% if(itm.checked && itm.attributes.menuUrl != 'actSetting/goodsCode'){%>
+                            <li class="item"><a href="javascript:;"  data-id="<%=itm.id%>" data-href="/html/<%=itm.attributes.menuUrl%>/index.html?parentId=<%=item.id%>&id=<%=itm.id%>%>"><%=itm.name%></a></li>
+                        <%}%>
+                    <%})%>
+                <%}%>
+            </ul>
+        </div>
+    <%}%>
+<% }) %>

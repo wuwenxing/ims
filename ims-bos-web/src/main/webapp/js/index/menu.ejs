@@ -1,0 +1,26 @@
+<% data.forEach(function(item, index){ %>
+    <% if(item.checked){ %>
+    <li class="layui-nav-item layui-row">
+        <a class="menu clearfix" data-id="<%=item.id%>" href="javascript:;">
+            <% if(item.children && item.children.length){ %>
+            <%  var iconurl = item.children[0].attributes.menuUrl.split('/')[0] %>
+            <% }%>
+            <div class="menu-icon fl"><i class="iconfont icon-<%=iconurl%>"></i></div>
+            <div class="menu-name fl"><%=item.name%></div>
+        </a>
+        <dl class="layui-nav-child" data-index="<%=index%>">
+            <%if(item.children){%>
+                <% item.children.forEach(function(itm,idx){ %>
+                    <% if(itm.checked && itm.attributes.menuUrl != 'actSetting/goodsCode'){%>
+                        <dd>
+                            <a  data-href="html/<%=itm.attributes.menuUrl%>/index.html?parentId=<%=item.id%>&id=<%=itm.id%>" data-id="<%=itm.id%>">
+                                <span><%=itm.name%></span>
+                            </a>
+                        </dd>
+                    <%}%>
+                <% }) %>
+            <%}%>
+        </dl>
+    </li>
+    <%}%>
+<% }) %>

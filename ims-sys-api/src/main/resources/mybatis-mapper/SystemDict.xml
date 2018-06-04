@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.sys.api.dao.inf.SystemDictDao" >
+  <select id="findListByMap" parameterType="java.util.Map" resultType="SystemDict" >
+    select * from t_system_dict 
+    <where>
+		<if test="dictCode != null and dictCode !='' ">
+			and dict_code like CONCAT('%',#{dictCode},'%')
+		</if>
+		<if test="dictNameCn != null and dictNameCn !='' ">
+			and dict_name_cn like CONCAT('%',#{dictNameCn},'%')
+		</if>
+		<if test="dictNameEn != null and dictNameEn !='' ">
+			and dict_name_en like CONCAT('%',#{dictNameEn},'%')
+		</if>
+		<if test="dictNameTw != null and dictNameTw !='' ">
+			and dict_name_tw like CONCAT('%',#{dictNameTw},'%')
+		</if>
+		<if test="parentDictCode != null and parentDictCode !='' ">
+			and parent_dict_code like CONCAT('%',#{parentDictCode},'%')
+		</if>
+		<if test="dictType != null and dictType !='' ">
+			and dict_type = #{dictType}
+		</if>
+		<if test="enableFlag != null and enableFlag !='' ">
+			and enable_flag = #{enableFlag}
+		</if>
+		<if test="companyId != null">
+			and (company_id = #{companyId} or company_id is null)
+		</if>
+	    and delete_flag != 'Y' order by dict_type, order_code
+	</where>
+  </select>
+  <select id="findByDictCode" resultType="SystemDict" >
+    select * from t_system_dict where dict_code = #{0}
+    and (company_id = #{1} or company_id is null)
+    and delete_flag != 'Y'
+  </select>
+  <select id="findListByParentDictCode" resultType="SystemDict" >
+    select * from t_system_dict where parent_dict_code = #{0}
+    and (company_id = #{1} or company_id is null)
+    and delete_flag != 'Y' order by order_code
+  </select>
+  <select id="findObject" parameterType="java.lang.Long" resultType="SystemDict">
+	select * from t_system_dict where dict_id = #{dictId,jdbcType=BIGINT}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from t_system_dict
+    where dict_id = #{dictId,jdbcType=BIGINT}
+    and delete_flag != 'Y'
+  </delete>
+  <delete id="deleteBatch">
+	delete from t_system_dict where dict_id in
+	<foreach item="item" index="index" collection="list" open="("
+		separator="," close=")">
+		#{item}
+	</foreach>
+  </delete>
+  <insert id="save" parameterType="SystemDict" >
+	<selectKey resultType="java.lang.Long" order="AFTER"
+		keyProperty="dictId">
+		SELECT LAST_INSERT_ID()
+	</selectKey>
+    insert into t_system_dict (dict_id, parent_dict_code, dict_code, 
+      dict_name_cn, dict_name_tw, 
+      dict_name_en, dict_type, order_code, 
+      create_date, create_ip, create_user, 
+      delete_flag, enable_flag, update_date, 
+      update_ip, update_user, version_no, 
+      company_id)
+    values (#{dictId,jdbcType=BIGINT}, #{parentDictCode,jdbcType=VARCHAR}, #{dictCode,jdbcType=VARCHAR}, 
+      #{dictNameCn,jdbcType=VARCHAR}, #{dictNameTw,jdbcType=VARCHAR}, 
+      #{dictNameEn,jdbcType=VARCHAR}, #{dictType,jdbcType=VARCHAR}, #{orderCode,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createIp,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=VARCHAR}, #{enableFlag,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{updateIp,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{versionNo,jdbcType=BIGINT}, 
+      #{companyId,jdbcType=BIGINT})
+  </insert>
+  <update id="update" parameterType="SystemDict" >
+    update t_system_dict
+    set parent_dict_code = #{parentDictCode,jdbcType=VARCHAR},
+      dict_code = #{dictCode,jdbcType=VARCHAR},
+      dict_name_cn = #{dictNameCn,jdbcType=VARCHAR},
+      dict_name_tw = #{dictNameTw,jdbcType=VARCHAR},
+      dict_name_en = #{dictNameEn,jdbcType=VARCHAR},
+      dict_type = #{dictType,jdbcType=VARCHAR},
+      order_code = #{orderCode,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_ip = #{updateIp,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      version_no = #{versionNo,jdbcType=BIGINT},
+      company_id = #{companyId,jdbcType=BIGINT}
+    where dict_id = #{dictId,jdbcType=BIGINT}
+  </update>
+</mapper>

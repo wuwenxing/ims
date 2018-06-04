@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<dubbo:application name="ims-base-service-provider" />
+	<dubbo:registry protocol="zookeeper" address="${zk.address}" />
+	<dubbo:protocol port="30977" />
+	
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.base.MisKeyValDubboService"
+		class="com.gwghk.ims.base.service.mis.MisKeyValDubboServiceImpl" timeout="120000"/>
+	
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.SeqDubboService"
+		class="com.gwghk.ims.base.service.SeqDubboServiceImpl" timeout="120000"/>
+	
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.base.MisImsBlackListDubboService"
+		class="com.gwghk.ims.base.service.mis.MisImsBlackListDubboServiceImpl" timeout="120000"/>
+		
+</beans>

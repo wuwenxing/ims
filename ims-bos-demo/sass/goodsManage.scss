@@ -1,0 +1,19 @@
+.m-container {
+    .layout-3 {
+        .layui-table{
+            
+        } 
+    }
+}
+.layui-form{
+    table{
+        width:100%;
+        .textarea,.layui-textarea{
+            width: 100%;
+            resize: none;
+        }
+        .thumb{
+            cursor: pointer;
+        }
+    }
+}

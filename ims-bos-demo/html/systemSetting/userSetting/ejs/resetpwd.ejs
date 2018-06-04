@@ -1,0 +1,23 @@
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">账号</label>
+        <div class="layui-input-block">
+            <input disabled type="text" name="userNo" value="<%=userNo%>" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码<span class="mustInput"></span></label>
+        <div class="layui-input-block">
+            <input type="password" lay-verType="tips" name="password" lay-verify="required|password" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">确认密码<span class="mustInput"></span></label>
+        <div class="layui-input-block">
+            <input type="password" lay-verType="tips" name="repassword" lay-verify="required|repassword" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div style="display: none;">
+        <button class="node-resetpwdSubmit" lay-submit lay-filter="layerDialogResetpwd"></button>
+    </div>
+</form>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+	<dubbo:application name="ims-gateway-consumer" />
+
+	<!-- 使用multicast广播注册中心暴露发现服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="${zk.address}" />
+	
+	
+	<dubbo:reference id="actCashinRealDubboService"
+		interface="com.gwghk.ims.common.inf.external.activity.ActCashinRealDubboService"
+		retries="0" check="false" timeout="1000000" />
+	<dubbo:reference id="actCashoutRealDubboService"
+		interface="com.gwghk.ims.common.inf.external.activity.ActCashoutRealDubboService"
+		retries="0" check="false" timeout="1000000" />
+	<dubbo:reference id="actCustomerInfoDubboService"
+		interface="com.gwghk.ims.common.inf.external.activity.ActCustomerInfoDubboService"
+		retries="0" check="false" timeout="1000000" />
+	<dubbo:reference id="actTradeRecordDubboService"
+		interface="com.gwghk.ims.common.inf.external.activity.ActTradeRecordDubboService"
+		retries="0" check="false" timeout="1000000" />
+	<dubbo:reference id="actSettingDubboService"
+		interface="com.gwghk.ims.common.inf.external.activity.ActSettingDubboService"
+		retries="0" check="false" timeout="1000000" />
+	<dubbo:reference id="actItemsSettingDubboService"
+		interface="com.gwghk.ims.common.inf.external.activity.ActItemsSettingDubboService"
+		retries="0" check="false" timeout="1000000" />
+	<dubbo:reference id="mallItemsDubboService"
+		interface="com.gwghk.ims.common.inf.external.mall.MallItemsDubboService"
+		retries="0" check="false" timeout="1000000" />
+	<dubbo:reference id="mallOrderDubboService"
+		interface="com.gwghk.ims.common.inf.external.mall.MallOrderDubboService"
+		retries="0" check="false" timeout="1000000" />
+	<dubbo:reference id="actTaskItemsDubboService"
+		interface="com.gwghk.ims.common.inf.external.activity.ActTaskItemsDubboService"
+		retries="0" check="false" timeout="1000000" />
+	<dubbo:reference id="activityApiDubboService"
+		interface="com.gwghk.ims.common.inf.external.activity.ActivityApiDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+</beans>

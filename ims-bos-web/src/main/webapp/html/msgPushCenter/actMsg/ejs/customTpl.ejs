@@ -1,0 +1,34 @@
+
+<div class="layui-form-item channelItem">
+  <label for="" class="layui-form-label flex flex-align-items">
+    <em class="required">*</em>
+    <span>推送渠道</span>
+  </label>
+  <div class="layui-inline">
+    <input class="layui-inline" type="checkbox" name="pushChannelList" 
+      value="SMS" lay-skin="primary" title="SMS" lay-filter="channelSel">
+    <input class="layui-inline" type="checkbox" name="pushChannelList" 
+      value="APP" lay-skin="primary" title="APP" lay-filter="channelSel">
+    <input class="layui-inline" type="checkbox" name="pushChannelList" 
+      value="PCUI" lay-skin="primary" title="PCUI" lay-filter="channelSel">
+    <input class="layui-inline" type="checkbox" name="pushChannelList" 
+      value="WeChat" lay-skin="primary" title="WeChat" lay-filter="channelSel">
+  </div>
+</div>
+<div class="layui-form-item preContent">
+  <label for="" class="layui-form-label flex flex-align-items"></label>
+  <div class="layui-inline flex flex-align-items">
+    <input type="text" class="layui-input preInput">
+    <span>***</span>
+    <input type="text" class="layui-input endInput">
+  </div>
+</div>
+<div class="layui-form-item">
+  <label for="" class="layui-form-label flex flex-align-items"></label>
+  <div class="layui-inline">
+    <span>推送内容预览：</span>
+    <span class="preInput-show"></span>
+    <span class="middleText">[条件]</span>
+    <span class="endInput-show"></span>
+  </div>
+</div>

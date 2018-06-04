@@ -1,0 +1,88 @@
+<% var params = paramsData.params; %>
+<% params.forEach(function(itm,idx){ %>
+  <div class="layui-inline prize-unit">
+      <%if(letters[itm.proName]){%>
+          <div class="layui-inline">
+              <label for="" class="layui-form-label"><%=letters[itm.proName]%></label>
+          </div>
+      <%}else if(itm.label){%>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label"><%=itm.label%></label>
+        </div>
+      <%}%>
+      <div class="layui-inline">
+          <%if(itm.inputType == 'select'){%>
+              <select name="<%=itm.proName%>" id="">
+                  <option value="" selected>--请选择--</option>
+                  <%if(itm.isDynamict && dynamicList[itm.dynamicOptionName]){%>
+                      <%dynamicList[itm.dynamicOptionName].forEach(function(dyItem,dyIndex){%>
+                          <option value="<%=dyItem.key%>"><%=dyItem.title%></option>
+                      <%})%>
+                  <%}%>
+              </select>
+          <%}else if(itm.inputType == 'label') {%>
+              <div class="layui-inline"><%=itm.desc%></div>
+          <%}else{%>
+              <input type="text" class="layui-input" 
+                  name="<%=itm.proName%>" 
+                  <%if(itm.required){%> 
+                      lay-verify='required|<%=itm.validType%>' 
+                  <%}else{%>
+                      lay-verify='<%=itm.validType%>' 
+                  <%}%>
+                  <%if(itm.proName == "itemParamVal" && itemPrice && (itemType == 'withGold' || itemType == 'tokenCoin' || itemType == 'analogCoin')){%>
+                    value = "<%=itemPrice%>" disabled
+                  <%}%>
+              >
+          <%}%>
+      </div>
+      <%if(itm.dynamicUnit){%>
+        <%if(prizeCategory){%>
+            <%if(itm.paramUnitMap[prizeCategory].inputType == "label"){%>
+                <div class="layui-inline <%=itm.paramUnitMap[prizeCategory].unitType%>" ><%=dynamicList.itemsUnitMap[itm.paramUnitMap[prizeCategory].defaultVal]%></div>
+            <%}else if(itm.paramUnitMap[prizeCategory].inputType == 'select'){%>
+                <div class="layui-inline">
+                  <select name="<%=itm.paramUnitProName%>" id="">
+                    <%if(itm.paramUnitMap[prizeCategory].options){%>
+                      <%itm.paramUnitMap[prizeCategory].options.forEach(function(dyItem,dyIndex){%>
+                        <option value="<%=dyItem.key%>"><%=dyItem.title%></option>
+                      <%})%>
+                    <%}%>
+                  </select>
+                </div>
+            <%}else{%>
+                <div class="layui-inline"><%=dynamicList.itemsUnitMap[itm.paramUnitMap[prizeCategory].defaultVal]%></div>
+            <%}%>
+        <%}else{%>
+            <select name="<%=itm.paramUnitProName%>" id="">
+                <%for(ppitm in itm.paramUnitMap){%>
+                    <option value="<%=ppitm%>" class="<%=itm.paramUnitMap[ppitm].unitType%>"><%=dynamicList.itemsUnitMap[itm.paramUnitMap[ppitm].defaultVal]%></option>
+                <%}%>
+            </select>
+        <%}%>
+      <%}else{%>
+          <%if(itm.paramUnit){%>
+              <%if(itm.paramUnit.inputType == 'select'){%>
+                  <div class="layui-inline">
+                      <select name="" id="">
+                          <option value=""></option>
+                      </select>
+                  </div>
+              <%}else if(itm.paramUnit.inputType == 'label'){%>
+                  <div class="layui-inline <%=itm.paramUnit.unitType%>"><%=dynamicList.itemsUnitMap[itm.paramUnit.defaultVal]%></div>
+                  <input type="hidden" class="<%=itm.paramUnit.unitType%>"  value="<%=itm.paramUnit.defaultVal%>" name="<%=itm.paramUnit.proName%>">
+              <%}else{%>
+                    <%if(itm.paramUnit.isDynamict){%>
+                        <div class="layui-inline <%=itm.paramUnit.unitType%>"><%=dynamicList.itemsUnitMap[itm.paramUnit.dynamicVal]%></div>
+                        <input type="hidden" class="<%=itm.paramUnit.unitType%>" value="<%=itm.paramUnit.dynamicVal%>" name="<%=itm.paramUnit.proName%>">
+                    <%}else{%>
+                        <div class="layui-inline <%=itm.paramUnit.unitType%>"><%=dynamicList.itemsUnitMap[itm.paramUnit.defaultVal]%></div>
+                        <input type="hidden" class="<%=itm.paramUnit.unitType%>"  value="<%=itm.paramUnit.defaultVal%>" name="<%=itm.paramUnit.proName%>">
+                    <%}%>
+              <%}%>
+          <%}else{%>
+
+          <%}%>
+      <%}%>
+  </div>
+<%})%>

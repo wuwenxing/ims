@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActProposalModifyDao" >
+ 
+  <select id="findList" resultType="ActProposalModify" parameterType="ActProposalModify" >
+    select * from act_proposal_modify where 1=1
+    <if test="activityPeriods != null and activityPeriods != ''" >
+		and activity_periods = #{activityPeriods}
+    </if>
+    <if test="proposalStatus != null and proposalStatus != ''" >
+		and proposal_status = #{proposalStatus}
+    </if>
+    <if test="pno != null and pno != ''" >
+		and pno = #{pno}
+    </if>
+  </select>
+  
+  <select id="findObject" resultType="ActProposalModify"  >
+    select * from act_proposal_modify
+    where id = #{id}
+  </select>
+  
+  <select id="findObjectByMap" resultType="ActProposalModify" parameterType="java.util.Map" >
+    select * from act_proposal_modify
+    where pno = #{pno}
+  </select>
+  
+  <sql id="Base_Column_List">
+		 id, pno,activity_name,activity_type,tag_code,activity_periods,activity_start_time,activity_end_time,activity_status, is_auto_approve, proposer, proposal_date, proposal_status, 
+    approver, approve_date, canceller, cancel_date, cancel_reason, create_date, create_ip, 
+    create_user, delete_flag, enable_flag, update_date, update_ip, update_user, version_no, 
+    company_id
+	</sql>
+	
+  <select id="findActProposalModifyList" resultType="ActProposalModifyWrapper" parameterType="ActProposalModifyWrapper" >
+      select   a.*,b.tag_code,b.activity_name,b.activity_type,b.enable_flag as 'activityStatus',b.start_time as 'activityStartTime',b.end_time as 'activityEndTime',b.finish_days as 'finishDays'
+	  from act_proposal_modify a left join act_setting b on a.activity_periods=b.activity_periods
+      where 1 =1 
+      <if test="activityName != null  and activityName != ''" >
+        and  b.activity_name like CONCAT('%',#{activityName},'%')
+      </if>
+       <if test="activityType != null and activityType != ''" >
+         and b.activity_type = #{activityType}
+      </if>
+      and (tag_code is null or tag_code =''
+        <if test="tagCodes != null">
+	     or b.tag_code in
+		    <foreach collection="tagCodes" open="(" close=")" index="index" item="item"  separator=",">
+		      #{item}
+		    </foreach>
+	    </if>
+	   )
+	   <if test="isExpiration != null" >
+          <if test="isExpiration" >
+              and now() &gt; date_add(b.end_time,interval b.finish_days day)
+          </if>
+          <if test="!isExpiration">
+             and now()  &lt;= date_add(b.end_time,interval b.finish_days day)
+          </if>
+      </if>
+	   
+	   
+      <if test="activityPeriods != null and activityPeriods != ''" >
+        and a.activity_periods like CONCAT('%',#{activityPeriods},'%')
+      </if>
+        <if test="activityStatus != null  and activityStatus != ''" >
+        and b.enable_flag = #{activityStatus}
+      </if>
+       <if test="expirationTime != null and expirationTime!=''" >
+         and b.end_time  &lt; #{expirationTime}
+      </if>
+      <if test="pno != null  and pno != ''" >
+         and a.pno = #{pno}
+      </if>
+      <if test="proposalStatus != null  and proposalStatus != ''" >
+        and a.proposal_status = #{proposalStatus}
+      </if>
+      <if test="companyId != null  and companyId != ''" >
+        and a.company_id = #{companyId}
+      </if>
+      
+       <if test="enableFlag != null  and enableFlag != ''" >
+        and a.enable_flag = #{enableFlag}
+      </if>
+       and a.delete_flag!='Y' 
+       <if test="orderStr != null  and orderStr != ''">
+		    order by ${orderStr} 
+		</if>
+	  <if test="orderStr == null  or orderStr == ''">
+	     order by a.update_date desc
+	  </if>
+       
+   </select>
+   
+  	<delete id="deleteBatch">
+		delete from act_proposal_modify where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from act_proposal_modify
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="save" parameterType="ActProposalModify" >
+    insert into act_proposal_modify (id, activity_periods, cancel_reason, 
+      pno, proposal_status, is_auto_approve, 
+      proposer, pre_approver, approver, 
+      canceller, proposal_date, pre_approve_date, 
+      approve_date, cancel_date, create_date, 
+      create_ip, create_user, delete_flag, 
+      enable_flag, update_date, update_ip, 
+      update_user, version_no, company_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{activityPeriods,jdbcType=VARCHAR}, #{cancelReason,jdbcType=VARCHAR}, 
+      #{pno,jdbcType=VARCHAR}, #{proposalStatus,jdbcType=VARCHAR}, #{isAutoApprove,jdbcType=BIT}, 
+      #{proposer,jdbcType=VARCHAR}, #{preApprover,jdbcType=VARCHAR}, #{approver,jdbcType=VARCHAR}, 
+      #{canceller,jdbcType=VARCHAR}, #{proposalDate,jdbcType=TIMESTAMP}, #{preApproveDate,jdbcType=TIMESTAMP}, 
+      #{approveDate,jdbcType=TIMESTAMP}, #{cancelDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createIp,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
+      #{enableFlag,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateIp,jdbcType=VARCHAR}, 
+      #{updateUser,jdbcType=VARCHAR}, #{versionNo,jdbcType=BIGINT}, #{companyId,jdbcType=INTEGER}
+      )
+  </insert>
+  
+  <update id="update" parameterType="ActProposalModify" >
+    update act_proposal_modify
+    set activity_periods = #{activityPeriods,jdbcType=VARCHAR},
+      cancel_reason = #{cancelReason,jdbcType=VARCHAR},
+      pno = #{pno,jdbcType=VARCHAR},
+      proposal_status = #{proposalStatus,jdbcType=VARCHAR},
+      is_auto_approve = #{isAutoApprove,jdbcType=BIT},
+      proposer = #{proposer,jdbcType=VARCHAR},
+      pre_approver = #{preApprover,jdbcType=VARCHAR},
+      approver = #{approver,jdbcType=VARCHAR},
+      canceller = #{canceller,jdbcType=VARCHAR},
+      proposal_date = #{proposalDate,jdbcType=TIMESTAMP},
+      pre_approve_date = #{preApproveDate,jdbcType=TIMESTAMP},
+      approve_date = #{approveDate,jdbcType=TIMESTAMP},
+      cancel_date = #{cancelDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_ip = #{updateIp,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      version_no = #{versionNo,jdbcType=BIGINT},
+      company_id = #{companyId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+ 
+  
+  <update id="updateByMap" parameterType="java.util.Map">
+    update act_proposal_modify
+    <set >
+      <if test="cancelReason != null and cancelReason!=''" >
+        cancel_reason = #{cancelReason},
+      </if>
+      <if test="proposalStatus != null and proposalStatus !='' " >
+        proposal_status = #{proposalStatus},
+      </if>
+      <if test="proposer != null and proposer!=''" >
+        proposer = #{proposer},
+      </if>
+      <if test="preApprover != null and preApprover!=''" >
+        pre_approver = #{preApprover},
+      </if>
+      <if test="approver != null and approver !=''" >
+        approver = #{approver},
+      </if>
+      <if test="canceller != null and canceller !=''" >
+        canceller = #{canceller},
+      </if>
+      <if test="proposalDate != null" >
+        proposal_date = #{proposalDate},
+      </if>
+      <if test="preApproveDate != null" >
+        pre_approve_date = #{preApproveDate},
+      </if>
+      <if test="approveDate != null" >
+        approve_date = #{approveDate},
+      </if>
+      <if test="cancelDate != null" >
+        cancel_date = #{cancelDate},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate},
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag = #{enableFlag},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+</mapper>

@@ -1,0 +1,10 @@
+<form class="layui-form">
+    <% itemList.forEach(function(item, index){%>
+        <div class="layui-form-item <%if(index == itemList.length -1 ){%> no-mb <%}%>">
+            <div class="layui-inline no-mr">
+                <input type="radio" name="giftType" value="<%=item.dictCode%>" title="<%=item.dictNameCn%>">                
+            </div>
+        </div>
+    <% }) %>    
+    <button class="node-submit" lay-filter="seeAddRow" lay-submit style="display:none;"></button>
+</form>

@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.datacleaning.dao.inf.base.ActCustomerInfoDao" >
+
+ 	<select id="selectDemoByExample" resultType="ActCustomerInfo" parameterType="ActCustomerInfo" >
+	    select
+	   	*
+	    from act_customer_info_demo
+	    where 1=1
+	       <if test="platform != null and platform != '' " >
+	        and platform = '${platform}'
+	      </if>
+	      <if test="companyId != null and companyId !='' " >
+	        and company_id = ${companyId}
+	      </if>
+	      <if test="accountNo != null and accountNo !='' " >
+	        and account_no = '${accountNo}'
+	      </if>
+	      and delete_flag != 'Y' and enable_flag = 'Y'
+  	</select>
+	
+	<sql id="selectRealAccountJoinCustomerInfo">
+		select
+			customer.customer_number account_no,
+			account.platform platform,
+			account.currency currency,
+			(case 
+				when locate('MIN',ag.account_level_code)>0 then 'MINI' 
+				when locate('STD',ag.account_level_code)>0 then 'standard' 
+				when locate('VIP',ag.account_level_code)>0 then 'vip' 
+				when locate('PRO',ag.account_level_code)>0 then 'standard' 
+				else ag.account_level_code end
+			) account_level_code,
+			mobile_phone,
+			email,
+			chinese_name,
+			(case 
+				when account.migrate_data_activate_time is not null 
+					then date_add(account.migrate_data_activate_time,interval 8 hour)
+				when account.activate_time is not null 
+					then date_add(account.activate_time,interval 8 hour)	
+				else NULL end
+			) activate_time,
+			IF (account.migrate_data_activate_time is null and account.activate_time is null, "N", "Y") activated_status,
+			account.company_id company_id,
+			account.create_user create_user,
+		  	date_add(account.create_date, interval 8 hour) create_date,
+			account.create_ip create_ip,
+			if (account.update_date > customer.update_date, account.update_user, customer.update_user) update_user,
+			if (account.update_date > customer.update_date, date_add(account.update_date, interval 8 hour), date_add(customer.update_date, interval 8 hour)) update_date,
+			if (account.update_date > customer.update_date, account.update_ip, customer.update_ip) update_ip,
+			customer.id_document_number_md5 id_document_number,
+			(case 
+				when trade_account_status='DISABLE' then 'D' 
+				when trade_account_status='CloseOnly' then 'S' 
+				else 'A' end
+			) accountStatus,
+			(case 
+				when account_status_code='T' then 'test' 
+				else 'real' end
+			) accountEnv,
+			customer.nationality nationality
+		from
+			t_account_info_real account
+		left join t_customer_real customer on customer.gts2_customer_id = account.gts2_customer_id 
+		left join t_account_group_real ag on account.account_group_id=ag.id
+		where 
+			customer.customer_number is not null 
+			and account.company_id = #{companyId}
+			<if test="lastUpdateDate != null" >
+	    		 and account.update_date &gt; #{lastUpdateDate}  and account.update_date &lt; #{lastUpdateDateEnd}
+	    	</if>
+	    	<if test="lastUpdateDateBegin!=null and lastUpdateDateEnd!=null">
+				and	account.update_date between #{lastUpdateDateBegin} and #{lastUpdateDateEnd}
+	    	</if>	
+	</sql>
+	<sql id="selectRealCustomerInfoJoinAccount">
+		select
+			customer.customer_number account_no,
+			account.platform platform,
+			account.currency currency,
+			(case 
+				when locate('MIN',ag.account_level_code)>0 then 'MINI' 
+				when locate('STD',ag.account_level_code)>0 then 'standard' 
+				when locate('VIP',ag.account_level_code)>0 then 'vip' 
+				when locate('PRO',ag.account_level_code)>0 then 'standard' 
+				else ag.account_level_code end
+			) account_level_code,
+			mobile_phone,
+			email,
+			chinese_name,
+			(case 
+				when account.migrate_data_activate_time is not null 
+					then date_add(account.migrate_data_activate_time,interval 8 hour)
+				when account.activate_time is not null 
+					then date_add(account.activate_time,interval 8 hour)	
+				else NULL end
+			) activate_time,
+			IF (account.migrate_data_activate_time is null and account.activate_time is null, "N", "Y") activated_status,
+			account.company_id company_id,
+			account.create_user create_user,
+		  	date_add(account.create_date, interval 8 hour) create_date,
+			account.create_ip create_ip,
+			if (account.update_date > customer.update_date, account.update_user, customer.update_user) update_user,
+			if (account.update_date > customer.update_date, date_add(account.update_date, interval 8 hour), date_add(customer.update_date, interval 8 hour)) update_date,
+			if (account.update_date > customer.update_date, account.update_ip, customer.update_ip) update_ip,
+			customer.id_document_number_md5 id_document_number,
+			(case 
+				when trade_account_status='DISABLE' then 'D' 
+				when trade_account_status='CloseOnly' then 'S' 
+				else 'A' end
+			) accountStatus,
+			(case 
+				when account_status_code='T' then 'test' 
+				else 'real' end
+			) accountEnv,
+			customer.nationality nationality
+		from
+			t_customer_real customer 
+		left join t_account_info_real account on account.gts2_customer_id =  customer.gts2_customer_id
+		left join t_account_group_real ag on account.account_group_id=ag.id
+		where 
+			customer.customer_number is not null 
+			and account.company_id = #{companyId}
+			<if test="lastUpdateDate != null" >
+	    		 and customer.update_date &gt; #{lastUpdateDate} and customer.update_date &lt; #{lastUpdateDateEnd} 
+	    	</if>
+	    	<if test="lastUpdateDateBegin!=null and lastUpdateDateEnd!=null">
+	    		 and customer.update_date between #{lastUpdateDateBegin} and #{lastUpdateDateEnd}
+	    	</if>
+	</sql>
+	
+	<sql id="selectDemoAccountJoinCustomerInfo">
+		select
+			customer.customer_number account_no,
+			account.platform platform,
+			account.currency currency,
+			mobile_phone,
+			email,
+			chinese_name,
+			date_add(account.create_date, interval 8 hour) activate_time,
+			'Y' activated_status,
+			date_add(account.create_date, interval 8 hour) register_time,
+			account.company_id company_id,
+			account.create_user create_user,
+			date_add(account.create_date, interval 8 hour) create_date,
+			account.create_ip create_ip,
+			if (account.update_date > customer.update_date, account.update_user, customer.update_user) update_user,
+			if (account.update_date > customer.update_date, date_add(account.update_date, interval 8 hour), date_add(customer.update_date, interval 8 hour)) update_date,
+			if (account.update_date > customer.update_date, account.update_ip, customer.update_ip) update_ip,
+			customer.nationality nationality
+		from
+			t_account_info_demo account
+		left join t_customer_demo customer on customer.gts2_customer_id = account.gts2_customer_id 
+		where 
+			customer.customer_number is not null 
+			and account.company_id = #{companyId}
+			<if test="lastUpdateDate != null" >
+	    		 and account.update_date &gt; #{lastUpdateDate} and account.update_date &lt; #{lastUpdateDateEnd}
+	    	</if>
+	    	<if test="lastUpdateDateBegin!=null and lastUpdateDateEnd!=null">
+	    		 and account.update_date between #{lastUpdateDateBegin} and #{lastUpdateDateEnd}
+	    	</if>
+	</sql>
+	<sql id="selectDemoCustomerInfoJoinAccount">
+		select
+			customer.customer_number account_no,
+			account.platform platform,
+			account.currency currency,
+			mobile_phone,
+			email,
+			chinese_name,
+			date_add(account.create_date, interval 8 hour) activate_time,
+			'Y' activated_status,
+			date_add(account.create_date, interval 8 hour) register_time,
+			account.company_id company_id,
+			account.create_user create_user,
+			date_add(account.create_date, interval 8 hour) create_date,
+			account.create_ip create_ip,
+			if (account.update_date > customer.update_date, account.update_user, customer.update_user) update_user,
+			if (account.update_date > customer.update_date, date_add(account.update_date, interval 8 hour), date_add(customer.update_date, interval 8 hour)) update_date,
+			if (account.update_date > customer.update_date, account.update_ip, customer.update_ip) update_ip,
+			customer.nationality nationality
+		from
+			t_customer_demo customer
+		left join t_account_info_demo account on account.gts2_customer_id = customer.gts2_customer_id 
+		where 
+			customer.customer_number is not null 
+			and account.company_id = #{companyId}
+			<if test="lastUpdateDate != null" >
+	    		 and customer.update_date &gt; #{lastUpdateDate} and customer.update_date &lt; #{lastUpdateDateEnd} 
+	    	</if>
+	    	<if test="lastUpdateDateBegin!=null and lastUpdateDateEnd!=null">
+	    		 and customer.update_date between #{lastUpdateDateBegin} and #{lastUpdateDateEnd}
+	    	</if>
+	</sql>
+  	<insert id="insertGts2Real" parameterType="java.util.Map" >
+	   insert into act_customer_info_real(
+			account_no,
+			platform,
+			account_currency,
+			account_level,
+			mobile,
+			email,
+			chinese_name,
+			account_env,
+			activated_time,
+			activated_status,
+			register_time,
+			company_id,
+			create_user,
+			create_date,
+			create_ip,
+			update_user,
+			update_date,
+			update_ip,
+			id_number,
+			account_status,
+			platform_currency,
+			sync_create_date,
+			sync_update_date,
+			nationality,
+			enable_flag,
+			delete_flag,
+			push_flag
+		) 
+		select
+			account_no,
+			platform,
+			currency,
+			account_level_code,
+			mobile_phone,
+			email,
+			chinese_name,
+			accountEnv,
+			activate_time,
+			activated_status,
+			create_date,
+			company_id,
+			create_user,
+			create_date,
+			create_ip,
+			update_user,
+			update_date,
+			update_ip,
+			id_document_number,
+			accountStatus,
+			concat(platform,'#',currency),
+			now(),
+			'${synDate}',
+			nationality,
+			'Y',
+			'N',
+			'0'
+		from
+			(
+			<include refid="selectRealAccountJoinCustomerInfo"></include>
+		    union 
+		    <include refid="selectRealCustomerInfoJoinAccount"></include>
+		)tbl
+		on duplicate key update 
+			sync_update_date='${synDate}',
+			account_level = tbl.account_level_code,
+			mobile = tbl.mobile_phone,
+			email = tbl.email,
+			account_env = tbl.accountEnv,
+			activated_time = tbl.activate_time,
+			activated_status = tbl.activated_status,
+			update_user = tbl.update_user,
+			update_date = tbl.update_date,
+			update_ip = tbl.update_ip,
+			id_number = tbl.id_document_number,
+			account_status = tbl.accountStatus,
+			chinese_name=tbl.chinese_name,
+			nationality = tbl.nationality
+	 </insert>
+ 
+ 	<select id="selectRealData" parameterType="java.util.Map" resultType="ActCustomerInfo">
+ 		select * from act_customer_info_real
+ 		where sync_update_date=#{synDate}
+ 	</select>
+ 	
+ 	<select id="selectLastActCustomerInfo" parameterType="java.lang.String" resultType="ActCustomerInfo">
+ 		select * from act_customer_info_${env} where source=${source} order by update_date desc limit 1
+ 	</select>
+ 
+ 
+  	<insert id="insertGts2Demo" parameterType="java.util.Map" >
+	   insert into act_customer_info_demo(
+			account_no,
+			platform,
+			account_currency,
+			account_level,
+			mobile,
+			email,
+			chinese_name,
+			account_status,
+			account_env,
+			activated_time,
+			activated_status,
+			register_time,
+			company_id,
+			create_user,
+			create_date,
+			create_ip,
+			update_user,
+			update_date,
+			update_ip,
+			platform_currency,
+			sync_create_date,
+			sync_update_date,
+			nationality,
+			enable_flag,delete_flag,
+			push_flag
+		) 
+		select
+			account_no,
+			platform,
+			currency,
+			'standard',
+			mobile_phone,
+			email,
+			chinese_name,
+			'A',
+			'demo',
+			activate_time,
+			activated_status,
+			register_time,
+			company_id,
+			create_user,
+			create_date,
+			create_ip,
+			update_user,
+			update_date,
+			update_ip,
+			concat(platform,'#',currency),
+			now(),
+			'${synDate}',
+			nationality,
+			'Y','N','0'
+		from
+			(
+			<choose>
+				<when test="lastUpdateDate!=null or lastUpdateDateBegin!=null">
+					<include refid="selectDemoAccountJoinCustomerInfo"></include>
+			    	union 
+			    	<include refid="selectDemoCustomerInfoJoinAccount"></include>
+				</when>
+				<otherwise>
+					<include refid="selectDemoAccountJoinCustomerInfo"></include>
+				</otherwise>
+			</choose>
+		)tbl
+		on duplicate key update 
+			sync_update_date='${synDate}',
+			mobile = tbl.mobile_phone,
+			email = tbl.email,
+			update_user = tbl.update_user,
+			update_date = tbl.update_date,
+			update_ip = tbl.update_ip,
+			chinese_name=tbl.chinese_name,
+			nationality = tbl.nationality
+  	</insert>
+
+	<select id="selectDemoData" parameterType="java.util.Map" resultType="ActCustomerInfo">
+		select * from act_customer_info_demo
+ 		where sync_update_date=#{synDate}
+	</select>
+	
+	<insert id="saveOrUpdateRealManual" parameterType="ActCustomerInfo" >
+		insert into act_customer_info_real (company_id, account_no, 
+	      chinese_name, platform, account_currency, 
+	      account_level, mobile, id_number, 
+	      email, account_env, activated_status, 
+	      account_status, is_blacklist, register_time, 
+	      activated_time, cancel_before, remark, 
+	      version_no, enable_flag, delete_flag, 
+	      create_user, create_date, create_ip, 
+	      update_user, update_date, update_ip, 
+	      source,platform_currency,sync_create_date,nationality)
+	    values ( #{companyId,jdbcType=INTEGER}, #{accountNo,jdbcType=VARCHAR}, 
+	      #{chineseName,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, #{accountCurrency,jdbcType=VARCHAR}, 
+	      #{accountLevel,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{idNumber,jdbcType=VARCHAR}, 
+	      #{email,jdbcType=VARCHAR}, #{accountEnv,jdbcType=VARCHAR}, #{activatedStatus,jdbcType=VARCHAR}, 
+	      #{accountStatus,jdbcType=VARCHAR}, #{accountBlack,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, 
+	      #{activatedTime,jdbcType=TIMESTAMP}, #{cancelBefore,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+	      #{versionNo,jdbcType=INTEGER}, #{enableFlag,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
+	      #{createUser,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createIp,jdbcType=VARCHAR}, 
+	      #{updateUser,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateIp,jdbcType=VARCHAR}, 
+	      #{source,jdbcType=VARCHAR},#{platformCurrency,jdbcType=VARCHAR},#{syncCreateDate,jdbcType=TIMESTAMP},#{nationality})
+		on duplicate key update 
+		  update_date = #{updateDate,jdbcType=TIMESTAMP}
+	      <if test="chineseName != null" >
+	        ,chinese_name = #{chineseName,jdbcType=VARCHAR}
+	      </if>
+	      <if test="accountLevel != null" >
+	        ,account_level = #{accountLevel,jdbcType=VARCHAR}
+	      </if>
+	      <if test="mobile != null" >
+	        ,mobile = #{mobile,jdbcType=VARCHAR}
+	      </if>
+	      <if test="idNumber != null" >
+	        ,id_number = #{idNumber,jdbcType=VARCHAR}
+	      </if>
+	      <if test="email != null" >
+	        ,email = #{email,jdbcType=VARCHAR}
+	      </if>
+	      <if test="accountEnv != null" >
+	        ,account_env = #{accountEnv,jdbcType=VARCHAR}
+	      </if>
+	      <if test="activatedStatus != null" >
+	        ,activated_status = #{activatedStatus,jdbcType=VARCHAR}
+	      </if>
+	      <if test="accountStatus != null" >
+	       ,account_status = #{accountStatus,jdbcType=VARCHAR}
+	      </if>
+	      <if test="activatedTime != null" >
+	        ,activated_time = #{activatedTime,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="cancelBefore != null" >
+	        ,cancel_before = #{cancelBefore,jdbcType=VARCHAR}
+	      </if>
+	      <if test="updateUser != null" >
+	        ,update_user = #{updateUser,jdbcType=VARCHAR}
+	      </if>
+	       <if test="nationality != null" >
+	        ,nationality = #{nationality}
+	      </if>
+	</insert>
+	
+	<select id="selectByParams" parameterType="ActCustomerInfo" resultType="ActCustomerInfo">
+		select * from act_customer_info_${env}
+		where account_no=#{accountNo} and platform=#{platform}
+	</select>
+	
+	<insert id="saveOrUpdateDemoManual" parameterType="ActCustomerInfo" >
+		insert into act_customer_info_demo (company_id, account_no, 
+	      chinese_name, platform, account_currency, 
+	      account_level, mobile, 
+	      email, account_env, activated_status, 
+	      account_status, is_blacklist, register_time, 
+	      activated_time, cancel_before, remark, 
+	      enable_flag, delete_flag, 
+	      create_user, create_date, create_ip, 
+	      update_user, update_date, update_ip, 
+	      source,platform_currency,sync_create_date,nationality)
+	    values ( #{companyId,jdbcType=INTEGER}, #{accountNo,jdbcType=VARCHAR}, 
+	      #{chineseName,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, #{accountCurrency,jdbcType=VARCHAR}, 
+	      #{accountLevel,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+	      #{email,jdbcType=VARCHAR}, #{accountEnv,jdbcType=VARCHAR}, #{activatedStatus,jdbcType=VARCHAR}, 
+	      #{accountStatus,jdbcType=VARCHAR}, #{accountBlack,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, 
+	      #{activatedTime,jdbcType=TIMESTAMP}, #{cancelBefore,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+	      #{enableFlag,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
+	      #{createUser,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createIp,jdbcType=VARCHAR}, 
+	      #{updateUser,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateIp,jdbcType=VARCHAR}, 
+	      #{source,jdbcType=VARCHAR},#{platformCurrency,jdbcType=VARCHAR},now(),#{nationality})
+		on duplicate key update 
+		  <if test="updateDate != null" >
+	        update_date = #{updateDate,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="chineseName != null" >
+	        ,chinese_name = #{chineseName,jdbcType=VARCHAR}
+	      </if>
+	      <if test="mobile != null" >
+	        ,mobile = #{mobile,jdbcType=VARCHAR}
+	      </if>
+	      <if test="email != null" >
+	        ,email = #{email,jdbcType=VARCHAR}
+		</if>
+		 <if test="nationality != null" >
+	        ,nationality = #{nationality,jdbcType=VARCHAR}
+		</if>		
+	</insert>
+	
+	<insert id="save" parameterType="ActCustomerInfo" >
+		insert into act_customer_info_${env} (company_id, account_no, 
+	      chinese_name, platform, account_currency, 
+	      account_level, mobile, id_number, 
+	      email, account_env, activated_status, 
+	      account_status, is_blacklist, register_time, 
+	      activated_time, cancel_before, remark, 
+	      version_no, enable_flag, delete_flag, 
+	      create_user, create_date, create_ip, 
+	      update_user, update_date, update_ip, 
+	      source,platform_currency,sync_create_date,sync_update_date,nationality,push_flag)
+	    values ( #{companyId,jdbcType=INTEGER}, #{accountNo,jdbcType=VARCHAR}, 
+	      #{chineseName,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, #{accountCurrency,jdbcType=VARCHAR}, 
+	      #{accountLevel,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{idNumber,jdbcType=VARCHAR}, 
+	      #{email,jdbcType=VARCHAR}, #{accountEnv,jdbcType=VARCHAR}, #{activatedStatus,jdbcType=VARCHAR}, 
+	      #{accountStatus,jdbcType=VARCHAR}, #{accountBlack,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, 
+	      #{activatedTime,jdbcType=TIMESTAMP}, #{cancelBefore,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+	      #{versionNo,jdbcType=INTEGER}, #{enableFlag,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
+	      #{createUser,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createIp,jdbcType=VARCHAR}, 
+	      #{updateUser,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateIp,jdbcType=VARCHAR}, 
+	      #{source,jdbcType=VARCHAR},#{platformCurrency,jdbcType=VARCHAR},#{syncCreateDate,jdbcType=TIMESTAMP},
+	      #{syncUpdateDate,jdbcType=TIMESTAMP},#{nationality},'0')
+	</insert>
+	
+	<update id="update" parameterType="ActCustomerInfo">
+		update act_customer_info_${env}
+		<set>
+			<if test="updateDate != null" >
+	        	update_date = #{updateDate,jdbcType=TIMESTAMP},
+	      	</if>
+	      	<if test="chineseName != null" >
+	        	chinese_name = #{chineseName,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="accountLevel != null" >
+	        	account_level = #{accountLevel,jdbcType=VARCHAR},
+	     	 </if>
+	      	<if test="mobile != null" >
+	        	mobile = #{mobile,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="idNumber != null" >
+	        	id_number = #{idNumber,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="email != null" >
+	        	email = #{email,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="accountEnv != null" >
+	        	account_env = #{accountEnv,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="activatedStatus != null" >
+	       		activated_status = #{activatedStatus,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="accountStatus != null" >
+	       		account_status = #{accountStatus,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="activatedTime != null" >
+	        	activated_time = #{activatedTime,jdbcType=TIMESTAMP},
+	      	</if>
+	      	<if test="cancelBefore != null" >
+	        	cancel_before = #{cancelBefore,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="updateUser != null" >
+	        	update_user = #{updateUser,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="syncUpdateDate!=null">
+	      		sync_update_date = #{syncUpdateDate,jdbcType=TIMESTAMP},
+	      	</if>
+	      	<if test="accountBlack!=null">
+	      		is_blacklist = #{accountBlack},
+	      	</if>
+	      	<if test="nationality!=null">
+	      		nationality = #{nationality},
+	      	</if>
+	    </set>
+	    where id =#{id}
+	</update>
+	
+	<update id="updateGroupBlack">
+		update act_customer_info_${env} a,ims_black_list b 
+		set a.is_blacklist='Y'
+		where a.account_no=b.account_no 
+	</update>
+	
+	<select id="findUnpushCustomerInfo" resultType="ActCustomerInfo">
+		select id,account_no,platform from act_customer_info_${env} where push_flag='0' order by id asc;
+	</select>
+	
+	<update id="batchUpdatePushStatus">
+		update act_customer_info_${env} set push_flag='1' where push_flag='0' and id &lt;= #{id}
+	</update>
+</mapper>

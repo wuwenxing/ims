@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<dubbo:application name="ims-activity-api-provider" />
+	<dubbo:registry protocol="zookeeper" address="${zk.address}" />
+	<dubbo:protocol port="30965" />
+	<dubbo:provider filter="dataSourceFilter" />
+	
+	<import resource="activity-job-provider.xml"/>
+	
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActSettingDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActSettingDubboServiceImpl" timeout="120000"/>
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActTaskSettingDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActTaskSettingDubboServiceImpl" timeout="120000"/>
+		
+    <dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActTaskItemsDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActTaskItemsDubboServiceImpl" timeout="120000"/>
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActBlackListDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActBlackListDubboServiceImpl" timeout="120000"/>
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActWhiteListDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActWhiteListDubboServiceImpl" timeout="120000"/>
+
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActTaskCustomSettingDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActTaskCustomSettingDubboServiceImpl" timeout="120000"/>
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActMaintenanceSettingDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActMaintenanceSettingDubboServiceImpl" timeout="120000"/>
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActItemsSettingDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActItemsSettingDubboServiceImpl" timeout="120000"/>
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActStringCodeDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActStringCodeDubboServiceImpl" timeout="120000"/>
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActCustomerInfoDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActCustomerInfoDubboServiceImpl" timeout="120000"/>
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActCashinRealDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActCashinRealDubboServiceImpl" timeout="120000"/>
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActThirdCallRecordDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActThirdCallRecordDubboServiceImpl" timeout="120000"/>
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActTradeRecordDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActTradeRecordDubboServiceImpl" timeout="120000"/>
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisPrizeRecordRedoDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisPrizeRecordRedoDubboServiceImpl" timeout="120000"/>
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActCashoutRealDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActCashoutRealServiceImpl" timeout="120000"/>
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.base.MisActTagDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActTagDubboServiceImpl" timeout="120000"/>	
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.order.MisOrderDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisOrderDubboServiceImpl" timeout="120000"/>
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.mall.MisMallItemsDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisMallItemsDubboServiceImpl" timeout="120000"/>
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActProductDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActProductDubboServiceImpl" timeout="120000"/>
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActAccountActiviStatDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActAccountActiviStatDubboServiceImpl" timeout="120000"/>
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisImsPrizeRecordDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisImsPrizeRecordDubboServiceImpl" timeout="120000"/>
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisImsPrizeRecordWaitingDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisImsPrizeRecordWaitingDubboServiceImpl" timeout="120000"/>
+				
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActProposalModifyDubboService"
+		class="com.gwghk.ims.activity.service.mis.MisActProposalModifyDubboServiceImpl" timeout="120000"/>
+		
+	<!-- 开放式api -->	
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.external.activity.ActCashinRealDubboService"
+		class="com.gwghk.ims.activity.service.ActCashinRealDubboServiceImpl" timeout="120000"/>
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.external.activity.ActCashoutRealDubboService"
+		class="com.gwghk.ims.activity.service.ActCashoutRealServiceImpl" timeout="120000"/>
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.external.activity.ActCustomerInfoDubboService"
+		class="com.gwghk.ims.activity.service.ActCustomerInfoDubboServiceImpl" timeout="120000"/>
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.external.activity.ActTradeRecordDubboService"
+		class="com.gwghk.ims.activity.service.ActTradeRecordDubboServiceImpl" timeout="120000"/>
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.external.activity.ActSettingDubboService"
+		class="com.gwghk.ims.activity.service.ActSettingDubboServiceImpl" timeout="120000"/>	
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.external.activity.ActItemsSettingDubboService"
+		class="com.gwghk.ims.activity.service.ActItemsSettingDubboServiceImpl" timeout="120000"/>	
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.external.mall.MallItemsDubboService"
+		class="com.gwghk.ims.activity.service.MallItemsDubboServiceImpl" timeout="120000"/>	
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.external.mall.MallOrderDubboService"
+		class="com.gwghk.ims.activity.service.MallOrderDubboServiceImpl" timeout="120000"/>	
+		
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.external.activity.ActivityApiDubboService"
+		class="com.gwghk.ims.activity.service.ActivityApiDubboServiceImpl" timeout="120000"/>	
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.external.activity.ActSettlementDubboService"
+		class="com.gwghk.ims.activity.service.ActSettlementDubboServiceImpl" timeout="120000"/>	
+	
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.mis.activity.MisGts2symbolDemoRealService"
+		class="com.gwghk.ims.activity.service.mis.MisGts2symbolDemoRealServiceImpl" timeout="120000"/>	
+ 
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.external.activity.ActPrizeRecordApiDubboService"
+		class="com.gwghk.ims.activity.service.ActPrizeRecordApiDubboServiceImpl" timeout="120000"/>
+	<dubbo:service
+		interface="com.gwghk.ims.common.inf.external.activity.ActAccountActivityStatDubboService"
+		class="com.gwghk.ims.activity.service.ActAccountActivityStatDubboServiceImpl" timeout="120000"/>
+	<!-- end -->	
+</beans>

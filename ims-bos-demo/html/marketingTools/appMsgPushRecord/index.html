@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>app消息推送记录</title>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/normalize.min.css">
+    <link rel="stylesheet" href="/css/base.min.css">
+</head>
+<body>
+    <div class="m-container">
+        <div class="layout-1 layui-searchPanel">
+            <div class="layui-searchPanel-item">
+                <h2 class="layui-searchPanel-title">
+                    <i class="layui-icon layui-search-icon">&#xe615;</i>
+                    <span>查询条件</span>
+                </h2>
+                <div class="layui-searchPanel-content">
+                    <form class="layui-form" action="">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">账号</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="recipents" placeholder="" autocomplete="off"
+                                            class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">消息标题</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="title" placeholder="" autocomplete="off"
+                                            class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">消息内容</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="content" placeholder="" autocomplete="off"
+                                            class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">发送状态</label>
+                                <div class="layui-input-inline">
+                                    <select name="status" id="">
+                                        <option value="">---请选择---</option>
+                                        <option value="waiting">待发送</option>
+                                        <option value="sending">发送中</option>
+                                        <option value="success">成功</option>
+                                        <option value="fail">失败</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">发送时间</label>
+                                <div class="layui-inline">
+                                    <input type="text" name="startTimeStr" class="layui-input" id="startDate" placeholder="yyyy-MM-dd HH:mm:ss">
+                                </div>
+                                <div class="layui-inline">&nbsp;&nbsp;至&nbsp;&nbsp;</div>
+                                <div class="layui-inline">
+                                    <input type="text" name="endTimeStr" class="layui-input" id="endDate" placeholder="yyyy-MM-dd HH:mm:ss">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block activeButton">
+                                <button class="layui-btn layui-btn node-search" lay-submit lay-filter="search"><i
+                                        class="layui-icon layui-search-icon">&#xe615;</i>查询
+                                </button>
+                                <button type="reset" class="layui-btn layui-btn-primary"><i
+                                        class="layui-icon layui-search-icon">&#xe640;</i>重置
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="layout-2">
+            <button class="layui-btn layui-btn layui-btn-sm node-add"><i class="layui-icon">&#xe654;</i>新增</button>
+            <button class="layui-btn layui-btn layui-btn-sm node-reSend"><i class="layui-icon">&#xe640;</i>重发</button>
+            <button class="layui-btn layui-btn layui-btn-sm node-refresh"><i class="layui-icon">&#xe640;</i>刷新</button>
+        </div>
+        <div class="layout-3">
+            <table id="data-table" lay-filter="dataTable"></table>
+        </div>
+    </div>
+</body>
+<script src="/js/vendor/jquery-2.0.0.min.js"></script>
+<script src="/js/vendor/ejs_production.js"></script>
+<script src="/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/js/extendModules/'
+    }).extend({
+        searchPanel: 'searchPanel'
+    });
+</script>
+<script src="./main.js"></script>
+</html>

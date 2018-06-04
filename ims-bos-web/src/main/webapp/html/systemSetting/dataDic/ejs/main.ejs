@@ -1,0 +1,31 @@
+<form class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">角色编号<span class="mustInput"></span></label>
+            <div class="layui-input-inline">
+                <input <%if(type == 'see'){%> disabled <%}%> type="text" lay-verType="tips" name="userNo" lay-verify="required" autocomplete="off" class="layui-input">
+
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">角色名称</label>
+            <div class="layui-input-inline">
+                <input  <%if(type == 'see'){%> disabled <%}%> type="text" lay-verType="tips" name="userName" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">状态<span class="mustInput"></span></label>
+            <div class="layui-input-inline">
+                <select name="city" lay-verify="required" <%if(type == 'see'){%> disabled <%}%> >
+                <option value="0" selected>启用</option>
+                <option value="1">禁用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div style="display: none;">
+        <button class="node-submit" lay-submit lay-filter="seeAddRow"></button>
+    </div>
+</form>

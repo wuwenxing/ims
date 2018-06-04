@@ -1,0 +1,23 @@
+@import "./variables.scss";
+.layui-layer {
+  .layui-layer-content {
+    .layui-form{
+      .layui-form-item {
+        .flex-item {
+          .layui-input, .layui-form-select {
+            width: 100%;
+          }
+        }
+        .layui-textarea {
+          width: 375px;
+        }
+      }
+    }
+  }
+} 
+.no-border {
+  border:none;
+}
+.mrl-8 {
+  margin-left: 8px;
+}

@@ -1,0 +1,445 @@
+
+  <form class="layui-form baseForm">
+      <div class="layui-form-base table">
+          <div class="title">
+            <p><span>活动基础设置</span><span class="type">(<%=letters[type]%>)</span> </p>
+          </div>
+          <div class="layui-form-table">
+              <div class="layui-form-item layui-row">
+                  <div class="layui-inline layui-col-md4 layui-row">
+                      <label class="layui-form-grid-label layui-col-md3 flex flex-align-items"><em class="required">*</em><span>活动编号</span></label>
+                      <div class="layui-inline layui-col-md7 layui-col-md-offset1">
+                          <input type="text" id="activityPeriods"
+                            <%if(model != 'copy'){%>
+                                disabled 
+                                value="<%=data.actBaseInfo.activityPeriods%>"
+                            <%}else{%>
+                                value="<%=actPeriods%>"
+                            <%}%>
+                            name="activityPeriods" class="layui-input" lay-verify="required">
+                            
+                          <%if(model == 'edit'){%>
+                            <input type="hidden" name="id" value="<%=data.actBaseInfo.id%>">
+                          <%}%>
+                      </div>
+                  </div>
+                  <div class="layui-inline layui-col-md4 layui-row">
+                      <label class="layui-form-grid-label layui-col-md3 flex flex-align-items"><em class="required">*</em><span>活动名称</span></label>
+                      <div class="layui-inline layui-col-md7 layui-col-md-offset1">
+                          <input type="text" class="layui-input" name="activityName" value="<%=data.actBaseInfo.activityName%>" lay-verType="tips" lay-verify="required">
+                      </div>
+                  </div>
+                  <div class="layui-inline layui-col-md4 layui-row">
+                      <label class="layui-form-grid-label layui-col-md3 flex flex-align-items"><em class="required">*</em>活动状态</label>
+                      <div class="layui-inline layui-col-md7 layui-col-md-offset1">
+                          <select name="enableFlag" id="" lay-filter="enableFlag"  lay-verify="required" lay-verType="tips">
+                              <option value="Y" <%if(data.actBaseInfo.enableFlag == 'Y'){%> selected <%}%> >启用</option>
+                              <option value="N" <%if(data.actBaseInfo.enableFlag == 'N'){%> selected <%}%> >禁用</option>
+                          </select>
+                      </div>
+                  </div>
+              </div>
+              <div class="layui-form-item layui-row">
+                      <div class="layui-inline layui-col-md4 layui-row">
+                          <label class="layui-form-grid-label layui-col-md3 flex flex-align-items"><em class="required">*</em><span>活动开始时间</span></label>
+                          <div class="layui-inline layui-col-md7 layui-col-md-offset1">
+                              <input type="text" lay-verify="required|beginTime" value="<%=data.actBaseInfo.startTime%>" name="startTime" class="layui-input" id="beginTime" 
+                              placeholder="yyyy-MM-dd HH:mm:ss"
+                              >
+                          </div>
+                      </div>
+                      <div class="layui-inline layui-col-md4 layui-row">
+                          <label class="layui-form-grid-label layui-col-md3 flex flex-align-items"><em class="required">*</em><span>活动结束时间</span></label>
+                          <div class="layui-inline layui-col-md7 layui-col-md-offset1">
+                              <input type="text"  lay-verify="required"  value="<%=data.actBaseInfo.endTime%>" name="endTime" class="layui-input" id="endTime" placeholder="yyyy-MM-dd HH:mm:ss">
+                          </div>
+                      </div>
+                      <div class="layui-inline layui-col-md4 layui-row">
+                          <label class="layui-form-grid-label layui-col-md3 flex flex-align-items"><em class="required"></em><span>活动完成时间</span></label>
+                          <div class="layui-inline input-append layui-col-md7 layui-col-md-offset1">
+                              <input type="text" class="layui-input" value="<%=data.actBaseInfo.finishDays%>" lay-verify="intParams" name="finishDays" id="finishTime" value="0"
+                              >
+                              <span class="append">天</span>
+                          </div>
+                          <input type="hidden" value="DAY" name="finishDaysUnit">
+                      </div>              
+              </div>
+              <div class="layui-form-item layui-row">
+                  <div class="layui-inline layui-col-md4 layui-row">
+                      <label class="layui-form-grid-label layui-col-md3 flex flex-align-items"><em class="required"></em><span>奖励发放</span></label>
+                      <div class="layui-inline layui-col-md7 layui-col-md-offset1">
+                          <select name="autoHandOut" id="" lay-filter="autoHandOut">
+                              <option value="1"  <%if(data.actBaseInfo.autoHandOut == '1'){%> selected <%}%> >自动发放</option>
+                              <option value="0"  <%if(data.actBaseInfo.autoHandOut == '0'){%> selected <%}%> >人工审核</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class="layui-inline layui-col-md4 layui-row">
+                      <label class="layui-form-grid-label layui-col-md3 flex flex-align-items"><em class="required"></em><span>所属标签</span></label>
+                      <div class="layui-inline layui-col-md7 layui-col-md-offset1">
+                          <select name="tagCode" id="" lay-filter="tagCode">
+                            <%if(data.actBaseInfo.tagCode){%>
+                                <option value="" selected>--请选择--</option>
+                            <%}else{%>
+                                <option value="<%=data.actBaseInfo.tagCode%>" selected ><%=data.actBaseInfo.tagName%></option>  
+                            <%}%>
+                          </select>
+                      </div>
+                  </div>
+                  <% if(baseFirst){ %>
+                    <div class="layui-inline layui-col-md4 layui-row">
+                        <label class="layui-form-grid-label layui-col-md3 flex flex-align-items" for=""><em class="required"></em><span><%=letters[baseFirst.proName]%></span></label>
+                        <div class="layui-inline layui-col-md7 layui-col-md-offset1">
+                          <%if(baseFirst.isShow){%>
+                            <%if(baseFirst.inputType == 'select'){%>
+                              <select name="<%=baseFirst.proName%>" id="" lay-filter="baseFirst"
+                                <%if(baseFirst.required){%> 
+                                    lay-verify="required"
+                                <%}%>
+                              >
+                                <%if(baseFirst.isDynamict){%>
+                                  <%dynamicList[baseFirst.dynamicOptionName].forEach(function(itm,idx){%>
+                                    <option value="<%=itm.key%>"  <%if(itm.key == data.actBaseInfo[baseFirst.proName]){ %> selected <%}%>  ><%=itm.title%></option>
+                                  <%})%>
+                                <%}else{%>
+                                    <option value="" 
+                                    <%if(!data.actBaseInfo[baseFirst.proName]){%>
+                                        selected
+                                    <%}%>
+                                    >--请选择--</option>
+                                  <%baseFirst.options.forEach(function(itm,idx){%>
+                                    <option data-test="<%=itm.key%>" value="<%=itm.key%>"
+                                      <%if(itm.key == data.actBaseInfo[baseFirst.proName] ){%> 
+                                        selected
+                                      <%}%>
+                                      ><%=itm.title%></option>
+                                  <%})%>
+                                <%}%>
+                              </select>
+                            <%}else{%>
+                                <input type="text" class="layui-input"   value="<%=data.actBaseInfo.baseFirst.proName%>" name="<%=baseFirst.proName%>" 
+                                <%if(baseFirst.required){%> 
+                                    lay-verify="required|<%=baseFirst.validType%>" 
+                                <%}else{%>
+                                    lay-verify="<%=baseFirst.validType%>" 
+                                <%}%>
+                                 >
+                            <%}%>
+                          <%}else{%>
+                              <input type="hidden" value="<%=data.actBaseInfo.baseFirst.proName%>" name="<%=baseFirst.proName%>" >
+                          <%}%>  
+                        </div>
+                    </div>
+                  <%}%>
+              </div>
+              <% if(base && base.length){ %>
+                <%base.forEach(function(item,indx){%>
+                  <div class="layui-form-item layui-row">
+                    <%item.forEach(function(itm, idx){%>
+                      <div class="layui-inline layui-col-md4 layui-row">
+                          <label class="layui-form-grid-label layui-col-md3 flex flex-align-items" for="" data-aa="<%=itm.proName%>" >
+                            <%if(itm.required){%> <em class="required">*</em> <%}%>
+                            <span><%=letters[itm.proName]%></span>
+                          </label>
+                          <div class="layui-inline layui-col-md7 layui-col-md-offset1 <%if(itm.paramUnit){%> input-append <%}%>"  >
+                              <%if(itm.isShow){%>
+                                <%if(itm.inputType == 'select'){%>
+                                  <select name="<%=itm.proName%>" id=""  lay-filter="<%=itm.proName%>"
+                                    <%if(itm.required){%> lay-verify="required" <%}%>
+                                  >
+                                  <% if(itm.isDynamict){ %>
+                                      <%if(dynamicList[itm.dynamicOptionName]){%>
+                                          <% var dParams = dynamicList[itm.dynamicOptionName]; %>
+                                          <%dParams.forEach(function(ditm,didx){%>
+                                            <option value="<%=ditm.key%>"   <%if(data.actBaseInfo[itm.proName] == ditm.key){%> selected <%}%>    ><%=ditm.title%></option>
+                                          <%})%>
+                                      <%}%>
+                                  <%}else{%>
+                                    <%if(itm.options){%>
+                                        <%itm.options.forEach(function(ditm,didx){%>
+                                          <option value="<%=ditm.key%>"  <%if(data.actBaseInfo[itm.proName] == ditm.key){%> selected <%}%> ><%=ditm.title%></option>
+                                        <%})%>
+                                    <%}%>
+                                  <%}%>
+                                  </select>
+                                <%}else{%>
+                                    <input type="text" class="layui-input"  value="<%=data.actBaseInfo[itm.proName]%>"  name="<%=itm.proName%>" 
+                                    <%if(itm.required){%> 
+                                        lay-verify="required|<%=itm.validType%>"
+                                    <%}else{%>
+                                        lay-verify="<%=itm.validType%>"
+                                    <%}%> 
+                                    >
+                                    <%if(itm.paramUnit){%> <span class="append"><%=dynamicList.itemsUnitMap[itm.paramUnit.defaultVal]%></span> <%}%>
+                                <%}%>
+    
+                                <%if(itm.paramUnit){%>
+                                  <div class="layui-inline">
+                                    <input type="hidden" value="<%=itm.paramUnit.defaultVal%>" name="<%=itm.paramUnit.proName%>">
+                                  </div>
+                                <%}%>
+    
+                              <%}else{%>
+                                  <input type="hidden" value="" name="<%=itm.proName%>">
+                              <%}%> 
+                          </div>
+                      </div>
+                      <%})%>
+                  </div>
+                <%})%>
+              <%}%>
+              <div class="layui-form-item textarea-item">
+                    <div class="layui-row flex">
+                        <label class="layui-form-grid-label layui-col-md1 flex flex-align-items">活动描述</label>
+                        <div class="layui-inline text-area layui-col-md9 layui-col-md-offset1">
+                            <textarea name="remark" maxlength="1024" placeholder="请输入" class="layui-textarea"><%=data.actBaseInfo.remark%></textarea>
+                        </div>
+                    </div>
+              </div>
+              <div class="layui-form-item  textarea-item">
+                    <div class="layui-row flex">
+                        <label class="layui-form-grid-label layui-col-md1 flex flex-align-items">活动链接地址</label>
+                        <div class="layui-inline text-area  layui-col-md9 layui-col-md-offset1">
+                            <textarea name="activityUrl"  maxlength="500" placeholder="请输入" class="layui-textarea"><%=data.actBaseInfo.activityUrl%></textarea>
+                        </div>
+                    </div>
+              </div>
+              <div class="layui-form-item textarea-item">
+                  <div class="layui-row flex">
+                      <label class="layui-form-grid-label layui-col-md1 flex flex-align-items">其他信息</label>
+                      <div class="layui-inline text-area  layui-col-md9 layui-col-md-offset1">
+                          <textarea name="otherMsg" maxlength="2048" placeholder="请输入" class="layui-textarea"><%=data.actBaseInfo.otherMsg%></textarea>
+                      </div>
+                  </div>
+              </div>
+              </div>
+        </div>
+        <button style="display:none;" class="layui-submit layui-btn  base-submit" lay-submit lay-filter="baseSubmit"></button>
+        </form>
+<form class="layui-form condiftionForm">
+      <div class="layui-form-exp table"> 
+          <div class="title">
+              <p>
+                  <span class="">参与活动条件</span> 
+                  <span class="type"><i class="tips"></i>活动审批通过并已开始状态下，除有黑白名单权限用户，不可修改活动开始时间及参与条件</span>
+              </p>
+          </div>
+          <div>
+              <% if(condition && condition.length){ %>
+                <input type="hidden" value="<%=data.actCondSetting.id%>" name="id">
+                <%condition.forEach(function(item,indx){%>
+                  <div class="layui-form-item layui-row">
+                    <%item.forEach(function(itm, idx){%>
+                      <div class="layui-inline layui-col-md4 layui-row">
+                            <label class="layui-form-grid-label layui-col-md3 flex flex-align-items" for="" data-aa="<%=itm.proName%>" >
+                                <em class="required"><%if(itm.required){%>*<%}%></em> 
+                                <span><%=letters[itm.proName]%></span>
+                            </label>
+                          <div class="layui-inline layui-col-md7 layui-col-md-offset1">
+                            <%if(itm.isShow){%>
+                              <%if(itm.isDynamict){%>
+                                <% var dynamicOptions = dynamicList[itm.dynamicOptionName]; %>
+                                <%if(itm.inputType == 'select'){%>
+                                  <select name="<%=itm.proName%>" id="" lay-filter="<%=itm.proName%>" 
+                                    <%if(item.required){%> lay-verify="required" <%}%>
+                                  >
+                                  <option value="">--请选择--</option>
+                                  <%if(dynamicOptions){%>
+                                      <%dynamicOptions.forEach(function(ditem,didx){%>
+                                        <option value="<%=ditem.key%>" <%if(data.actCondSetting[itm.proName] == ditem.key){%> selected  <%}%> > <%=ditem.title%></option>
+                                      <%})%>
+                                  <%}%>
+                                  </select>
+                                <%}else if(itm.inputType == 'date'){%>
+                                    <input type="text" class="layui-input" id="<%=itm.proName%>"  value="<%=data.actCondSetting[itm.proName]%>" name="<%=itm.proName%>"
+                                    <%if(itm.required){%> 
+                                        lay-verify="required" 
+                                    <%}else{%>
+                                        lay-verify="<%=itm.proName%>" 
+                                    <%}%>
+                                    >
+                                <%}else if(itm.inputType == 'file'){%>
+                                    
+                                <%}else if(itm.inputType == 'textarea_select'){%>
+                                  
+                                <%}else if(itm.inputType == 'checkbox'){%>
+    
+                                <%}else if(itm.inputType == 'input'){%>
+                                  <input type="text" class="layui-input"  value="<%=data.actCondSetting[itm.proName]%>" name="<%=itm.proName%>" 
+                                    <%if(itm.required){%> 
+                                        lay-verify="required|<%=itm.validType%>" 
+                                    <%}else{%>
+                                        lay-verify="<%=itm.validType%>" 
+                                    <%}%> 
+                                  >
+                                <%}else{%>
+                                    <input type="text" class="layui-input"  value="<%=data.actCondSetting[itm.proName]%>" name="<%=itm.proName%>" <%if(itm.required){%> lay-verify="required" <%}%> >
+                                <%}%>
+                              <%}else{%>
+                                <%if(itm.inputType == 'select'){%>
+                                  <select name="<%=baseFirst.proName%>" id="" lay-filter="<%=baseFirst.proName%>" 
+                                    <%if(baseFirst.required){%> lay-verify="required" <%}%>
+                                  >
+                                      <%itm.options.forEach(function(itm,idx){%>
+                                        <option value="<%=idx%>"  <%if(idx==0){%> selected <%}%> ><%=idx%></option>
+                                      <%})%>
+                                  </select>
+                                <%}else if(itm.inputType == 'date'){%>
+                                    <input type="text" class="layui-input" id="<%=itm.proName%>"  value="<%=data.actCondSetting[itm.proName]%>" name="<%=itm.proName%>" 
+                                    <%if(itm.required){%> 
+                                        lay-verify="required"
+                                    <%}else{%>
+                                        lay-verify="<%=itm.proName%>"
+                                    <%}%>
+                                    >
+                                <%}else if(itm.inputType == 'file'){%>
+                                    
+                                <%}else if(itm.inputType == 'textarea_select'){%>
+                                  
+                                <%}else if(itm.inputType == 'input'){%>
+                                    <input type="text" class="layui-input"  value="<%=data.actCondSetting[itm.proName]%>" name="<%=itm.proName%>" 
+                                    <%if(itm.required){%> 
+                                        lay-verify="required|<%=itm.validType%>" 
+                                    <%}else{%>
+                                        lay-verify="<%=itm.validType%>" 
+                                    <%}%> 
+                                    >
+                                <%}else{%>
+                                    <input type="text" class="layui-input"  value="<%=data.actCondSetting[itm.proName]%>" name="<%=itm.proName%>" 
+                                        <%if(itm.required){%> 
+                                            lay-verify="required|<%=itm.validType%>" 
+                                        <%}else{%>
+                                            lay-verify="<%=itm.validType%>" 
+                                        <%}%>
+                                    >
+                                <%}%>
+                              <%}%>
+                            <%}else{%>
+                                <input type="hidden" value="<%=data.actCondSetting[itm.proName]%>" name="<%=itm.proName%>">
+                            <%}%>  
+                          </div>
+                      </div>
+                      <%})%>
+                  </div>
+                <%})%>
+              <%}%>   
+              <%if(platformsCcy && platformsCcy.isShow){%>
+                <div class="layui-form-item platformsCcy layui-row">
+                    <div class="layui-inline layui-row layui-col-md12">
+                        <label class="layui-form-grid-label layui-col-md1">
+                          <em class="required"><%if(platformsCcy.required){%>*<%}%></em> <span><%=letters[platformsCcy.proName]%></span>
+                        </label>
+                        <%if(platformsCcy.isDynamict){%>
+                            <div class="layui-col-md7 layui-col-md-offset1">
+                                <% dynamicList.platformsCcy_options.forEach(function(itm,idx){%>
+                                        <input 
+                                        <%if(platformsCcy.required){%> lay-verify="required"  <%}%>
+                                        <%if(data.actCondSetting.platformsCcy && data.actCondSetting.platformsCcy.indexOf(itm.key) != -1){%> checked <%}%>
+                                        lay-filter="platformsCcy" type="checkbox" value="<%=itm.key%>"  name="platformsCcy" title="<%=itm.title%>" lay-skin="primary">
+                                <%})%>
+                            </div>
+                        <%}%>
+                    </div>
+                </div>
+              <%}%>
+              <%if(accountLevel && accountLevel.isShow){%>
+                <div class="layui-form-item accountLevel">
+                    <div class="layui-inline layui-col-md12 layui-row">
+                        <label class="layui-form-grid-label layui-col-md1">
+                          <%if(accountLevel.required){%><em class="required">*</em><%}%>
+                          <span><%=letters[accountLevel.proName]%></span>
+                        </label>
+                        <%if(accountLevel.isDynamict){%>
+                            <div class="layui-col-md7 layui-col-md-offset1">
+                                <% dynamicList[accountLevel.dynamicOptionName].forEach(function(itm,idx){%>
+                                    <input 
+                                    <%if(accountLevel.required){%> lay-verify="required" <%}%>
+                                    <%if(data.actCondSetting.accountLevel && data.actCondSetting.accountLevel.indexOf(itm.key) != -1){%> checked <%}%>
+                                    lay-filter="accountLevel" type="checkbox" value="<%=itm.key%>" name="accountLevel" title="<%=itm.title%>" lay-skin="primary">
+                                    
+                                <%})%>
+                            </div>
+                        <%}%>
+                    </div>
+                </div>
+              <%}%>
+              <%if(whiteListFileName){%>
+                <div class="layui-form-item layui-row">
+                    <label class="layui-form-grid-label layui-col-md1"><%=letters[whiteListFileName.proName]%></label>
+                    <div class="layui-inline uploadContent layui-col-md6">
+                        <button type="button" class="layui-btn sel" id="upload-whitelist"><%=letters[whiteListFileName.proName]%></button>
+                        <a class="" href="" >下载模板</a>
+                    </div>
+                    <div class="layui-inline layui-col-md1">
+                        <button type="button" class="layui-btn upload-btn"  id="whiteBtn">上传</button>
+                    </div>
+                    <input type="hidden" value="" name="whiteListFileName" id="whiteListFileName" value="">
+                    <input type="hidden" value="" name="whiteListFilePath" id="whiteListFilePath" value="">
+                </div>
+              <%}%>
+              <%if(blackListFileName){%>
+                <div class="layui-form-item layui-row">
+                    <label class="layui-form-grid-label layui-col-md1"><%=letters[blackListFileName.proName]%></label>
+                    <div class="layui-inline uploadContent layui-col-md6">
+                        <button type="button" class="layui-btn sel" id="upload-blacklist"><%=letters[blackListFileName.proName]%></button>
+                        <a class=""  href="">下载模板</a>
+                    </div>
+                    <div class="layui-inline layui-col-md1">
+                        <button type="button" class="layui-btn upload-btn" id="blackBtn">上传</button>
+                    </div>
+                    <input type="hidden" name="blackListFileName" id="blackListFileName" value="">
+                    <input type="hidden" name="blackListFilePath" id="blackListFilePath" value="">
+                </div>
+              <%}%>  
+            <%if(tradePrdsList && tradePrdsList.isShow){%>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-row layui-col-md12">
+                        <label class="layui-form-grid-label layui-col-md1">交易产品</label>
+                        <div class="layui-inline prds  layui-col-md10 layui-md-offset1 ">
+                            <div class="layui-form-select layui-check-select flex-item">
+                                <div class="layui-check-select-title">
+                                    <textarea name="tradePrdsList" placeholder="请输入产品名称" class="layui-textarea" id="tradePrdsTextArea"></textarea>
+                                </div>
+                                <div class="layui-check-select-content">
+                                    <dl class="layui-anim layui-anim-upbit layui-select-group">
+                                        <dd lay-value="" class="layui-select-tips">--请选择--</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="layui-inline prd-btns">
+                                <button type="button" class="layui-btn all-select select-btn" >全选</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <%}%>
+            </div>
+            <button style="display:none;" class="layui-submit layui-btn  condition-submit" lay-submit lay-filter="conditionSubmit"></button>
+        </div>
+        </form>
+        <form class="layui-form layui-row">
+          <div class="layui-form-prize table layui-row layui-col-md12">
+            <div class="title layui-col-md12">
+                <p>
+                    <span>任务与奖励</span>
+                </p>
+            </div>
+              <div>
+                    <div class="tr">
+                        <div class="prize-content"></div>
+                    </div>
+              </div>
+            </div>
+            <button class="layui-btn node-submit prize-submit" lay-submit lay-filter="prizeSubmit" style="display:none;"></button>
+        </form>
+            <div class="layui-inline task layui-row layui-col-md12">
+                <% if(type == 'cj'){ %>
+                    <button class="layui-btn layui-btn-sm add-task"><i class="layui-icon">&#xe654;</i>添加层级任务</button>
+                <%}else{%>
+                    <button class="layui-btn layui-btn-sm add-task"><i class="layui-icon">&#xe654;</i>添加任务项</button>
+                <%}%>
+            </div>
+      <div class="btns">
+          <button class="layui-btn submit" lay-filter="addSubmit" lay-submit>提交</button>
+          <button class="layui-btn back ">返回</button>
+      </div>

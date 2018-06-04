@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.message.dao.inf.ActRelatedCustomerDao" >
+
+  <sql id="Base_Column_List" >
+    id,customer_number, demo_customer_number, 
+    company_id, create_user, create_ip, create_date, 
+    update_user, update_ip, update_date, version_no,bind_date
+  </sql>
+  
+  <insert id="save" parameterType="ActRelatedCustomer" >
+    insert into act_related_customer (id,customer_number, demo_customer_number, 
+       company_id, 
+      create_user, create_ip, create_date, 
+      update_user, update_ip, update_date, 
+      version_no,bind_date)
+    values (#{id,jdbcType=BIGINT},  #{customerNumber,jdbcType=BIGINT}, #{demoCustomerNumber,jdbcType=BIGINT}, 
+      #{companyId,jdbcType=BIGINT}, 
+      #{createUser,jdbcType=VARCHAR}, #{createIp,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR}, #{updateIp,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{versionNo,jdbcType=INTEGER},#{bindDate,jdbcType=TIMESTAMP})
+  </insert>
+  
+
+  <update id="update" parameterType="ActRelatedCustomer" >
+    update act_related_customer
+    <set >
+      
+      <if test="customerNumber != null" >
+        customer_number = #{customerNumber,jdbcType=BIGINT},
+      </if>
+      <if test="demoCustomerNumber != null" >
+        demo_customer_number = #{demoCustomerNumber,jdbcType=BIGINT},
+      </if>
+      
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo,jdbcType=INTEGER},
+      </if>
+      <if test="bindDate != null" >
+        bind_date = #{bindDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getById" parameterType="ActRelatedCustomer" resultType="ActRelatedCustomer">
+  	select * from  act_related_customer  where id = #{id}
+  </select>
+</mapper>

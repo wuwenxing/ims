@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActThirdCallRecordDao">
+	<resultMap id="BaseResultMap" type="ActThirdCallRecord">
+		<id column="id" property="id" />
+		<result column="activity_periods" property="activityPeriods" />
+		<result column="company_id" property="companyId" />
+		<result column="platform" property="platform" jdbcType="VARCHAR" />
+		<result column="account_no" property="accountNo" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="record_no" property="recordNo" jdbcType="VARCHAR" />
+		<result column="third_record_no" property="thirdRecordNo" />
+		<result column="parent_record_no" property="parentRecordNo" />
+		<result column="third_deal_result" property="thirdDealResult" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="create_ip" property="createIp" jdbcType="VARCHAR" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+		<result column="update_ip" property="updateIp" jdbcType="VARCHAR" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+		<result column="version_no" property="versionNo" jdbcType="INTEGER" />
+		<result column="delete_flag" property="deleteFlag" jdbcType="VARCHAR" />
+		<result column="enable_flag" property="enableFlag" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="try_count" property="tryCount" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, activity_periods, company_id, platform, account_no, type, code,
+		record_no, third_record_no,
+		parent_record_no, third_deal_result, create_user, create_ip, create_date, update_user,
+		update_ip, update_date, version_no, delete_flag, enable_flag,
+		remark,try_count
+	</sql>
+	
+	<sql id="Base_Column_List_2">
+		a.id, a.activity_periods, a.company_id, a.platform, a.account_no, a.type, a.code,
+		a.record_no, a.third_record_no,
+		a.parent_record_no, a.third_deal_result, a.create_user, a.create_ip, a.create_date, a.update_user,
+		a.update_ip, a.update_date, a.version_no, a.delete_flag, a.enable_flag,
+		a.remark,a.try_count
+	</sql>
+	
+	<insert id="save" parameterType="ActThirdCallRecord" >
+	    insert into act_third_call_record (id,activity_periods,company_id,platform,account_no,type, code, 
+	      record_no, third_record_no, parent_record_no, 
+	      third_deal_result, create_user, create_ip, 
+	      create_date, update_user, update_ip, 
+	      update_date, version_no, delete_flag, 
+	      enable_flag, remark,data,try_count,release_type,source)
+	    values (#{id,jdbcType=INTEGER},#{activityPeriods}, #{companyId},#{platform},#{accountNo}, #{type,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+	      #{recordNo,jdbcType=VARCHAR}, #{thirdRecordNo,jdbcType=VARCHAR}, #{parentRecordNo,jdbcType=VARCHAR}, 
+	      #{thirdDealResult,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{createIp,jdbcType=VARCHAR}, 
+	      #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateIp,jdbcType=VARCHAR}, 
+	      #{updateDate,jdbcType=TIMESTAMP}, #{versionNo,jdbcType=BIGINT}, #{deleteFlag,jdbcType=VARCHAR}, 
+	      #{enableFlag,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{data,jdbcType=VARCHAR},#{tryCount},#{releaseType},#{source})
+  	</insert>
+	
+	<select id="findList" resultMap="BaseResultMap" parameterType="com.gwghk.ims.common.vo.activity.ActThirdCallRecordVO">
+		select
+		<include refid="Base_Column_List_2" />
+		from act_third_call_record a JOIN  act_setting b on  a.activity_periods=b.activity_periods
+		WHERE 1 = 1
+		<if test="activityPeriods != null and activityPeriods != ''">
+			AND a.activity_periods = #{activityPeriods}
+		</if>
+		and (b.tag_code is null  or b.tag_code =''
+         <if test="tagCodes != null">
+	       or b.tag_code in
+		    <foreach collection="tagCodes" open="(" close=")" index="index" item="item"  separator=",">
+		      #{item}
+		    </foreach>
+	      </if>
+	    )
+		<if test="platform != null and platform != ''">
+			AND a.platform = #{platform}
+		</if>
+		<if test="accountNo != null and accountNo != ''">
+			AND a.account_no = #{accountNo}
+		</if>
+		<if test="type != null and type != ''">
+			AND a.type = #{type}
+		</if>
+		<if test="code != null and code != ''">
+			AND a.code = #{code}
+		</if>
+		<if test="recordNo != null and recordNo != ''">
+			AND a.record_no like CONCAT('%',#{recordNo},'%')
+		</if>
+		<if test="thirdRecordNo != null and thirdRecordNo != ''">
+			AND a.third_record_no like CONCAT('%',#{thirdRecordNo},'%')
+		</if>
+		<if test="parentRecordNo != null and parentRecordNo != ''">
+			AND a.parent_record_no like CONCAT('%',#{parentRecordNo},'%')
+		</if>
+		<if test="thirdDealResult != null and thirdDealResult != ''">
+			AND a.third_deal_result like CONCAT('%',#{thirdDealResult},'%')
+		</if>
+	</select>
+	
+	<select id="findObject" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from act_third_call_record
+		where id = #{id}
+	</select>
+	
+	<update id="update" parameterType="ActThirdCallRecord">
+		update act_third_call_record
+		<set>
+			<if test="tryCount!=null">
+				try_count = #{tryCount},
+			</if>
+			<if test="updateDate!=null">
+				update_date=#{updateDate},
+			</if>
+		</set>
+		where
+		id=#{id}
+	</update>
+	
+</mapper>

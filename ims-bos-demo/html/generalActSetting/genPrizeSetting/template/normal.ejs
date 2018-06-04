@@ -1,0 +1,84 @@
+<form class="layui-form">
+  <div class="form-list-item">
+    <!-- 物品编号 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">物品编号</label>
+      <div class="layui-input-inline">
+        <input type="text" name="giftNumber" required lay-verify="required" class="layui-input" value="<%=giftNumber%>">
+      </div>
+    </div>
+  </div>
+  <div class="form-list-item">
+    <!-- 所属活动 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">所属活动</label>
+      <div class="layui-input-inline">
+        <select name="activityPeriodsAdd" required lay-verify="required">
+          <option value="1">---请选择---</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-list-item">
+    <!-- 物品名称 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">物品名称</label>
+      <div class="layui-input-inline">
+        <input type="text" name="giftName" required lay-verify="required" class="layui-input" value="<%=giftName%>">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-list-item">
+    <!-- 物品数量 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">物品数量</label>
+      <div class="layui-input-inline">
+        <input type="text" name="giftAmount" class="layui-input" value="<%=giftAmount%>">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-list-item">
+    <!-- 物品中奖率 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">物品中奖率</label>
+      <div class="layui-input-inline">
+        <input type="text" name="giftRate" required lay-verify="required" class="layui-input" value="<%=giftRate%>">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-list-item">
+    <!-- 物品有效时间 -->
+    <div class="layui-inline">
+      <label class="layui-form-label"> 物品有效时间</label>
+      <div class="layui-input-inline">
+        <input type="text" name="startDateSearch" required lay-verify="required" class="layui-input" id="startDateSearch" value="<%=startDateSearch%>">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-list-item">
+    <!-- 物品状态 -->
+    <div class="layui-inline flex-container">
+      <label class="layui-form-label">物品状态</label>
+      <div class="layui-input-inline flex-block">
+        <select name="enableFlag">
+          <option value="">---请选择---</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="options-bar">
+    <% if(edit){%>
+      <button class="layui-btn" lay-submit lay-filter="editFormEdit">修改</button>
+      <%}else{%>
+        <button class="layui-btn" lay-submit lay-filter="editFormSubmit">提交</button>
+        <%}%>
+
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+  </div>
+</form>

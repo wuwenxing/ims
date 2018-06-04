@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		
+	<!-- 系统管理 -->
+	<dubbo:reference id="misKeyValDubboService"
+		interface="com.gwghk.ims.common.inf.mis.base.MisKeyValDubboService"
+		retries="0" check="false" timeout="1000000" />
+		<!-- 系统管理 -->
+	<dubbo:reference id="misSystemDictDubboService"
+		interface="com.gwghk.ims.common.inf.mis.sys.MisSystemDictDubboService"
+		retries="0" check="false" timeout="1000000" />
+	<!-- 系统管理 -->
+	<dubbo:reference id="misActItemsSettingDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActItemsSettingDubboService"
+		retries="0" check="false" timeout="1000000" />
+</beans>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.message.dao.inf.ActCustomerInfoDao" >
+
+ 	<select id="selectByExample" resultType="ActCustomerInfo" parameterType="ActCustomerInfo" >
+	    select
+	   	*
+	    from act_customer_info_${env}
+	    where 1=1
+	       <if test="platform != null and platform != '' " >
+	        and platform = '${platform}'
+	      </if>
+	      <if test="companyId != null and companyId !='' " >
+	        and company_id = ${companyId}
+	      </if>
+	      <if test="accountNo != null and accountNo !='' " >
+	        and account_no = '${accountNo}'
+	      </if>
+	      and delete_flag != 'Y' and enable_flag = 'Y'
+  	</select>
+	
+	<insert id="save" parameterType="ActCustomerInfo" >
+		insert into act_customer_info_${env} ( account_no, 
+	      chinese_name, platform, account_currency, 
+	      account_level, mobile, id_number, 
+	      email, account_env, activated_status, 
+	      account_status,  register_time, 
+	      activated_time, remark, 
+	      version_no, enable_flag, delete_flag, 
+	      create_user, create_date, create_ip, 
+	      update_user, update_date, update_ip, 
+	      platform_currency,account_create_date,account_update_date,nationality,company_id,push_flag)
+	    values (  #{accountNo,jdbcType=VARCHAR}, 
+	      #{chineseName,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, #{accountCurrency,jdbcType=VARCHAR}, 
+	      #{accountLevel,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{idNumber,jdbcType=VARCHAR}, 
+	      #{email,jdbcType=VARCHAR}, #{accountEnv,jdbcType=VARCHAR}, #{activatedStatus,jdbcType=VARCHAR}, 
+	      #{accountStatus,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, 
+	      #{activatedTime,jdbcType=TIMESTAMP},  #{remark,jdbcType=VARCHAR}, 
+	      #{versionNo,jdbcType=INTEGER}, #{enableFlag,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
+	      #{createUser,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createIp,jdbcType=VARCHAR}, 
+	      #{updateUser,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateIp,jdbcType=VARCHAR}, 
+	      #{platformCurrency,jdbcType=VARCHAR},#{accountCreateDate,jdbcType=TIMESTAMP},
+	      #{accountUpdateDate,jdbcType=TIMESTAMP},#{nationality},#{companyId,jdbcType=INTEGER},'0')
+	</insert>
+	
+	<update id="update" parameterType="ActCustomerInfo">
+		update act_customer_info_${env}
+		<set>
+			<if test="updateDate != null" >
+	        	update_date = #{updateDate,jdbcType=TIMESTAMP},
+	      	</if>
+	      	<if test="chineseName != null" >
+	        	chinese_name = #{chineseName,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="accountLevel != null" >
+	        	account_level = #{accountLevel,jdbcType=VARCHAR},
+	     	 </if>
+	      	<if test="mobile != null" >
+	        	mobile = #{mobile,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="idNumber != null" >
+	        	id_number = #{idNumber,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="email != null" >
+	        	email = #{email,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="accountEnv != null" >
+	        	account_env = #{accountEnv,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="activatedStatus != null" >
+	       		activated_status = #{activatedStatus,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="accountStatus != null" >
+	       		account_status = #{accountStatus,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="activatedTime != null" >
+	        	activated_time = #{activatedTime,jdbcType=TIMESTAMP},
+	      	</if>	  
+	      	<if test="updateUser != null" >
+	        	update_user = #{updateUser,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="accountUpdateDate!=null">
+	      		account_update_date = #{accountUpdateDate,jdbcType=TIMESTAMP},
+	      	</if>
+	      	<if test="nationality!=null">
+	      		nationality = #{nationality},
+	      	</if>
+	    </set>
+	    where id =#{id}
+	</update>
+</mapper>

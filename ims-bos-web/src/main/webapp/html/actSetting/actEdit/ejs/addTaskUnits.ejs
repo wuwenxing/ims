@@ -1,0 +1,37 @@
+<% var params = data.params; %>
+<% params.forEach(function(item,index){ %>
+    <div class="layui-inline unitStr item">
+        <% if(item.isShow){ %>
+            <% if(item.isDynamict){} %>
+            <% var validType = item.validType || ''; %>
+            <% if(item.inputType == 'select'){ %>
+                <div class="layui-inline">
+                    <select name="<%=item.proName%>" id=""
+                        <%if(item.required){%> lay-verify='required|<%=validType%>' <%}%>
+                        >
+                        <option value="" selected>--请选择--</option>
+                        <% if(item.options && item.options.length){ %>
+                            <% item.options.forEach(function(itm,idx){%>
+                                <option value="<%=itm%>" selected>--请选择--</option>
+                            <%})%>
+                        <% }%>
+                    </select>
+                </div>                               
+            <%}else{%>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" 
+                        <%if(item.required){%> 
+                            lay-verify='required|<%=item.validType%>' 
+                        <%}else{%>
+                            lay-verify='<%=item.validType%>' 
+                        <%}%>
+                        name="<%=item.proName%>">
+                </div>
+                <div class="layui-inline <%=item.paramUnit.unitType%>"><%=dynamicList.itemsUnitMap[item.paramUnit.defaultVal]%></div>
+                <input type="hidden" class="<%=item.paramUnit.unitType%>" value="<%=item.paramUnit.defaultVal%>" name="<%=item.paramUnit.proName%>">
+            <%}%>
+        <%}else{%>
+            <input type="hidden" value="">
+        <%}%>
+    </div>
+<%})%>

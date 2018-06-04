@@ -1,0 +1,103 @@
+<form action="" class="layui-form">
+    <table>
+        <tr>
+            <td>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label">客户账号:<span class="mustInput"></span></label>
+                </div>
+            </td>
+            <td>
+                <div class="layui-inline">
+                    <p><%=data.accountNo%></p>
+                </div>
+            </td>
+            <td>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label">手机号:<span class="mustInput"></span></label>
+                </div>
+            </td>
+            <td>
+                <div class="layui-inline">
+                    <p><%=data.mobile%></p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label">收货地址:</label>
+                </div>
+            </td>
+            <td colspan="3">
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" name="detailAddress" value="<%=data.detailAddress%>">
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i>修改</button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label">商品名称:<span class="mustInput"></span></label>
+                </div>
+            </td>
+            <td colspan="3">
+                <div class="layui-inline">
+                    <p><%=data.itemsName%></p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label">快递公司:<span class="mustInput"></span></label>
+                </div>
+            </td>
+            <td>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" name="expressCompany" value="<%=data.expressCompany%>">
+                </div>
+            </td>
+            <td>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label">快递单号:<span class="mustInput"></span></label>
+                </div>
+            </td>
+            <td>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" name="expressNo" value="<%=data.expressNo%>">
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i>修改</button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label">发货日期:</label>
+                </div>
+            </td>
+            <td colspan="3">
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" id="deliveryDate" placeholder="yyyy:mm:dd hh:mm:ss" value="<%=data.deliveryDate%>">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label">备注:</label>
+                </div>
+            </td>
+            <td>
+                <div class="layui-inline">
+                    <textarea name="" id="" class="layui-textarea"><%=data.remark%></textarea>
+                </div>  
+            </td>
+        </tr>
+    </table>
+    <button class="layui-btn edit-btn" style="display:none;" lay-submit lay-filter="editDeliveryInfo"></button>
+</form>

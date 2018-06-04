@@ -1,0 +1,109 @@
+.m-container .layout-3 .layui-table td[data-field=activityPeriods], .m-container .layout-3 .layui-table td[data-field=pno], .m-container .layout-3 .layui-table td[data-field=activityName] {
+  text-decoration: underline;
+  color: #009688;
+  cursor: pointer;
+}
+
+.m-container .layout-3 .layui-form .layui-form-item .tips p {
+  font-size: 12px;
+  color: #131626;
+  padding-left: 20px;
+  width: 100%;
+}
+
+/*
+.layui-layer.layui-layer-dialog .layui-layer-content {
+    overflow-y: hidden;
+}
+.layui-layer-dialog {
+    border-radius: 8px !important;
+     .layui-layer-content {
+        padding:14px 56px 0;
+        .layui-form {
+            .layui-form-item {
+                .tips {
+                    p {
+                        font-size: 12px;
+                        color:#131626;
+                        padding-left: 20px;
+                        width: 100%;
+                    }
+                }
+            }
+
+        }
+    }
+    .layui-layer-title {
+        height: 76px;
+        background: #fff;
+        line-height: 76px;
+        text-align: center;
+        color:#131626;
+        font-size: 18px;
+        border:none;
+    }
+    .layui-layer-setwin {
+        top: 22px;
+        right: 22px;
+        
+    }
+    .layui-layer-btn {
+        text-align: center;
+        padding-top: 20px;
+        a {
+            display: block;
+            width: 320px;
+            height: 40px;
+            color:#fff;
+            font-size: 14px;
+            border-radius: 4px;
+            background-color: #6772e5;
+            margin: 0 auto;
+            padding: 0;
+            line-height: 40px;
+        }
+    }
+
+}
+
+.layui-form  .layui-form-item .uploadContent {
+    width: 586px;
+    height: 40px;
+    border-radius: 4px;
+    border: rgba(1, 5, 71, 0.1) solid 1px;
+  }
+  
+  .layui-form  .layui-form-item .uploadContent .layui-btn {
+    padding: 0;
+    background: transparent;
+    color: #555762;
+  }
+  
+  .layui-form  .layui-form-item .uploadContent .layui-btn.sel {
+    padding-left: 20px;
+    width: 550px;
+    text-align: left;
+    color:#131626;
+    font-size: 14px;
+  }
+  
+  .layui-form  .layui-form-item .uploadContent .template {
+    color: #6772e5;
+    width: 120px;
+    height: 40px;
+    position: relative;
+    align-self: center;
+    line-height: 40px;
+    text-align: center;
+  }
+  
+  .layui-form  .layui-form-item .uploadContent .template::before {
+    position: absolute;
+    display: block;
+    content: '';
+    height: 20px;
+    left: 0;
+    top: 10px;
+    width: 1px;
+    background: rgba(1, 5, 71, 0.1);
+  }*/

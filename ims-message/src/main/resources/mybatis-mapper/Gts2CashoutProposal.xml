@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.message.dao.inf.Gts2CashoutProposalDao" >
+ 
+  <insert id="save" parameterType="Gts2CashoutProposal" >
+    insert into t_cashout_proposal_real (id, gts2_customer_id, gts2_account_id, 
+      account_group_id, account_no, customer_no, 
+      agent_code, cus_tran_type, platform, 
+      expire_date, pay_amount, account_currency, 
+      pay_currency, trans_amount, trans_currency, 
+      exchange_rate, bank, bank_account_number, 
+      bank_pay_method, fee, information_from, 
+      remark, withdrew_bankname, withdrew_bank_account, 
+      withdrew_bank_accounttype, withdrew_national_transfercode, 
+      withdrew_bank_address, withdrew_bank_country, withdrew_province, 
+      withdrew_bank_city, withdrew_bank_branch, pno, 
+      proposal_status, is_auto_approve, proposer, 
+      pre_approver, approver, canceller, 
+      proposal_date, pre_approve_date, approve_date, 
+      cancel_date, customer_group_id, create_user, 
+      create_ip, create_date, update_user, 
+      update_ip, update_date, version_no, 
+      withdraw_all, cashout_channel, refer_pno, 
+      actual_exchange_rate, actual_pay_amount, withdrew_bank_account_name, 
+      prev_matched_pno, daily_count, margin_ratio, 
+      margin_credit, withdrew_file_path, withdrew_file_name
+      )
+    values (#{id,jdbcType=BIGINT}, #{gts2CustomerId,jdbcType=BIGINT}, #{gts2AccountId,jdbcType=BIGINT}, 
+      #{accountGroupId,jdbcType=BIGINT}, #{accountNo,jdbcType=CHAR}, #{customerNo,jdbcType=CHAR}, 
+      #{agentCode,jdbcType=CHAR}, #{cusTranType,jdbcType=INTEGER}, #{platform,jdbcType=CHAR}, 
+      #{expireDate,jdbcType=TIMESTAMP}, #{payAmount,jdbcType=DOUBLE}, #{accountCurrency,jdbcType=CHAR}, 
+      #{payCurrency,jdbcType=CHAR}, #{transAmount,jdbcType=DOUBLE}, #{transCurrency,jdbcType=CHAR}, 
+      #{exchangeRate,jdbcType=DOUBLE}, #{bank,jdbcType=CHAR}, #{bankAccountNumber,jdbcType=CHAR}, 
+      #{bankPayMethod,jdbcType=CHAR}, #{fee,jdbcType=DOUBLE}, #{informationFrom,jdbcType=CHAR}, 
+      #{remark,jdbcType=CHAR}, #{withdrewBankname,jdbcType=CHAR}, #{withdrewBankAccount,jdbcType=CHAR}, 
+      #{withdrewBankAccounttype,jdbcType=CHAR}, #{withdrewNationalTransfercode,jdbcType=CHAR}, 
+      #{withdrewBankAddress,jdbcType=CHAR}, #{withdrewBankCountry,jdbcType=CHAR}, #{withdrewProvince,jdbcType=CHAR}, 
+      #{withdrewBankCity,jdbcType=CHAR}, #{withdrewBankBranch,jdbcType=CHAR}, #{pno,jdbcType=CHAR}, 
+      #{proposalStatus,jdbcType=CHAR}, #{isAutoApprove,jdbcType=BIT}, #{proposer,jdbcType=CHAR}, 
+      #{preApprover,jdbcType=CHAR}, #{approver,jdbcType=CHAR}, #{canceller,jdbcType=CHAR}, 
+      #{proposalDate,jdbcType=TIMESTAMP}, #{preApproveDate,jdbcType=TIMESTAMP}, #{approveDate,jdbcType=TIMESTAMP}, 
+      #{cancelDate,jdbcType=TIMESTAMP}, #{customerGroupId,jdbcType=BIGINT}, #{createUser,jdbcType=CHAR}, 
+      #{createIp,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=CHAR}, 
+      #{updateIp,jdbcType=CHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{versionNo,jdbcType=INTEGER}, 
+      #{withdrawAll,jdbcType=BIT}, #{cashoutChannel,jdbcType=CHAR}, #{referPno,jdbcType=CHAR}, 
+      #{actualExchangeRate,jdbcType=DOUBLE}, #{actualPayAmount,jdbcType=DOUBLE}, #{withdrewBankAccountName,jdbcType=CHAR}, 
+      #{prevMatchedPno,jdbcType=CHAR}, #{dailyCount,jdbcType=INTEGER}, #{marginRatio,jdbcType=DOUBLE}, 
+      #{marginCredit,jdbcType=DOUBLE}, #{withdrewFilePath,jdbcType=LONGVARCHAR}, #{withdrewFileName,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  
+  <update id="update" parameterType="Gts2CashoutProposal" >
+    update t_cashout_proposal_real
+    <set >
+      <if test="gts2CustomerId != null" >
+        gts2_customer_id = #{gts2CustomerId,jdbcType=BIGINT},
+      </if>
+      <if test="gts2AccountId != null" >
+        gts2_account_id = #{gts2AccountId,jdbcType=BIGINT},
+      </if>
+      <if test="accountGroupId != null" >
+        account_group_id = #{accountGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="accountNo != null" >
+        account_no = #{accountNo,jdbcType=CHAR},
+      </if>
+      <if test="customerNo != null" >
+        customer_no = #{customerNo,jdbcType=CHAR},
+      </if>
+      <if test="agentCode != null" >
+        agent_code = #{agentCode,jdbcType=CHAR},
+      </if>
+      <if test="cusTranType != null" >
+        cus_tran_type = #{cusTranType,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=CHAR},
+      </if>
+      <if test="expireDate != null" >
+        expire_date = #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payAmount != null" >
+        pay_amount = #{payAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="accountCurrency != null" >
+        account_currency = #{accountCurrency,jdbcType=CHAR},
+      </if>
+      <if test="payCurrency != null" >
+        pay_currency = #{payCurrency,jdbcType=CHAR},
+      </if>
+      <if test="transAmount != null" >
+        trans_amount = #{transAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="transCurrency != null" >
+        trans_currency = #{transCurrency,jdbcType=CHAR},
+      </if>
+      <if test="exchangeRate != null" >
+        exchange_rate = #{exchangeRate,jdbcType=DOUBLE},
+      </if>
+      <if test="bank != null" >
+        bank = #{bank,jdbcType=CHAR},
+      </if>
+      <if test="bankAccountNumber != null" >
+        bank_account_number = #{bankAccountNumber,jdbcType=CHAR},
+      </if>
+      <if test="bankPayMethod != null" >
+        bank_pay_method = #{bankPayMethod,jdbcType=CHAR},
+      </if>
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=DOUBLE},
+      </if>
+      <if test="informationFrom != null" >
+        information_from = #{informationFrom,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=CHAR},
+      </if>
+      <if test="withdrewBankname != null" >
+        withdrew_bankname = #{withdrewBankname,jdbcType=CHAR},
+      </if>
+      <if test="withdrewBankAccount != null" >
+        withdrew_bank_account = #{withdrewBankAccount,jdbcType=CHAR},
+      </if>
+      <if test="withdrewBankAccounttype != null" >
+        withdrew_bank_accounttype = #{withdrewBankAccounttype,jdbcType=CHAR},
+      </if>
+      <if test="withdrewNationalTransfercode != null" >
+        withdrew_national_transfercode = #{withdrewNationalTransfercode,jdbcType=CHAR},
+      </if>
+      <if test="withdrewBankAddress != null" >
+        withdrew_bank_address = #{withdrewBankAddress,jdbcType=CHAR},
+      </if>
+      <if test="withdrewBankCountry != null" >
+        withdrew_bank_country = #{withdrewBankCountry,jdbcType=CHAR},
+      </if>
+      <if test="withdrewProvince != null" >
+        withdrew_province = #{withdrewProvince,jdbcType=CHAR},
+      </if>
+      <if test="withdrewBankCity != null" >
+        withdrew_bank_city = #{withdrewBankCity,jdbcType=CHAR},
+      </if>
+      <if test="withdrewBankBranch != null" >
+        withdrew_bank_branch = #{withdrewBankBranch,jdbcType=CHAR},
+      </if>
+      <if test="pno != null" >
+        pno = #{pno,jdbcType=CHAR},
+      </if>
+      <if test="proposalStatus != null" >
+        proposal_status = #{proposalStatus,jdbcType=CHAR},
+      </if>
+      <if test="isAutoApprove != null" >
+        is_auto_approve = #{isAutoApprove,jdbcType=BIT},
+      </if>
+      <if test="proposer != null" >
+        proposer = #{proposer,jdbcType=CHAR},
+      </if>
+      <if test="preApprover != null" >
+        pre_approver = #{preApprover,jdbcType=CHAR},
+      </if>
+      <if test="approver != null" >
+        approver = #{approver,jdbcType=CHAR},
+      </if>
+      <if test="canceller != null" >
+        canceller = #{canceller,jdbcType=CHAR},
+      </if>
+      <if test="proposalDate != null" >
+        proposal_date = #{proposalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="preApproveDate != null" >
+        pre_approve_date = #{preApproveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveDate != null" >
+        approve_date = #{approveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelDate != null" >
+        cancel_date = #{cancelDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerGroupId != null" >
+        customer_group_id = #{customerGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp,jdbcType=CHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo,jdbcType=INTEGER},
+      </if>
+      <if test="withdrawAll != null" >
+        withdraw_all = #{withdrawAll,jdbcType=BIT},
+      </if>
+      <if test="cashoutChannel != null" >
+        cashout_channel = #{cashoutChannel,jdbcType=CHAR},
+      </if>
+      <if test="referPno != null" >
+        refer_pno = #{referPno,jdbcType=CHAR},
+      </if>
+      <if test="actualExchangeRate != null" >
+        actual_exchange_rate = #{actualExchangeRate,jdbcType=DOUBLE},
+      </if>
+      <if test="actualPayAmount != null" >
+        actual_pay_amount = #{actualPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="withdrewBankAccountName != null" >
+        withdrew_bank_account_name = #{withdrewBankAccountName,jdbcType=CHAR},
+      </if>
+      <if test="prevMatchedPno != null" >
+        prev_matched_pno = #{prevMatchedPno,jdbcType=CHAR},
+      </if>
+      <if test="dailyCount != null" >
+        daily_count = #{dailyCount,jdbcType=INTEGER},
+      </if>
+      <if test="marginRatio != null" >
+        margin_ratio = #{marginRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="marginCredit != null" >
+        margin_credit = #{marginCredit,jdbcType=DOUBLE},
+      </if>
+      <if test="withdrewFilePath != null" >
+        withdrew_file_path = #{withdrewFilePath,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="withdrewFileName != null" >
+        withdrew_file_name = #{withdrewFileName,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+</mapper>

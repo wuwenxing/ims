@@ -1,0 +1,43 @@
+<form class="layui-form">
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">模板下载</label>
+    </div>
+    <div class="layui-inline">
+      <a href="javascript:;" class="download">下载模板</a>
+    </div>
+  </div>
+  <div class="layui-form-item">
+      <div class="layui-inline">
+          <label class="layui-form-label">选择excel文件</label>
+          <div class="layui-inline uploadContent">
+              <button type="button" class="layui-btn template" id="uploadUserExcel" >选择excel文件</button>
+          </div>
+      </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">上传文件类型</label>
+    </div>
+    <div class="layui-inline">
+      <span>支持.xls; .xlsx格式excel文件</span>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">注意事项</label>
+    </div>
+    <div class="layui-inline">
+      <span>	1)交易账号为必填项</span>
+    </div>
+  </div>
+  <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">提示信息</label>
+            <div class="layui-input-block">
+                <textarea name="remark" id='remark' placeholder="返回结果信息" class="layui-textarea"></textarea>
+            </div>
+  </div>
+  <div style="display:none;">
+    <button class="layui-btn upload-btn" lay-submit lay-filter="upload-btn"></button>
+  </div>
+</form>

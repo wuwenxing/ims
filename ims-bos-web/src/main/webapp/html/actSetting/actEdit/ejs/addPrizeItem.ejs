@@ -1,0 +1,16 @@
+<div class="prize-item layui-row">
+    <div>
+        <div class="layui-inline prizeName">
+            <select name="itemNumber" id="" lay-filter="addItemCode">
+                <option value="" selected>--请选择--</option>
+                <% prizelist.forEach(function(item,index){%>
+                    <option data-price="<%=item.itemPrice%>" data-category="<%=item.itemCategory%>" value="<%=item.itemNumber%>" data-type="<%=item.itemType%>" ><%=item.itemName%></option>
+                <%})%>
+            </select>
+        </div>    
+        <div class="layui-inline prize-params"></div>
+        <div class="layui-inline">
+            <button class="layui-btn layui-btn-danger del-prize">删除物品</button>
+        </div>
+    </div>
+</div>

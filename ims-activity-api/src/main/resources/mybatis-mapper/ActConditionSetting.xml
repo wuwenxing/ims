@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActConditionSettingDao" >
+
+  <select id="findListByMap" parameterType="java.util.Map" resultType="ActConditionSetting">
+    select * from act_condition_setting where  delete_flag != 'Y' 
+    <if test="activityPeriods != null and activityPeriods != ''" >
+		and activity_periods = #{activityPeriods}
+    </if>
+    <if test="conditionType != null and conditionType != ''" >
+		and condition_type = #{conditionType}
+    </if>
+    <if test="conditionVal != null and conditionVal != ''" >
+		and condition_val = #{conditionVal}
+    </if>
+    <if test="companyId != null and companyId != ''" >
+		and companyId = #{companyId}
+    </if>
+  </select>
+  <select id="findObject" parameterType="java.lang.Integer" resultType="ActConditionSetting">
+    select * from act_condition_setting
+    where id = #{id}
+  </select>
+  <select id="findObjectByMap"  resultType="ActConditionSetting">
+    select * from act_condition_setting where activity_periods = #{activityPeriods} and  condition_type = #{conditionType}
+  </select>
+   <delete id="deleteBatch">
+	delete from act_condition_setting where id in
+	<foreach item="item" index="index" collection="list" open="("
+		separator="," close=")">
+		#{item}
+	</foreach>
+  </delete>
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from act_condition_setting
+    where id = #{id}
+  </delete>
+  <insert id="save" parameterType="ActConditionSetting" >
+    insert into act_condition_setting (id, activity_periods, condition_type, 
+      condition_val, enable_flag, delete_flag, 
+      create_user, create_date, create_ip, 
+      update_user, update_date, update_ip, 
+      version_no, company_id)
+    values (#{id}, #{activityPeriods}, #{conditionType}, 
+      #{conditionVal}, #{enableFlag}, #{deleteFlag}, 
+      #{createUser}, #{createDate}, #{createIp}, 
+      #{updateUser}, #{updateDate}, #{updateIp}, 
+      #{versionNo}, #{companyId})
+  </insert>
+  <update id="update" parameterType="ActConditionSetting" >
+    update act_condition_setting
+    set activity_periods = #{activityPeriods},
+      condition_type = #{conditionType},
+      condition_val = #{conditionVal},
+      enable_flag = #{enableFlag},
+      delete_flag = #{deleteFlag},
+      create_user = #{createUser},
+      create_date = #{createDate},
+      create_ip = #{createIp},
+      update_user = #{updateUser},
+      update_date = #{updateDate},
+      update_ip = #{updateIp},
+      version_no = #{versionNo},
+      company_id = #{companyId}
+    where id = #{id}
+  </update>
+</mapper>

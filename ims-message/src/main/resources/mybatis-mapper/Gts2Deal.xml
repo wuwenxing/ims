@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.message.dao.inf.Gts2DealDao" >
+
+  <insert id="save" parameterType="Gts2Deal" >
+    insert into gts2deal_${env} (id, uuid,  
+      groupid, accountid, positionid, 
+      orderid, direction, status, 
+      reason, symbol, execvolume, 
+      execprice, exectime, exectickseq, 
+      srcvolume, srcprice, srctickseq, 
+      rate, profit, swap, commission, 
+      amountsrc, amountdst, proposalno, 
+      proposaltype, comment, orderrefid, 
+      openmargin, openmarginmaintenance, openmarginstopout, 
+      openmarginrate, p_id, p_relate_id1, 
+      p_relate_id2, orderseq, tickno, 
+      platform)
+    values (#{id,jdbcType=INTEGER}, #{uuid,jdbcType=INTEGER},  
+      #{groupid,jdbcType=INTEGER}, #{accountid,jdbcType=INTEGER}, #{positionid,jdbcType=INTEGER}, 
+      #{orderid,jdbcType=INTEGER}, #{direction,jdbcType=SMALLINT}, #{status,jdbcType=SMALLINT}, 
+      #{reason,jdbcType=SMALLINT}, #{symbol,jdbcType=CHAR}, #{execvolume,jdbcType=DOUBLE}, 
+      #{execprice,jdbcType=DOUBLE}, #{exectime,jdbcType=TIMESTAMP}, #{exectickseq,jdbcType=CHAR}, 
+      #{srcvolume,jdbcType=DOUBLE}, #{srcprice,jdbcType=DOUBLE}, #{srctickseq,jdbcType=CHAR}, 
+      #{rate,jdbcType=DOUBLE}, #{profit,jdbcType=DOUBLE}, #{swap,jdbcType=DOUBLE}, #{commission,jdbcType=DOUBLE}, 
+      #{amountsrc,jdbcType=DOUBLE}, #{amountdst,jdbcType=DOUBLE}, #{proposalno,jdbcType=CHAR}, 
+      #{proposaltype,jdbcType=INTEGER}, #{comment,jdbcType=CHAR}, #{orderrefid,jdbcType=INTEGER}, 
+      #{openmargin,jdbcType=DOUBLE}, #{openmarginmaintenance,jdbcType=DOUBLE}, #{openmarginstopout,jdbcType=DOUBLE}, 
+      #{openmarginrate,jdbcType=DOUBLE}, #{pId,jdbcType=INTEGER}, #{pRelateId1,jdbcType=INTEGER}, 
+      #{pRelateId2,jdbcType=INTEGER}, #{orderseq,jdbcType=INTEGER}, #{tickno,jdbcType=CHAR}, 
+      #{platform,jdbcType=CHAR})
+  </insert>
+
+  <insert id="insertBatchReal" parameterType="java.util.List">
+	 insert into gts2deal_real (id, uuid,  
+      groupid, accountid, positionid, 
+      orderid, direction, status, 
+      reason, symbol, execvolume, 
+      execprice, exectime, exectickseq, 
+      srcvolume, srcprice, srctickseq, 
+      rate, profit, swap, commission, 
+      amountsrc, amountdst, proposalno, 
+      proposaltype, comment, orderrefid, 
+      openmargin, openmarginmaintenance, openmarginstopout, 
+      openmarginrate, p_id, p_relate_id1, 
+      p_relate_id2, orderseq, tickno, 
+      platform)
+	values
+	<foreach collection="gts2DealRealList" item="item" index="index" separator=",">
+		 (#{item.id,jdbcType=INTEGER}, #{item.uuid,jdbcType=INTEGER},  
+	      #{item.groupid,jdbcType=INTEGER}, #{item.accountid,jdbcType=INTEGER}, #{item.positionid,jdbcType=INTEGER}, 
+	      #{item.orderid,jdbcType=INTEGER}, #{item.direction,jdbcType=SMALLINT}, #{item.status,jdbcType=SMALLINT}, 
+	      #{item.reason,jdbcType=SMALLINT}, #{item.symbol,jdbcType=CHAR}, #{item.execvolume,jdbcType=DOUBLE}, 
+	      #{item.execprice,jdbcType=DOUBLE}, #{item.exectime,jdbcType=TIMESTAMP}, #{item.exectickseq,jdbcType=CHAR}, 
+	      #{item.srcvolume,jdbcType=DOUBLE}, #{item.srcprice,jdbcType=DOUBLE}, #{item.srctickseq,jdbcType=CHAR}, 
+	      #{item.rate,jdbcType=DOUBLE}, #{item.profit,jdbcType=DOUBLE}, #{item.swap,jdbcType=DOUBLE}, #{item.commission,jdbcType=DOUBLE}, 
+	      #{item.amountsrc,jdbcType=DOUBLE}, #{item.amountdst,jdbcType=DOUBLE}, #{item.proposalno,jdbcType=CHAR}, 
+	      #{item.proposaltype,jdbcType=INTEGER}, #{item.comment,jdbcType=CHAR}, #{item.orderrefid,jdbcType=INTEGER}, 
+	      #{item.openmargin,jdbcType=DOUBLE}, #{item.openmarginmaintenance,jdbcType=DOUBLE}, #{item.openmarginstopout,jdbcType=DOUBLE}, 
+	      #{item.openmarginrate,jdbcType=DOUBLE}, #{item.pId,jdbcType=INTEGER}, #{item.pRelateId1,jdbcType=INTEGER}, 
+	      #{item.pRelateId2,jdbcType=INTEGER}, #{item.orderseq,jdbcType=INTEGER}, #{item.tickno,jdbcType=CHAR}, 
+	      #{item.platform,jdbcType=CHAR})
+	</foreach>
+   </insert>
+
+   <update id="update" parameterType="Gts2Deal" >
+    update gts2deal_${env}
+    <set >
+      <if test="positionid != null" >
+        positionid = #{positionid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        orderid = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="direction != null" >
+        direction = #{direction,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=SMALLINT},
+      </if>
+      <if test="symbol != null" >
+        symbol = #{symbol,jdbcType=CHAR},
+      </if>
+      <if test="execvolume != null" >
+        execvolume = #{execvolume,jdbcType=DOUBLE},
+      </if>
+      <if test="execprice != null" >
+        execprice = #{execprice,jdbcType=DOUBLE},
+      </if>
+      <if test="exectime != null" >
+        exectime = #{exectime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exectickseq != null" >
+        exectickseq = #{exectickseq,jdbcType=CHAR},
+      </if>
+      <if test="srcvolume != null" >
+        srcvolume = #{srcvolume,jdbcType=DOUBLE},
+      </if>
+      <if test="srcprice != null" >
+        srcprice = #{srcprice,jdbcType=DOUBLE},
+      </if>
+      <if test="srctickseq != null" >
+        srctickseq = #{srctickseq,jdbcType=CHAR},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="profit != null" >
+        profit = #{profit,jdbcType=DOUBLE},
+      </if>
+      <if test="swap != null" >
+        swap = #{swap,jdbcType=DOUBLE},
+      </if>
+      <if test="commission != null" >
+        commission = #{commission,jdbcType=DOUBLE},
+      </if>
+      <if test="amountsrc != null" >
+        amountsrc = #{amountsrc,jdbcType=DOUBLE},
+      </if>
+      <if test="amountdst != null" >
+        amountdst = #{amountdst,jdbcType=DOUBLE},
+      </if>
+      <if test="proposalno != null" >
+        proposalno = #{proposalno,jdbcType=CHAR},
+      </if>
+      <if test="proposaltype != null" >
+        proposaltype = #{proposaltype,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=CHAR},
+      </if>
+      <if test="orderrefid != null" >
+        orderrefid = #{orderrefid,jdbcType=INTEGER},
+      </if>
+      <if test="openmargin != null" >
+        openmargin = #{openmargin,jdbcType=DOUBLE},
+      </if>
+      <if test="openmarginmaintenance != null" >
+        openmarginmaintenance = #{openmarginmaintenance,jdbcType=DOUBLE},
+      </if>
+      <if test="openmarginstopout != null" >
+        openmarginstopout = #{openmarginstopout,jdbcType=DOUBLE},
+      </if>
+      <if test="openmarginrate != null" >
+        openmarginrate = #{openmarginrate,jdbcType=DOUBLE},
+      </if>
+      <if test="pId != null" >
+        p_id = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="pRelateId1 != null" >
+        p_relate_id1 = #{pRelateId1,jdbcType=INTEGER},
+      </if>
+      <if test="pRelateId2 != null" >
+        p_relate_id2 = #{pRelateId2,jdbcType=INTEGER},
+      </if>
+      <if test="orderseq != null" >
+        orderseq = #{orderseq,jdbcType=INTEGER},
+      </if>
+      <if test="tickno != null" >
+        tickno = #{tickno,jdbcType=CHAR},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=CHAR},
+      </if>
+    </set>
+  	 where id = #{id}
+  </update>
+  
+  <update id="updateBatchReal"  parameterType="java.util.List">  
+	   <foreach collection="gts2DealRealList" item="item" index="index" separator=",">
+	        update gts2deal_real
+		    <set >
+		      <if test="item.positionid != null" >
+		        positionid = #{item.positionid,jdbcType=INTEGER},
+		      </if>
+		      <if test="item.orderid != null" >
+		        orderid = #{item.orderid,jdbcType=INTEGER},
+		      </if>
+		      <if test="item.direction != null" >
+		        direction = #{item.direction,jdbcType=SMALLINT},
+		      </if>
+		      <if test="item.status != null" >
+		        status = #{item.status,jdbcType=SMALLINT},
+		      </if>
+		      <if test="item.reason != null" >
+		        reason = #{item.reason,jdbcType=SMALLINT},
+		      </if>
+		      <if test="item.symbol != null" >
+		        symbol = #{item.symbol,jdbcType=CHAR},
+		      </if>
+		      <if test="item.execvolume != null" >
+		        execvolume = #{item.execvolume,jdbcType=DOUBLE},
+		      </if>
+		      <if test="item.execprice != null" >
+		        execprice = #{item.execprice,jdbcType=DOUBLE},
+		      </if>
+		      <if test="item.exectime != null" >
+		        exectime = #{item.exectime,jdbcType=TIMESTAMP},
+		      </if>
+		      <if test="item.exectickseq != null" >
+		        exectickseq = #{item.exectickseq,jdbcType=CHAR},
+		      </if>
+		      <if test="item.srcvolume != null" >
+		        srcvolume = #{item.srcvolume,jdbcType=DOUBLE},
+		      </if>
+		      <if test="item.srcprice != null" >
+		        srcprice = #{item.srcprice,jdbcType=DOUBLE},
+		      </if>
+		      <if test="item.srctickseq != null" >
+		        srctickseq = #{item.srctickseq,jdbcType=CHAR},
+		      </if>
+		      <if test="item.rate != null" >
+		        rate = #{item.rate,jdbcType=DOUBLE},
+		      </if>
+		      <if test="item.profit != null" >
+		        profit = #{item.profit,jdbcType=DOUBLE},
+		      </if>
+		      <if test="item.swap != null" >
+		        swap = #{item.swap,jdbcType=DOUBLE},
+		      </if>
+		      <if test="item.commission != null" >
+		        commission = #{item.commission,jdbcType=DOUBLE},
+		      </if>
+		      <if test="item.amountsrc != null" >
+		        amountsrc = #{item.amountsrc,jdbcType=DOUBLE},
+		      </if>
+		      <if test="item.amountdst != null" >
+		        amountdst = #{item.amountdst,jdbcType=DOUBLE},
+		      </if>
+		      <if test="item.proposalno != null" >
+		        proposalno = #{item.proposalno,jdbcType=CHAR},
+		      </if>
+		      <if test="item.proposaltype != null" >
+		        proposaltype = #{item.proposaltype,jdbcType=INTEGER},
+		      </if>
+		      <if test="item.comment != null" >
+		        comment = #{item.comment,jdbcType=CHAR},
+		      </if>
+		      <if test="item.orderrefid != null" >
+		        orderrefid = #{item.orderrefid,jdbcType=INTEGER},
+		      </if>
+		      <if test="item.openmargin != null" >
+		        openmargin = #{item.openmargin,jdbcType=DOUBLE},
+		      </if>
+		      <if test="item.openmarginmaintenance != null" >
+		        openmarginmaintenance = #{item.openmarginmaintenance,jdbcType=DOUBLE},
+		      </if>
+		      <if test="item.openmarginstopout != null" >
+		        openmarginstopout = #{item.openmarginstopout,jdbcType=DOUBLE},
+		      </if>
+		      <if test="item.openmarginrate != null" >
+		        openmarginrate = #{item.openmarginrate,jdbcType=DOUBLE},
+		      </if>
+		      <if test="item.pId != null" >
+		        p_id = #{item.pId,jdbcType=INTEGER},
+		      </if>
+		      <if test="item.pRelateId1 != null" >
+		        p_relate_id1 = #{item.pRelateId1,jdbcType=INTEGER},
+		      </if>
+		      <if test="item.pRelateId2 != null" >
+		        p_relate_id2 = #{item.pRelateId2,jdbcType=INTEGER},
+		      </if>
+		      <if test="item.orderseq != null" >
+		        orderseq = #{item.orderseq,jdbcType=INTEGER},
+		      </if>
+		      <if test="item.tickno != null" >
+		        tickno = #{item.tickno,jdbcType=CHAR},
+		      </if>
+		      <if test="item.platform != null" >
+		        platform = #{item.platform,jdbcType=CHAR},
+		      </if>
+		    </set>
+		  	 where id = #{item.id}
+	    </foreach>       
+    </update>
+</mapper>

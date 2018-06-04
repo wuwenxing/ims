@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>活动提案</title>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/normalize.min.css">
+    <link rel="stylesheet" href="/css/base.min.css">
+</head>
+<body>
+    <div class="m-container">
+        <div class="layui-searchPanel">
+            <div class="layui-searchPanel-item">
+                <h2 class="layui-searchPanel-title">
+                    <i class="layui-icon layui-search-icon">&#xe615;</i>
+                    <span>查询条件</span>
+                </h2>
+                <div class="layui-searchPanel-content">
+                    <form class="layui-form" action="">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">活动编号:</label>
+                            <div class="layui-input-inline">
+                                <select name="activityPeriods" lay-search id="actNum">
+                                </select>   
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">活动名称:</label>
+                            <div class="layui-input-inline">
+                                <select name="activityName" id="actName" lay-search>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">活动类型:</label>
+                            <div class="layui-input-inline">
+                                <select name="activityType" id="actType">
+                                    <option value="" selected>--请选择--</option>
+                                    <option value="rw">任务型</option>
+                                    <option value="wpdh">物品兑换型</option>
+                                    <option value="rjzj">入金赠金型</option>
+                                    <option value="jyzj">交易赠金型</option>
+                                    <option value="cj">层级型</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">&nbsp;&nbsp;&nbsp;&nbsp;提案号:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="pno" placeholder="" autocomplete="off"
+                                        class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">提案状态:</label>
+                            <div class="layui-input-inline">
+                                <select name="proposalStatus" id="creStatus">
+                                    <option value="ActWaitForApprove" selected>待审批</option>
+                                    <option value="ActHasApproved">已审批</option>
+                                    <option value="ActHasCanceled">已取消</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">活动状态:</label>
+                            <div class="layui-input-inline">
+                                <select name="enableFlag" id="actStatus">
+                                    <option value="Y" selected>启用</option>
+                                    <option value="N">禁用</option>
+                                    <option value="invalid">无效</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block activeButton">
+                                <button class="layui-btn layui-btn" lay-submit lay-filter="search"><i
+                                        class="layui-icon layui-search-icon">&#xe615;</i>查询
+                                </button>
+                                <button type="reset" class="layui-btn layui-btn-primary"><i
+                                        class="layui-icon layui-search-icon">&#xe640;</i>重置
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                    
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="layout-2">
+            <button class="layui-btn layui-btn layui-btn-sm node-add"><i class="layui-icon">&#xe654;</i>新增</button>
+            <button class="layui-btn layui-btn layui-btn-sm node-edit"><i class="layui-icon">&#xe642;</i>修改  </button>
+            <button class="layui-btn layui-btn layui-btn-sm node-agree"><i class="layui-icon">&#xe618;</i>审批通过 </button>
+            <button class="layui-btn layui-btn layui-btn-sm node-cancel"><i class="layui-icon">&#x1006;</i>删除 </button>
+            <button class="layui-btn layui-btn layui-btn-sm node-copy"><i class="layui-icon">&#xe630;</i>复制 </button>
+            <button class="layui-btn layui-btn layui-btn-sm node-refresh"><iclass="layui-icon">&#x1002;</i>刷新</button>
+        </div>
+        <div class="layout-3">
+            <table id="data-table" lay-filter="dataTable"></table>
+        </div>
+    </div>
+</body>
+<script src="/js/vendor/jquery-2.0.0.min.js"></script>
+<script src="/js/vendor/ejs_production.js"></script>
+<script src="/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/js/extendModules/'
+    }).extend({
+        searchPanel: 'searchPanel'
+    });
+</script>
+<script src="./main.js"></script>
+</html>

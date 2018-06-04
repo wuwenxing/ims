@@ -1,0 +1,53 @@
+<div class="outter">
+    <div class="del"><a href="javascript:;"><i class="iconfont icon-close"></i></a></div>
+    <div class="task-table">
+            <div class="layui-form-item task-item taskCode">
+                <div class="layui-inline">
+                    <label class="layui-form-label"><em class="required">*</em><span class="task-name">任务</span></label>
+                    <div class="layui-inline taskName">
+                        <% var random = new Date().getTime() %>
+                        <% if(type == 'rjzj'){ %>
+                            <select name="taskItemCode" id="taskItemCode" lay-filter="taskItemCode">
+                                <option value="" selected unitStr="" demo="" disableCode="" >--请选择--</option>
+                                <% for(var otherTaskAttr in rjzjTask){ %>
+                                    <option value="<%=otherTaskAttr%>" unitStr="" demo="" disableCode="" ><%=rjzjTask[otherTaskAttr].taskName%></option>
+                                <% } %>
+                            </select>
+                        <% }else{ %>    
+                            <select name="taskItemCode" id="taskItemCode" lay-filter="taskItemCode">
+                                <option value="" selected unitStr="" demo="" disableCode="" >--请选择--</option>
+                                <% for(var attr in data){ %>
+                                    <option value="<%=attr%>" unitStr="" demo="" disableCode="" ><%=data[attr].taskName%></option>
+                                <% } %>
+                            </select>
+                        <% } %>
+                    </div>
+                    <div class="layui-inline task-params"></div>
+                </div>
+            </div>
+            <div class="layui-form-item task-item taskDesc">
+                <div class="layui-inline">
+                    <label class="layui-form-label">任务描述</label>
+                    <div class="layui-inline">
+                        <textarea type="text" name="taskDesc" class="layui-textarea task-desc"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item task-item taskItem">
+                <div class="layui-inline">
+                    <label class="layui-form-label"><em class="required"></em><span>奖励物品</span></label>
+                        <div class="layui-inline prize-table">
+                            <div class="tbody"></div>
+                            <div class="layui-inline">
+                                <button class="layui-btn layui-btn-sm add-prize"><i class="layui-icon">&#xe654;</i>添加物品</button>
+                            </div>
+                        </div>
+                </div>
+            </div>
+    </div>
+</div>
+<%if(type == 'cj' && inner == 'false'){%>
+    <div class="layui-inline innerTask">
+        <button class="layui-btn add-innerTask">添加任务项</button>
+    </div>
+<%}%>

@@ -1,0 +1,123 @@
+@import "./variables.scss";
+.layui-form {
+  padding-top:8px; 
+  .layui-form-item {
+    padding-bottom: 12px;
+    margin-bottom: 0;
+    box-sizing: border-box;
+    .layui-inline {
+      margin-right: 0;
+      margin-bottom: 0;
+      &:first-child {
+        margin-right: 34px;
+      }
+      &.no-mr {
+        margin-right: 0;
+      }
+      .append {
+        position: absolute;
+        display: inline-block;
+        vertical-align: middle;
+        right: 10px;
+        top: 0;
+        line-height: 32px;
+        height: 32px;
+      }
+    }
+    &.no-mb {
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+    .layui-form-label {
+      width: 56px;
+      height: 32px;
+      margin-right: 12px;
+      color:$fontColor-06;
+      padding: 0;
+      text-align: left;
+      position: relative;
+      .required {
+        position: absolute;
+        color: $fontColor-05;
+        font-size: 20px;
+        left: -10px;
+        font-weight: bold;
+        top: 10px;
+      }
+    }
+    .layui-input,.layui-form-select {
+      width: 216px;
+      height: 32px;
+      box-sizing: border-box;
+      border-radius: 4px;
+    }
+    .layui-input-reset {
+      width: 105px;
+    }
+    textarea, .layui-textarea {
+      min-height: 56px;
+      resize: vertical;
+      border-radius: 4px;
+    }
+    .layui-form-radio {
+      margin: 0;
+      width: 216px;
+    }
+    .layui-btn {
+      padding: 5px 29px;
+      background:$fontColor-03;
+      color:$bgWhite;
+      border-radius: 4px;
+      height: 40px;
+      line-height: 30px;
+    }
+    .flex-item {
+      .layui-input {
+        width:100%;
+      }
+    }
+  }
+  .layui-searchPanel-content {
+      .layui-form-item {
+        .search-item {
+          height: 32px;
+          .layui-form-inner-label {
+            height: 30px;
+            line-height: 30px;
+            border-right: solid 1px $blColor-00;
+            text-align: center;
+          }
+          .layui-input {
+            width: 100%;
+            height: 30px; 
+          }
+          &:hover {
+            .layui-form-inner-label {
+              line-height: 30px;
+              border-right: solid 1px $blColor-04;
+            } 
+          }
+        }
+        .search-btns {
+          .layui-btn {
+            
+          }
+        }
+
+      }
+  }
+  .upload-content {
+    
+  }
+  &.single {
+    .layui-textarea ,.layui-input, .layui-form-select{
+      width: 375px;
+    }
+  }
+  select.itemUnit + .layui-form-select {
+    width: 50px;
+    .layui-input {
+      width: 50px;
+    }
+  }
+}

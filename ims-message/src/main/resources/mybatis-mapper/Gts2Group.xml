@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.message.dao.inf.Gts2GroupDao" >
+ 
+  
+  <sql id="Base_Column_List" >
+    id, uuid, serverid, name, currency, platform, authentication, minpwdlength, 
+    companyid, company, companysite, companyemail, supportsite, supportemail, templatesfolder, 
+    margincalllevel, stopoutlevel, weekendlevel, ordermax, enable, clearnegative, createtime, 
+    createuserid, moditime, modiuserid, status, volumesmax, level, balanceclearnegative, 
+    marginlevel
+  </sql>
+  
+  <select id="select" resultType="Gts2Group"  >
+    select 
+    <include refid="Base_Column_List" />
+    from gts2group_${env}
+  </select>
+  
+  <insert id="save" parameterType="Gts2Group" >
+    insert into gts2group_${env} (id, uuid, 
+      serverid, name, currency, 
+      platform, authentication, minpwdlength, 
+      companyid, company, companysite, 
+      companyemail, supportsite, supportemail, 
+      templatesfolder, margincalllevel, stopoutlevel, 
+      weekendlevel, ordermax, enable, 
+      clearnegative, createtime, createuserid, 
+      moditime, modiuserid, status, 
+      volumesmax, level, balanceclearnegative, 
+      marginlevel)
+    values (#{id,jdbcType=INTEGER}, #{uuid,jdbcType=INTEGER}, 
+      #{serverid,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, #{currency,jdbcType=CHAR}, 
+      #{platform,jdbcType=CHAR}, #{authentication,jdbcType=CHAR}, #{minpwdlength,jdbcType=SMALLINT}, 
+      #{companyid,jdbcType=INTEGER}, #{company,jdbcType=CHAR}, #{companysite,jdbcType=CHAR}, 
+      #{companyemail,jdbcType=CHAR}, #{supportsite,jdbcType=CHAR}, #{supportemail,jdbcType=CHAR}, 
+      #{templatesfolder,jdbcType=CHAR}, #{margincalllevel,jdbcType=SMALLINT}, #{stopoutlevel,jdbcType=SMALLINT}, 
+      #{weekendlevel,jdbcType=SMALLINT}, #{ordermax,jdbcType=SMALLINT}, #{enable,jdbcType=SMALLINT}, 
+      #{clearnegative,jdbcType=SMALLINT}, #{createtime,jdbcType=TIMESTAMP}, #{createuserid,jdbcType=INTEGER}, 
+      #{moditime,jdbcType=TIMESTAMP}, #{modiuserid,jdbcType=INTEGER}, #{status,jdbcType=SMALLINT}, 
+      #{volumesmax,jdbcType=DOUBLE}, #{level,jdbcType=CHAR}, #{balanceclearnegative,jdbcType=SMALLINT}, 
+      #{marginlevel,jdbcType=SMALLINT})
+  </insert>
+ 
+  
+  <update id="update" parameterType="Gts2Group" >
+    update gts2group_${env}
+    <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=INTEGER},
+      </if>
+      <if test="serverid != null" >
+        serverid = #{serverid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=CHAR},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=CHAR},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=CHAR},
+      </if>
+      <if test="authentication != null" >
+        authentication = #{authentication,jdbcType=CHAR},
+      </if>
+      <if test="minpwdlength != null" >
+        minpwdlength = #{minpwdlength,jdbcType=SMALLINT},
+      </if>
+      <if test="companyid != null" >
+        companyid = #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=CHAR},
+      </if>
+      <if test="companysite != null" >
+        companysite = #{companysite,jdbcType=CHAR},
+      </if>
+      <if test="companyemail != null" >
+        companyemail = #{companyemail,jdbcType=CHAR},
+      </if>
+      <if test="supportsite != null" >
+        supportsite = #{supportsite,jdbcType=CHAR},
+      </if>
+      <if test="supportemail != null" >
+        supportemail = #{supportemail,jdbcType=CHAR},
+      </if>
+      <if test="templatesfolder != null" >
+        templatesfolder = #{templatesfolder,jdbcType=CHAR},
+      </if>
+      <if test="margincalllevel != null" >
+        margincalllevel = #{margincalllevel,jdbcType=SMALLINT},
+      </if>
+      <if test="stopoutlevel != null" >
+        stopoutlevel = #{stopoutlevel,jdbcType=SMALLINT},
+      </if>
+      <if test="weekendlevel != null" >
+        weekendlevel = #{weekendlevel,jdbcType=SMALLINT},
+      </if>
+      <if test="ordermax != null" >
+        ordermax = #{ordermax,jdbcType=SMALLINT},
+      </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=SMALLINT},
+      </if>
+      <if test="clearnegative != null" >
+        clearnegative = #{clearnegative,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        createuserid = #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="moditime != null" >
+        moditime = #{moditime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiuserid != null" >
+        modiuserid = #{modiuserid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="volumesmax != null" >
+        volumesmax = #{volumesmax,jdbcType=DOUBLE},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=CHAR},
+      </if>
+      <if test="balanceclearnegative != null" >
+        balanceclearnegative = #{balanceclearnegative,jdbcType=SMALLINT},
+      </if>
+      <if test="marginlevel != null" >
+        marginlevel = #{marginlevel,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+ 
+ <select id="findObject" parameterType="Gts2Group" resultType="Gts2Group">
+	select * from gts2group_${env}
+	<where>
+		<if test="id != null">
+			id = #{id}
+		</if>
+	</where>
+</select>
+</mapper>

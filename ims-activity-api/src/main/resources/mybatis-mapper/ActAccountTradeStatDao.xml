@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActAccountTradeStatDao" >
+
+  
+  <sql id="Base_Column_List" >
+    id, activity_periods, account_no, platform, create_user, 
+    create_ip, create_date, update_user, update_ip, update_date, version_no, delete_flag, 
+    enable_flag, company_id,surplus_finish_trade_lot,finish_trade_id,finish_trade_time,finish_in_trade_time
+  </sql>
+  
+  <insert id="insert" parameterType="ActAccountTradeStat"  >
+    insert into act_account_trade_stat (id, activity_periods, account_no, 
+      platform,  create_user, 
+      create_ip, create_date, update_user, 
+      update_ip, update_date, version_no, 
+      delete_flag, enable_flag, company_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{activityPeriods,jdbcType=VARCHAR}, #{accountNo,jdbcType=VARCHAR}, 
+      #{platform,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{createIp,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateIp,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{versionNo,jdbcType=BIGINT}, 
+      #{deleteFlag,jdbcType=VARCHAR}, #{enableFlag,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER}
+      )
+  </insert>
+  <select id="findActAccountActivityStat" parameterType="ActAccountTradeStat" resultType="ActAccountTradeStat"  >
+             select
+             <include refid="Base_Column_List" />
+              from act_account_trade_stat
+              where  activity_periods = #{activityPeriods} and account_no = #{accountNo} and platform = #{platform} 
+              and enable_flag = 'Y' and delete_flag !='Y'
+  </select>
+  
+  <update id="updateActAccountActivityStat"   parameterType="ActAccountTradeStat" >
+    update act_account_trade_stat
+    <set >
+      <if test="activityPeriods != null and activityPeriods != '' " >
+        activity_periods = #{activityPeriods,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNo != null and accountNo != '' " >
+        account_no = #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null and platform != '' " >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId},
+      </if>
+    </set>
+    where  id = #{id}
+  </update>
+  
+  <insert id="saveOrUpdateNormal" parameterType="ActAccountTradeStat" >
+  	 insert into act_account_trade_stat ( activity_periods, account_no, 
+      platform,create_user, 
+      create_ip, create_date, update_user, 
+      update_ip, update_date, version_no, 
+      delete_flag, enable_flag, company_id
+      )
+    values ( #{activityPeriods,jdbcType=VARCHAR}, #{accountNo,jdbcType=VARCHAR}, 
+      #{platform,jdbcType=VARCHAR},  #{createUser,jdbcType=VARCHAR}, 
+      #{createIp,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateIp,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{versionNo,jdbcType=BIGINT}, 
+      #{deleteFlag,jdbcType=VARCHAR}, #{enableFlag,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER}
+      )
+	  on duplicate key update
+	  		update_date= #{updateDate}
+   	
+  </insert>
+  
+  <insert id="saveOrUpdate" parameterType="ActAccountTradeStat" >
+  	 insert into act_account_trade_stat ( activity_periods, account_no, 
+      platform,  create_user, 
+      create_ip, create_date, update_user, 
+      update_ip, update_date, version_no, 
+      delete_flag, enable_flag, company_id,
+      surplus_finish_trade_lot,finish_trade_id,finish_trade_time,finish_in_trade_time
+      )
+    values ( #{activityPeriods,jdbcType=VARCHAR}, #{accountNo,jdbcType=VARCHAR}, 
+      #{platform,jdbcType=VARCHAR},  #{createUser,jdbcType=VARCHAR}, 
+      #{createIp,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateIp,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{versionNo,jdbcType=BIGINT}, 
+      #{deleteFlag,jdbcType=VARCHAR}, #{enableFlag,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER},
+      #{surplusFinishTradeLot},#{finishTradeId},#{finishTradeTime},#{finishInTradeTime}
+      )
+	  on duplicate key update
+	  		update_date= #{updateDate},
+	    	surplus_finish_trade_lot=#{surplusFinishTradeLot},
+	    	finish_trade_id=#{finishTradeId},    	
+	    	finish_trade_time=#{finishTradeTime},
+	    	finish_in_trade_time=#{finishInTradeTime}
+  </insert>
+</mapper>

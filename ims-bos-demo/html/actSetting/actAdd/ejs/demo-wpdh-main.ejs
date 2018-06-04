@@ -1,0 +1,372 @@
+<form class="layui-form">
+    <table class="layui-form-base">
+        <thead>
+            <tr>
+                <th colspan="6" class="title"><p><span>任务型</span>-活动基础设置</p></th>                    
+            </tr>
+            <tr class="h15"></tr>
+        </thead>
+        <tbody class="layui-form-table">
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">活动编号<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <input type="text" name="activityPeriods" class="layui-input" lay-verify="required">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">活动名称<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" name="activityName"  lay-verify="required">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">活动状态</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <select name="enableFlag" id="" lay-filter="enableFlag">
+                                <option value="">--请选择--</option>
+                                <option value="1" selected>启用</option>
+                                <option value="0" selected>禁用</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">活动开始时间<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <input type="text"  lay-verify="required" name="startTime" class="layui-input" id="beginTime" placeholder="yyyy-MM-dd HH:mm:ss">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">活动结束时间<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <input type="text"  lay-verify="required"  name="endTime" class="layui-input" id="endTime" placeholder="yyyy-MM-dd HH:mm:ss">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">活动完成时间</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input"  name="finishDays" id="finishTime" value="0">
+                        </div>
+                        <div class="layui-inline">天</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">代币有效期</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" value="0" name="coinDays">
+                        </div>
+                        <div class="layui-inline">天</div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">奖励发放方式</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-input-inline">
+                            <select name="autoHandOut" id="" lay-filter="autoHandOut">
+                                <option value="1" selected>自动发放</option>
+                                <option value="0">人工审核</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">奖励优先发放平台</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-input-inline">
+                            <select name="priorityPlatform" id="" lay-filter="priorityPlatform">
+                                <option value="" selected>--请选择--</option>
+                                <option value="MT4">MT4</option>
+                                <option value="GTS2">GTS2</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">活动描述</label>
+                        </div>
+                    </td>
+                    <td colspan="5">
+                        <div class="layui-inline text-area">
+                            <textarea name="remark" maxlength="1024" placeholder="请输入" class="layui-textarea"></textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">活动链接地址</label>
+                        </div>
+                    </td>
+                    <td colspan="5">
+                        <div class="layui-inline text-area">
+                            <textarea name="activityUrl"  maxlength="500" placeholder="请输入" class="layui-textarea"></textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">其他信息</label>
+                        </div>
+                    </td>
+                    <td colspan="5">
+                        <div class="layui-inline text-area">
+                            <textarea name="otherMsg" maxlength="2048" placeholder="请输入" class="layui-textarea"></textarea>
+                        </div>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+    <table class="layui-form-exp"> 
+        <thead>
+            <tr>
+                <th colspan="6" class="title">
+                    <p>
+                        <span>参与活动条件</span> 
+                        <span class="tips">(温馨提示：活动一旦审批通过且已开始，则不能修改活动的开始时间及参与条件（除黑白名单有权限的人可以修改外），请知悉！)</span>
+                    </p>
+                </th>
+            </tr>
+            <tr class="h15"></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="first">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">账号类型<span class="mustInput"></span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-input-inline">
+                        <select lay-verify="required" name="custActCondition.accountType" id="" lay-filter="custActCondition.accountType">
+                            <option value="" selected>--请选择--</option>
+                            <option value="type_noLimit">无限制</option>
+                            <option value="type_demo">模拟账户</option>
+                            <option value="type_real">真实账户</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">账号唯一性<span class="mustInput"></span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-input-inline">
+                        <select lay-verify="required" name="custActCondition.accountOnly" id="" lay-filter="custActCondition.accountOnly">
+                            <option value="0" selected>否</option>
+                            <option value="1">是</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                            <label class="layui-form-label">账号级别<span class="mustInput"></span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline accountLevel">
+                        <input lay-verify="required" lay-skin="primary" type="checkbox" name="custActCondition.accountLevel" value="mini" title="MINI">
+                        <input  lay-verify="required" lay-skin="primary" type="checkbox" name="custActCondition.accountLevel" value="standard" title="标准" selected>
+                        <input  lay-verify="required" lay-skin="primary" type="checkbox" name="custActCondition.accountLevel" value="vip" title="VIP">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="first">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">参与活动平台<span class="mustInput"></span></label>
+                    </div>
+                </td>
+                <td class="platform pd-tb10">
+                    <div class="layui-inline">
+                        <input lay-verify="required" type="checkbox" value="GTS2#CNY" name="custActCondition.platformsCcy" title="GTS2(CNY)" lay-skin="primary">
+                    </div>
+                    <div class="layui-inline">
+                        <input lay-verify="required" type="checkbox" value="GTS2#USD" name="custActCondition.platformsCcy" title="GTS2(USD)" lay-skin="primary">
+                    </div>
+                    <div class="layui-inline">
+                        <input lay-verify="required" type="checkbox" value="MT4#USD" name="custActCondition.platformsCcy" title="MT4(USD)" lay-skin="primary">
+                    </div>
+                    <div class="layui-inline">
+                        <input lay-verify="required" type="checkbox" value="MT4#CNY" name="custActCondition.platformsCcy" title="MT4(CNY)" lay-skin="primary">                        
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">账户注册时间</label>
+                    </div>
+                </td>
+                <td colspan="3">
+                    <div class="layui-inline">
+                        <div class="layui-inline">
+                            <input type="text" name="custActCondition.registerStartTime" class="layui-input" id="regisBeginTime" placeholder="yyyy-MM-dd HH:mm:ss">
+                        </div>
+                        <div class="layui-inline">至</div>
+                        <div class="layui-inline">
+                            <input type="text" name="custActCondition.registerEndTime" class="layui-input" id="regisEndTime" placeholder="yyyy-MM-dd HH:mm:ss">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="first">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">只允许白名单用户参加活动</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                        <select name="custActCondition.allowWhiteUsers" id="" lay-filter="custActCondition.allowWhiteUsers">
+                            <option value="0" selected>否</option>
+                            <option value="1">是</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">上传白名单</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                        <button type="button" class="layui-btn layui-btn-sm" id="upload-whitelist">
+                            <i class="layui-icon">&#xe67c;</i>上传文件
+                        </button>
+                        <button type="button" class="layui-btn layui-btn-xs" id="wtpl-download">下载模板</button>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">上传黑名单</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                        <button type="button" class="layui-btn layui-btn-sm" id="upload-blacklist">
+                            <i class="layui-icon">&#xe67c;</i>上传文件
+                        </button>
+                        <button type="button" class="layui-btn layui-btn-xs" id="wtpl-download">下载模板</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="first">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">注销过账号参加活动</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                        <select name="custActCondition.allowCancelAccount" id="" lay-filter="custActCondition.allowCancelAccount">
+                            <option value="0">否</option>
+                            <option value="1">是</option>
+                        </select>
+                    </div>
+                </td>
+                <td colspan="4"></td>
+            </tr>
+            <tr>
+                <td class="first">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">交易产品</label>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="layui-inline prds">
+                        <div class="layui-form-select layui-check-select">
+                            <div class="layui-check-select-title">
+                                <textarea name="custActCondition.items" placeholder="请输入产品名称" class="layui-textarea"></textarea>
+                                <!-- <div class="layui-edge-outter">                                     -->
+                                    <i class="layui-edge"></i>
+                                <!-- </div> -->
+                            </div>
+                            <div class="layui-check-select-content">
+                                <dl class="layui-anim layui-anim-upbit layui-select-group">
+                                    <dd lay-value="" class="layui-select-tips">--请选择--</dd>
+                                    <!-- <dt>wh</dt>
+                                    <dd lay-value="告诉对方">
+                                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                            <span>告诉对方</span>
+                                            <i class="layui-icon"></i>
+                                        </div>
+                                    </dd> -->
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="3" style="padding-left:15px;">
+                    <div class="layui-inline" style="margin-right:10px;">
+                        <button type="button" class="layui-btn layui-btn-sm all-select" >全选</button>
+                    </div>
+                    <div class="layui-inline">
+                        <button type="button" class="layui-btn layui-btn-sm cancel-allselect" id="">取消全选</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="layui-form-prize">
+        <thead>
+            <tr class="prize-title">
+                <th class="title">
+                    <p>
+                        <span>任务与奖励</span>
+                        <span class="tips">(必填)</span>
+                    </p>
+                </th>
+            </tr>
+            <tr class="h15"></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="prize-content"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="layui-inline">
+        <button class="layui-btn layui-btn-sm add-task"><i class="layui-icon">&#xe654;</i>添加任务项</button>
+    </div>
+    <div class="btns" style="text-align:right;padding-right:15px;">
+        <button class="layui-btn" lay-filter="addSubmit" lay-submit>提交</button>
+        <button class="layui-btn layui-btn-primary ">返回</button>
+    </div>
+</form>

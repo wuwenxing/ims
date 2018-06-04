@@ -1,0 +1,51 @@
+@import "./variables.scss";
+.layui-layer {
+  .layui-layer-content {
+    .layui-form{
+      .layui-form-item {
+        .rules {
+          height: 32px;
+          line-height: 32px;
+          padding-bottom: 12px;
+          .middle {
+            margin: 0 8px;
+          }
+          .layui-input-xs {
+            width: 70px;
+            padding-right: 22px;
+          }
+          .days {
+            border:solid 1px $blColor-00;
+            position: relative;
+            border-radius: 4px;
+            .append {
+              position: absolute;
+              right: 10px;
+              top: 0px;
+              color: $fontColor-11; 
+            }
+          }
+        }
+        .tips-inner {
+          font-size: 12px;
+          color:$fontColor-12;
+          padding-left: 68px
+        }
+        .flex-item {
+          .layui-input, .layui-form-select {
+            width: 100%;
+          }
+        }
+        .layui-textarea {
+          width: 472px;
+        }
+      }
+    }
+  }
+} 
+.no-border {
+  border:none;
+}
+.mrl-8 {
+  margin-left: 8px;
+}

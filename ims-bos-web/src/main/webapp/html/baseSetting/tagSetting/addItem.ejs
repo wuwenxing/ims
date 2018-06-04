@@ -1,0 +1,87 @@
+<% if(typeof(data) != "undefined"){ %>
+<form class="layui-form">
+	<input type="hidden" name="id" id="id" value="<%=data.id%>" />
+    <div class="layui-form-item">
+        <div class="layui-inline no-mr">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>状态</span></label>
+            <div class="layui-inline">
+                <select name="enableFlag" id="enableFlag">
+                    <option <%if(data.enableFlag == 'Y'){%> selected <%}%>  value="Y" >启用</option>
+                    <option <%if(data.enableFlag == 'N'){%> selected <%}%> value="N" >禁用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline no-mr">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>标签编码</span></label>
+            <div class="layui-inline">
+                <input type="text" name="tagCode" value="<%=data.tagCode%>" class="layui-input" autocomplete="off"   lay-verify="required" lay-verType="tips">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline no-mr">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>标签名称</span></label>
+            <div class="layui-inline">
+                <input type="text" name="tagName" value="<%=data.tagName%>" class="layui-input" autocomplete="off"   lay-verify="required" lay-verType="tips">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item no-mb">
+        <div class="layui-inline no-mr">
+           <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>标签值</span></label>
+            <div class="layui-inline">
+            <input type="text" name="tagVal" value="<%=data.tagVal%>" class="layui-input" autocomplete="off"   lay-verify="required" lay-verType="tips">
+            </div>
+        </div>
+    </div>
+    <div style="display:none;">
+        <button class="node-submit" lay-submit lay-filter="seeAddRow"></button>
+    </div>
+</form>
+
+<%}else{%>
+
+<form class="layui-form">
+	<input type="hidden" name="id" id="id" value="<%=data.id%>" />
+    <div class="layui-form-item">
+        <div class="layui-inline no-mr">
+            <label for="" class="layui-form-label"><em class="required">*</em><span>状态</span></label>
+            <div class="layui-inline">
+                <select name="enableFlag" id="enableFlag">
+                    <option  selected   value="Y" >启用</option>
+                    <option  selected  value="N" >禁用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline no-mr">
+            <label for="" class="layui-form-label"><em class="required">*</em><span>标签编码</span></label>
+            <div class="layui-inline">
+                <input type="text" name="tagCode"  class="layui-input" autocomplete="off"   lay-verify="required" lay-verType="tips">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline no-mr">
+            <label for="" class="layui-form-label"><em class="required">*</em><span>标签名称</span></label>
+            <div class="layui-inline">
+                <input type="text" name="tagName" value="<%=data.tagName%>" class="layui-input" autocomplete="off"   lay-verify="required" lay-verType="tips">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item no-mb">
+        <div class="layui-inline no-mr">
+           <label for="" class="layui-form-label"><em class="required">*</em><span>标签值</span></label>
+            <div class="layui-inline">
+                <input type="text" name="tagVal" value="<%=data.tagVal%>" class="layui-input" autocomplete="off"   lay-verify="required" lay-verType="tips">
+            </div>
+        </div>
+    </div>
+    <div style="display:none;">
+        <button class="node-submit" lay-submit lay-filter="seeAddRow"></button>
+    </div>
+</form>
+<%}%>

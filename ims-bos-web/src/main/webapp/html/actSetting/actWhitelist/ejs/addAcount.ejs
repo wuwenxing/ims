@@ -1,0 +1,62 @@
+<form action="" class="layui-form">
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>活动名称</span>
+      </label>
+      <div class="layui-inline">
+        <select name="activityName" id="layer-actName" lay-filter="layer-actName" lay-verify="required" lay-verType="tips"></select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>活动编号</span>
+      </label>
+      <div class="layui-inline">
+        <select name="activityPeriods" id="layer-actNum" lay-filter="layer-actNum" lay-verify="required" lay-verType="tips"></select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>交易账号</span>
+      </label>
+      <div class="layui-inline">
+        <input type="text" class="layui-input" name="accountNo" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>账号类型</span>
+      </label>
+      <div class="layui-inline">
+        <select name="env" id="" lay-verify="required" lay-verType="tips">
+          <option value="">--请选择--</option>
+          <option value="real">真实</option>
+          <option value="demo">模拟</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>平台</span>
+      </label>
+      <div class="layui-inline">
+        <select name="platform" id="layer-platform" lay-verify="required" lay-verType="tips"></select>
+      </div>
+    </div>
+  </div>
+  <button class="layui-btn node-submit" style="display:none;" lay-submit lay-filter="addItem"></button>
+</form>

@@ -1,0 +1,16 @@
+<td></td>
+<td colspan="3">
+    <div class="layui-inline">
+        <input type="text" class="layui-input"  lay-verify="required|number" lay-verType="tips" id="itemAmountData" name="itemAmountData">
+    </div>
+    <div class="layui-inline">
+      <%if(value == 'mobile_data'){%>
+          <select name="itemUnit" id="itemUnit">
+              <option value="M">M</option>
+              <option value="G">G</option>
+          </select>
+      <%}else{%>
+          <span class="unit"><%=unit%></span>
+      <%}%>
+    </div>
+</td>

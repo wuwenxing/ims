@@ -1,0 +1,125 @@
+.layui-form{
+    // background: #f2f2f2;
+    table{
+        margin-bottom: 25px;
+        tbody{
+            // background: #f0f0f0;            
+        }
+    }
+    .layui-inline{
+        &.text-area{
+            width: 100%;
+            textarea{
+                resize: none;
+            }
+        }
+    }
+    .title{
+        text-align: left;
+        position: relative;
+        padding: 10px 0 10px 15px;
+        &::before{
+            width: 4px;
+            height: 50%;
+            background: #009688;
+            content: "";
+            clear: both;
+            position: absolute;
+            left: 0;
+            top: 25%;
+        }
+        .tips{
+            font-size: 12px;
+            color: #f00;
+        }
+    }
+    .layui-form-exp{
+        tbody{
+            td.first{
+                width:120px;
+            }
+            .layui-form-label{
+                text-align: left;
+            }
+        }
+        .platform{
+            width: 250px;
+            .layui-inline{
+                width: 48%;
+            }
+        }
+        .prds{
+            width: 100%;    
+            select{
+                width: 100%;                
+            }
+            .layui-form-select{
+                .layui-select-title{
+                    .layui-input{
+                        width:100%;
+                        height: 120px;
+                    }
+                }
+            }
+        }
+    } 
+    .layui-form-prize{
+        margin-bottom: 0;
+    }
+    .outter{
+        background: #eee;
+        position: relative;
+        margin-bottom: 25px;
+        .del{
+            position: absolute;
+            right: -12px;
+            top: -12px;
+            display: block;
+            background: #c2c2c2;
+            width: 24px;
+            text-align: center;
+            padding: 2px;
+            line-height: 24px;
+            height: 24px;
+            cursor: pointer;
+            border-radius: 50%;
+            .layui-icon{
+                color: #fff;
+            }
+        }
+        .task-table{
+            min-width: 800px;
+            margin-bottom: 0;
+            tbody{
+                tr.task-item:nth-child(1){
+                    >td,>th{
+                        padding-top: 10px;
+                    }
+                }
+                tr.task-item:nth-last-child(1){
+                    >th,>td{
+                        padding-bottom: 10px;
+                    }
+                }
+                .task-item {
+                    .layui-inline{
+                        margin-bottom: 0;
+                        padding: 5px;
+                    }
+                    th{
+                        width: 120px;
+                    }
+        
+                }
+                .prize-table{
+                    margin-bottom: 0;
+                    width: 100%;
+                    tbody tr{
+                        border:solid 1px #01aaed;
+                    }
+                }
+
+            }
+        }
+    }
+}

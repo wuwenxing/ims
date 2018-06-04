@@ -1,0 +1,18 @@
+
+
+<form action="" class="layui-form">
+    <div class="layui-form-item no-mb">
+      <div class="layui-inline no-mr">
+        <span for="" >输入确认码</span>
+        <div class="layui-inline">
+          <span id="labCode"  style="color:red" onclick="getcode(this,'v_code')"><%=code%></span>
+        </div>
+        <div class="layui-inline">
+          <input type="text" class="layui-input" name="code" lay-verify="required|code" lay-verType="tips">
+        </div>
+      </div>
+    </div>
+    <input type="hidden" id="v_code" name="v_code" value="<%=code%>"  class="layui-input"  />
+    <input type="hidden" id="id" name="id" value="<%=data.id%>" class="layui-input"  />
+    <button class="layui-btn node-del" style="display:none;" lay-submit lay-filter="del"></button>
+  </form>

@@ -1,0 +1,10 @@
+.layui-form{
+    .layui-textarea{
+        width: 300px;
+        height: 200px;
+        resize: none;
+        &.remark{
+            height: 150px;
+        }
+    }
+}

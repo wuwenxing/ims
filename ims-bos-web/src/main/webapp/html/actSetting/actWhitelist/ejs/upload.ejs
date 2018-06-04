@@ -1,0 +1,44 @@
+<form class="layui-form upload-form">
+  <div class="layui-form-item">
+    <div class="layui-inline flex flex-horizon-between no-mr">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>活动名称</span>
+      </label>
+      <div class="layui-inline">
+        <select name="activityName" id="layer-actName" lay-search lay-filter="layer-actName"></select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline flex flex-horizon-between no-mr">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>活动编号</span>
+      </label>
+      <div class="layui-inline">
+        <select name="activityPeriods" id="layer-actNum" lay-search lay-filter="layer-actNum"></select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline upload-content flex-item no-mr flex flex-horizon-between">
+      <div class="layui-inline no-mr flex-item">
+        <input type="text" readonly class="template layui-input sel" id="upload-whitelist" placeholder="点击选择白名单文件">
+      </div>
+      <div class="layui-inline download" id="downloadTempl">
+          <a class="template" href="">下载模板</a>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item no-mb upload-tips">
+    <div class="layui-inline">
+        <h4><i class="icon-tips"></i><span class="tips-title">温馨提示：</span></h4>
+        <p>1.上传文件类型：可支持.xls、.xlsx格式的excel文件。</p>
+        <p>2.交易账号列为必填项。</p>
+    </div>
+  </div>
+  <div class="upload" style="display:none;" >
+    <button type="button" id="uploadBtn">上传</button>
+  </div>
+</form>

@@ -1,0 +1,63 @@
+<%if(typeof(data.roleId) != "undefined"){%>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">角色编号<span class="mustInput"></span></label>
+                <div class="layui-input-inline">
+                    <input <%if(type == 'see'){%> disabled <%}%> value="<%=data.roleCode%>" type="text" lay-verType="tips" name="roleCode" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">角色名称</label>
+                <div class="layui-input-inline">
+                    <input  <%if(type == 'see'){%> disabled <%}%> type="text" value="<%=data.roleName%>" lay-verType="tips" name="roleName" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">状态<span class="mustInput"></span></label>
+                <div class="layui-input-inline">
+                    <select name="enableFlag" lay-verify="required" <%if(type == 'see'){%> disabled <%}%> >
+                        <option value="Y" <%if(data.enableFlag == 'Y'){%>selected<%}%> >启用</option>
+                        <option value="N" <%if(data.enableFlag == 'N'){%>selected<%}%>>禁用</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div style="display: none;">
+            <button class="node-submit" lay-submit lay-filter="seeAddRow"></button>
+        </div>
+    </form>
+<%}else{%>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">角色编号<span class="mustInput"></span></label>
+                <div class="layui-input-inline">
+                    <input type="text" lay-verType="tips" name="roleCode" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">角色名称</label>
+                <div class="layui-input-inline">
+                    <input  type="text" lay-verType="tips" name="roleName" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">状态<span class="mustInput"></span></label>
+                <div class="layui-input-inline">
+                    <select name="enableFlag" lay-verify="required" >
+                    <option value="Y" selected>启用</option>
+                    <option value="N">禁用</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div style="display: none;">
+            <button class="node-submit" lay-submit lay-filter="seeAddRow"></button>
+        </div>
+    </form>
+<%}%>

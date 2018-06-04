@@ -1,0 +1,12 @@
+
+<!-- <i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop" style="font-size:30px;">&#xe63d;</i> -->
+<% data.forEach(function(item, index){ %>
+    <div class="menu-item layui-row">
+        <h4><%=item.menuName%></h4>
+        <ul class="list layui-clear" data-index="<%=index%>">   
+            <%item.child.forEach(function(itm,idx){%>
+                <li class="item"><a href="javascript:;" data-id="<%=itm.url.replace(/\.html/,'')%>"><%=itm.name%></a></li>
+            <%})%>
+        </ul>
+    </div>
+<% }) %>

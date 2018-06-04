@@ -1,0 +1,213 @@
+<% if(type == 'cj'){%>
+  <%data.forEach(function(titem,tindex){%>
+    <div class="taskGroup">
+    <%titem.tasks.forEach(function(item,index){%>
+      <div class="outter layui-row">
+          <div class="del"><a href="javascript:;"><i class="iconfont icon-close"></i></a></div>
+          <div class="task-table">
+              <div class="layui-form-item task-item taskCode">
+                  <div class="layui-inline layui-row layui-col-md12">
+                      <label class="layui-form-grid-label layui-col-md1 flex flex-align-items"><em class="required">*</em><span class="task-name">任务<%=item.taskOrder+1%></span></label>
+                      <div class="layui-inline taskName layui-col-md3">
+                          <% var random = new Date().getTime() %>
+                          <% if(type == 'rjzj'){ %>
+                              <select name="taskItemCode" id="taskItemCode" lay-filter="taskItemCode">
+                                  <option value="" selected unitStr="" demo="" disableCode="" ></option>
+                              </select>
+                          <% }else{ %>    
+                              <select name="taskItemCode" id="taskItemCode" lay-filter="taskItemCode">
+                                  <% for(var attr in taskConfig){ %>
+                                    <option value="<%=attr%>" unitStr="" demo="" disableCode=""
+                                      <%if(item.taskItemCode == attr){%>selected <%}%>
+                                      ><%=taskConfig[attr].taskName%></option>
+                                  <% } %>                                
+                              </select>
+                          <% } %>
+                      </div>
+                      <div class="layui-inline task-params">
+                          <% var attr = item.taskItemCode;%>
+                          <% if(taskConfig[attr].params && taskConfig[attr].params.length){ %>
+                              <% var params = taskConfig[attr].params; %>
+                              <% params.forEach(function(itm,idx){ %>
+                              <div class="layui-inline unitStr item" data-id="<%=attr%>" >
+                                  <% if(itm.isShow){ %>
+                                  <% var validType = itm.validType || ''; %>
+                                  <% if(itm.inputType == 'select'){ %>
+                                      <div class="layui-inline">
+                                          <select name="<%=itm.proName%>" id=""
+                                              <%if(itm.required){%> lay-verify='required' <%}%>
+                                              >
+                                              <option value="" selected>--请选择--</option>
+                                              <% if(itm.options && itm.options.length){ %>
+                                                  <% itm.options.forEach(function(itm2,idx){%>
+                                                      <option value="<%=itm%>" selected>--请选择--</option>
+                                                  <%})%>
+                                              <% }%>
+                                          </select>
+                                      </div>                               
+                                  <%}else{%>
+                                      <div class="layui-inline">
+                                          <input type="text" class="layui-input" 
+                                            <%if(itm.required){%> 
+                                                lay-verify='required|<%=validType%>' 
+                                            <%}else{%>
+                                                lay-verify='<%=validType%>' 
+                                            <%}%>
+                                              value="<%=item[itm.proName]%>"
+                                              name="<%=itm.proName%>">
+                                            <%if(model == 'edit'){%>
+                                                <input type="hidden" name="id" value="<%=itm.id%>">
+                                            <%}%>
+                                      </div>
+                                      <div class="layui-inline <%=itm.paramUnit.unitType%>"><%=dynamicList.itemsUnitMap[itm.paramUnit.defaultVal]%></div>
+                                      <input type="hidden" class="<%=itm.paramUnit.unitType%>" value="<%=itm.paramUnit.defaultVal%>" name="<%=itm.paramUnit.proName%>">
+                                  <%}%>
+                                  <%}else{%>
+                                      <input type="hidden" value="">
+                                  <%}%>
+                              </div>
+                              <%if(model == 'edit'){%>
+                                <input type="hidden" value="<%=item.id%>" name="id">
+                              <%}%>
+                              <%})%>
+                          <%}%>
+                      </div>
+                  </div>
+              </div>
+              <div class="layui-form-item task-item taskDesc">
+                  <div class="layui-inline layui-row layui-col-md12">
+                      <label class="layui-form-grid-label layui-col-md1 flex flex-align-items">任务描述</label>
+                      <div class="layui-inline layui-col-md10">
+                          <textarea type="text" name="taskDesc" class="layui-textarea task-desc"><%=item.taskDesc%></textarea>
+                      </div>
+                  </div>
+              </div>
+              <div class="layui-form-item task-item taskItem layui-row layui-col-md12">
+                  <div class="layui-inline layui-col-md12 layui-row">
+                      <label class="layui-form-grid-label layui-col-md1"><em class="required"></em><span>奖励物品</span></label>
+                        <div class="layui-inline prize-table layui-col-md11 layui-row">
+                            <div class="tbody">
+                            </div>
+                            <div class="layui-inline">
+                                <button class="layui-btn layui-btn-sm add-prize"><i class="layui-icon">&#xe654;</i>添加物品</button>
+                            </div>
+                        </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    <%})%>
+      <div class="layui-inline innerTask">
+          <button class="layui-btn add-innerTask">添加任务项</button>
+      </div>
+    </div>
+  <%})%>
+<%}else{%>
+  <%if(data && data.length > 0){%>
+      <%data.forEach(function(item, index){%>
+      <div class="outter layui-row">
+          <%if(type == "rjzj" && index != 0){%>
+            <div class="del"><a href="javascript:;"><i class="iconfont icon-close"></i></a></div>
+          <%}else if(type != "rjzj"){%>
+            <div class="del"><a href="javascript:;"><i class="iconfont icon-close"></i></a></div>
+          <%}%>
+          <div class="task-table">
+              <div class="layui-form-item task-item taskCode">
+                  <div class="layui-inline layui-row layui-col-md12">
+                      <label class="layui-form-grid-label layui-col-md1 flex flex-align-items"><em class="required">*</em><span class="task-name">任务</span></label>
+                      <div class="layui-inline taskName layui-col-md3">
+                        <select name="taskItemCode"lay-filter="taskItemCode"
+                        <%if(item.subTaskSettings.length){%>
+                            id="firstTask" 
+                        <%}else{%>
+                            id="taskItemCode" 
+                        <%}%>
+                        >
+                            <% for(var attr in taskConfig){ %>
+                              <option value="<%=attr%>" unitStr="" demo="" disableCode=""
+                                <%if(item.taskItemCode == attr){%>selected <%}%>
+                                ><%=taskConfig[attr].taskName%></option>
+                            <% } %>                                
+                        </select>
+                      </div>
+                      <div class="layui-inline task-params">
+                          <% var attr = item.taskItemCode;%>
+                          <% if(taskConfig[attr].params && taskConfig[attr].params.length){ %>
+                              <% var params = taskConfig[attr].params; %>
+                              <% params.forEach(function(itm,idx){ %>
+                              <div class="layui-inline unitStr item" data-id="<%=attr%>" >
+                                  <% if(itm.isShow){ %>
+                                  <% if(itm.inputType == 'select'){ %>
+                                      <div class="layui-inline">
+                                          <select name="<%=itm.proName%>" id="">
+                                              <option value="" selected>--请选择--</option>
+                                              <% if(itm.options && itm.options.length){ %>
+                                                  <% itm.options.forEach(function(itm2,idx){%>
+                                                      <option value="<%=itm%>" selected>--请选择--</option>
+                                                  <%})%>
+                                              <% }%>
+                                          </select>
+                                      </div>                               
+                                  <%}else{%>
+                                      <div class="layui-inline">
+                                          <input type="text" class="layui-input" 
+                                              <%if(itm.required){%> 
+                                                lay-verify='required|<%=itm.validType%>' 
+                                              <%}else{%>
+                                                lay-verify='<%=itm.validType%>'
+                                               <%}%> 
+                                              value="<%=item[itm.proName]%>"
+                                              name="<%=itm.proName%>">
+                                        <%if(model == 'edit'){%>
+                                          <input type="hidden" name="id" value="<%=itm.id%>">
+                                          <%}%>
+                                      </div>
+                                      <div class="layui-inline <%=itm.paramUnit.unitType%>"><%=dynamicList.itemsUnitMap[itm.paramUnit.defaultVal]%></div>
+                                      <input type="hidden" class="<%=itm.paramUnit.unitType%>" value="<%=itm.paramUnit.defaultVal%>" name="<%=itm.paramUnit.proName%>">
+                                  <%}%>
+                                  <%}else{%>
+                                      <input type="hidden" value="">
+                                  <%}%>
+                              </div>
+                              <%})%>
+                          <%}%>
+                      </div>
+                  </div>
+              </div>
+              <div class="layui-form-item task-item taskDesc">
+                  <div class="layui-inline layui-row layui-col-md12">
+                      <label class="layui-form-grid-label layui-col-md1 flex flex-align-items">任务描述</label>
+                      <div class="layui-inline layui-col-md10">
+                          <textarea type="text" name="taskDesc" class="layui-textarea task-desc"><%=item.taskDesc%></textarea>
+                          <%if(model == 'edit'){%>
+                            <input type="hidden" value="<%=item.id%>" name="id">
+                          <%}%>
+                      </div>
+                  </div>
+              </div>
+              <div class="layui-form-item task-item taskItem">
+                  <div class="layui-inline layui-row layui-col-md12">
+                      <label class="layui-form-grid-label layui-col-md1 flex flex-align-items"><em class="required"></em><span>奖励物品</span></label>
+                        <div class="layui-inline prize-table layui-col-md11">
+                            <div class="tbody"></div>
+                            <%if(type == 'rjzj' && index == 0 ){%>
+                              <div class="layui-inline">
+                                  <button class="layui-btn layui-btn-sm addLevel"><i class="layui-icon">&#xe654;</i>添加层级</button>
+                              </div>
+                            <%}else{%>
+                              <div class="layui-inline">
+                                  <button class="layui-btn layui-btn-sm add-prize"><i class="layui-icon">&#xe654;</i>添加物品</button>
+                              </div>
+                            <%}%>
+                        </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <%});%>
+  <%}%> 
+<%}%>
+
+
+
+

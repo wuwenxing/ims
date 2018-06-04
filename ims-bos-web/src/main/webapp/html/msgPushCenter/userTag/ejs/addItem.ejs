@@ -1,0 +1,90 @@
+<form action="" class="layui-form">
+  <div class="layui-form-item">
+    <div class="layui-inline flex no-mr">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>标签名称</span>
+      </label>
+      <div class="layui-inline flex-item">
+        <span class="prepend"></span>
+        <input type="text" class="layui-input" id="tagCode" name="tagCode" lay-verify="required|tagCodeValid" lay-verType="tips" value="<%=company%>">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline flex no-mr">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>标签类型</span>
+      </label>
+      <div class="layui-inline flex-item">
+        <select name="tagType" id="" lay-filter="tagTypeItem" lay-verify="required" lay-verType="tips">
+          <option value="1" selected>唤醒沉默客户</option>
+          <option value="2">其他</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item tagStatusItem">
+    <div class="layui-inline flex no-mr">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <span>状态</span>
+      </label>
+      <div class="layui-inline flex-item">
+        <select name="enableFlag" id="">
+          <option value="Y">启用</option>
+          <option value="N">禁用</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item ruleItem">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>筛选规则</span>
+      </label>
+      <div class="layui-inline flex rules">
+        <input type="text" class="layui-input layui-input-sm" 
+            id="cashDate" name="cashStartTime" placeholder="yyyy-mm-dd hh:mm:ss"
+            lay-verify="required" lay-verType="tips"
+            >
+        <span class="middle">之后注册，超</span>
+        <div class="layui-inline days">
+          <input type="text" class="layui-input layui-input-xs no-border" name="noCashInDay" lay-verify="required|daysItem" lay-verType="tips">
+          <span class="append">天</span>
+        </div>
+        <span class="mrl-8">无入金</span>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item ruleItem">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label"></label>
+      <div class="layui-inline flex rules">
+          <input type="text" class="layui-input layui-input-sm" 
+              id="tradeDate" name="tradeStartTime" placeholder="yyyy-mm-dd hh:mm:ss"
+              lay-verify="required" lay-verType="tips"           
+              >
+          <span class="middle">之后注册，超</span>
+          <div class="layui-inline days">
+            <input type="text" class="layui-input layui-input-xs no-border" name="noTradeDay" lay-verify="required|daysItem" lay-verType="tips">
+            <span class="append">天</span>
+          </div>
+          <span class="mrl-8">无交易</span>        
+      </div>
+      <p class="tips-inner">日历选择最近2个月，填写不超过30天</p>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline flex no-mr">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <span>备注</span>
+      </label>
+      <div class="layui-inline flex-item">
+        <textarea name="remark" id="" class="layui-textarea"></textarea>
+      </div>
+    </div>
+  </div>
+  <button class="layui-btn node-submit" lay-submit lay-filter="addItem" style="display:none;">提交</button>
+</form>

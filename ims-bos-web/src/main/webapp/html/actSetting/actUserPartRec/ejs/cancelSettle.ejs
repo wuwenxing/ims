@@ -1,0 +1,107 @@
+
+<form action="" class="layui-form">
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="layui-inline">
+                        <label for="" class="layui-form-label">客户账号<span class="mustInput"></span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input" name="userNo" id="userNo"  >
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="layui-inline">
+                        <label for="" class="layui-form-label">活动名称</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input" name="startTime" id="startTime" placeholder="开始时间" >
+                    </div>
+                    <div class="layui-inline">  至 </div>
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input" name="endTime" id="endTime" placeholder="结束时间">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="layui-inline">
+                        <label for="" class="layui-form-label">生效</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                        <select name="effectiveFlag" id="">
+                            <option value="N" selected>否</option>
+                            <option value="Y">是</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="layui-btn node-submit" style="display:none;" lay-submit lay-filter="addItem"></button>
+</form>
+<%}else{%>
+<form action="" class="layui-form">
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="layui-inline">
+                        <label for="" class="layui-form-label">所属活动<span class="mustInput"></span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                        <select name="activityPeriods" id="activityPeriods">
+                            <% actNumList.forEach(function(item, index){%>
+                                <option value="<%=item.activityPeriods%>"><%=item.activityPeriods%></option>
+                            <%})%>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="layui-inline">
+                        <label for="" class="layui-form-label">维护时间</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input" name="startTime" id="startTime" placeholder="开始时间" >
+                    </div>
+                    <div class="layui-inline">  至 </div>
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input" name="endTime" id="endTime" placeholder="结束时间">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="layui-inline">
+                        <label for="" class="layui-form-label">生效</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-inline">
+                        <select name="effectiveFlag" id="">
+                            <option value="N" selected>否</option>
+                            <option value="Y">是</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="layui-btn node-submit" style="display:none;" lay-submit lay-filter="addItem"></button>
+</form>
+<%}%>

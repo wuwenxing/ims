@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>web_ims_demo_normal</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="web_ims_demo_normal">
+            <g id="demo">
+                <rect id="Rectangle-6" x="0" y="0" width="24" height="24"></rect>
+                <g id="Group-2" transform="translate(2.000000, 4.000000)">
+                    <rect id="Rectangle-19" stroke="#FFFFFF" stroke-width="1.2" x="7.6" y="0.6" width="4.8" height="2.8" rx="1"></rect>
+                    <rect id="Rectangle-19-Copy" stroke="#FFFFFF" stroke-width="1.2" x="0.6" y="11.6" width="5.8" height="3.8" rx="1"></rect>
+                    <rect id="Rectangle-19-Copy-2" stroke="#FFFFFF" stroke-width="1.2" x="13.6" y="11.6" width="5.8" height="3.8" rx="1"></rect>
+                    <rect id="Rectangle-20" fill="#FFFFFF" x="9.25" y="4" width="1.5" height="2"></rect>
+                    <path d="M3.6,10.3999547 L16.4,10.3989874 L16.4,6.99756225 C16.4,6.76177139 16.2581041,6.6 16.125,6.6 L3.875,6.6 C3.74189587,6.6 3.6,6.76177139 3.6,6.99756225 L3.6,10.3999547 Z" id="Rectangle-21" stroke="#B0BEC5" stroke-width="1.2"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

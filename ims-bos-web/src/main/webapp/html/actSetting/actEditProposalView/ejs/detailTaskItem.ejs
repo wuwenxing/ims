@@ -1,0 +1,87 @@
+
+<%if(data && data.length > 0){%>
+    <%data.forEach(function(item, index){%>
+    <div class="outter layui-row" id="<%=item.id%>">
+        <div class="task-table"
+            <%if(typeof(item.taskGroup) != "undefinded"){%>
+                data-taskGroup = "<%=item.taskGroup%>"    
+            <%}%>
+            <%if(typeof(item.taskOrder) != "undefinded"){%>
+                data-taskOrder = "<%=item.taskOrder%>"    
+            <%}%>
+        >
+            <div class="layui-form-item task-item taskCode">
+                <div class="layui-inline layui-row layui-col-md12">
+                    <%if(type != 'cj'){%>
+                        <label class="layui-form-grid-label layui-col-md1 flex flex-align-items"><em class="required">*</em><span class="task-name">任务</span></label>
+                    <%}else{%>
+                        <label class="layui-form-grid-label layui-col-md1 flex flex-align-items"><em class="required">*</em><span class="task-name">任务<%=item.taskOrder+1%></span></label>
+                    <%}%>
+                    <div class="layui-inline taskName layui-col-md3">
+                        <% var random = new Date().getTime() %>  
+                        <select name="taskItemCode" id="taskItemCode" lay-filter="taskItemCode" disabled>
+                            <% for(var attr in taskConfig){ %>
+                            <option value="<%=attr%>" unitStr="" demo="" disableCode=""
+                                <%if(item.taskItemCode == attr){%>selected <%}%>
+                                ><%=taskConfig[attr].taskName%></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="layui-inline task-params">
+                        <% var attr = item.taskItemCode;%>
+                        <% if(taskConfig[attr].params && taskConfig[attr].params.length){ %>
+                            <% var params = taskConfig[attr].params; %>
+                            <% params.forEach(function(itm,idx){ %>
+                            <div class="layui-inline unitStr item" data-id="<%=attr%>" >
+                                <% if(itm.isShow){ %>
+                                <% var validType = itm.validType || ''; %>
+                                <% if(itm.inputType == 'select'){ %>
+                                    <div class="layui-inline">
+                                        <select name="<%=itm.proName%>" id="" disabled
+                                            <%if(itm.required){%> lay-verify='required|<%=validType%>' <%}%>
+                                            >
+                                            <option value="" selected>--请选择--</option>
+                                            <% if(itm.options && itm.options.length){ %>
+                                                <% itm.options.forEach(function(itm2,idx){%>
+                                                    <option value="<%=itm%>" selected>--请选择--</option>
+                                                <%})%>
+                                            <% }%>
+                                        </select>
+                                    </div>                               
+                                <%}else{%>
+                                    <div class="layui-inline">
+                                        <input type="text" class="layui-input" disabled value="<%=item[itm.proName]%>"
+                                            name="<%=itm.proName%>" >
+                                    </div>
+                                    <div class="layui-inline"><%=dynamicList.itemsUnitMap[itm.paramUnit.defaultVal]%></div>
+                                    <input type="hidden" value="<%=itm.paramUnit.defaultVal%>" name="<%=itm.paramUnit.proName%>">
+                                <%}%>
+                                <%}else{%>
+                                    <input type="hidden" value="">
+                                <%}%>
+                            </div>
+                            <%})%>
+                        <%}%>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item task-item taskDesc">
+                <div class="layui-inline layui-row layui-col-md12">
+                    <label class="layui-form-grid-label layui-col-md1 flex flex-align-items"><em class="required"></em><span>任务描述</span></label>
+                    <div class="layui-inline layui-col-md10">
+                        <textarea type="text" name="taskDesc" disabled class="layui-textarea task-desc"><%=item.taskDesc%></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item task-item taskItem layui-row layui-col-md12">
+                <div class="layui-inline layui-col-md12 layui-row">
+                    <label class="layui-form-grid-label layui-col-md1"><em class="required"></em><span>奖励物品</span></label>
+                    <div class="layui-inline prize-table layui-col-md11 layui-row">
+                        <div class="tbody"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+    <%})%>
+<%}%> 

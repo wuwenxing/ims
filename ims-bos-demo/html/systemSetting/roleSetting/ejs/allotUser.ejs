@@ -1,0 +1,42 @@
+<div class="inner-container">
+    <div class="layout-1 layui-searchPanel">
+        <div class="layui-searchPanel-item">
+            <h2 class="layui-searchPanel-title">
+                <i class="layui-icon layui-search-icon">&#xe615;</i>
+                <span>查询条件</span>
+            </h2>
+            <div class="layui-searchPanel-content">
+                <form class="layui-form" action="">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">账号:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="userNo" placeholder="" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">姓名：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="userName" placeholder="" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block activeButton">
+                            <button class="layui-btn layui-btn" lay-submit lay-filter="subSearch"><i
+                                    class="layui-icon layui-search-icon">&#xe615;</i>查询
+                            </button>
+                            <button type="reset" class="layui-btn layui-btn-primary"><i
+                                    class="layui-icon layui-search-icon">&#xe640;</i>重置
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="table" lay-filter="allotTable" id="allotTable"></div>
+    <form class="layui-form "> 
+        <button class="layui-btn save" lay-filter="save" lay-submit style="display:none;"></button>
+    </form>
+</div>

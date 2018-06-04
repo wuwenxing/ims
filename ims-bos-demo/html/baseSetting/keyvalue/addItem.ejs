@@ -1,0 +1,56 @@
+<form class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">状态</label>
+            <div class="layui-inline">
+                <select name="" id="">
+                    <option value="" selected>启用</option>
+                    <option value="">禁用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+      
+    
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">键<span class="mustInput"></span></label>
+            <div class="layui-inline">
+                <input type="text" name="dataKey" class="layui-input" autocomplete="off"  lay-verify="required" lay-verType="tips">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">值<span class="mustInput"></span></label>
+            <div class="inner">
+                <div class="layui-inline">
+                    <textarea name="dataVal" style="height:50px;" autocomplete="off" required lay-verType="tips" lay-verify="required" placeholder="请输入" class="layui-textarea"></textarea>
+                </div>
+                <p style="color:red;margin-left:50px;">(注意：值为json字符串，请使用类似{"a":"1","b":"2"}的格式)</p>                    
+            </div>
+        </div>
+    </div>
+    
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">标签</label>
+            <div class="layui-inline">
+                <input type="text" name="tag" class="layui-input">
+            </div>
+        </div>
+    </div>
+    
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">备注</label>
+            <div class="layui-inline">
+                <textarea name="remark" style="height:50px;" autocomplete="off" required lay-verType="tips" lay-verify="required" placeholder="请输入" class="layui-textarea remark"></textarea>
+            </div>
+        </div>
+    </div>
+    <div style="display:none;">
+        <button class="node-submit" lay-submit lay-filter="seeAddRow"></button>
+    </div>
+</form>

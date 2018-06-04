@@ -1,0 +1,51 @@
+<%if(typeof(viewColumns) != 'undefined'){%>
+<div class="layui-form-item">
+    <div class="layui-inline check-input" style="margin-left:15px;">
+        <input type="checkbox" name="chineseName" <%if(viewColumns.indexOf('chineseName') != -1){%>checked<%}%> lay-skin="switch" lay-text="允许|禁止">
+    </div>
+    <div class="layui-inline">
+        <label for="" class="layui-form-label">客户姓名</label>
+    </div>
+</div>
+<div class="layui-form-item">
+    <div class="layui-inline check-input" style="margin-left:15px;">
+        <input type="checkbox"  name="mobilePhone"  <%if(viewColumns.indexOf('mobilePhone') != -1){%>checked<%}%>  lay-skin="switch" lay-text="允许|禁止">
+    </div>
+    <div class="layui-inline">
+        <label for="" class="layui-form-label">电话</label>
+    </div>
+</div>
+<div class="layui-form-item">
+    <div class="layui-inline check-input" style="margin-left:15px;">
+        <input type="checkbox"  name="email" <%if(viewColumns.indexOf('email') != -1){%>checked<%}%> lay-skin="switch" lay-text="允许|禁止">
+    </div>
+    <div class="layui-inline">
+        <label for="" class="layui-form-label">邮箱</label>
+    </div>
+</div>
+<%}else{%>
+    <div class="layui-form-item">
+        <div class="layui-inline check-input" style="margin-left:15px;">
+            <input type="checkbox"  name="chineseName"  lay-skin="switch" lay-text="允许|禁止">
+        </div>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">客户姓名</label>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline check-input" style="margin-left:15px;">
+            <input type="checkbox"  name="mobilePhone"  lay-skin="switch" lay-text="允许|禁止">
+        </div>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">电话</label>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline check-input" style="margin-left:15px;">
+            <input type="checkbox" name="email" lay-skin="switch" lay-text="允许|禁止">
+        </div>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">邮箱</label>
+        </div>
+    </div>
+<%}%>

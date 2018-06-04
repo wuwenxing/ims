@@ -1,0 +1,90 @@
+
+<form class="layui-form prizeItem">
+		<p style="margin-top:10px"></p>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                             <label for="" class="layui-form-label">充值类型:<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <select name="rechargeType" lay-filter="rechargeType" id="rechargeType">
+                                <option value="online" selected>话费</option>
+                                <option value="flow" >流量</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <div class="layui-inline">
+                             <label for="" class="layui-form-label">通道类型:<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                           <select name="interfaceType" id="interfaceType">
+                               <option value="rl">容联</option>
+                               <option value="of">欧飞</option>
+                           </select>
+                        </div>
+                    </td>
+                </tr>
+
+
+
+                 <tr>
+                    <td>
+                        <div class="layui-inline">
+                             <label for="" class="layui-form-label">手机号码:<span class="mustInput"></span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <input type="text" name="phone"  class="layui-input" autocomplete="off"   lay-verify="required|phone" lay-verType="tips">
+                        </div>
+                    </td>
+                </tr>
+
+                <tr class="online">
+                    <td colspan="2">
+                        <div class="layui-inline">
+                             <label for="" class="layui-form-label">金&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;额:<span class="mustInput"></span></label>
+                            <div class="layui-inline">
+                                <input type="text" name="price"  id="price" class="layui-input" autocomplete="off" value="0"   lay-verify="required|number|itemNumber" lay-verType="tips">
+                            </div>元
+                        </div>
+                    </td>
+                </tr>
+                <tr class="flow">
+                    <td colspan="2">
+                        <div class="layui-inline">
+                             <label for="" class="layui-form-label">流量:<span class="mustInput"></span></label>
+                            <div class="layui-inline">
+                                <input type="text" name="rechargeSize" id="rechargeSize" style="width:80px" value="0"  class="layui-input" autocomplete="off" lay-verify="required|number"    lay-verType="tips">
+                            </div>
+                            <div class="layui-inline">
+                                <select name="itemUnit" lay-filter="unit" style="width:30px">
+                                    <option value="M">M</option>
+                                    <option value="G">G</option>
+                                </select>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+              </tbody>
+         </table>
+
+          <div style="display:none;">
+                 <button class="node-submit" lay-submit lay-filter="seeAddRow"></button>
+           </div>
+</form>
+
+

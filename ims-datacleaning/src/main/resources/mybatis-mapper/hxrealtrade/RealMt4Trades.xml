@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.datacleaning.dao.inf.hxrealtrade.RealMt4TradesDao" >
+  <resultMap id="BaseResultMap" type="Mt4Trades" >
+    <id column="TICKET" property="ticket" jdbcType="INTEGER" />
+    <result column="LOGIN" property="login" jdbcType="INTEGER" />
+    <result column="SYMBOL" property="symbol" jdbcType="CHAR" />
+    <result column="DIGITS" property="digits" jdbcType="INTEGER" />
+    <result column="CMD" property="cmd" jdbcType="INTEGER" />
+    <result column="VOLUME" property="volume" jdbcType="INTEGER" />
+    <result column="OPEN_TIME" property="openTime" jdbcType="TIMESTAMP" />
+    <result column="OPEN_PRICE" property="openPrice" jdbcType="DOUBLE" />
+    <result column="SL" property="sl" jdbcType="DOUBLE" />
+    <result column="TP" property="tp" jdbcType="DOUBLE" />
+    <result column="CLOSE_TIME" property="closeTime" jdbcType="TIMESTAMP" />
+    <result column="EXPIRATION" property="expiration" jdbcType="TIMESTAMP" />
+    <result column="REASON" property="reason" jdbcType="INTEGER" />
+    <result column="CONV_RATE1" property="convRate1" jdbcType="DOUBLE" />
+    <result column="CONV_RATE2" property="convRate2" jdbcType="DOUBLE" />
+    <result column="COMMISSION" property="commission" jdbcType="DOUBLE" />
+    <result column="COMMISSION_AGENT" property="commissionAgent" jdbcType="DOUBLE" />
+    <result column="SWAPS" property="swaps" jdbcType="DOUBLE" />
+    <result column="CLOSE_PRICE" property="closePrice" jdbcType="DOUBLE" />
+    <result column="PROFIT" property="profit" jdbcType="DOUBLE" />
+    <result column="TAXES" property="taxes" jdbcType="DOUBLE" />
+    <result column="COMMENT" property="comment" jdbcType="CHAR" />
+    <result column="INTERNAL_ID" property="internalId" jdbcType="INTEGER" />
+    <result column="MARGIN_RATE" property="marginRate" jdbcType="DOUBLE" />
+    <result column="TIMESTAMP" property="timestamp" jdbcType="INTEGER" />
+    <result column="GW_VOLUME" property="gwVolume" jdbcType="INTEGER" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
+    <result column="first_deposit" property="firstDeposit" jdbcType="VARCHAR" />
+  </resultMap>
+  
+ 
+  <sql id="Base_Column_List" >
+    ticket, login, symbol, digits, cmd, volume, open_time, open_price, sl, tp, close_time, 
+    expiration, reason, conv_rate1, conv_rate2, commission, commission_agent, swaps, 
+    close_price, profit, taxes, comment, internal_id, margin_rate, timestamp, gw_volume, 
+     modify_time
+  </sql>
+ 
+  <select id="selectTrade" parameterType="java.util.Map"  resultMap="BaseResultMap" >
+  	(select 
+  		<include refid="Base_Column_List"></include>,'in' trade_type
+  	from 
+  		MT4_TRADES
+  	where 
+  		cmd in (0,1)
+  		and open_time!='1970-01-01 00:00:00'
+  		<if test="lastUpdateDateBegin!=null and lastUpdateDateEnd!=null">
+		   and open_time between #{lastUpdateDateBegin} and #{lastUpdateDateEnd}
+		</if>
+		<if test="lastUpdateDate != null" >
+	    	and open_time &gt;= #{lastUpdateDate}
+		</if>
+		order by open_time asc)
+	union all
+	
+	(select 
+  		<include refid="Base_Column_List"></include>,'out' trade_type
+  	from 
+  		MT4_TRADES
+  	where 
+  		cmd in (0,1)
+  		and close_time!='1970-01-01 00:00:00'
+  		<if test="lastUpdateDateBegin!=null and lastUpdateDateEnd!=null">
+		   and close_time between #{lastUpdateDateBegin} and #{lastUpdateDateEnd}
+		</if>
+		<if test="lastUpdateDate != null" >
+	    	and close_time &gt;= #{lastUpdateDate}
+		</if>
+		order by close_time asc)
+  </select>
+  
+  
+</mapper>

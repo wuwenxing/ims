@@ -1,0 +1,101 @@
+
+
+<form class="layui-form">
+    <div class="hide">
+        <input type="hidden" name="taskItemId" id="taskItemid"  value=""  />
+        <input type="hidden" name="taskCode" id="taskCode"  value=""  />
+        <input type="hidden" name="accountNoCcyAdd" id="accountNoCcyAdd"  value=""  />
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><span>是否批量</span></label>
+            <div class="layui-inline">
+                <select name="batchAdd" lay-filter="batchAdd">
+                    <option value="1">是</option>
+                    <option value="0" selected>否</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item" id="custInfo">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>客户账号</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" id="accountNo"   name="accountNo">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>活动平台</span></label>
+            <div class="layui-inline">
+                <select name="platform" id="guestPlatForm" lay-verify="required" lay-verType="tips" lay-filter="guestPlatForm">
+                    <option value="">--请选择--</option>
+                    <%actItemCategoryList.forEach(function(item,index){%>
+                            <option value="<%=item.dictCode%>"><%=item.dictNameCn%></option>
+                    <%})%>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>所属活动</span></label>
+            <div class="layui-inline">
+                <select name="activityName" id="ejsActivityName" lay-verify="required" lay-verType="tips"   lay-filter="ejsActivityName">
+                    <option value="">--请选择--</option>
+                    <%acts.forEach(function(item,index){%>
+                        <option value="<%=item.activityPeriods%>"><%=item.activityName%></option>
+                    <%})%>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items">活动编号</label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" id="ejsActivityPeriods"  lay-filter="ejsActivityPeriods" readonly="readonly" name="actNo">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>所属任务</span></label>
+            <div class="layui-inline">
+                <select name="taskSettingId" id="taskSettingId"  lay-verify="required" lay-filter="taskSettingId"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required"></em><span>物品名称</span></label>
+            <div class="layui-inline">
+                <select name="itemName" id="ejsItemName"  lay-filter="ejsItemName" lay-verify="required"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required"></em><span>物品编号</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" name="itemNo" id="ejsGiftNumber"  lay-filter="ejsGiftNumber"  disabled>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item hide"  id="unitAdd_row"></div>
+    <div class="layui-form-item flex flex-align-items batch-save" style="display:none;">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items">模板</label>
+            <div class="layui-inline flex flex-align-items">
+                <a class="layui-btn downTemplate" href="">下载模板</a>
+                <span class="tips">温馨提示：模拟币和代币要求手数非必填,奖励金额和要求手数仅保存两位小数!</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item batch-save hide" >
+        <div class="layui-inline flex flex-align-items">
+            <label class="layui-form-label  flex flex-align-items">上传文件</label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" value="" readonly placeholder="选择文件" id="chooseFile">
+            </div>
+            <button type="button" class="layui-btn upload-btn">上传</button>
+            <input type="hidden" name="batchAddFilePath" value="" id="batchAddFilePath">
+        </div>
+    </div>
+    <button style="display:none;" class="layui-btn addItem" lay-submit lay-filter="addItem"></button>
+</form>

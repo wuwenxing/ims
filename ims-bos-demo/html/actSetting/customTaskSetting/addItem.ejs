@@ -1,0 +1,59 @@
+<form action="" class="layui-form layer">
+    <table>
+        <tr>
+            <td>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label">任务编号<span class="mustInput"></span></label>
+                </div>
+            </td>
+            <td>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" name="taskCode">
+                </div>
+            </td>
+            <td>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label">任务名称<span class="mustInput"></span></label>
+                </div>
+            </td>
+            <td>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" name="taskName">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label">规则识别码<span class="mustInput"></span></label>
+                </div>
+            </td>
+            <td>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" name="ruleCode">
+                </div>
+            </td>
+            <td>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label">任务状态<span class="mustInput"></span></label>
+                </div>
+            </td>
+            <td>
+                <div class="layui-inline">
+                    <input type="checkbox" name="switch" lay-skin="switch" lay-text="开启|关闭">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-inline">
+                    <label for="" class="layui-form-label">任务描述</label>
+                </div>
+            </td>
+            <td colspan="3">
+                <textarea name="taskDesc" id="taskDesc"  class="layui-textarea"></textarea>
+            </td>
+        </tr>
+    </table>
+    <button class="layui-btn node-add" lay-submit lay-filter="add" style="display:none;"></button>
+</form>

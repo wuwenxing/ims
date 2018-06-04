@@ -1,0 +1,198 @@
+@import "./variables.scss";
+.layui-container{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    position: relative;
+    padding-left: 260px;
+    background: $bgWhite;
+    .left{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 261px;
+        height: 100%;
+        padding: 0 12px;
+        border-right: solid 1px #eee;
+        box-sizing: border-box;
+        overflow: hidden;
+        background:$bgColor-15;
+        .layout-2 {
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            padding: 0;
+            background:$bgColor-15;
+            .layui-btn-xs {
+                width: 40px;
+                height: 24px;
+                border-radius: 4px;
+                background: $bgColor-13;
+                color:$bgWhite;
+                font-size: 12px;
+                padding: 0;
+            }
+        }
+        .list {
+            font-size: 0;
+            text-align: left;
+            li {
+                margin-bottom: 5px;
+                float: left;
+                margin-right: 4px;
+                &:last-child{
+                    margin-right: 0;
+                }
+            }
+        }
+        .tree-box {
+            width: 100%;
+            height: calc(100% - 48px);
+            overflow-y: auto;
+            .layui-tree {
+                height: 100%;
+                li {
+                    width: 100%;
+                    ul {
+                        width: 100%;
+                        padding-left: 20px;
+                        box-sizing: border-box;
+                        margin-left: 0;
+                    }
+                    a {
+                        width: 100%;
+                    }
+                    .active {
+                        background: $bgColor-16;
+                    }
+                }
+            }
+        }
+    }
+    .right{
+        width: 100%;
+        height: 100%;
+        display: none;
+        overflow: hidden;
+    }
+    .btns {
+        width: 100%;
+        margin-right: 0;
+        text-align: right;
+        .layui-btn{
+            background: $bgColor-13;
+            &:first-child{
+                margin-right: 14px;
+            }
+        }
+        .reset {
+            background: $bgWhite;
+            border:solid 1px $bgColor-13;
+            color:$bgColor-13;
+        }
+    }
+}
+.layui-input-reset{
+    display: inline-block;
+    width: auto;
+    text-align: center;
+}
+
+.single {
+    width: 216px;
+    button {
+        width: 24px;
+        height: 24px;
+        border: none;
+        margin-top: 3px;
+        background: $bgWhite;
+        cursor: pointer;
+    }
+    .layui-input {
+        width: 168px;
+    }
+}
+.detail {
+    padding-top: 8px;
+    padding-left: 32px;
+    width: 100%;
+    box-sizing: border-box;
+    .layui-form-item {
+        padding-bottom: 12px;
+        margin-bottom: 0;
+        box-sizing: border-box;
+        .layui-inline {
+            margin-right: 0;
+            margin-bottom: 0;
+            &.single {
+                width: 216px;
+            }
+        }
+        .layui-inline:first-child {
+          margin-right: 34px;
+        }
+        .layui-inline.no-mr {
+            margin-right: 0;
+        }
+        &.no-mb {
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        .layui-form-label {
+            width: 90px;
+            height: 32px;
+            margin-right: 12px;
+            color:$fontColor-06;
+            padding: 0;
+            text-align: left;
+            position: relative;
+            .required {
+                position: absolute;
+                color: $fontColor-05;
+                font-size: 20px;
+                left: -10px;
+                font-weight: bold;
+                top: 10px;
+            }
+        }
+        .layui-input,.layui-form-select {
+            width: 216px;
+            height: 30px;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+        .layui-input.sort {
+            width: 168px;
+            text-align: center;
+        }
+        .layui-input.big {
+            width: 570px;
+        }
+        .layui-input-reset {
+            width: 105px;
+        }
+        textarea, .layui-textarea {
+           min-height: 56px;
+           resize: vertical;
+           border-radius: 4px;
+        }
+        .layui-form-radio {
+            margin: 0;
+            width: 216px;
+        }
+        .layui-btn {
+            padding: 5px 29px;
+            border-radius: 4px;
+            height: 40px;
+            line-height: 30px;
+        }
+        .detail-item {
+            .flex-item {
+                .layui-input,.layui-form-select{
+                    width:100%;
+                }
+            }
+        }
+
+    }
+}

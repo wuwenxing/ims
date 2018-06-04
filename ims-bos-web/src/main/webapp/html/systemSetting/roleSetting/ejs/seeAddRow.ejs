@@ -1,0 +1,95 @@
+<%if(typeof(data.roleId) != "undefined"){%>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline no-mr">
+                <label class="layui-form-label"><em class="required">*</em><span>角色编号</span></label>
+                <div class="layui-inline">
+                    <input <%if(type == 'view'){%> disabled <%}%> value="<%=data.roleCode%>" type="text" lay-verType="tips" name="roleCode" lay-verify="required|valueLength" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline no-mr">
+                <label class="layui-form-label"><em class="required">*</em><span>角色名称</span></label>
+                <div class="layui-inline">
+                    <input  <%if(type == 'view'){%> disabled <%}%> type="text" value="<%=data.roleName%>" lay-verify="required|valueLength" lay-verType="tips" name="roleName" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline no-mr">
+                <label class="layui-form-label"><em class="required">*</em><span>状态</span></label>
+                <div class="layui-inline">
+                    <select name="enableFlag" lay-verify="required" <%if(type == 'view'){%> disabled <%}%> >
+                        <option value="Y" <%if(data.enableFlag == 'Y'){%>selected<%}%> >启用</option>
+                        <option value="N" <%if(data.enableFlag == 'N'){%>selected<%}%>>禁用</option>
+                    </select>
+                </div>
+            </div>
+            <%if(userInfo.superAdmin){%>
+                <div class="layui-inline no-mr">
+                    <label class="layui-form-label"><em class="required">*</em><span>所属公司</span></label>
+                    <div class="layui-inline">
+                        <select name="companyId" lay-verify="required" <%if(type == 'view'){%> disabled <%}%> >
+                            <% companyList.forEach(function(item, index){ %>
+                                <option value="<%=item.id%>" <%if(data.companyId == item.id){%>selected<%}%> ><%=item.name%></option>
+                            <%})%>
+                        </select>
+                    </div>
+                </div>
+            <%}else{%>
+                <input type="hidden" name="companyId" value="<%=userInfo.companyId%>">
+            <%}%>
+        </div>
+        <div style="display: none;">
+            <button class="node-submit" lay-submit lay-filter="seeAddRow"></button>
+        </div>
+    </form>
+<%}else{%>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline no-mr">
+                <label class="layui-form-label"><em class="required">*</em><span>角色编号</span></label>
+                <div class="layui-inline">
+                    <input type="text" lay-verType="tips" name="roleCode" lay-verify="required|valueLength" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline no-mr">
+                <label class="layui-form-label"><em class="required">*</em><span>角色名称</span></label>
+                <div class="layui-inline">
+                    <input lay-verify="required|valueLength"  type="text" lay-verType="tips" name="roleName" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline no-mr">
+                <label class="layui-form-label"><em class="required">*</em><span>状态</span></label>
+                <div class="layui-inline">
+                    <select name="enableFlag" lay-verify="required" >
+                    <option value="Y" selected>启用</option>
+                    <option value="N">禁用</option>
+                    </select>
+                </div>
+            </div>
+            <%if(userInfo.superAdmin){%>
+                <div class="layui-inline no-mr">
+                    <label class="layui-form-label"><em class="required">*</em><span>所属公司</span></label>
+                    <div class="layui-inline">
+                        <select name="companyId" lay-verify="required" <%if(type == 'view'){%> disabled <%}%> >
+                            <% companyList.forEach(function(item, index){ %>
+                                <option value="<%=item.id%>" <%if(data.companyId == item.id){%>selected<%}%> ><%=item.name%></option>
+                            <%})%>
+                        </select>
+                    </div>
+                </div>
+            <%}else{%>
+                <input type="hidden" name="companyId" value="<%=userInfo.companyId%>">
+            <%}%>
+        </div>
+        <div style="display: none;">
+            <button class="node-submit layui-btn" lay-submit lay-filter="seeAddRow"></button>
+        </div>
+    </form>
+<%}%>

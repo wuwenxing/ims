@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>close_icon_32*32</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="close_icon_32*32" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="close_icon">
+            <g id="Group-2">
+                <rect id="Rectangle-6" x="0" y="0" width="32" height="32"></rect>
+                <path d="M15.25,15.25 L15.25,6 L16.75,6 L16.75,15.25 L26,15.25 L26,16.75 L16.75,16.75 L16.75,26 L15.25,26 L15.25,16.75 L6,16.75 L6,15.25 L15.25,15.25 Z" id="Combined-Shape" fill-opacity="0.72" fill="#00214A" transform="translate(16.000000, 16.000000) rotate(-315.000000) translate(-16.000000, -16.000000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

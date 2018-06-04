@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.message.dao.inf.Gts2BoDictDao" >
+
+  <insert id="insert" parameterType="Gts2BoDict" >
+    insert into t_bo_dict_${env} (id, code, parent_code, 
+      valid, sort, create_user, 
+      create_ip, create_date, update_user, 
+      update_ip, update_date, version_no, 
+      company_id, name_cn, name_tw, 
+      name_en)
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=CHAR}, #{parentCode,jdbcType=CHAR}, 
+      #{valid,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{createUser,jdbcType=CHAR}, 
+      #{createIp,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=CHAR}, 
+      #{updateIp,jdbcType=CHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{versionNo,jdbcType=INTEGER}, 
+      #{companyId,jdbcType=BIGINT}, #{nameCn,jdbcType=LONGVARCHAR}, #{nameTw,jdbcType=LONGVARCHAR}, 
+      #{nameEn,jdbcType=LONGVARCHAR})
+  </insert>
+
+ 
+  <update id="update" parameterType="Gts2BoDict" >
+    update t_bo_dict_${env}
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=CHAR},
+      </if>
+      <if test="parentCode != null" >
+        parent_code = #{parentCode,jdbcType=CHAR},
+      </if>
+      <if test="valid != null" >
+        valid = #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp,jdbcType=CHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="nameCn != null" >
+        name_cn = #{nameCn,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="nameTw != null" >
+        name_tw = #{nameTw,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="nameEn != null" >
+        name_en = #{nameEn,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+</mapper>

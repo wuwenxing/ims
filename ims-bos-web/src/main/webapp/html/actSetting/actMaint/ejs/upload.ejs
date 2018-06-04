@@ -1,0 +1,26 @@
+<form class="layui-form upload-form">
+  <div class="layui-form-item">
+    <div class="layui-inline upload-content flex-item no-mr flex flex-horizon-between">
+        <div class="layui-inline no-mr flex-item">
+            <%if(type == 'whitelist'){%>
+              <input type="text" readonly class="template layui-input sel" id="upload-whitelist" placeholder="点击选择白名单文件">
+            <%}else{%>
+              <input type="text" readonly class="template layui-input sel" id="upload-blacklist" placeholder="点击选择黑名单文件">
+            <%}%>
+        </div>
+        <div class="layui-inline download" id="downloadTempl">
+            <a class="template" href="">下载模板</a>
+        </div>
+    </div>
+  </div>
+  <div class="layui-form-item no-mb upload-tips">
+      <div class="layui-inline">
+          <h4><i class="tips"></i><span class="tips-title">温馨提示：</span></h4>
+          <p>1.上传文件类型：可支持.xls、.xlsx格式的excel文件。</p>
+          <p>2.交易账号列为必填项。</p>
+      </div>
+  </div>
+  <div class="upload" style="display:none;" >
+    <button type="button" id="uploadBtn">上传</button>
+  </div>
+</form>

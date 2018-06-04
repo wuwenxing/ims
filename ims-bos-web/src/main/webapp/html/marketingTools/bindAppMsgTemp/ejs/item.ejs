@@ -1,0 +1,127 @@
+<div style="margin-top:10px"></div>
+<% if(typeof(data.id) != "undefined"){ %>
+<form action="" class="layui-form">
+<input type="hidden" name="id" id="id" value="<%=data.id%>" />
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>绑定编号</span></label>
+      <div class="layui-inline">
+        <input type="text" class="layui-input" name="bindCode" value="<%=data.bindCode%>" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+    <div class="layui-inline" >
+      <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>app模板编号</span></label>
+      <div class="layui-inline">
+        <input type="text" class="layui-input" name="appCode" value="<%=data.appCode%>" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>短信模板编号</span></label>
+      <div class="layui-inline">
+        <input type="text" class="layui-input" name="smsCode" value="<%=data.smsCode%>" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>绑定类型</span></label>
+      <div class="layui-inline">
+        <select name="bindType" id="" lay-verify="required" lay-verType="tips">
+          <option value="bind_item"  <%if(data.bindType == 'bind_item'){%> selected <%}%> >物品</option>
+          <option value="bind_activity" <%if(data.bindType == 'bind_activity'){%> selected <%}%> >活动</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>状态</span></label>
+      <div class="layui-inline">
+        <select name="enableFlag" id="" lay-verify="required" lay-verType="tips">
+          <option value="Y" <%if(data.enableFlag == 'Y'){%> selected <%}%> >启用</option>
+          <option value="N" <%if(data.enableFlag == 'N'){%> selected <%}%> >关闭</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline flex no-mr">
+      <label for="" class="layui-form-label flex flex-align-items"><span>扩展信息</span></label>
+      <div class="layui-inline flex-item">
+        <textarea class="layui-textarea" name="ext1" id=""  ><%=data.ext1%></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline flex">
+      <label for="" class="layui-form-label flex flex-align-items"><span>备注</span></label>
+      <div class="layui-inline flex-item">
+        <textarea  class="layui-textarea" name="remark" id="" ><%=data.remark%></textarea>
+      </div>
+    </div>
+  </div>
+ <button class="layui-btn node-submit" lay-submit lay-filter="addItem" style="display:none;"></button>
+</form>
+<%}else{%>
+<form action="" class="layui-form">
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>绑定编号</span></label>
+      <div class="layui-inline">
+        <input type="text" class="layui-input" name="bindCode"  lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>app模板编号</span></label>
+      <div class="layui-inline">
+        <input type="text" class="layui-input" name="appCode" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>短信模板编号</span></label>
+      <div class="layui-inline">
+        <input type="text" class="layui-input" name="smsCode" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>绑定类型</span></label>
+      <div class="layui-inline">
+        <select name="bindType" id="" lay-verify="required"  lay-verType="tips">
+          <option value="bind_item">物品</option>
+          <option value="bind_activity">活动</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>状态</span></label>
+      <div class="layui-inline">
+        <select name="enableFlag" id="" lay-verify="required"  lay-verType="tips">
+          <option value="Y">启用</option>
+          <option value="N">关闭</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline flex no-mr">
+      <label for="" class="layui-form-label flex flex-align-items"><span>扩展信息</span></label>
+      <div class="layui-inline flex-item no-mr">
+        <textarea name="ext1" class="layui-textarea" id=""></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item no-mb">
+    <div class="layui-inline no-mr flex">
+      <label for="" class="layui-form-label flex flex-align-items"><span>备注</span></label>
+      <div class="layui-inline flex-item">
+        <textarea name="remark" class="layui-textarea" id=""></textarea>
+      </div>
+    </div>
+  </div>
+  <button class="layui-btn node-submit" lay-submit lay-filter="addItem" style="display:none;"></button>
+</form>
+<%}%>

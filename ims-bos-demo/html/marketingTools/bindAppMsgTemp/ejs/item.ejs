@@ -1,0 +1,109 @@
+<%if(typeof(id) != "undefined"){%>
+<form action="" class="layui-form">
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">绑定编号</label>
+      <div class="layui-input-inline">
+        <input type="text" value="<%=itemCode%>" class="layui-input" name="itemCode" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">模板编号</label>
+      <div class="layui-input-inline">
+        <input type="text" value="<%=msgCode%>" class="layui-input" name="itemCode" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">绑定类型</label>
+      <div class="layui-input-inline">
+        <select name="pushType" id="" lay-verify="required" lay-verType="tips">
+          <option value="push_item" <%if(pushType == 'push_item'){%> selected <%}%> >物品</option>
+          <option value="push_activity" <%if(pushType == 'push_activity'){%> selected <%}%> >活动</option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">状态</label>
+      <div class="layui-input-inline">
+        <select name="enableFlag" id="" lay-verify="required" lay-verType="tips">
+          <option value="Y" <%if(enableFlag == 'Y'){%> selected <%}%> >启用</option>
+          <option value="N" <%if(enableFlag == 'N'){%> selected <%}%> >关闭</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">扩展信息</label>
+      <div class="layui-input-inline">
+        <textarea class="layui-textarea" name="ext1" id="" cols="30" rows="10"><%=ext1%></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">备注</label>
+      <div class="layui-input-inline">
+        <textarea  class="layui-textarea" name="remark" id="" cols="30" rows="10"><%=remark%></textarea> 
+      </div>
+    </div>
+  </div>
+  <button class="layui-btn addItem" lay-submit lay-filter="addItem" style="display:none;"></button>
+</form>
+<%}else{%>
+<form action="" class="layui-form">
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">绑定编号</label>
+      <div class="layui-input-inline">
+        <input type="text" class="layui-input" name="itemCode" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">模板编号</label>
+      <div class="layui-input-inline">
+        <input type="text" class="layui-input" name="itemCode" lay-verify="required" lay-verType="tips">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">绑定类型</label>
+      <div class="layui-input-inline">
+        <select name="pushType" id="" lay-verify="required" lay-verType="tips">
+          <option value="push_item">物品</option>
+          <option value="push_activity">活动</option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">状态</label>
+      <div class="layui-input-inline">
+        <select name="enableFlag" id="" lay-verify="required" lay-verType="tips">
+          <option value="Y">启用</option>
+          <option value="N">关闭</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">扩展信息</label>
+      <div class="layui-input-inline">
+        <textarea name="ext1" class="layui-textarea" id="" cols="30" rows="10"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label for="" class="layui-form-label">备注</label>
+      <div class="layui-input-inline">
+        <textarea name="remark" class="layui-textarea" id="" cols="30" rows="10"></textarea>
+      </div>
+    </div>
+  </div>
+  <button class="layui-btn node-submit" lay-submit lay-filter="addItem" style="display:none;"></button>
+</form>
+<%}%>

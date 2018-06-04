@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActSettingDao" >
+  <select id="findListByMap" resultType="ActSetting" parameterType="java.util.Map"  >
+    select * from act_setting where delete_flag!='Y'
+      <if test="activityPeriods != null and activityPeriods != ''" >
+         and activity_periods like CONCAT('%',#{activityPeriods},'%')
+      </if>
+      <if test="pno != null  and pno != ''" >
+         and pno = #{pno}
+      </if>
+      <if test="activityName != null  and activityName != ''" >
+        and  activity_name like CONCAT('%',#{activityName},'%')
+      </if>
+      <if test="activityType != null  and activityType != ''" >
+        and  activity_type = #{activityType}
+      </if>
+      <if test="filterActType != null  and filterActType != ''" >
+        and  activity_type != #{filterActType}
+      </if>
+      <if test="activityTypeList != null">
+	    and activity_type in
+	    <foreach collection="activityTypeList" open="(" close=")" index="index" item="item"  separator=",">
+	      #{item}
+	    </foreach>
+       </if>
+      <if test="isExpiration != null" >
+          <if test="isExpiration == 'true'" >
+              and now() &gt; date_add(end_time,interval finish_days day)
+          </if>
+          <if test="isExpiration == 'false'">
+             and now()  &lt;= date_add(end_time,interval finish_days day)
+          </if>
+      </if>
+      <if test="enableFlag != null  and enableFlag != ''" >
+        and enable_flag = #{enableFlag}
+      </if>
+       <if test="autoHandOut != null" >
+        and auto_hand_out = #{autoHandOut}
+      </if>
+      <if test="proposalStatus != null  and proposalStatus != ''" >
+        and proposal_status = #{proposalStatus}
+      </if>
+      <if test="companyId != null  and companyId != ''" >
+        and company_id = #{companyId}
+      </if>
+       and (tag_code is null   or tag_code =''
+       <if test="tagCodes != null">
+	     or tag_code in
+	    <foreach collection="tagCodes" open="(" close=")" index="index" item="item"  separator=",">
+	      #{item}
+	    </foreach>
+	   </if>
+	   )
+       <if test="orderStr != null  and orderStr != ''">
+		    order by ${orderStr} 
+		</if>
+  </select>
+  
+  <select id="findObject" resultType="ActSetting" parameterType="java.lang.Long" >
+    select * from act_setting where id = #{id}
+  </select>
+  
+  <select id="findObjectByMap"  resultType="ActSetting" parameterType="java.util.Map">
+    select * from act_setting where activity_periods = #{activityPeriods}
+  </select>
+ 
+  <insert id="save" parameterType="ActSetting" >
+    insert into act_setting (id, activity_periods, activity_name, activity_type, turn_group,transfer,
+    start_time, end_time, finish_days,finish_days_unit,activity_url, activity_img,tag_code,auto_hand_out,other_msg, params_val,
+     pno, proposer,proposal_date, proposal_status, approver, 
+      approve_date, canceller, cancel_date, cancel_reason, create_ip, create_user, 
+      create_date, enable_flag, delete_flag, update_date, update_ip, update_user, 
+      version_no, company_id, remark)
+    values (#{id}, #{activityPeriods}, #{activityName}, #{activityType}, #{turnGroup},#{transfer},
+    #{startTime}, #{endTime}, #{finishDays},#{finishDaysUnit},#{activityUrl}, #{activityImg}, #{tagCode}, #{autoHandOut}, #{otherMsg}, #{paramsVal},
+     #{pno}, #{proposer}, #{proposalDate}, #{proposalStatus}, #{approver}, 
+      #{approveDate}, #{canceller}, #{cancelDate}, #{cancelReason}, #{createIp}, #{createUser}, 
+      #{createDate}, #{enableFlag}, #{deleteFlag}, #{updateDate}, #{updateIp}, #{updateUser}, 
+      #{versionNo}, #{companyId}, #{remark})
+  </insert>
+ 
+  <update id="update" parameterType="ActSetting" >
+    update act_setting set activity_periods = #{activityPeriods},
+      activity_name = #{activityName},
+      activity_type = #{activityType},
+      start_time = #{startTime},
+      end_time = #{endTime},
+      finish_days = #{finishDays},
+      finish_days_unit =#{finishDaysUnit},
+      turn_group =#{turnGroup},
+      transfer=#{transfer},
+      params_val =#{paramsVal},     
+      activity_url = #{activityUrl},
+      activity_img = #{activityImg},
+      auto_hand_out = #{autoHandOut},
+      other_msg = #{otherMsg},
+      pno = #{pno},
+      proposer = #{proposer},
+      proposal_date = #{proposalDate,jdbcType=TIMESTAMP},
+      proposal_status = #{proposalStatus},
+      approver = #{approver},
+      approve_date = #{approveDate,jdbcType=TIMESTAMP},
+      canceller = #{canceller},
+      cancel_date = #{cancelDate,jdbcType=TIMESTAMP},
+      cancel_reason = #{cancelReason},
+      is_settlement = #{isSettlement,jdbcType=BIT},
+      settlement_date = #{settlementDate,jdbcType=TIMESTAMP},
+      update_user = #{updateUser},
+      update_ip = #{updateIp},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      version_no = #{versionNo},
+      delete_flag = #{deleteFlag},
+      enable_flag = #{enableFlag},
+      company_id = #{companyId},
+      remark = #{remark}
+    where id = #{id}
+  </update>
+  
+  <update id="updateByMap" parameterType="java.util.Map" >
+    update act_setting
+    <set>
+      <if test="activityPeriods != null" >
+        activity_periods = #{activityPeriods},
+      </if>
+      <if test="activityName != null" >
+        activity_name = #{activityName},
+      </if>
+      <if test="activityType != null" >
+        activity_type = #{activityType},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishDays != null" >
+        finish_days = #{finishDays},
+      </if>
+      <if test="finishDaysUnit != null" >
+        finish_days_unit = #{finishDaysUnit},
+      </if>
+      <if test="paramsVal != null" >
+        params_val = #{paramsVal},
+      </if> 
+       <if test="autoHandOut != null" >
+        auto_hand_out = #{autoHandOut},
+      </if>
+      <if test="activityUrl != null" >
+        activity_url = #{activityUrl},
+      </if>
+      <if test="activityImg != null" >
+        activity_img = #{activityImg},
+      </if>
+      <if test="turnGroup != null" >
+        turn_group = #{turnGroup},
+      </if>
+      <if test="transfer != null" >
+        transfer = #{transfer},
+      </if>
+      <if test="tagCode != null" >
+        tag_code = #{tagCode},
+      </if>
+      <if test="otherMsg != null" >
+        other_msg = #{otherMsg},
+      </if>
+      <if test="pno != null" >
+        pno = #{pno},
+      </if>
+      <if test="proposer != null" >
+        proposer = #{proposer},
+      </if>
+      <if test="proposalDate != null" >
+        proposal_date = #{proposalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proposalStatus != null" >
+        proposal_status = #{proposalStatus},
+      </if>
+      <if test="approver != null" >
+        approver = #{approver},
+      </if>
+      <if test="approveDate != null" >
+        approve_date = #{approveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="canceller != null" >
+        canceller = #{canceller},
+      </if>
+      <if test="cancelDate != null" >
+        cancel_date = #{cancelDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelReason != null" >
+        cancel_reason = #{cancelReason},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag = #{enableFlag},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId},
+      </if>
+      <if test="remark != null and remark != ''" >
+        remark = #{remark},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+ 
+  <delete id="deleteBatch">
+	delete from act_setting where id in
+	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		#{item}
+	</foreach>
+  </delete>
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from act_setting where id = #{id}
+  </delete>
+  
+  
+  <select id="findReadySettleActSetting" resultType="ActSetting">
+  	select
+		*
+	from
+		act_setting
+	where
+		date_add(
+			end_time,
+			interval finish_days day
+		) &lt;= now()
+	and settlement_date is null
+	and activity_type!='qt'
+	and proposal_status = 'ActHasApproved'
+  </select>
+  
+  <select id="findValidActivity"  resultType="ActSetting">
+  	select * from act_setting where proposal_status = 'ActHasApproved' and start_time &lt;=now() and delete_flag='N'
+  		<if test='excludeFlag=="1"'>
+  			and enable_flag = 'Y'
+  		</if>
+  		<if test='excludeFlag=="2"'>
+  			and enable_flag = 'Y' and date_add(end_time,interval finish_days day) &lt;= now()
+  		</if>
+  </select>
+</mapper>

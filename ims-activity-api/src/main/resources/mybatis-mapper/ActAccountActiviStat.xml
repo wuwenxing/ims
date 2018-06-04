@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActAccountActiviStatDao" >
+  <select id="findByMap" resultType="ActAccountActiviStat" parameterType="java.util.Map" >
+    select * from act_account_activi_stat
+    <if test="accountNo != null and accountNo != ''">
+			and a.account_no = #{accountNo}
+	</if>
+	<if test="platform != null and platform != ''">
+			and a.platform = #{platform}
+	</if>
+	<if test="actNo != null and actNo != ''">
+			and a.act_no = #{actNo}
+	</if>
+  </select>
+  <select id="findListByMap" resultType="ActAccountActiviStat" parameterType="java.util.Map" >
+    select * from act_account_activi_stat where 1 = 1
+    <if test="accountNo != null and accountNo != ''">
+			and account_no = #{accountNo}
+	</if>
+	<if test="platform != null and platform != ''">
+			and platform = #{platform}
+	</if>
+	<if test="actNo != null and actNo != ''">
+			and act_no = #{actNo}
+	</if>
+	<if test="settleStatus != null and settleStatus != ''">
+			and settle_status = #{settleStatus}
+	</if>
+  </select>
+  <select id="findObjectByMap" resultType="ActAccountActiviStat" parameterType="java.util.Map" >
+    select * from act_account_activi_stat where account_no = #{accountNo} and platform = #{platform} and act_no = #{actNo}
+  </select>
+  <select id="findObject" resultType="ActAccountActiviStat" parameterType="java.lang.Long" >
+    select * from act_account_activi_stat where id = #{id}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from act_account_activi_stat where id = #{id}
+  </delete>
+  <insert id="save" parameterType="ActAccountActiviStat" >
+    insert into act_account_activi_stat (id, account_no, platform, env, 
+      cust_name, cust_mobile, act_no, 
+      act_name, act_start_time, act_end_time, 
+      join_time, deposit_amount, before_gold, 
+      before_release_gold, before_required_lot, before_finish_lot, 
+      after_gold, after_finish_lot, discount_gold, 
+      settle_status, settle_mode, about_settle_time, 
+      real_settle_time, remark, create_user, 
+      create_ip, create_date, update_user, 
+      update_ip, update_date, version_no, 
+      delete_flag, enable_flag, company_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{accountNo,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, #{env,jdbcType=VARCHAR}, 
+      #{custName,jdbcType=VARCHAR}, #{custMobile,jdbcType=VARCHAR}, #{actNo,jdbcType=VARCHAR}, 
+      #{actName,jdbcType=VARCHAR}, #{actStartTime,jdbcType=TIMESTAMP}, #{actEndTime,jdbcType=TIMESTAMP}, 
+      #{joinTime,jdbcType=TIMESTAMP}, #{depositAmount,jdbcType=VARCHAR}, #{beforeGold,jdbcType=DECIMAL}, 
+      #{beforeReleaseGold,jdbcType=DECIMAL}, #{beforeRequiredLot,jdbcType=DECIMAL}, #{beforeFinishLot,jdbcType=DECIMAL}, 
+      #{afterGold,jdbcType=DECIMAL}, #{afterFinishLot,jdbcType=DECIMAL}, #{discountGold,jdbcType=DECIMAL}, 
+      #{settleStatus,jdbcType=BIT}, #{settleMode,jdbcType=BIT}, #{aboutSettleTime,jdbcType=TIMESTAMP}, 
+      #{realSettleTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{createIp,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateIp,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{versionNo,jdbcType=BIGINT}, 
+      #{deleteFlag,jdbcType=VARCHAR}, #{enableFlag,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="update" parameterType="ActAccountActiviStat" >
+    update act_account_activi_stat
+    set account_no = #{accountNo,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=VARCHAR},
+      env = #{env,jdbcType=VARCHAR},
+      cust_name = #{custName,jdbcType=VARCHAR},
+      cust_mobile = #{custMobile,jdbcType=VARCHAR},
+      act_no = #{actNo,jdbcType=VARCHAR},
+      act_name = #{actName,jdbcType=VARCHAR},
+      act_start_time = #{actStartTime,jdbcType=TIMESTAMP},
+      act_end_time = #{actEndTime,jdbcType=TIMESTAMP},
+      join_time = #{joinTime,jdbcType=TIMESTAMP},
+      deposit_amount = #{depositAmount,jdbcType=VARCHAR},
+      before_gold = #{beforeGold,jdbcType=DECIMAL},
+      before_release_gold = #{beforeReleaseGold,jdbcType=DECIMAL},
+      before_required_lot = #{beforeRequiredLot,jdbcType=DECIMAL},
+      before_finish_lot = #{beforeFinishLot,jdbcType=DECIMAL},
+      after_gold = #{afterGold,jdbcType=DECIMAL},
+      after_finish_lot = #{afterFinishLot,jdbcType=DECIMAL},
+      discount_gold = #{discountGold,jdbcType=DECIMAL},
+      settle_status = #{settleStatus,jdbcType=BIT},
+      settle_mode = #{settleMode,jdbcType=BIT},
+      about_settle_time = #{aboutSettleTime,jdbcType=TIMESTAMP},
+      real_settle_time = #{realSettleTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_ip = #{updateIp,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      version_no = #{versionNo,jdbcType=BIGINT},
+      delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findByAccountNo" resultType="ActAccountActiviStat">
+  	select * from act_account_activi_stat where account_no=#{accountNo}
+  </select>
+  
+  <select id="findByBean" resultType="ActAccountActiviStat">
+  	select * from act_account_activi_stat where account_no=#{accountNo} and platform=#{platform} and act_no=#{actNo} and env=#{env}
+  </select>
+</mapper>

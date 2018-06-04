@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean name="cjTemplateConfig" class="com.gwghk.ims.activity.context.ActivityConfigBean">
+        <property name="activityType" value="cj"/>
+        <property name="desc" value="层级型模板"/>
+        <property name="actBaseParams">
+              <list>
+                    <bean name="priorityPlatform" class="com.gwghk.ims.activity.context.ParamBean">
+				        <property name="proName" value="priorityPlatform"/>
+				        <property name="desc" value="优先发放平台"/>
+				        <property name="inputType" value="select"/>
+				        <property name="options">
+				          <list>
+				             <bean  class="com.gwghk.ims.common.common.Kuak">
+				                    <property name="key" value="GTS2"/>
+				                    <property name="title" value="GTS2"/>
+				               </bean>
+				               <bean class="com.gwghk.ims.common.common.Kuak">
+				                    <property name="key" value="MT4"/>
+				                    <property name="title" value="MT4"/>
+				               </bean>
+				          </list>
+				        </property>
+				    </bean>
+				    <bean name="coinDays" class="com.gwghk.ims.activity.context.ParamBean">
+				        <property name="proName" value="coinDays"/>
+				        <property name="desc" value="代币有效期"/>
+				        <property name="required" value="false"/>
+				        <property name="validType" value="int"/>
+				        <property name="defaultVal" value="0"/>
+				         <property name="paramUnit">
+				               <bean class="com.gwghk.ims.activity.context.ParamUnitBean">
+				                    <property name="proName" value="coinDaysUnit"/>
+				                    <property name="unitType"  value="cycleTime"/>
+				                    <property name="defaultVal"  value="DAY"/>
+				                    <property name="desc"  value="天"/>
+				               </bean>
+				        </property>
+				    </bean>
+				    <bean name="turnGroup" class="com.gwghk.ims.activity.context.ParamBean">
+				        <property name="proName" value="turnGroup"/>
+				        <property name="desc" value="是否允许转组 (0:不允许,1：允许)"/>
+				        <property name="required" value="true"/>
+				        <property name="inputType" value="select"/>
+				        <property name="defaultVal" value="0"/>
+				        <property name="isDynamict" value="true"/>
+				    </bean>
+				    <bean name="transfer" class="com.gwghk.ims.activity.context.ParamBean">
+				        <property name="proName" value="transfer"/>
+				        <property name="desc" value="是否允许转账 (0:不允许,1：允许)"/>
+				        <property name="required" value="true"/>
+				        <property name="inputType" value="select"/>
+				        <property name="defaultVal" value="0"/>
+				        <property name="isDynamict" value="true"/>
+				    </bean>
+              </list>
+        </property>
+        <property name="actCondtionParamsMap">
+            <map>
+                <entry key="act_custInfo">
+		              <list>
+		                    <bean  name="accountType"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="accountType"/>
+						        <property name="desc" value="账号类型"/>
+						        <property name="required" value="true"/>
+						        <property name="inputType" value="select"/>
+						        <property name="isDynamict" value="true"/>
+						    </bean>
+						    <bean  name="tradePrdsList"  class="com.gwghk.ims.activity.context.ParamBean">
+							  <property name="proName" value="tradePrdsList"/>
+							  <property name="desc" value="交易产品"/>
+							  <property name="required" value="false"/>
+							  <property name="inputType" value="textarea"/>
+							  <property name="isDynamict" value="false"/>
+						   </bean>
+						     <bean name="accountOnly"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="accountOnly"/>
+						        <property name="desc" value="账号唯一性(0:否,1:是)"/>
+						        <property name="required" value="true"/>
+						        <property name="inputType" value="select"/>
+						        <property name="isDynamict" value="true"/>
+						        <property name="defaultVal" value="0"/>
+						    </bean> 
+						    <bean name="accountLevel"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="accountLevel"/>
+						        <property name="desc" value="账号级别"/>
+						        <property name="required" value="false"/>
+						        <property name="inputType" value="checkbox"/>
+						        <property name="isDynamict" value="true"/>
+						    </bean> 
+						     <bean name="accountStatus"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="accountStatus"/>
+						        <property name="desc" value="账号状态"/>
+						        <property name="required" value="false"/>
+						        <property name="inputType" value="select"/>
+						        <property name="isDynamict" value="true"/>
+						    </bean> 
+						    <bean name="activateStartTime"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="activateStartTime"/>
+						        <property name="desc" value="账号激活日期:开始时间"/>
+						        <property name="inputType" value="date"/>
+						        <property name="defaultVal" value="0"/>
+						        <property name="required" value="false"/>
+						    </bean>
+						    <bean name="activateEndTime"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="activateEndTime"/>
+						        <property name="desc" value="账号激活日期:结束时间"/>
+						        <property name="inputType" value="date"/>
+						        <property name="defaultVal" value="0"/>
+						        <property name="required" value="false"/>
+						    </bean>
+						   <bean name="allowCancelAccount"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="allowCancelAccount"/>
+						        <property name="desc" value="注销过账号参加活动,(0:否,1:是)"/>
+						        <property name="required" value="true"/>
+						        <property name="inputType" value="select"/>
+						        <property name="isDynamict" value="true"/>
+						        <property name="defaultVal" value="1"/>
+						    </bean> 
+						    <bean name="platformsCcy"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="platformsCcy"/>
+						        <property name="desc" value="参与活动的平台eg:GTS2#RMB,MT4#USD"/>
+						        <property name="required" value="true"/>
+						        <property name="inputType" value="checkbox"/>
+						        <property name="isDynamict" value="true"/>
+						    </bean> 
+						    <bean name="item"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="item"/>
+						        <property name="desc" value="交易产品，支持输入及下拉选择"/>
+						        <property name="required" value="false"/>
+						        <property name="inputType" value="textarea_select"/>
+						        <property name="isDynamict" value="true"/>
+						    </bean> 
+						    <bean name="registerStartTime"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="registerStartTime"/>
+						        <property name="desc" value="账号注册开始日期"/>
+						        <property name="required" value="false"/>
+						        <property name="inputType" value="date"/>
+						        <property name="isDynamict" value="true"/>
+						    </bean>
+						    <bean name="registerEndTime"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="registerEndTime"/>
+						        <property name="desc" value="账号注册结束日期"/>
+						        <property name="required" value="false"/>
+						        <property name="inputType" value="date"/>
+						        <property name="isDynamict" value="true"/>
+						    </bean>
+						    <bean name="allowWhiteUsers"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="allowWhiteUsers"/>
+						        <property name="desc" value="只允许白名单用户参加活动 true:是 ,false:否"/>
+						        <property name="required" value="true"/>
+						        <property name="inputType" value="select"/>
+						        <property name="isDynamict" value="true"/>
+						        <property name="defaultVal" value="0"/>
+						    </bean>
+						     <bean name="whiteListFileName"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="whiteListFileName"/>
+						        <property name="desc" value="白名单文件名"/>
+						        <property name="inputType" value="file"/>
+						        <property name="required" value="false"/>
+						    </bean>
+						    <bean name="blackListFileName"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="blackListFileName"/>
+						        <property name="desc" value="黑名单文件名"/>
+						        <property name="inputType" value="file"/>
+						        <property name="required" value="false"/>
+						    </bean>
+						     <bean name="whiteListFilePath"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="whiteListFilePath"/>
+						        <property name="desc" value="白名单文件名地址"/>
+						        <property name="isShow" value="false"/>
+						        <property name="required" value="false"/>
+						    </bean>
+						    <bean name="blackListFilePath"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="blackListFilePath"/>
+						        <property name="desc" value="黑名单文件名地址"/>
+						        <property name="isShow" value="false"/>
+						        <property name="required" value="false"/>
+						    </bean>
+						    <bean name="allowWithdrawals"  class="com.gwghk.ims.activity.context.ParamBean">
+						        <property name="proName" value="allowWithdrawals"/>
+						        <property name="desc" value="是否允许取款 true:是 ,false:否"/>
+						        <property name="inputType" value="select"/>
+						        <property name="isDynamict" value="true"/>
+						        <property name="defaultVal" value="0"/>
+						        <property name="required" value="false"/>
+						    </bean>
+		              </list>
+                </entry>
+            </map>
+        </property>
+    
+       <property name="actTaskConfigsMap" ref="cj_actTaskConfigsTreeMap"/>
+    </bean>
+      <bean  name="cj_actTaskConfigsTreeMap" class="java.util.LinkedHashMap">
+	   <constructor-arg>
+	      <map>
+	        <entry key="add_demo_account"> 
+	           <ref bean="add_demo_account"/><!-- 注册模拟账号 -->
+	        </entry>
+	         <entry key="demo_close_times"> 
+	           <ref bean="demo_close_times"/><!-- 模拟账号平仓次数 -->
+	        </entry>
+	         <entry key="demo_close_lot"> 
+	           <ref bean="demo_close_lot"/><!-- 模拟账号平仓手数-->
+	        </entry>
+	         <entry key="demo_close_profit"> 
+	           <ref bean="demo_close_profit"/><!-- 模拟账号单笔平仓盈利 -->
+	        </entry>
+	        <entry key="demo_close_loss"> 
+	           <ref bean="demo_close_loss"/><!-- 模拟账号单笔平仓亏损 -->
+	        </entry>
+	        <entry key="demo_close_profit_percent"> 
+	           <ref bean="demo_close_profit_percent"/><!-- 模拟账号单笔平仓盈利% -->
+	        </entry>
+	        <entry key="demo_close_loss_percent"> 
+	           <ref bean="demo_close_loss_percent"/><!-- 模拟账号单笔平仓亏损% -->
+	        </entry>
+	        <entry key="demo_total_close_times"> 
+	           <ref bean="demo_total_close_times"/><!-- 模拟账号累计平仓次数 -->
+	        </entry>
+	        <entry key="demo_total_close_lot"> 
+	           <ref bean="demo_total_close_lot"/><!-- 模拟账号累计平仓手数 -->
+	        </entry>
+	         <entry key="demo_total_close_profit"> 
+	           <ref bean="demo_total_close_profit"/><!-- 模拟账号平仓盈利总额-->
+	        </entry>
+	         <entry key="demo_total_close_loss"> 
+	           <ref bean="demo_total_close_loss"/><!-- 模拟账号平仓亏损总额-->
+	        </entry>
+	        <entry key="demo_open_times"> 
+	           <ref bean="demo_open_times"/><!-- 模拟账号开仓次数-->
+	        </entry>
+	          <entry key="demo_open_lot"> 
+	           <ref bean="demo_open_lot"/><!-- 模拟账号开仓手数-->
+	        </entry>
+	         <entry key="demo_total_open_times"> 
+	           <ref bean="demo_total_open_times"/><!--模拟账号累计开仓次数-->
+	        </entry>
+	        <entry key="demo_total_open_lot"> 
+	           <ref bean="demo_total_open_lot"/><!-- 模拟账号累计开仓手数-->
+	        </entry>
+	        <entry key="add_real_account"> 
+	           <ref bean="add_real_account"/><!-- 注册真实账号 -->
+	        </entry>
+	         <entry key="real_activation"> 
+	           <ref bean="real_activation"/><!-- 真实账号激活 -->
+	        </entry>
+	         <entry key="real_close_times"> 
+	           <ref bean="real_close_times"/><!-- 真实账号平仓次数 -->
+	        </entry>
+	         <entry key="real_close_lot"> 
+	           <ref bean="real_close_lot"/><!-- 真实账号平仓手数-->
+	        </entry>
+	         <entry key="real_close_profit"> 
+	           <ref bean="real_close_profit"/><!-- 真实账号单笔平仓盈利 -->
+	        </entry>
+	        <entry key="real_close_loss"> 
+	           <ref bean="real_close_loss"/><!-- 真实账号单笔平仓亏损 -->
+	        </entry>
+	        <entry key="real_close_profit_percent"> 
+	           <ref bean="real_close_profit_percent"/><!-- 真实账号单笔平仓盈利% -->
+	        </entry>
+	        <entry key="real_close_loss_percent"> 
+	           <ref bean="real_close_loss_percent"/><!-- 真实账号单笔平仓亏损% -->
+	        </entry>
+	        <entry key="real_total_close_times"> 
+	           <ref bean="real_total_close_times"/><!-- 真实账号累计平仓次数 -->
+	        </entry>
+	        <entry key="real_total_close_lot"> 
+	           <ref bean="real_total_close_lot"/><!-- 真实账号累计平仓手数 -->
+	        </entry>
+	         <entry key="real_total_close_profit"> 
+	           <ref bean="real_total_close_profit"/><!-- 真实账号平仓盈利总额-->
+	        </entry>
+	         <entry key="real_total_close_loss"> 
+	           <ref bean="real_total_close_loss"/><!-- 真实账号平仓亏损总额-->
+	        </entry>
+	          <entry key="real_open_times"> 
+	           <ref bean="real_open_times"/><!-- 真实账号开仓次数-->
+	        </entry>
+	          <entry key="real_open_lot"> 
+	           <ref bean="real_open_lot"/><!-- 真实账号开仓手数-->
+	        </entry>
+	         <entry key="real_total_open_times"> 
+	           <ref bean="real_total_open_times"/><!--真实账号累计开仓次数-->
+	        </entry>
+	          <entry key="real_total_open_lot"> 
+	           <ref bean="real_total_open_lot"/><!-- 真实账号累计开仓手数-->
+	        </entry>
+	         <entry key="zdy_task"> 
+	           <ref bean="zdy_task"/><!-- 自定义任务-->
+	        </entry>
+	      </map>
+	   </constructor-arg>
+	</bean>
+    
+</beans>

@@ -1,0 +1,23 @@
+<form action="" class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">数据类型</label>
+        </div>
+        <div class="layui-inline">
+            <select name="" id="">
+                <option value="" selected>客户个人资料</option>
+            </select>
+        </div>
+    </div>
+    <% data.forEach(function(item, index){%>
+        <div class="layui-form-item">
+            <div class="layui-inline check-input" style="margin-left:15px;">
+                <input type="checkbox"  <%if(item.selected){%> checked <%}%> name="<%=item.dictCode%>" lay-skin="switch" lay-text="允许|禁止">
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label"><%=item.dictName%></label>
+            </div>
+        </div>
+    <%})%>
+    <button class="layui-btn powerSave" lay-submit lay-filter="power" style="display:none;"></button>
+</form>

@@ -1,0 +1,63 @@
+<form class="layui-form">
+  <div class="form-list-item">
+    <!-- 所属活动 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">所属活动</label>
+      <div class="layui-input-inline">
+        <select name="activityCode" required lay-verify="required">
+          <option value="">---请选择---</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="form-list-item">
+    <!-- 数量或者倍数 -->
+    <div class="layui-inline">
+      <label class="layui-form-label"> 数量或者倍数</label>
+      <div class="layui-input-inline">
+        <input type="text" name="amount" required lay-verify="required" class="layui-input" value="<%=amount%>">
+      </div>
+    </div>
+
+  </div>
+  <div class="form-list-item">
+    <!-- 开始时间 -->
+    <div class="layui-inline">
+      <label class="layui-form-label"> 开始时间</label>
+      <div class="layui-input-inline">
+        <input type="text" name="startTimeStr" required lay-verify="required" class="layui-input" id="startTimeStr" value="<%=startTimeStr%>">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-list-item">
+    <!-- 结束时间 -->
+    <div class="layui-inline">
+      <label class="layui-form-label"> 结束时间</label>
+      <div class="layui-input-inline">
+        <input type="text" name="endTimeStr" required lay-verify="required" class="layui-input" id="endTimeStr" value="<%=endTimeStr%>">
+      </div>
+    </div>
+
+  </div>
+  <div class="form-list-item">
+    <!-- 备注 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">备注</label>
+      <div class="layui-input-inline">
+        <textarea placeholder="请输入内容" name="remark" class="layui-textarea"><%=remark%></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="options-bar">
+    <% if(edit){%>
+      <button class="layui-btn" lay-submit lay-filter="editFormEdit">修改</button>
+      <%}else{%>
+        <button class="layui-btn" lay-submit lay-filter="editFormSubmit">提交</button>
+        <%}%>
+
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+  </div>
+</form>

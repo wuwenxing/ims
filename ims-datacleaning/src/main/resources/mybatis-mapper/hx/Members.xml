@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.datacleaning.dao.inf.hx.MembersDao" >
+  
+  
+  <sql id="Base_Column_List" >
+    members.id id, username, chinese_name, english_name, sex, birthday, id_name, address, country_code, 
+    qq, skype, msn, nationality, other_contact, agent, zipcode, bankswift, bankname, 
+    bankaddr, province, city, bank_account, member_type, ad_from, members.status status, user_status, 
+    question, answer, cgse_coding, area, country, ip, iecookie, mobile_sec, id_number_hidden, 
+    modifier, members.ctime ctime, members.mtime mtime,AES_DECRYPT(id_number,'${hxDecryptKey}') id_number, 
+    AES_DECRYPT(mobile,'${hxDecryptKey}') mobile,AES_DECRYPT(email,'${hxDecryptKey}') email,trades_platform.mtime platform_mtime
+  </sql>
+  
+  <select id="select" parameterType="java.util.Map"  resultType="Members" >
+  	select 
+  		<include refid="Base_Column_List"></include>,trades_platform.first_deposit_time deposit_time,trades_platform.group `group`
+  	from 
+  		members
+  	left join 
+  		trades_platform 
+  			on members.id = trades_platform.members_id 
+  	where 
+  		trades_platform.platform='MT4'
+  		<if test="lastUpdateDateBegin!=null and lastUpdateDateEnd!=null">
+		   and(
+		   	 members.ctime between #{lastUpdateDateBegin} and #{lastUpdateDateEnd}
+		     or members.mtime between #{lastUpdateDateBegin} and #{lastUpdateDateEnd}
+		     or trades_platform.mtime between #{lastUpdateDateBegin} and #{lastUpdateDateEnd}
+		    )
+		</if>
+		<if test="lastUpdateDate != null" >
+	    	and (
+	    		members.ctime &gt; #{lastUpdateDate}
+	    		or members.mtime &gt; #{lastUpdateDate}
+	    		or trades_platform.mtime &gt; #{lastUpdateDate}
+	    	)
+		</if>
+  </select>
+</mapper>

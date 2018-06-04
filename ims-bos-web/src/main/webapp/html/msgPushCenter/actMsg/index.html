@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>新建活动消息</title>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="/layui/css/layui.css">
+	  <link rel="stylesheet" href="/css/iconfont.css">  
+    <link rel="stylesheet" href="/css/base.min.css">
+    <link rel="stylesheet" href="/css/normalize.min.css">
+	  <link rel="stylesheet" href="/css/power.min.css">
+	  <link rel="stylesheet" href="/css/layuireset.min.css">
+</head>
+<body>
+    <div class="m-container layer">
+      <form action="" class="layui-form">
+        <div class="top card">
+          <div class="layui-form-item no-mb">
+            <label for="" class="layui-form-label flex flex-align-items"><span>活动名称</span></label>
+            <div class="layui-inline">
+              <select name="activityName" id="actName"></select>
+            </div>
+          </div>
+        </div>
+        <div class="act-warm-up card">
+          <div class="title">
+            <p>活动预热</p>
+          </div>
+          <div class="layui-form-item">
+            <label for="" class="layui-form-label flex flex-align-items"><span>推送消息</span></label>
+            <div class="layui-inline">
+              <select name="" id="">
+                <option value="">是</option>
+                <option value="">否</option>
+              </select>
+            </div>
+          </div>
+          <div class="layui-form-item pushContent">
+            <label for="" class="layui-form-label flex flex-align-items">
+              <em class="required">*</em>
+              <span>推送内容</span>
+            </label>
+            <div class="layui-inline">
+                <input type="radio" name="selectTplRadio_content" value="Y" title="使用模板" lay-filter="pushModel" checked>
+                <input type="radio" name="selectTplRadio_content" value="N" title="自定义" lay-filter="pushModel">
+            </div>
+          </div>
+          <div class="pushContent">
+            <div class="layui-form-item">
+              <label for="" class="layui-form-label flex flex-align-items"><span></span></label>
+              <div class="layui-inline">
+                <select name="" id="">
+                  <option value="">模拟开仓次数</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item pushUser">
+            <label for="" class="layui-form-label flex flex-align-items">
+              <em class="required">*</em>
+              <span>推送对象</span>
+            </label>
+            <div class="layui-inline">
+                <input type="radio" name="selectTplRadio_user" value="Y" title="使用模板" lay-filter="pushModel" checked>
+                <input type="radio" name="selectTplRadio_user" value="N" title="自定义" lay-filter="pushModel">
+            </div>
+          </div>
+          <div class="pushUser">
+            <div class="layui-form-item">
+              <label for="" class="layui-form-label flex flex-align-items"><span></span></label>
+              <div class="layui-inline">
+                <select name="" id="">
+                  <option value="">沉默用户</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item pushUser">
+            <label for="" class="layui-form-label flex flex-align-items">
+              <em class="required">*</em>
+              <span>推送时间</span>
+            </label>
+            <div class="layui-inline">
+              <span>活动开始前</span>
+              <div class="layui-inline input-append">
+                <input type="text" class="layui-input">
+                <span class="append">天</span>
+              </div>
+              <div class="layui-inline input-append">
+                <input type="text" class="layui-input" id="pushTime" placeholder="hh:mm:ss">
+                <span class="append">点</span>
+              </div>
+              <span>推送1次，间隔</span>
+              <div class="layui-inline input-append">
+                <input type="text" class="layui-input">
+                <span class="append">天</span>
+              </div>
+              <span>推送1次</span>
+            </div>
+          </div>
+        </div>
+        <div class="prize-out card">
+          <div class="title"><p>物品发放</p></div>
+          <div class="layui-form-item layui-row">
+            <div class="layui-col-md4 no-mr">
+              <div class="layui-col-md10 layui-row">
+                <label for="" class="layui-form-label flex flex-align-items layui-col-md4">
+                  <span>推送消息</span>
+                </label>
+                <div class=" layui-col-md8">
+                  <select name="" id="">
+                    <option value="Y">是</option>
+                    <option value="N">否</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-md4">
+              <div class="layui-col-md10 layui-row">
+                <label for="" class="layui-form-label flex flex-align-items layui-col-md4">
+                  <em class="required">*</em>
+                  <span>推送对象</span>
+                </label>
+                <div class=" layui-col-md8">
+                  <input type="text" readonly value="物品发放成功用户" style="border:none;" class="layui-input">
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-md4">
+              <div class="layui-col-md10 layui-row">
+                <label for="" class="layui-form-label flex flex-align-items layui-col-md4">
+                  <em class="required">*</em>
+                  <span>推送时间</span>
+                </label>
+                <div class="layui-col-md8">
+                  <input type="text" readonly value="物品发放成功时间点" style="border:none;" class="layui-input">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hide">
+          <button class="layui-btn" lay-submit lay-filter="addMsg">提交</button>
+          <button class="layui-btn" lay-submit lay-filter="saveMsg">暂存</button>
+        </div>
+      <div class="act-progress card">
+        <div class="title">
+          <p>活动进度</p>
+        </div>
+        <div class="layui-form-item">
+          <label for="" class="layui-form-label flex flex-align-items">
+            <span>推送消息</span>
+          </label>
+          <div class="layui-inline">
+            <select name="" id="">
+              <option value="Y">是</option>
+              <option value="N">否</option>
+            </select>
+          </div>
+        </div>
+        </div>
+      </form>
+      <div class="task-list card"></div>
+      <div class="btns">
+        <button class="layui-btn">提交</button>
+        <button class="layui-btn">暂存</button>
+        <button class="layui-btn back">返回</button>
+      </div>
+    </div>
+</body>
+<script src="/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="/js/vendor/ejs_production.js"></script> 
+<script src="/js/vendor/parseUrl.js"></script> 
+<script src="/js/tools/ajaxInterceptor.js"></script>
+<script src="/js/tools/act.js"></script>
+<script src="/js/api/api.js"></script>
+<script src="/js/api/client.js"></script>
+<script src="/layui/layui.js"></script>
+<script src="./main.js"></script>
+</html>

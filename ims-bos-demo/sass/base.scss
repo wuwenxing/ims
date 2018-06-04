@@ -1,0 +1,207 @@
+@charset "UTF-8";
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 14px;
+}
+iframe {
+  border: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 759px;
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+a {
+  cursor: pointer;
+}
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
+.pd20{
+  padding-bottom: 20px;
+}
+.pd-tb10{
+  padding: 10px 0;
+}
+.h20{
+  height: 20px;
+}
+.h15{
+  height: 15px;
+}
+.h25{
+  height: 25px;
+}
+/*------------------------------------layui-reset--------------------------------*/
+.layui-tab {
+  height: 100%;
+  padding: 10px;
+  margin: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  .layui-tab-content {
+    height: 100%;
+    box-sizing: border-box;
+    padding-bottom: 50px;
+    .layui-tab-item{
+      height: 100%;
+    }
+  }
+}
+.layui-input-reset {
+  display: inline-block;
+  width: auto;
+  text-align: center;
+}
+.layui-layout-admin .layui-body {
+  bottom: 0px;
+}
+.layui-table {
+  td{
+    // font-size: 12px;
+  }
+}
+.layui-inline {
+  margin-bottom: 10px;
+}
+.layui-form-label{
+  width:auto;
+  text-align: right;
+}
+.layui-form {
+  .layui-inline {
+    .layui-input {
+      width: 196px;
+    }
+  }
+}
+.layui-layer-dialog {
+  .layui-layer-content{
+    overflow: hidden;
+  }
+}
+/*------------------------------------表格页面整体布局--------------------------------*/
+.m-container {
+  .layout-2 {
+    margin-top: 10px;
+    padding-left: 15px;
+  }
+  .layout-3 {
+    margin-top: 10px;
+    .layui-table{
+        td[data-field=activityPeriods],td[data-field=activityName]{
+            text-decoration: underline;
+            color: #009688;
+            cursor: pointer;
+        }
+    }
+  }
+}
+.iconfont {
+  font-size: 30px;
+  padding: 2px;
+}
+/*-------------------------------------带复选框的下拉框显示隐藏----------------------------------*/
+.layui-check-select{
+  .layui-check-select-content{
+    display: none;
+    dl{
+      display: block;
+    }
+  }
+}
+
+/*-------------------------------------搜索面板显示隐藏----------------------------------*/
+.layui-searchPanel {
+  .layui-searchPanel-item {
+    border: solid 1px #e6e6e6;
+    .layui-searchPanel-title {
+      border-bottom: solid 1px #e6e6e6;
+      font-size: 14px;
+      position: relative;
+      height: 42px;
+      color: #333;
+      line-height: 42px;
+      padding: 0 15px;
+      background-color: #f2f2f2;
+      cursor: pointer;
+      .layui-search-icon {
+        position: relative;
+        top: 1px;
+        padding-right: 5px;
+      }
+    }
+    .layui-searchPanelMore-icon {
+      position: absolute;
+      right: 15px;
+    }
+    .layui-searchPanel-content {
+      padding: 10px 15px 0 0;
+    }
+  }
+  .activeButton {
+    margin-top: 10px;
+    text-align: right;
+  }
+}
+/*-------------------------------------必填小红点----------------------------------*/
+.layui-form-label{
+  position: relative;
+  .mustInput {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    margin-top: -2px;
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #FF5722;
+  }
+
+}
+/*-------------------------------------树形选择----------------------------------*/
+.layui-treeCheck {
+  .layui-treeCheck-spread {
+    cursor: pointer;
+    color: #666;
+  }
+  .icon-empty {
+    display: inline-block;
+    width: 22px;
+  }
+  .layui-treeCheck-rootMenu {
+    li {
+      position: relative;
+      line-height: 24px;
+      ul {
+        position: relative;
+        left: 15px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px){
+  .layui-side{
+    display: none;
+  }
+  .layui-body{
+    width:100%;
+    left: 0;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width:1200px){
+
+}
+

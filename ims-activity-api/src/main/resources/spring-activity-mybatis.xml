@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd   
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+        
+	<bean name="commonDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+		<!-- 初始化连接大小 -->
+		<property name="initialSize" value="3" />
+		<!-- 连接池最大使用连接数量 -->
+		<property name="maxActive" value="60" />
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="0" />
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait" value="60000" />
+		<property name="validationQuery" value="${validationQuery}" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<property name="testWhileIdle" value="true" />
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="3000000" />
+		<!-- 打开removeAbandoned功能 -->
+		<property name="removeAbandoned" value="true" />
+		<!-- 1800秒，也就是30分钟 -->
+		<property name="removeAbandonedTimeout" value="1800" />
+		<!-- 关闭abanded连接时输出错误日志 -->
+		<property name="logAbandoned" value="true" />
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="stat,slf4j" />
+		<property name="connectionInitSqls" value="set names utf8mb4;" />
+	</bean>
+	
+	<bean name="baseDS" parent="commonDataSource" init-method="init" primary="true">
+		<property name="url" value="${base.jdbc_url}" />
+		<property name="username" value="${base.jdbc_username}" />
+		<property name="password" value="${base.jdbc_password}" />
+	</bean>
+	
+	<bean name="fxDS" parent="commonDataSource" init-method="init">
+		<property name="url" value="${fx.jdbc_url}" />
+		<property name="username" value="${fx.jdbc_username}" />
+		<property name="password" value="${fx.jdbc_password}" />
+	</bean>
+	
+	<bean name="hxDS" parent="commonDataSource" init-method="init">
+		<property name="url" value="${hx.jdbc_url}" />
+		<property name="username" value="${hx.jdbc_username}" />
+		<property name="password" value="${hx.jdbc_password}" />
+	</bean>
+	
+	<bean name="dynamicDS" class="com.gwghk.ims.datasource.data.DynamicDataSource">
+		<property name="defaultDataSource" ref="fxDS" />
+        <property name="dataSources">
+        	<map>
+        		<entry key="baseDS"><ref bean="baseDS"/></entry>
+				<entry key="fxDS"><ref bean="fxDS"/></entry>
+				<entry key="hxDS"><ref bean="hxDS"/></entry>
+			</map> 
+        </property>  
+	</bean>
+	
+	<context:component-scan base-package="com.gwghk.ims" />
+
+	<!-- 替换org.mybatis.spring.SqlSessionFactoryBean -->
+	<bean id="sqlSessionFactory"  class="net.oschina.durcframework.easymybatis.ext.SqlSessionFactoryBeanExt">
+		<property name="dataSource" ref="dynamicDS" />
+		<property name="configLocation" value="classpath:mybatis.xml"></property>
+		<property name="mapperLocations" value="classpath:mybatis-mapper/*.xml" />
+		
+		<!-- 以下是附加属性 -->
+		<!-- dao所在的包名,跟MapperScannerConfigurer的basePackage一致 
+			多个用;隔开
+		-->
+		<property name="basePackage" value="com.gwghk.ims.*.dao.inf" />
+		<property name="config">
+			<bean class="net.oschina.durcframework.easymybatis.EasymybatisConfig">
+				<!-- 
+				/* 驼峰转下划线形式，默认是true
+				 开启后java字段映射成数据库字段将自动转成下划线形式
+				 如：userAge -> user_age
+				 如果数据库设计完全遵循下划线形式，可以启用
+				 这样可以省略Entity中的注解，@Table，@Column都可以不用，只留
+				@Id
+				@GeneratedValue 
+				参见：UserInfo.java
+				*/-->
+				<property name="camel2underline" value="true"/>
+			</bean>
+		</property>
+		<property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>
+                            dialect=mysql
+                            offsetAsPageNum=true
+                            rowBoundsWithCount=true
+                            pageSizeZero=true
+                            reasonable=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+	</bean>
+	
+	<!-- 配置扫描器 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.gwghk.ims.*.dao.inf" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dynamicDS" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+</beans>

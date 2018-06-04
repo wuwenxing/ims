@@ -1,0 +1,18 @@
+
+<div class="layui-inline">
+    <label for="" class="layui-form-label">客户账号<span class="mustInput"></span></label>
+    <div class="layui-inline">
+        <input type="text" class="layui-input" id="accountNo"   name="accountNo">
+    </div>
+</div>
+<div class="layui-inline">
+    <label for="" class="layui-form-label">活动平台<span class="mustInput"></span></label>
+    <div class="layui-inline">
+        <select name="platform" id="guestPlatForm" lay-verify="required" lay-verType="tips" lay-filter="guestPlatForm">
+            <option value="">--请选择--</option>
+            <%actItemCategoryList.forEach(function(item,index){%>
+                    <option value="<%=item.dictCode%>"><%=item.dictNameCn%></option>
+            <%})%>
+        </select>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.message.dao.inf.ActCashoutDao" >
+
+	<insert id="save" parameterType="ActCashout" >
+		insert into act_cashout_real (id, company_id, account_no, 
+	      platform, pno, trans_amount, 
+	      approve_date, enable_flag, 
+	      delete_flag, create_date,update_date,push_flag)
+	    values (#{id,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{accountNo,jdbcType=VARCHAR}, 
+	      #{platform,jdbcType=VARCHAR}, #{pno,jdbcType=VARCHAR}, #{transAmount}, 
+	      #{approveDate,jdbcType=TIMESTAMP},  #{enableFlag,jdbcType=VARCHAR}, 
+	      #{deleteFlag,jdbcType=VARCHAR}, 
+	       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},'0')
+	</insert>
+	
+	<update id="update" parameterType="ActCashout" >
+		update act_cashout_real
+		<set>
+			<if test="updateDate != null" >
+	        	update_date = #{updateDate},
+	      	</if>
+	      	<if test="transAmount!=null">
+	      		trans_amount = #{transAmount},
+	      	</if>
+	      	<if test="approveDate!=null">
+	      		approve_date = #{approveDate},
+	      	</if>
+	    </set>
+	    where id =#{id}
+	</update>
+	
+	<select id="findObjectByMap" parameterType="java.util.Map" resultType="ActCashout">
+		select * from act_cashout_real 
+		<where>
+			<if test="accountNo!=null">
+				account_no=#{accountNo}
+			</if>
+			<if test="platform!=null">
+				and platform=#{platform}
+			</if>
+			<if test="pno!=null">
+				and pno = #{pno}
+			</if>
+		</where> 
+	</select>
+</mapper>

@@ -1,0 +1,123 @@
+<form class="layui-form">
+  <div class="form-list-item">
+    <!-- 活动编号 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">活动编号</label>
+      <div class="layui-input-inline">
+        <input type="text" name="activityPeriods" required lay-verify="required" class="layui-input" value="<%=activityPeriods%>">
+      </div>
+    </div>
+    <!-- 活动名称 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">活动名称</label>
+      <div class="layui-input-inline">
+        <input type="text" name="activityName" required lay-verify="required" class="layui-input" value="<%=activityName%>">
+      </div>
+    </div>
+  </div>
+  <div class="form-list-item">
+    <!-- 活动开始时间 -->
+    <div class="layui-inline">
+      <label class="layui-form-label"> 活动开始时间</label>
+      <div class="layui-input-inline">
+        <input type="text" name="startTime" required lay-verify="required" class="layui-input" id="startTime" value="<%=startTime%>">
+      </div>
+    </div>
+    <!-- 活动结束时间 -->
+    <div class="layui-inline">
+      <label class="layui-form-label"> 活动结束时间</label>
+      <div class="layui-input-inline">
+        <input type="text" name="endTime" required lay-verify="required" class="layui-input" id="endTime" value="<%=endTime%>">
+      </div>
+    </div>
+  </div>
+  <div class="form-list-item">
+    <!-- 活动状态 -->
+    <div class="layui-inline">
+      <label class="layui-form-label">活动状态</label>
+      <div class="layui-input-inline">
+        <select name="enableFlag">
+          <option value="">---请选择---</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+  <div class="form-list-item">
+    <!-- 活动描述 -->
+    <div class="layui-inline flex-container">
+      <label class="layui-form-label">活动描述</label>
+      <div class="layui-input-inline flex-block">
+        <textarea placeholder="请输入内容" name="remark" class="layui-textarea"><%=remark%></textarea>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-list-item">
+    <!-- 活动链接地址 -->
+    <div class="layui-inline flex-container">
+      <label class="layui-form-label">活动链接地址</label>
+      <div class="layui-input-inline flex-block">
+        <textarea placeholder="请输入内容" name="activityUrl" class="layui-textarea"><%=activityUrl%></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-list-item">
+    <!-- 其他信息 -->
+    <div class="layui-inline flex-container">
+      <label class="layui-form-label">其他信息</label>
+      <div class="layui-input-inline flex-block">
+        <textarea placeholder="请输入内容" name="otherMsg" class="layui-textarea"><%=otherMsg%></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-list-item">
+    <!-- 只允许白名单用户参加活动 -->
+    <div class="layui-inline">
+      <label class="layui-form-label mutiple-line">只允许白名单用户参加活动</label>
+      <div class="layui-input-inline">
+        <select name="allowWhiteUsers">
+          <option value="Y">是</option>
+          <option value="N">否</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-list-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">上传白名单</label>
+      <div class="layui-input-inline">
+        <div class="layui-upload">
+          <button type="button" class="layui-btn layui-btn-normal" id="uploadWhiteList">选择文件</button>
+          <button type="button" class="layui-btn" id="uploadWhiteListBtn">开始上传</button>
+          <button type="button" class="layui-btn">下载模板</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-list-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">上传黑名单</label>
+      <div class="layui-input-inline">
+        <div class="layui-upload">
+          <button type="button" class="layui-btn layui-btn-normal" id="uploadBlackList">选择文件</button>
+          <button type="button" class="layui-btn" id="uploadBlackListBtn">开始上传</button>
+          <button type="button" class="layui-btn">下载模板</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="options-bar">
+
+    <button class="layui-btn" lay-submit lay-filter="editFormEdit">修改</button>
+    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+  </div>
+</form>

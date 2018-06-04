@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.datacleaning.dao.inf.hx.DemousersDao">
+	<resultMap id="BaseResultMap" type="Demousers">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="platform" property="platform" jdbcType="CHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="CHAR" />
+		<result column="nationality" property="nationality" jdbcType="VARCHAR" />
+		<result column="area" property="area" jdbcType="VARCHAR" />
+		<result column="country_code" property="countryCode" jdbcType="VARCHAR" />
+		<result column="qq" property="qq" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="ad_from" property="adFrom" jdbcType="VARCHAR" />
+		<result column="cookie" property="cookie" jdbcType="VARCHAR" />
+		<result column="become_member" property="becomeMember" jdbcType="VARCHAR" />
+		<result column="mobile_sec" property="mobileSec" jdbcType="VARCHAR" />
+		<result column="ip" property="ip" jdbcType="VARCHAR" />
+		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+	    <result column="id_number" property="idNumber" jdbcType="VARCHAR" />
+	    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+	    <result column="email" property="email" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, username, password, platform, name, sex, nationality, area,
+		country_code, qq,
+		type, ad_from, cookie, become_member, mobile_sec, ip, ctime, mtime,
+    	AES_DECRYPT(mobile,'${hxDecryptKey}') mobile,AES_DECRYPT(email,'${hxDecryptKey}') email
+	</sql>
+	<select id="select" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select 
+			<include refid="Base_Column_List"></include>
+		from 
+			demousers
+		where 
+			platform='MT4'
+			<if test="lastUpdateDateBegin!=null and lastUpdateDateEnd!=null">
+		   and(
+		   	 ctime between #{lastUpdateDateBegin} and #{lastUpdateDateEnd}
+		     or mtime between #{lastUpdateDateBegin} and #{lastUpdateDateEnd}
+		    )
+		</if>
+		<if test="lastUpdateDate != null" >
+	    	and (
+	    		ctime > #{lastUpdateDate}
+	    		or mtime > #{lastUpdateDate}
+	    		)
+		</if>
+	</select>
+</mapper>

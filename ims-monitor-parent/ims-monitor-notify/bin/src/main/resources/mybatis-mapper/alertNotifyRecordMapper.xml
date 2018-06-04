@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.monitor.notify.dao.inf.AlertNotifyRecordDao">
+	<insert id="batchSave" parameterType="AlertNotifyRecord">
+		insert into alert_notify_record(staff_id,notify_status_json,alert_content,alert_date) 
+		<foreach collection="list" item="record" open="values (" close=")" separator=",">
+			#{record.staffId},#{record.notifyStatusJson},#{record.alertContent},now()
+		</foreach>	
+	</insert>
+</mapper>

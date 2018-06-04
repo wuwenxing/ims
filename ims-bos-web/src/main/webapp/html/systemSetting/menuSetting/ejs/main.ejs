@@ -1,0 +1,249 @@
+<% if(pattern == "normal"){ %>
+    <form action="" class="layui-form detail">
+        <div class="layui-form-item">
+            <div class="layui-col-md12">
+                <div class="detail-item layui-col-md10 layui-row flex">
+                    <label for="" class="layui-form-label flex flex-align-items layui-col-md3">
+                        <em class="required">*</em>
+                        <span>上级名称/编号</span>
+                    </label>
+                    <div class="layui-inline no-mr flex-item layui-col-md9">
+                        <input type="text" class="layui-input" readonly value="<%=parentName%><%=parentMenuCode%>">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-col-md5">
+                <div class="detail-item layui-col-md10 layui-row flex">
+                    <label for="" class="layui-form-label flex flex-align-items layui-col-md3">
+                        <em class="required">*</em>
+                        <span>类型</span>
+                    </label>
+                    <div class="layui-col-md9 flex-item">
+                        <select name="menuType"  lay-verify="required"  lay-verType="tips">
+                            <option value="1" <%if(menuType == '1'){%>selected<%}%> >菜单</option>
+                            <option value="2" <%if(menuType == '2'){%>selected<%}%> >功能</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="menuId" value="<%=menuId%>">
+                </div>
+            </div>
+            <div class="layui-col-md5">
+                <div class="detail-item layui-col-md10 layui-row flex layui-col-md-offset2">
+                    <label for="" class="layui-form-label flex flex-align-items layui-col-md3">
+                        <em class="required">*</em>
+                        <span>状态</span>
+                    </label>
+                    <div class="layui-col-md9 flex-item">
+                        <select name="status"  lay-verify="required"  lay-verType="tips">
+                            <option value="Y" <%if(enableFlag == 'Y'){%>selected<%}%> >启用</option>
+                            <option value="N" <%if(enableFlag == 'N'){%>selected<%}%> >禁用</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-col-md5">
+                <div class="detail-item layui-col-md10 layui-row flex">
+                    <label for="" class="layui-form-label flex flex-align-items layui-col-md3">
+                        <em class="required">*</em>
+                        <span>编号</span>
+                    </label>
+                    <div class="layui-col-md9 flex-item">
+                        <input type="text" value="<%=menuCode%>" name="menuCode" lay-verify="required" lay-verType="tips" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md5">
+                <div class="detail-item layui-col-md10 layui-row flex layui-col-md-offset2">
+                    <label for="" class="layui-form-label flex flex-align-items layui-col-md3">
+                        <em class="required">*</em>
+                        <span>名称(英文)</span>
+                    </label>
+                    <div class="layui-col-md9 flex-item">
+                        <input type="text" value="<%=menuNameEn%>" name="menuNameEn" lay-verify="required" lay-verType="tips" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-col-md5">
+                <div class="detail-item layui-col-md10 layui-row flex">
+                    <label for="" class="layui-form-label flex flex-align-items layui-col-md3">
+                        <em class="required">*</em>
+                        <span>名称(简体)</span>
+                    </label>
+                    <div class="layui-col-md9 flex-item">
+                        <input type="text" value="<%=menuNameCn%>" name="menuNameCn" lay-verify="required" lay-verType="tips" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md5">
+                <div class="detail-item layui-col-md10 layui-row flex layui-col-md-offset2">
+                    <label for="" class="layui-form-label flex flex-align-items layui-col-md3">
+                        <em class="required">*</em>
+                        <span>名称(繁体)</span>
+                    </label>
+                    <div class="layui-col-md9 flex-item">
+                        <input type="text" value="<%=menuNameTw%>" name="menuNameTw" lay-verify="required" lay-verType="tips" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-col-md5">
+                <div class="detail-item layui-col-md10 layui-row flex">
+                    <label for="" class="layui-form-label flex flex-align-items layui-col-md3">
+                        <em class="required">*</em>
+                        <span>排序</span>
+                    </label>
+                    <div class="layui-col-md9 flex-item single flex">
+                        <button class="decrease" type="button" ><i class="layui-icon">&#xe603;</i></button>
+                        <input type="text"  value="<%=orderCode%>" name="orderCode" lay-verify="number" class="layui-input sort">
+                        <button  class="add" type="button"><i class="layui-icon">&#xe602;</i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-col-md12">
+                <div class="detail-item layui-col-md10 layui-row flex">
+                    <label for="" class="layui-form-label flex flex-align-items layui-col-md3">
+                        <span>请求URL</span>
+                    </label>
+                    <div class="layui-inline no-mr flex-item layui-col-md9">
+                        <input name="menuUrl" value="<%=menuUrl%>" type="text" class="layui-input big">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-col-md10">
+                <div class="layui-inline btns">
+                    <button class="layui-btn" lay-submit lay-filter="menu-form"><i class="layui-icon"></i>保存</button>
+                    <button class="layui-btn reset" type="reset"><i class="layui-icon"></i>重置</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+<% }else{ %>
+    <form action="" class="layui-form add-form">
+        <div class="layui-form-item">
+            <div class="layui-inline no-mr flex">
+                <label for="" class="layui-form-label flex flex-align-items">
+                    <em class="required">*</em>
+                    <span>上级名称/编号</span>
+                </label>
+                <div class="layui-inline flex-item">
+                    <%if(typeof(menuCode) != "undefined"){%>
+                        <input type="text" class="layui-input" readonly value="<%=menuCode%>">
+                        <input type="hidden" name="parentMenuCode" value="<%=parentMenuCode%>">
+                        <input type="hidden" name="menuCode" value="<%=menuCode%>">
+                        <input type="hidden" name="menuId" value="<%=menuId%>">
+                    <%}else{%>
+                        <input type="text" class="layui-input" readonly >
+                        <input type="hidden" name="parentMenuCode">
+                        <input type="hidden" name="menuCode">
+                        <input type="hidden" name="menuId">
+                    <%}%>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items">
+                    <em class="required">*</em>
+                    <span>类型</span>
+                </label>
+                <div class="layui-inline">
+                    <select name="menuType"  lay-verify="required"  lay-verType="tips">
+                        <option value="1">菜单</option>
+                        <option value="2">功能</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items">
+                    <em class="required">*</em>
+                    <span>状态</span>
+                </label>
+                <div class="layui-inline">
+                    <select name="enableFlag"  lay-verify="required" lay-verType="tips">
+                        <option value="Y">启用</option>
+                        <option value="N">禁用</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items">
+                    <em class="required">*</em>
+                    <span>编号</span>
+                </label>
+                <div class="layui-inline">
+                    <input type="text" name="menuCode" lay-verify="required" lay-verType="tips" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items">
+                    <em class="required">*</em>
+                    <span>名称(英文)</span>
+                </label>
+                <div class="layui-inline">
+                    <input type="text" name="menuNameEn" lay-verify="required" lay-verType="tips" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items">
+                    <em class="required">*</em>
+                    <span>名称(简体)</span>
+                </label>
+                <div class="layui-inline">
+                    <input type="text" name="menuNameCn" lay-verify="required" lay-verType="tips" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items">
+                    <em class="required">*</em>
+                    <span>名称(繁体)</span>
+                </label>
+                <div class="layui-inline">
+                    <input type="text" name="menuNameTw" lay-verify="required" lay-verType="tips" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline no-mr">
+                <label for="" class="layui-form-label flex flex-align-items">
+                    <em class="required">*</em>
+                    <span>排序</span>
+                </label>
+                <div class="layui-inline single flex">
+                    <button class="decrease"  type="button" ><i class="layui-icon">&#xe603;</i></button>
+                    <input type="text"  name="orderCode" lay-verify="number" class="layui-input layui-input-reset sort flex-item" value="1">
+                    <button class="add"  type="button" ><i class="layui-icon">&#xe602;</i></button>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline no-mr flex">
+                <label for="" class="layui-form-label flex flex-align-items">
+                    <em class="required"></em>
+                    <span>请求URL</span>
+                </label>
+                <div class="layui-inline flex-item">
+                    <input name="menuUrl" type="text"  class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-inline realBtns" style="display:none;">
+            <button class="layui-btn" lay-submit lay-filter="add-form">确定</button>
+        </div>
+    </form>
+<% } %>

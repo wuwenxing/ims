@@ -1,0 +1,258 @@
+<div class="outter">
+    <div class="del"><a href="javascript:;"><i class="layui-icon">&#xe640;</i></a></div>
+    <table class="task-table">
+        <tbody>
+            <tr class="task-item">
+                <th>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">  &nbsp;&nbsp;&nbsp;&nbsp; 任务<span class="mustInput"></span></label>
+                    </div>
+                </th>
+                <td>
+                    <div class="layui-inline">
+                        <select name="taskItemCode" id="taskItemCode__#_" lay-filter="taskItemCode">
+                            <option value="" unitStr="" demo="" disableCode="">--请选择--</option>
+                            <option value="">自由兑换</option>
+                            <option value="add_demo_account" title="注册模拟账号"
+                                unitStr="" unitCode=""
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr=""
+                                itemUnitStr="元" demo="true"
+                                outCode="add_demo_account" isReceiveMaxNum="false"
+                                isReceiveMaxMoney="false">注册模拟账号</option>
+                            
+                            <option value="模拟账号首次开仓">模拟账号首次开仓</option>
+                            <option value="模拟账号开仓次数">模拟账号开仓次数</option>
+                            <option value="模拟账号开仓手数">模拟账号开仓手数</option>
+                            <option value="模拟账号首次平仓">模拟账号首次平仓</option>
+                            <option value="demo_close_times" title="模拟账号平仓次数"
+                                unitStr="次" unitCode="TIMES"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="int"
+                                itemUnitStr="元" demo="true"
+                                outCode=" " isReceiveMaxNum="true"
+                                isReceiveMaxMoney="false">模拟账号平仓次数</option>
+                        
+                            <option value="demo_close_lot" title="模拟账号平仓手数"
+                                unitStr="手" unitCode="LOT"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="gtZeroDecimalTwo"
+                                itemUnitStr="元" demo="true"
+                                outCode=" " isReceiveMaxNum="true"
+                                isReceiveMaxMoney="false">模拟账号平仓手数</option>
+                        
+                            <option value="demo_close_profit" title="模拟账号单笔平仓盈利"
+                                unitStr="元" unitCode="MONEY"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="zeroDecimalTwo"
+                                itemUnitStr="元" demo="true"
+                                outCode="" isReceiveMaxNum="true"
+                                isReceiveMaxMoney="false">模拟账号单笔平仓盈利</option>
+                        
+                            <option value="demo_close_loss" title="模拟账号单笔平仓亏损"
+                                unitStr="元" unitCode="MONEY"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="zeroDecimalTwo"
+                                itemUnitStr="元" demo="true"
+                                outCode="" isReceiveMaxNum="true"
+                                isReceiveMaxMoney="false">模拟账号单笔平仓亏损</option>
+                        
+                            <option value="demo_close_profit_percent" title="模拟账号单笔平仓盈利%"
+                                unitStr="元" unitCode="MONEY"
+                                itemUnitCode="%"
+                                unitValidTypeStr="zeroDecimalTwo"
+                                itemUnitStr="%" demo="true"
+                                outCode="" isReceiveMaxNum="false"
+                                isReceiveMaxMoney="true">模拟账号单笔平仓盈利%</option>
+                        
+                            <option value="demo_close_loss_percent" title="模拟账号单笔平仓亏损%"
+                                unitStr="元" unitCode="MONEY"
+                                itemUnitCode="%"
+                                unitValidTypeStr="zeroDecimalTwo"
+                                itemUnitStr="%" demo="true"
+                                outCode="" isReceiveMaxNum="false"
+                                isReceiveMaxMoney="true">模拟账号单笔平仓亏损%</option>
+                            <option value="模拟账号累计开仓次数">模拟账号累计开仓次数</option>  
+                            <option value="demo_total_close_times" title="模拟账号累计平仓次数"
+                                unitStr="次" unitCode="TIMES"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="int"
+                                itemUnitStr="元" demo="true"
+                                outCode=" " isReceiveMaxNum="false"
+                                isReceiveMaxMoney="false">模拟账号累计平仓次数</option>
+                            <option value="模拟账号累计开仓手数">模拟账号累计开仓手数</option>
+                            <option value="demo_total_close_lot" title="模拟账号累计平仓手数"
+                                unitStr="手" unitCode="LOT"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="gtZeroDecimalTwo"
+                                itemUnitStr="元" demo="true"
+                                outCode=" " isReceiveMaxNum="false"
+                                isReceiveMaxMoney="false">模拟账号累计平仓手数</option>
+                        
+                            <option value="demo_total_close_profit" title="模拟账号平仓盈利总额"
+                                unitStr="元" unitCode="MONEY"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="gtZeroDecimalTwo"
+                                itemUnitStr="元" demo="true"
+                                outCode="" isReceiveMaxNum="false"
+                                isReceiveMaxMoney="false">模拟账号平仓盈利总额</option>
+                        
+                            <option value="demo_total_close_loss" title="模拟账号平仓亏损总额"
+                                unitStr="元" unitCode="MONEY"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="gtZeroDecimalTwo"
+                                itemUnitStr="元" demo="true"
+                                outCode="" isReceiveMaxNum="false"
+                                isReceiveMaxMoney="false">模拟账号平仓亏损总额</option>
+                        
+                            <option value="add_real_account" title="注册真实账号"
+                                unitStr="" unitCode=""
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr=""
+                                itemUnitStr="元" demo="false"
+                                outCode="add_real_account" isReceiveMaxNum="false"
+                                isReceiveMaxMoney="false">注册真实账号</option>
+                        
+                            <option value="real_activation" title="真实账号激活"
+                                unitStr="元" unitCode="MONEY"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="zeroDecimalTwo"
+                                itemUnitStr="元" demo="false"
+                                outCode="real_activation" isReceiveMaxNum="false"
+                                isReceiveMaxMoney="false">真实账号激活</option>
+                        
+                            <option value="real_close_times" title="真实账号平仓次数"
+                                unitStr="次" unitCode="TIMES"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="int"
+                                itemUnitStr="元" demo="false"
+                                outCode=" " isReceiveMaxNum="true"
+                                isReceiveMaxMoney="false">真实账号平仓次数</option>
+                        
+                            <option value="real_close_lot" title="真实账号平仓手数"
+                                unitStr="手" unitCode="LOT"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="gtZeroDecimalTwo"
+                                itemUnitStr="元" demo="false"
+                                outCode=" " isReceiveMaxNum="true"
+                                isReceiveMaxMoney="false">真实账号平仓手数</option>
+                        
+                            <option value="real_close_profit" title="真实账号单笔平仓盈利"
+                                unitStr="元" unitCode="MONEY"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="zeroDecimalTwo"
+                                itemUnitStr="元" demo="false"
+                                outCode="" isReceiveMaxNum="true"
+                                isReceiveMaxMoney="false">真实账号单笔平仓盈利</option>
+                        
+                            <option value="real_close_loss" title="真实账号单笔平仓亏损"
+                                unitStr="元" unitCode="MONEY"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="zeroDecimalTwo"
+                                itemUnitStr="元" demo="false"
+                                outCode="" isReceiveMaxNum="true"
+                                isReceiveMaxMoney="false">真实账号单笔平仓亏损</option>
+                        
+                            <option value="real_close_profit_percent" title="真实账号单笔平仓盈利%"
+                                unitStr="元" unitCode="MONEY"
+                                itemUnitCode="%"
+                                unitValidTypeStr="zeroDecimalTwo"
+                                itemUnitStr="%" demo="false"
+                                outCode="" isReceiveMaxNum="false"
+                                isReceiveMaxMoney="true">真实账号单笔平仓盈利%</option>
+                        
+                            <option value="real_close_loss_percent" title="真实账号单笔平仓亏损%"
+                                unitStr="元" unitCode="MONEY"
+                                itemUnitCode="%"
+                                unitValidTypeStr="zeroDecimalTwo"
+                                itemUnitStr="%" demo="false"
+                                outCode="" isReceiveMaxNum="false"
+                                isReceiveMaxMoney="true">真实账号单笔平仓亏损%</option>
+                        
+                            <option value="real_total_close_times" title="真实账号累计平仓次数"
+                                unitStr="次" unitCode="TIMES"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="int"
+                                itemUnitStr="元" demo="false"
+                                outCode=" " isReceiveMaxNum="false"
+                                isReceiveMaxMoney="false">真实账号累计平仓次数</option>
+                        
+                            <option value="real_total_close_lot" title="真实账号累计平仓手数"
+                                unitStr="手" unitCode="LOT"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="gtZeroDecimalTwo"
+                                itemUnitStr="元" demo="false"
+                                outCode=" " isReceiveMaxNum="false"
+                                isReceiveMaxMoney="false">真实账号累计平仓手数</option>
+                        
+                            <option value="real_total_close_profit" title="真实账号平仓盈利总额"
+                                unitStr="元" unitCode="MONEY"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="gtZeroDecimalTwo"
+                                itemUnitStr="元" demo="false"
+                                outCode="" isReceiveMaxNum="false"
+                                isReceiveMaxMoney="false">真实账号平仓盈利总额</option>
+                        
+                            <option value="real_total_close_loss" title="真实账号平仓亏损总额"
+                                unitStr="元" unitCode="MONEY"
+                                itemUnitCode="MONEY"
+                                unitValidTypeStr="gtZeroDecimalTwo"
+                                itemUnitStr="元" demo="false"
+                                outCode="" isReceiveMaxNum="false"
+                                isReceiveMaxMoney="false">真实账号平仓亏损总额</option>
+                        </select>
+                    </div>
+                    <div class="layui-inline hide unitStr">
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" name="temp_taskItemVal">
+                        </div>
+                        <div class="layui-inline unit">元</div>
+                    </div>
+                    <div class="layui-inline hide hours">
+                        <div class="layui-inline">
+                            <input type="text" class="layui-input" name="temp_taskItemTime">
+                        </div>
+                        <div class="layui-inline">小时</div>
+                    </div>
+
+                </td>
+            </tr>
+            <tr class="task-item">
+                <th>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">任务描述</label>
+                    </div>
+                </th>
+                <td>
+                    <div class="layui-inline">
+                        <input type="text" name="taskDesc" class="layui-input">
+                    </div>
+                </td>
+            </tr>
+            <tr class="task-item">
+                <th>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">奖励物品<span class="mustInput"></span></label>
+                    </div>
+                </th>
+                <td>
+                    <table class="prize-table">
+                        <thead>
+                            <tr>
+                                <td>
+                                    <div class="layui-inline">
+                                        <button class="layui-btn layui-btn-sm add-prize"><i class="layui-icon">&#xe654;</i>添加物品</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

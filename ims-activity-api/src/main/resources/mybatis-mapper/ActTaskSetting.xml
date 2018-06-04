@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActTaskSettingDao">
+	<select id="findListByMap" resultType="ActTaskSetting" parameterType="java.util.Map">
+		select a.* from act_task_setting a ,act_setting b  where  
+		  a.delete_flag != 'Y' and a.enable_flag = 'Y' and a.activity_periods=b.activity_periods
+		<if test="activityPeriods != null and activityPeriods != '' ">
+			and a.activity_periods = #{activityPeriods}
+		</if>
+		<if test="taskItemCode != null and taskItemCode != '' ">
+			and a.task_item_code = #{taskItemCode}
+		</if>
+		<if test="activityName != null and activityName != '' ">
+			and b.activity_name  like CONCAT('%',#{activityName},'%')
+		</if>
+		<if test="orderStr!=null and orderStr!=''">
+		  order by  ${orderStr}
+		</if>
+	</select>
+ 
+   <select id="listActivityPeriodsByTaskItemCode" resultType="java.lang.String" parameterType="java.util.Map" >
+     select distinct activity_periods  from  act_task_setting
+     where enable_flag='Y' and delete_flag='N' 
+    	<if test="company_id != null">
+    	   and company_id = #{companyId}
+    	</if>
+    	<if test="taskItemCode != null and taskItemCode !='' ">
+    	   and task_item_code = #{taskItemCode}
+    	</if>
+    </select>
+ 
+	<select id="findObject" resultType="ActTaskSetting">
+		select * from act_task_setting where id = #{id}
+	</select>
+	
+	<delete id="delete">
+		delete from act_task_setting where id = #{id}
+	</delete>
+	 <delete id="deleteBatch">
+		delete from act_task_setting where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	  </delete>
+  
+	<insert id="save" parameterType="ActTaskSetting" useGeneratedKeys="true" keyProperty="id">
+		insert into act_task_setting
+		(activity_periods, task_item_code,params_val,task_order,task_group,parent_id,task_desc,
+		enable_flag, delete_flag,create_user,create_date, create_ip,
+		update_user, update_date, update_ip,version_no, company_id)
+		values 
+		(#{activityPeriods},#{taskItemCode},#{paramsVal},#{taskOrder},#{taskGroup},#{parentId},
+		#{taskDesc},#{enableFlag},#{deleteFlag},#{createUser},#{createDate}, #{createIp},#{updateUser}, #{updateDate},
+		#{updateIp},#{versionNo},#{companyId})
+	</insert>
+	
+	<update id="update" parameterType="ActTaskSetting">
+		update act_task_setting
+		<set>
+		       activity_periods = #{activityPeriods},
+				task_item_code = #{taskItemCode},
+				task_group = #{taskGroup},
+				parent_id = #{parentId},
+				params_val = #{paramsVal},
+				task_desc = #{taskDesc},
+				enable_flag = #{enableFlag},
+				delete_flag = #{deleteFlag},
+				update_user = #{updateUser},
+				update_date = #{updateDate},
+				update_ip = #{updateIp},
+				version_no = #{versionNo},
+				company_id = #{companyId},
+				task_order = #{taskOrder},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateByMap" parameterType="ActTaskSetting">
+		update act_task_setting
+		<set>
+			<if test="activityPeriods != null and activityPeriods != '' ">
+				activity_periods = #{activityPeriods},
+			</if>
+			<if test="taskItemCode != null and taskItemCode != '' ">
+				task_item_code = #{taskItemCode},
+			</if>
+			<if test="paramsVal != null and paramsVal != '' ">
+				params_val = #{paramsVal},
+			</if>
+			<if test="taskGroup != null">
+				task_group = #{taskGroup},
+			</if>
+			<if test="parentId != null">
+				parent_id = #{parentId},
+			</if>
+			<if test="taskDesc != null and taskDesc != '' ">
+				task_desc = #{taskDesc},
+			</if>
+			<if test="enableFlag != null">
+				enable_flag = #{enableFlag},
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag = #{deleteFlag},
+			</if>
+			<if test="createUser != null">
+				create_user = #{createUser},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate},
+			</if>
+			<if test="createIp != null">
+				create_ip = #{createIp},
+			</if>
+			<if test="updateUser != null">
+				update_user = #{updateUser},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate},
+			</if>
+			<if test="updateIp != null">
+				update_ip = #{updateIp},
+			</if>
+			<if test="versionNo != null">
+				version_no = #{versionNo},
+			</if>
+			<if test="companyId != null and companyId != '' ">
+				company_id = #{companyId},
+			</if>
+			<if test="taskOrder != null">
+				task_order = #{taskOrder},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+ 
+</mapper>

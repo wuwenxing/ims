@@ -1,0 +1,22 @@
+{
+  "zh-CN":{
+    "frequencyTime":"领取限制",
+    "frequencyNum":"领取限制",
+    "equalValue":"等额值",
+    "receiveMaxNum":"最高领取",
+    "tradeNum":"平仓手数",
+    "infParamMax":"最高额度",
+    "taskItemVal":"入金金额",
+    "taskItemVal2":"至"
+  },
+  "en-US":{
+    "frequencyTime":"frequencyTime",
+    "equalValue":"equalValue",
+    "receiveMaxNum":"receiveMaxNum",
+    "tradeNum":"tradeNum",
+    "infParamMax":"infParamMax",
+    "taskItemVal":"taskItemVal",
+    "taskItemVal2":"taskItemVal2",
+    "frequencyNum":"frequencyNum"
+  }
+}

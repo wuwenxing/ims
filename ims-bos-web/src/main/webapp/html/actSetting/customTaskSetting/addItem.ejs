@@ -1,0 +1,117 @@
+
+<% if(typeof(data.id) != "undefined"){ %>
+    <form action="" class="layui-form layer">
+        <div style="margin-top:10px"> </div>
+        <input type="hidden" class="layui-input" value="<%=data.id%>" id="id" name="id">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><span>任务类型</span></label>
+                <div class="layui-inline">
+                    <% if(data.taskType==1){%>
+                        <input type="text" class="layui-input" value="自定义任务" readonly> 
+                        <input type="hidden" class="layui-input" value="1" name="taskType">
+                    <%}else{%>
+                        <input type="text" class="layui-input" value="系统内置任务" readonly> 
+                        <input type="hidden" class="layui-input" value="2" name="taskType">
+                    <%}%>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>任务识别码</span></label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input"  lay-verify="required" <%=data.disabled%>  lay-verType="tips" name="taskCode" value="<%=data.taskCode%>">
+                </div>
+            </div>
+        </div> 
+        <div class="layui-form-item">
+            <div class="layui-inline">  
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>任务名称</span></label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input"  lay-verify="required" <%=data.disabled%> lay-verType="tips" name="taskName" value="<%=data.taskName%>">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>规则识别码</span></label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" lay-verify="required" lay-verType="tips" <%=data.disabled%> name="ruleCode" value="<%=data.ruleCode%>">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>任务状态</span></label>
+                <div class="layui-inline">
+                    <select name="enableFlag" id="enableFlag" <%=data.disabled%>>
+                        <option <%if(data.enableFlag == 'Y'){%> selected <%}%>  value="Y" >启用</option>
+                        <option <%if(data.enableFlag == 'N'){%> selected <%}%> value="N" >禁用</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline flex no-mr">
+                <label for="" class="layui-form-label flex flex-align-items"><span>任务描述</span></label>
+                <div class="layui-inline flex-item">                
+                    <textarea name="taskDesc" id="taskDesc" value="<%=data.taskDesc%>"  <%=data.disabled%> class="layui-textarea"><%=data.taskDesc%></textarea>
+                </div>
+            </div>
+        </div>  
+        <div style="display:none;">
+            <button class="node-submit" lay-submit lay-filter="seeAddRow"></button>
+        </div>
+    </form>
+<%}else{%>
+    <form action="" class="layui-form layer">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><span>任务类型</span></label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" value="自定义任务" readonly>
+                    <input type="hidden" class="layui-input" name="taskType">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><span>任务识别码</span></label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" value="<%=parfix%>"  lay-verify="required" lay-verType="tips" name="taskCode">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>任务名称</span></label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input"  lay-verify="required" lay-verType="tips" name="taskName">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>规则识别码</span></label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" value="<%=parfix%>" lay-verify="required" lay-verType="tips" name="ruleCode">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>任务状态</span></label>
+                <div class="layui-inline">
+                    <select name="enableFlag" id="enableFlag">
+                        <option value="Y" selected>开启</option>
+                        <option value="N">关闭</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline flex no-mr">
+                <label for="" class="layui-form-label flex flex-align-items"><span>任务描述</span></label>
+                <div class="layui-inline flex-item">
+                    <textarea name="taskDesc" id="taskDesc"  class="layui-textarea"></textarea>
+                </div>
+            </div>
+        </div>
+        <div style="display:none;">
+            <button class="node-submit" lay-submit lay-filter="seeAddRow"></button>
+        </div>
+    </form>
+<%}%>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.message.dao.inf.Gts2AccountGroupDao" >
+
+  <sql id="Base_Column_List" >
+    id, company_id, platform, code, display_name, account_group_status, account_level_code, 
+    account_status_code, trade_group_id, trade_account_status, currency, remark, enable_deposit, 
+    enable_withdraw, enable_transfer_in, enable_transfer_out, enable_adjustment, activate_total_deposit_currency, 
+    activate_total_deposit_amount, activate_account_group_id, activate_count_all_account, 
+    upgrade_account_group_id, upgrade_total_deposit_currency, upgrade_total_deposit_amount, 
+    upgrade_count_all_account, downgrade_account_group_id, use_company_setting, deleted, 
+    create_user, create_ip, create_date, update_user, update_ip, update_date, version_no, 
+    trade_mode, check_trade_mode, check_hold_position, margin_credit_ratio
+  </sql>
+ 
+  <select id="select" resultType="Gts2AccountGroup" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    from t_account_group_${env}
+  </select>
+
+  <insert id="save" parameterType="Gts2AccountGroup" >
+    insert into t_account_group_${env} (id, company_id, platform, 
+      code, display_name, account_group_status, 
+      account_level_code, account_status_code, trade_group_id, 
+      trade_account_status, currency, remark, 
+      enable_deposit, enable_withdraw, enable_transfer_in, 
+      enable_transfer_out, enable_adjustment, activate_total_deposit_currency, 
+      activate_total_deposit_amount, activate_account_group_id, 
+      activate_count_all_account, upgrade_account_group_id, 
+      upgrade_total_deposit_currency, upgrade_total_deposit_amount, 
+      upgrade_count_all_account, downgrade_account_group_id, 
+      use_company_setting, deleted, create_user, 
+      create_ip, create_date, update_user, 
+      update_ip, update_date, version_no, 
+      trade_mode, check_trade_mode, check_hold_position, 
+      margin_credit_ratio)
+    values (#{id,jdbcType=BIGINT}, #{companyId,jdbcType=BIGINT}, #{platform,jdbcType=CHAR}, 
+      #{code,jdbcType=CHAR}, #{displayName,jdbcType=CHAR}, #{accountGroupStatus,jdbcType=CHAR}, 
+      #{accountLevelCode,jdbcType=CHAR}, #{accountStatusCode,jdbcType=CHAR}, #{tradeGroupId,jdbcType=BIGINT}, 
+      #{tradeAccountStatus,jdbcType=CHAR}, #{currency,jdbcType=CHAR}, #{remark,jdbcType=CHAR}, 
+      #{enableDeposit,jdbcType=BIT}, #{enableWithdraw,jdbcType=BIT}, #{enableTransferIn,jdbcType=BIT}, 
+      #{enableTransferOut,jdbcType=BIT}, #{enableAdjustment,jdbcType=BIT}, #{activateTotalDepositCurrency,jdbcType=CHAR}, 
+      #{activateTotalDepositAmount,jdbcType=DOUBLE}, #{activateAccountGroupId,jdbcType=BIGINT}, 
+      #{activateCountAllAccount,jdbcType=BIT}, #{upgradeAccountGroupId,jdbcType=BIGINT}, 
+      #{upgradeTotalDepositCurrency,jdbcType=CHAR}, #{upgradeTotalDepositAmount,jdbcType=DOUBLE}, 
+      #{upgradeCountAllAccount,jdbcType=BIT}, #{downgradeAccountGroupId,jdbcType=BIGINT}, 
+      #{useCompanySetting,jdbcType=BIT}, #{deleted,jdbcType=BIT}, #{createUser,jdbcType=CHAR}, 
+      #{createIp,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=CHAR}, 
+      #{updateIp,jdbcType=CHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{versionNo,jdbcType=INTEGER}, 
+      #{tradeMode,jdbcType=CHAR}, #{checkTradeMode,jdbcType=CHAR}, #{checkHoldPosition,jdbcType=CHAR}, 
+      #{marginCreditRatio,jdbcType=DOUBLE})
+  </insert>
+
+  <update id="update" parameterType="Gts2AccountGroup" >
+    update t_account_group_${env}
+    <set >
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=CHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=CHAR},
+      </if>
+      <if test="displayName != null" >
+        display_name = #{displayName,jdbcType=CHAR},
+      </if>
+      <if test="accountGroupStatus != null" >
+        account_group_status = #{accountGroupStatus,jdbcType=CHAR},
+      </if>
+      <if test="accountLevelCode != null" >
+        account_level_code = #{accountLevelCode,jdbcType=CHAR},
+      </if>
+      <if test="accountStatusCode != null" >
+        account_status_code = #{accountStatusCode,jdbcType=CHAR},
+      </if>
+      <if test="tradeGroupId != null" >
+        trade_group_id = #{tradeGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="tradeAccountStatus != null" >
+        trade_account_status = #{tradeAccountStatus,jdbcType=CHAR},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=CHAR},
+      </if>
+      <if test="enableDeposit != null" >
+        enable_deposit = #{enableDeposit,jdbcType=BIT},
+      </if>
+      <if test="enableWithdraw != null" >
+        enable_withdraw = #{enableWithdraw,jdbcType=BIT},
+      </if>
+      <if test="enableTransferIn != null" >
+        enable_transfer_in = #{enableTransferIn,jdbcType=BIT},
+      </if>
+      <if test="enableTransferOut != null" >
+        enable_transfer_out = #{enableTransferOut,jdbcType=BIT},
+      </if>
+      <if test="enableAdjustment != null" >
+        enable_adjustment = #{enableAdjustment,jdbcType=BIT},
+      </if>
+      <if test="activateTotalDepositCurrency != null" >
+        activate_total_deposit_currency = #{activateTotalDepositCurrency,jdbcType=CHAR},
+      </if>
+      <if test="activateTotalDepositAmount != null" >
+        activate_total_deposit_amount = #{activateTotalDepositAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="activateAccountGroupId != null" >
+        activate_account_group_id = #{activateAccountGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="activateCountAllAccount != null" >
+        activate_count_all_account = #{activateCountAllAccount,jdbcType=BIT},
+      </if>
+      <if test="upgradeAccountGroupId != null" >
+        upgrade_account_group_id = #{upgradeAccountGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="upgradeTotalDepositCurrency != null" >
+        upgrade_total_deposit_currency = #{upgradeTotalDepositCurrency,jdbcType=CHAR},
+      </if>
+      <if test="upgradeTotalDepositAmount != null" >
+        upgrade_total_deposit_amount = #{upgradeTotalDepositAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="upgradeCountAllAccount != null" >
+        upgrade_count_all_account = #{upgradeCountAllAccount,jdbcType=BIT},
+      </if>
+      <if test="downgradeAccountGroupId != null" >
+        downgrade_account_group_id = #{downgradeAccountGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="useCompanySetting != null" >
+        use_company_setting = #{useCompanySetting,jdbcType=BIT},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp,jdbcType=CHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo,jdbcType=INTEGER},
+      </if>
+      <if test="tradeMode != null" >
+        trade_mode = #{tradeMode,jdbcType=CHAR},
+      </if>
+      <if test="checkTradeMode != null" >
+        check_trade_mode = #{checkTradeMode,jdbcType=CHAR},
+      </if>
+      <if test="checkHoldPosition != null" >
+        check_hold_position = #{checkHoldPosition,jdbcType=CHAR},
+      </if>
+      <if test="marginCreditRatio != null" >
+        margin_credit_ratio = #{marginCreditRatio,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="findObject" parameterType="Gts2AccountGroup" resultType="Gts2AccountGroup">
+  	select * from t_account_group_${env}
+	<where>
+		<if test="id != null">
+			id = #{id}
+		</if>
+	</where>
+  </select>
+</mapper>

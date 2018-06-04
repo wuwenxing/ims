@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<configuration status="off" monitorInterval="1800">  
+    <properties>  
+        <property name="LOG_HOME">logs</property>  
+        <property name="SERVICE_NAME">ims-activity-api</property>
+    </properties>  
+    <appenders>
+		<!-- 定义控制台输出 -->
+		<Console name="Console" target="SYSTEM_OUT" follow="true">
+			<PatternLayout
+				pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+		</Console>
+		<!-- 程序员调试日志，每100M一个文件 -->
+		<RollingRandomAccessFile name="DevLog"
+			fileName="${LOG_HOME}/${SERVICE_NAME}.log" filePattern="${LOG_HOME}/${SERVICE_NAME}.%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout
+				pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+			<SizeBasedTriggeringPolicy size="100MB" />
+		</RollingRandomAccessFile>
+		<!-- <Async name="async-devlog">
+			<AppenderRef ref="DevLog" />
+		</Async> -->
+	</appenders>
+	<loggers>
+		<!-- Root Logger -->
+		<logger name="org.slf4j" level="INFO" />
+		<logger name="com.alibaba.dubbo" level="WARN" />
+		<logger name="com.alibaba.druid" level="WARN" />
+		<logger name="org.springframework" level="INFO" />
+		<logger name="org.apache.zookeeper" level="INFO" />
+		<logger name="org.springframework.web" level="INFO" />
+		<asyncRoot  level="INFO" includeLocation="true">
+			<appender-ref ref="Console" />
+			<appender-ref ref="DevLog" />
+		</asyncRoot >
+	</loggers>
+</configuration>  

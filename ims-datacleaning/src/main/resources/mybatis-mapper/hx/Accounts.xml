@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.datacleaning.dao.inf.hx.AccountsDao" >
+  <resultMap id="BaseResultMap" type="Accounts" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="members_id" property="membersId" jdbcType="INTEGER" />
+    <result column="platform" property="platform" jdbcType="CHAR" />
+    <result column="channel" property="channel" jdbcType="CHAR" />
+    <result column="login" property="login" jdbcType="VARCHAR" />
+    <result column="order" property="order" jdbcType="VARCHAR" />
+    <result column="paysn" property="paysn" jdbcType="VARCHAR" />
+    <result column="payorigin" property="payorigin" jdbcType="CHAR" />
+    <result column="paymode" property="paymode" jdbcType="CHAR" />
+    <result column="paycard" property="paycard" jdbcType="CHAR" />
+    <result column="paybank" property="paybank" jdbcType="CHAR" />
+    <result column="payaddr" property="payaddr" jdbcType="VARCHAR" />
+    <result column="payname" property="payname" jdbcType="CHAR" />
+    <result column="payno" property="payno" jdbcType="CHAR" />
+    <result column="paycurrency" property="paycurrency" jdbcType="CHAR" />
+    <result column="CNY" property="cny" jdbcType="REAL" />
+    <result column="HKD" property="hkd" jdbcType="REAL" />
+    <result column="USD" property="usd" jdbcType="REAL" />
+    <result column="USD_CNY" property="usdCny" jdbcType="REAL" />
+    <result column="CNY_USD" property="cnyUsd" jdbcType="REAL" />
+    <result column="USD_HKD" property="usdHkd" jdbcType="REAL" />
+    <result column="HKD_USD" property="hkdUsd" jdbcType="REAL" />
+    <result column="HKD_CNY" property="hkdCny" jdbcType="REAL" />
+    <result column="CNY_HKD" property="cnyHkd" jdbcType="REAL" />
+    <result column="fee" property="fee" jdbcType="REAL" />
+    <result column="paystatus" property="paystatus" jdbcType="CHAR" />
+    <result column="paytime" property="paytime" jdbcType="INTEGER" />
+    <result column="ordertime" property="ordertime" jdbcType="INTEGER" />
+    <result column="deposit_time" property="depositTime" jdbcType="TIMESTAMP" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+    <result column="first_deposit" property="firstDeposit" jdbcType="VARCHAR" />
+  </resultMap>
+  
+ 
+  <sql id="Base_Column_List" >
+    id, members_id, platform, channel, login, `order`, paysn, payorigin, paymode, paycard, 
+    paybank, payaddr, payname, payno, paycurrency, CNY, HKD, USD, USD_CNY, CNY_USD, USD_HKD, 
+    HKD_USD, HKD_CNY, CNY_HKD, fee, paystatus, paytime, ordertime, deposit_time, operator, 
+    description, ctime, mtime
+  </sql>
+  <select id="select" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    	<include refid="Base_Column_List" />
+    from 
+    	accounts a
+    where 
+		platform='MT4'
+		and paystatus in ('入金','成功')
+		<if test="lastUpdateDateBegin!=null and lastUpdateDateEnd!=null">
+		   	and (deposit_time between #{lastUpdateDateBegin} and #{lastUpdateDateEnd} or 
+		   		mtime  between #{lastUpdateDateBegin} and #{lastUpdateDateEnd})
+		</if>
+		<if test="lastUpdateDate != null" >
+	    	and (deposit_time &gt;= #{lastUpdateDate} or mtime &gt;= #{lastUpdateDate} )
+		</if>
+  </select>
+ 
+</mapper>

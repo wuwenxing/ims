@@ -1,0 +1,10 @@
+.layout-2 ,.layout-3{
+  .layui-btn {
+    &.show{
+      display: inline-block;
+    }
+    &.hide{
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ImsPrizeRecordExtDao" >
+  <insert id="save" parameterType="ActPrizeRecordExt" >
+    insert into ims_prize_record_ext_${actNo} (id, record_number,task_id,task_items_id,task_group,
+      <!-- settlement_time, -->receive_trade_id,receive_finish_time,withdrawal_start_trade_id,withdrawal_start_time,need_trade_lots,finished_trade_lots,release_type,
+      release_finish,create_date, create_ip, create_user, delete_flag, 
+      enable_flag, update_date, update_ip, update_user, version_no, company_id)
+    values (#{id},#{recordNumber},#{taskId},#{taskItemsId},#{taskGroup},
+      <!-- #{settlementTime,jdbcType=TIMESTAMP}, --> #{receiveTradeId}, #{receiveFinishTime,jdbcType=TIMESTAMP},#{withdrawalStartTradeId},#{withdrawalStartTime}, #{needTradeLots}, #{finishedTradeLots},#{releaseType},
+      #{releaseFinish},#{createDate,jdbcType=TIMESTAMP}, #{createIp,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
+      #{enableFlag,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateIp,jdbcType=VARCHAR}, 
+      #{updateUser,jdbcType=VARCHAR}, #{versionNo,jdbcType=BIGINT}, #{companyId,jdbcType=BIGINT}
+      )
+  </insert>
+ 
+  <update id="updateByRecordNumber" parameterType="ActPrizeRecordExt" >
+    update ims_prize_record_ext_${actNo}
+    <set >
+      <if test="needTradeLots!=null">
+      	need_trade_lots=#{needTradeLots},
+      </if>
+      <if test="taskId!=null">
+      	task_id=#{taskId},
+      </if>
+      <if test="taskItemsId!=null">
+      	task_items_id=#{taskItemsId},
+      </if>
+      <if test="withdrawalStartTime">
+      	withdrawal_start_time=#{withdrawalStartTime},
+      </if>
+      <if test="releaseType">
+      	release_type=#{releaseType},
+      </if>
+      
+      
+      <if test="dealNumber != null and dealNumber !='' " >
+        deal_number = #{dealNumber},
+      </if>
+      <if test="finishedTradeLots != null" >
+        finished_trade_lots = #{finishedTradeLots},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+     <!-- <if test="dealStartTime != null" >
+        deal_start_time = #{dealStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealEndTime != null" >
+        deal_end_time = #{dealEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null" >
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if> -->
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseFinish!=null">
+      	release_finish = #{releaseFinish},
+      </if>
+      <if test="finishedLotsTradeId!=null">
+      	finished_lots_trade_id = #{finishedLotsTradeId},
+      </if>
+      <if test="finishedLotsTradeTime!=null">
+      	finished_lots_trade_time = #{finishedLotsTradeTime},
+      </if>
+      <if test="releasedBonus!=null">
+      	released_bonus = #{releasedBonus},
+      </if>
+      <if test="groupRelease!=null">
+      	group_release = #{groupRelease},
+      </if>
+     <!--  <if test="settlementTime!=null">
+      	settlement_time = #{settlementTime},
+      </if> -->
+      <if test="cumulativeTradeId!=null">
+      	cumulative_trade_id = #{cumulativeTradeId}
+      </if>
+    </set>
+    where record_number = #{recordNumber}
+  </update>
+  
+  <update id="updateBatchByDealNumbers" parameterType="ActPrizeRecordExt" >
+    update ims_prize_record_ext_${actNo}
+    <set >
+    	<if test="releaseFinish!=null">
+    		 release_finish=#{releaseFinish},
+    	</if>
+       <if test="updateDate != null" >
+       		update_date = #{updateDate,jdbcType=TIMESTAMP},
+      	</if>
+    </set>
+    where deal_number in
+    <foreach item="item" index="index" collection="dealNumbers"  open="(" separator="," close=")">  
+		#{item}  
+	</foreach>	
+  </update>
+  
+  <update id="updateBatchByRecordNumbers" parameterType="ActPrizeRecordExt" >
+    update ims_prize_record_ext_${actNo}
+    <set >
+    	<if test="releaseFinish!=null">
+    		 release_finish=#{releaseFinish},
+    	</if>
+       <if test="updateDate != null" >
+       		update_date = #{updateDate,jdbcType=TIMESTAMP},
+      	</if>
+      	 <if test="settlementTime != null" >
+       		settlement_time = #{settlementTime,jdbcType=TIMESTAMP},
+      	</if>
+    </set>
+    where record_number in
+    <foreach item="item" index="index" collection="recordNumbers"  open="(" separator="," close=")">  
+		#{item}  
+	</foreach>	
+  </update>
+
+  <update id="updateBatchSettlementByAccountNoAndActPeriods" parameterType="VActPrizeRecord" >
+  	update ims_prize_record_ext_${actNo} a,
+	 	act_prize_record_${actNo} b 
+	<set>
+    	<if test="releaseFinish!=null">
+    		a.release_finish=#{releaseFinish},
+    	</if>
+       <if test="updateDate != null" >
+       		a.update_date = #{updateDate,jdbcType=TIMESTAMP},
+      	</if>
+      	 <if test="settlementTime != null" >
+       		a.settlement_time = #{settlementTime,jdbcType=TIMESTAMP},
+      	</if>
+    </set>
+	where
+		a.record_number = b.record_number
+		and b.activity_periods=#{activityPeriods} 
+		and b.account_no=#{accountNo} 
+		and b.guest_platform=#{guestPlatForm}
+  </update>
+    
+  <update id="updateBatchSettlementTime" parameterType="java.util.Map">
+  	update ims_prize_record_ext_${actNo} a 
+      set a.settlement_time=#{settlementTime}  where a.settlement_time is null 
+        and exists (select b.record_number from act_prize_record_${actNo} b where  b.activity_periods=#{activityPeriods}
+	    and b.account_no=#{accountNo} and b.guest_platForm=#{platform} and a.record_number =b.record_number ) 
+  </update>
+   
+   <update id="updateBatchFlagAccountWithdrawalStart" parameterType="java.util.Map">
+    update ims_prize_record_ext_${actNo} a ,
+	(select max(a1.receive_trade_id) maxTradeId,max(a1.receive_finish_time) maxTime from ims_prize_record_ext_${actNo} a1  
+	 join act_prize_record_${actNo} a2
+	 on a1.task_group=#{taskGroup}  and a1.record_number=a2.record_number and a2.activity_periods=#{activityPeriods} and a2.account_no=#{accountNo} and a2.guest_platForm=#{platform}) b 
+	 set a.withdrawal_start_trade_id = b.maxTradeId,a.withdrawal_start_time=b.maxTime  
+	 where  a.need_trade_lots is not null  and a.task_group=#{taskGroup} and 
+	    exists (select b.record_number from act_prize_record_${companyCode} b where  b.activity_periods=#{activityPeriods}
+	    and b.account_no=#{accountNo} and b.guest_platForm=#{platform} and a.record_number=b.record_number) 
+  </update>
+   <update id="updateTaskLastRecordReleaseType" parameterType="java.util.Map">
+      update ims_prize_record_ext_${actNo} rExt set rExt.release_type = 4
+      where 
+         rExt.need_trade_lots is not null and rExt.need_trade_lots &gt;=0 and rExt.release_type = 3
+         and  exists (select c.maxId from 
+			(select max(b.id) maxId from ims_prize_record_ext_${actNo} b 
+			 join act_prize_record_${companyCode} a  on a.record_number=b.record_number and  a.activity_periods=#{activityPeriods} and a.account_no=#{accountNo} and  a.guest_platForm=#{platform} and a.audit_status != #{unAuditStatus} 
+			 join act_task_setting  c on b.task_id = c.id  and c.activity_periods=#{activityPeriods} and  c.task_item_code=#{taskItemCode} 
+			 join act_items_setting d on  a.gift_number=d.gift_number and d.gift_type='withGold'
+			) c where c.maxId  = rExt.id)
+   </update>
+   <update id="updateTaskSettleFlag" parameterType="java.util.Map">
+      update ims_prize_record_ext_${actNo} rExt set rExt.settle_flag = 1
+      where 
+         rExt.release_type in (3,4) 
+         and  exists (select c.id from 
+			(select b.id   from ims_prize_record_ext_${actNo} b 
+			 join act_prize_record_${actNo} a  on a.record_number=b.record_number and  a.activity_periods=#{activityPeriods} and a.account_no=#{accountNo} and  a.guest_platForm=#{platform} and a.audit_status != #{unAuditStatus} 
+			 join act_task_setting  c on b.task_id = c.id  and c.activity_periods=#{activityPeriods} and  c.task_item_code=#{taskItemCode} 
+			 join act_items_setting d on  a.gift_number=d.gift_number and d.gift_type='withGold'
+			) c where c.id  = rExt.id)
+   </update>
+  <select id="getAccountTaskLotsByTaskItemCode"  parameterType="java.util.Map" resultType="java.math.BigDecimal" >
+     select  round(sum(rExt.need_trade_lots),4) from ims_prize_record_ext_${actNo} rExt ,act_prize_record_${actNo}  r where r.record_number=rExt.record_number and 
+     r.activity_periods=#{activityPeriods}  and r.account_no=#{accountNo}  and r.guest_platForm=#{platform} and rExt.need_trade_lots is not null
+      and  EXISTS (select id from act_task_setting where act_task_setting.activity_periods=#{activityPeriods} and  act_task_setting.task_item_code=#{taskItemCode} and rExt.task_id = act_task_setting.id)
+      and    r.audit_status != #{unAuditStatus} and r.delete_flag != 'Y' and r.enable_flag = 'Y'
+      and EXISTS (select id from act_items_setting where r.gift_number=act_items_setting.gift_number and act_items_setting.gift_type='withGold')
+  </select>
+  
+   <select id="getAccountTaskLotsByTaskId"  parameterType="java.util.Map" resultType="java.math.BigDecimal" >
+     select round(sum(rExt.need_trade_lots),4) from ims_prize_record_ext_${actNo} rExt ,act_prize_record_${actNo}  r where r.record_number=rExt.record_number and 
+     r.activity_periods=#{activityPeriods}  and r.account_no=#{accountNo}  and r.guest_platForm=#{platform} and rExt.need_trade_lots is not null
+     and rExt.task_id=#{taskId}
+     and r.audit_status != #{unAuditStatus} and r.delete_flag != 'Y' and r.enable_flag = 'Y'
+     and EXISTS (select id from act_items_setting where r.gift_number=act_items_setting.gift_number and act_items_setting.gift_type='withGold')
+  </select>
+  
+  <select id="getAccountGiftAmountSumByTaskItemCode"  parameterType="java.util.Map" resultType="java.math.BigDecimal" >
+     select round(sum(r.gift_amount),4) from ims_prize_record_ext_${actNo} rExt ,act_prize_record_${actNo}  r 
+     where r.record_number=rExt.record_number and 
+     r.activity_periods=#{activityPeriods}  and r.account_no=#{accountNo}  and r.guest_platForm=#{platform}  
+     and   r.audit_status != #{unAuditStatus} and r.delete_flag != 'Y' and r.enable_flag = 'Y'  
+     and  EXISTS (select id from act_task_setting where act_task_setting.activity_periods=#{activityPeriods} and  
+     act_task_setting.task_item_code=#{taskItemCode} and rExt.task_id = act_task_setting.id)
+     and EXISTS (select id from act_items_setting where r.gift_number=act_items_setting.gift_number
+      and act_items_setting.gift_type=#{giftType})
+     
+  </select>
+  
+  <select id="getAccountIssueAmountSumByTaskItemCode"  parameterType="java.util.Map" resultType="java.math.BigDecimal" >
+     select round(sum(r.issue_amount),4) from ims_prize_record_ext_${actNo} rExt ,act_prize_record_${actNo}  r 
+     where r.record_number=rExt.record_number and 
+     r.activity_periods=#{activityPeriods}  and r.account_no=#{accountNo}  and r.guest_platForm=#{platform}  
+     and   r.audit_status != #{unAuditStatus} and r.delete_flag != 'Y' and r.enable_flag = 'Y'  
+     and  EXISTS (select id from act_task_setting where act_task_setting.activity_periods=#{activityPeriods} and  
+     act_task_setting.task_item_code=#{taskItemCode} and rExt.task_id = act_task_setting.id)
+     and EXISTS (select id from act_items_setting where r.gift_number=act_items_setting.gift_number
+      and act_items_setting.gift_type=#{giftType})
+  </select>
+  
+  <select id="getActPrizeRecordExt" parameterType="java.lang.String" resultType="ActPrizeRecordExt">
+  	select * from ims_prize_record_ext_${actNo}
+  	where record_number = #{recordNumber}
+  </select>
+  
+  
+  <update id="updateBatchByAccountPeriodsReleaseType" parameterType="VActPrizeRecord" >
+  	update ims_prize_record_ext_${actNo} a,
+	 	act_prize_record_${companyCode} b 
+	<set>
+    	<if test="settleFlag!=null">
+    		 a.settle_flag=#{settleFlag},
+    	</if>
+       <if test="updateDate != null" >
+       		a.update_date = #{updateDate,jdbcType=TIMESTAMP},
+      	</if>
+    </set>
+	where
+		a.record_number = b.record_number
+		and b.activity_periods=#{activityPeriods} 
+		and b.account_no=#{accountNo} 
+		and b.guest_platform=#{guestPlatForm}
+    	and a.release_type in (3,4)
+  </update>
+  
+  <select id="findReadyReleaseFinishRecord" resultType="ActPrizeRecordExt" parameterType="java.util.Map">
+  	select * from ims_prize_record_ext_${actNo} where release_finish=0 and settlement_time &lt;=date_add(now(), interval -${delayDay} day) order by id asc limit 20
+  </select>
+
+</mapper>

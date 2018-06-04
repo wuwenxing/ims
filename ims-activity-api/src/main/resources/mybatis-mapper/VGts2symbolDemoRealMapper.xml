@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper 
+	namespace="com.gwghk.ims.activity.dao.inf.VGts2symbolDemoRealDao">
+	<resultMap id="BaseResultMap" type="Gts2symbolDemoRealWrapper">
+		<result column="code" property="code"  />
+		<result column="name" property="name"/>
+		<result column="type" property="type"/>
+		<result column="typeName" property="typeName"/>
+	    <result column="isDemo" property="isDemo"   />
+	    <result column="companyid" property="companyId" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		 code,name,type,typeName,companyid
+	</sql>
+	  
+	<select id="getGts2symbolDemoReals" resultMap="BaseResultMap" parameterType="com.gwghk.ims.common.vo.activity.Gts2symbolDemoRealVO" >
+      select distinct
+       <include refid="Base_Column_List" />
+      from v_gts2symbol_demo_real
+      where 1 =1 
+      <if test="isDemo != null" >
+        and isDemo = #{isDemo}
+      </if>
+      <if test="companyId != null  and companyId != ''" >
+        and companyid = #{companyId}
+      </if>
+         order by type,name desc
+   </select>
+ 
+</mapper>

@@ -1,0 +1,104 @@
+/* @wayne : 首页样式 */
+@charset "utf-8";
+
+.index-body {
+	min-width: 0px;
+/* 	background: url(../img/icons/overview_bg.png) 0px 0px repeat-y */
+/* 		rgb(255, 255, 255); */
+}
+
+.main-top {
+	height: 50px;
+	background-color: #337ab7;
+	color: #FFF;
+	font-weight: bold;
+	position: fixed;
+	width: 100%;
+	min-width: 0px;
+	z-index: 9999;
+}
+.main-top .icon-bar {
+	background-color: #fff;
+}
+.main-top .navbar-header a, .main-top .navbar-header a:HOVER {
+	color: #FFF;
+}
+.main-top .logo-container {
+	position: relative;
+	float: left;
+	background: url(../img/logo_1.png) no-repeat center;
+	width: 200px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	padding-left: 50px;
+	font-size: 16px;
+}
+.main-top .nav-container{
+	background-color: #337ab7;
+}
+.main-top .nav-container span.nav-text {
+	padding-left: 3px;
+}
+.main-top .nav-container li>a {
+	color: #FFF;
+	font-weight: bold;
+}
+.main-top .nav-container li>a:HOVER {
+	color: #337ab7;
+	background-color: #FFF;
+	font-weight: bold;
+}
+.main-top .nav-container li.active>a {
+	color: #337ab7;
+	background-color: #FFF;
+	font-weight: bold;
+}
+.main-top .dropdown-menu {
+    min-width: 120px;
+    background-color: #337ab7;
+}
+
+
+.main-sidebar {
+	padding: 50px 10px 10px 0px;
+}
+.main-sidebar .left-side {
+	width: 200px;
+	float: left;
+}
+.main-sidebar .right-side {
+	margin-left: 200px;
+}
+.main-sidebar .left-side span.nav-text {
+	padding-left: 3px;
+	display: inline-block;
+}
+.main-sidebar .left-side li>a {
+	color: #333;
+	font-weight: bold;
+	border-radius: 0px;
+	margin-top: 0px;
+}
+.main-sidebar .left-side li.leftMenu>a:HOVER {
+	color: #fff;
+	background-color: #337ab7;
+	font-weight: bold;
+}
+.main-sidebar .left-side li {
+	margin-top: 0px;
+    border: 1px solid rgb(224, 224, 224);
+    border-left: 0px solid rgb(224, 224, 224);
+	margin-bottom: -1px;
+}
+.main-sidebar .left-side li.leftSubMenu {
+	font-size: 12px;
+    border-left: 0px solid rgb(224, 224, 224);
+    border-right: 0px solid rgb(224, 224, 224);
+}
+
+.panel-body {
+    padding: 0px 0px 0px 15px;
+}
+

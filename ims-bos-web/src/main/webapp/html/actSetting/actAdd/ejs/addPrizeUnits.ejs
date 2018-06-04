@@ -1,0 +1,99 @@
+<% var params = paramsData.params; %>
+<% params.forEach(function(itm,idx){ %>
+  <div class="layui-inline prize-unit layui-col-md3 layui-row <%if(idx%3 != 0){%> layui-col-md-offset1 <%}%>"  >
+        <%if(letters[itm.proName]){%>   
+            <label for="" class="layui-form-grid-label layui-col-md5"><%=letters[itm.proName]%></label>
+        <%}else if(itm.label){%>
+            <label for="" class="layui-form-grid-label layui-col-md5"><%=itm.label%></label>
+        <%}else{%>
+            <%if(paramsData.itemType == "interface" && itm.proName == "itemParamVal"){%>
+                <label for="" class="layui-form-grid-label layui-col-md5">公式</label>
+            <%}else if(paramsData.itemType == "withGold" && itm.proName == "itemParamVal"){%>
+                <label for="" class="layui-form-grid-label layui-col-md5">奖励额度</label>
+            <%}else if(paramsData.itemType == "analogCoin" && itm.proName == "itemParamVal"){%>
+                <label for="" class="layui-form-grid-label layui-col-md5">模拟币</label>
+            <%}else if(paramsData.itemType == "tokenCoin" && itm.proName == "itemParamVal"){%>
+                <label for="" class="layui-form-grid-label layui-col-md5">代币</label>
+            <%}%>
+        <%}%>
+        <div class="layui-inline <%if(itm.proName != 'infParamX'){%> layui-col-md7 <%}else{%> layui-col-md12 <%}%> ">
+            <%if(itm.inputType == 'select'){%>
+                <select name="<%=itm.proName%>" id="">
+                    <option value="" selected>--请选择--</option>
+                    <%if(itm.isDynamict && dynamicList[itm.dynamicOptionName]){%>
+                        <%dynamicList[itm.dynamicOptionName].forEach(function(dyItem,dyIndex){%>
+                            <option value="<%=dyItem.key%>"><%=dyItem.title%></option>
+                        <%})%>
+                    <%}%>
+                </select>
+            <%}else if(itm.inputType == 'label') {%>
+                <div class="layui-inline <%=itm.proName%>"><%=itm.desc%></div>
+            <%}else{%>
+                <input type="text" class="layui-input" 
+                    name="<%=itm.proName%>" 
+                    <%if(itm.required){%> 
+                        lay-verify='required|<%=itm.validType%>' 
+                    <%}else{%>
+                        lay-verify='<%=itm.validType%>' 
+                    <%}%>
+                    <%if(itm.proName == "itemParamVal" && itemPrice && (itemType == 'withGold' || itemType == 'tokenCoin' || itemType == 'analogCoin')){%>
+                        value = "<%=itemPrice%>" disabled
+                    <%}%>
+                >
+            <%}%>
+            <%if(itm.dynamicUnit){%>
+                <%if(prizeCategory){%>
+                    <%if(itm.paramUnitMap[prizeCategory].inputType == "label"){%>
+                        <div class="append layui-inline <%=itm.paramUnitMap[prizeCategory].unitType%>" ><%=dynamicList.itemsUnitMap[itm.paramUnitMap[prizeCategory].defaultVal]%></div>
+                    <%}else if(itm.paramUnitMap[prizeCategory].inputType == 'select'){%>
+                        <div class="appendSelect layui-inline">
+                            <select name="<%=itm.paramUnitProName%>" id="">
+                                <%if(itm.paramUnitMap[prizeCategory].options){%>
+                                <%itm.paramUnitMap[prizeCategory].options.forEach(function(dyItem,dyIndex){%>
+                                    <option value="<%=dyItem.key%>"><%=dyItem.title%></option>
+                                <%})%>
+                                <%}%>
+                            </select>
+                        </div>
+                    <%}else{%>
+                        <div class="append layui-inline"><%=dynamicList.itemsUnitMap[itm.paramUnitMap[prizeCategory].defaultVal]%></div>
+                    <%}%>
+                <%}else{%>
+                        <div class="layui-inline appendSelect">
+                            <select name="<%=itm.paramUnitProName%>">
+                                <%for(ppitm in itm.paramUnitMap){%>
+                                    <option value="<%=ppitm%>" class="<%=itm.paramUnitMap[ppitm].unitType%>"><%=dynamicList.itemsUnitMap[itm.paramUnitMap[ppitm].defaultVal]%></option>
+                                <%}%>
+                            </select>
+                        </div>
+                <%}%>
+                <%}else{%>
+                    <%if(itm.paramUnit){%>
+                        <%if(itm.paramUnit.inputType == 'select'){%>
+                            <div class="layui-inline appendSelect">
+                                <select name="" id="">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        <%}else if(itm.paramUnit.inputType == 'label'){%>
+                            <div class="append layui-inline <%=itm.paramUnit.unitType%>"><%=dynamicList.itemsUnitMap[itm.paramUnit.defaultVal]%></div>
+                            <input type="hidden" class="<%=itm.paramUnit.unitType%>"  value="<%=itm.paramUnit.defaultVal%>" name="<%=itm.paramUnit.proName%>">
+                        <%}else{%>
+                            <%if(itm.paramUnit.isDynamict){%>
+                                <div class="append layui-inline <%=itm.paramUnit.unitType%>"><%=dynamicList.itemsUnitMap[itm.paramUnit.dynamicVal]%></div>
+                                <input type="hidden" class="<%=itm.paramUnit.unitType%>" value="<%=itm.paramUnit.dynamicVal%>" name="<%=itm.paramUnit.proName%>">
+                            <%}else{%>
+                                <div class="append layui-inline <%=itm.paramUnit.unitType%>"><%=dynamicList.itemsUnitMap[itm.paramUnit.defaultVal]%></div>
+                                <input type="hidden" class="<%=itm.paramUnit.unitType%>"  value="<%=itm.paramUnit.defaultVal%>" name="<%=itm.paramUnit.proName%>">
+                            <%}%>
+                        <%}%>
+                    <%}else{%>
+        
+                    <%}%>
+                <%}%>
+        </div>
+  </div>
+<%})%>
+<div class="layui-inline layui-col-md3 layui-col-md-offset1">
+    <button class="layui-btn layui-btn-danger del-prize">删除物品</button>
+</div>

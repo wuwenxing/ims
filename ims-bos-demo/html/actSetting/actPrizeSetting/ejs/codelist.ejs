@@ -1,0 +1,46 @@
+<form action="" class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">物品编号:</label>
+            <input type="text" class="layui-input" value="FX_201707051804">
+        </div>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">物品名称:</label>
+            <input type="text" class="layui-input" value="FX_京东E卡50">            
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">&nbsp;&nbsp;&nbsp;&nbsp;状态:</label>
+        </div>
+        <div class="layui-inline">
+            <select name="" id="" class="layui-select">
+                <option value="">--请选择--</option>
+                <option value="Y" selected>启用</option>
+                <option value="N">禁用</option>
+                <option value="invalid">无效</option>
+            </select>
+        </div>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">上传串码:</label>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn layui-btn-sm">选择excel文件</button>
+        </div>
+    </div>
+    <div class="layui-form-item" style="margin-bottom:0;margin-top:20px;">
+        <div class="layui-inline">
+            <button class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe642;</i>修改</button>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn layui-btn-danger layui-btn-sm"><i class="layui-icon">&#xe640;</i>删除</button>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe61d;</i>导出</button>
+        </div>
+    </div>
+    <div class="tab">
+        <table id="codeTab" lay-filter="codeTab"></table>
+    </div>
+
+</form>

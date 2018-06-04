@@ -1,0 +1,33 @@
+<form action="" class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">账号</label>
+        </div>
+        <div class="layui-inline"><%=userName%></div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label">原密码:<span class="mustInput"></span></label>
+        </div>
+        <div class="layui-inline">
+            <input type="password" class="layui-input" name="oldPassword" lay-verify="required|password" lay-verType="tips">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label" >新密码<span class="mustInput"></span></label>
+        </div>
+        <div class="layui-inline">
+            <input type="password" class="layui-input" id="newPassword" name="password" lay-verify="required|password|newpassword" lay-verType="tips">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label" >重新输入密码<span class="mustInput"></span></label>
+        </div>
+        <div class="layui-inline">
+            <input type="password" class="layui-input" id="newrePassword" name="password" lay-verify="required|password|newrepassword"  lay-verType="tips">
+        </div>
+    </div>
+    <button class="layui-btn node-modify" style="display:none;" lay-filter="modifyPwd" lay-submit></button>
+</form>

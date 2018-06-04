@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActMessageRecordDao" >
+  <select id="findListByMap" resultType="ActMessageRecord" parameterType="java.util.Map" >
+    select * from act_message_record where companyId = #{companyId}
+    <if test="msgType != null and msgType != ''" >
+		and msg_type = #{msgType}
+    </if>
+    <if test="msgCode != null and msgCode != ''" >
+		and msg_code = #{msgCode}
+    </if>
+    <if test="msgStatus != null and msgStatus != ''" >
+		and msg_status = #{msgStatus}
+    </if>
+  </select>
+  <select id="findObject" resultType="ActMessageRecord" parameterType="java.lang.Integer" >
+    select * from act_message_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  	<delete id="deleteBatch">
+		delete from act_message_record where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from act_message_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="save" parameterType="ActMessageRecord" >
+    insert into act_message_record (id, msg_type, msg_code, 
+      msg_status, create_user, create_ip, 
+      create_date, update_user, update_ip, 
+      update_date, version_no, delete_flag, 
+      enable_flag, company_id)
+    values (#{id,jdbcType=INTEGER}, #{msgType,jdbcType=VARCHAR}, #{msgCode,jdbcType=INTEGER}, 
+      #{msgStatus,jdbcType=BIT}, #{createUser,jdbcType=VARCHAR}, #{createIp,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateIp,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{versionNo,jdbcType=BIGINT}, #{deleteFlag,jdbcType=VARCHAR}, 
+      #{enableFlag,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER})
+  </insert>
+  <update id="update" parameterType="ActMessageRecord" >
+    update act_message_record
+    set msg_type = #{msgType,jdbcType=VARCHAR},
+      msg_code = #{msgCode,jdbcType=INTEGER},
+      msg_status = #{msgStatus,jdbcType=BIT},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_ip = #{updateIp,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      version_no = #{versionNo,jdbcType=BIGINT},
+      delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

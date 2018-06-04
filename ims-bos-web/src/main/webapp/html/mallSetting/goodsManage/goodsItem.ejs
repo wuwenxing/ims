@@ -1,0 +1,206 @@
+<% if(typeof(data.data.id)!="undefined"){ %>
+<form action="" class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>活动名称</span></label>
+            <div class="layui-inline">
+                <select name="activityPeriods" id="activityPeriods" lay-verify="required" lay-verType="tips" lay-filter="activityPeriods" disabled=disabled>
+                        <%acts.forEach(function(item,index){%>
+                        <option value="<%=item.activityPeriods%>"<%if(item.activityPeriods==data.data.activityPeriods){%>selected<%}%>><%=item.activityName%></option>
+                    <%})%>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>任务名称</span></label>
+                <div class="layui-inline">
+                    <select name="taskSettingId" id="taskSettingId" lay-filter="taskSettingId"  disabled=disabled>
+                        <option value='<%=data.data.taskSettingId%>' selected><%=data.data.taskSettingName%></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品名称</span></label>
+            <div class="layui-inline">
+                <select name="refActItemsCode" id="refActItemsCode" lay-verify="required" lay-verType="tips"   disabled=disabled lay-filter="refActItemsCode">
+                    <option value='<%=data.data.itemName%>' selected><%=data.data.itemName%></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>商品显示名称</span></label>
+            <div class="layui-inline">
+                <input type="text" name="mallItemsName" lay-verify="required" lay-verType="tips" id="mallItemsName" value="<%=data.data.mallItemsName%>" class="layui-input" placeholder="" />
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品数量</span></label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" readonly=readonly name="mallItemsNum"  placeholder="" value="<%=data.data.mallItemsNum %>">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><span>物品状态</span></label>
+            <div class="layui-inline">
+                <select name="enableFlag" id="">
+                        <option <%if(data.data.enableFlag == 'Y'){%> selected <%}%>  value="Y" >启用</option>
+                        <option <%if(data.data.enableFlag == 'N'){%> selected <%}%> value="N" >禁用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品有效期</span></label>
+            <div class="layui-inline">
+                <input type="text" name="startDate" class="layui-input"  disabled=disabled id="startDate" value="<%=data.data.startDate %>">
+            </div>
+            <div class="layui-inline">-</div>
+            <div class="layui-inline">
+                <input type="text" name="endDate" class="layui-input" disabled=disabled id="endDate" value="<%=data.data.startDate %>">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>商品图片</span></label>
+            <% if(data.operate!='detail'){%>
+                <div class="layui-inline up-btn">
+                    <button type="button" class="layui-btn" id="upload">
+                        <i class="layui-icon">&#xe67c;</i>上传图片
+                    </button>
+                </div>
+            <%}%>
+            <% if(data.data.imgUrl){%>
+                <div class='layui-inline layui-show' id='div_prev' title=''><img   src='<%=data.data.imgUrl%>' width="150"></div>
+            <% }else{ %>
+                <div class='layui-inline' id='div_prev' title=''><img  src='' width="150"></div>
+            <% } %>
+            <input type="hidden" name="imgUrl"  value="<%=data.data.imgUrl%>">
+        </div>  
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline flex">
+            <label for="" class="layui-form-label flex flex-align-items"><span>商品描述</span></label>
+            <div class="layui-inline textarea flex-item">
+                <textarea name="mallItemsDesc" id="mallItemsDesc" class="layui-textarea"><%= data.data.mallItemsDesc %></textarea>
+            </div>
+        </div>
+        <input type="hidden" name="id" value="<%=data.data.id %>"/>
+    </div>
+    <div class="layui-form-item no-mb">
+        <div class="layui-inline">
+            <label for="" class="layui-form-label flex flex-align-items"><span class="required">*</span><span>上架时间</span></label>
+            <div class="layui-inline">            
+                 <input type="text" name="publishDate" lay-verify="required" lay-verType="tips" class="layui-input"   id="publishDate" value="<%=data.data.publishDate %>">
+            </div>
+        </div>
+    </div>
+    <button class="layui-btn add" style="display:none;" lay-submit lay-filter="add"></button>
+</form>
+<%}else{%>
+    <form action="" class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>活动名称</span></label>
+                <div class="layui-inline">
+                    <select name="activityPeriods" id="activityPeriods" lay-filter="activityPeriods" lay-verify="required" lay-verType="tips">
+                        <option value="">--请选择--</option>
+                        <%acts.forEach(function(item,index){%>
+                            <option value="<%=item.activityPeriods%>"><%=item.activityName%></option>
+                        <%})%>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>任务名称</span></label>
+                <div class="layui-inline">
+                    <select name="taskSettingId" id="taskSettingId" lay-verify="required" lay-verType="tips" lay-filter="taskSettingId">
+                        <option value=''>--请选择--</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品名称</span></label>
+                <div class="layui-inline">
+                    <select name="refActItemsCode" id="refActItemsCode"  lay-verify="required" lay-verType="tips" lay-filter="refActItemsCode">
+                        <option value=''>--请选择--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>商品显示名称</span></label>
+                <div class="layui-inline">
+                    <input type="text" name="mallItemsName"  name="mallItemsNum" lay-verify="required" lay-verType="tips"  id="mallItemsName" class="layui-input" placeholder="" >
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品数量</span></label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" disabled=disabled id="mallItemsNum" name="mallItemsNum" placeholder="" value="<%=data.data.mallItemsNum %>">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><span>物品状态</span></label>
+                <div class="layui-inline">
+                    <select name="enableFlag" id="">
+                        <option value="">--请选择--</option>
+                        <option value="Y" selected>启用</option>
+                        <option value="N">禁用</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>物品有效期</span></label>
+                <div class="layui-inline">
+                    <input type="text" name="startDate" class="layui-input"  disabled=disabled id="startDate" value="<%=data.startDate %>">
+                </div>
+                <div class="layui-inline">-</div>
+                <div class="layui-inline">
+                    <input type="text" name="endDate" class="layui-input" disabled=disabled id="endDate" value="<%=data.startDate %>">
+                </div>
+            </div>
+        </div>    
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>商品图片</span></label>
+                <div class="layui-inline up-btn">
+                    <button type="button" class="layui-btn" id="upload">
+                        <i class="layui-icon">&#xe67c;</i>上传图片
+                    </button>
+                </div>
+                <div class='layui-inline' id='div_prev' title=''><img src='' width="150"></div>
+                <input type="hidden" name="imgUrl" >
+            </div>
+        </div>              
+        <div class="layui-form-item">
+            <div class="layui-inline flex">
+                <label for="" class="layui-form-label flex flex-align-items"><span>商品描述</span></label>
+                <div class="layui-inline textarea flex-item">
+                    <textarea name="mallItemsDesc" id="mallItemsDesc" class="layui-textarea"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item no-mb">
+            <div class="layui-inline">
+                <label for="" class="layui-form-label flex flex-align-items"><em class="required">*</em><span>上架时间</span></label>
+                <div class="layui-inline">
+                    <input type="text" name="publishDate" lay-verify="required" lay-verType="tips" id="publishDate" class="layui-input"  value="<%=data.publishDate%>">
+                </div>
+            </div>
+        </div>
+        <button class="layui-btn add" style="display:none;" lay-submit lay-filter="add"></button>
+    </form>
+<%}%>

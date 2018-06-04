@@ -1,0 +1,157 @@
+<%if(type == "view" || type == "edit"){%>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>上级编号</span></label>
+                <div class="layui-inline">
+                    <input type="text" name="parentDictCode" id="parentDictCode" 
+                    <%if(data.dictType == 2){%>value="<%=data.parentDictCode%>"<%}%>   
+                    class="layui-input" disabled>
+                    <input type="hidden" name="dictType" value="<%=data.dictType%>"  />
+                    <input type="hidden" name="dictId" value="<%=data.dictId%>"  />
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>编号</span></label>
+                <div class="layui-inline">
+                    <input type="text" value="<%=data.dictCode%>"   <%=data.disabled%> lay-verify="dictCode" name="dictCode" id="dictCode" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>名称(英文)</span></label>
+                <div class="layui-inline">
+                    <input type="text" value="<%=data.dictNameEn%>"  <%=data.disabled%>  lay-verify="dictNameEn" name="dictNameEn" id="dictNameEn" class="layui-input">                
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>名称(简体)</span></label>
+                <div class="layui-inline">
+                    <input type="text"  value="<%=data.dictNameCn%>" <%=data.disabled%> lay-verify="dictNameCn" name="dictNameCn" id="dictNameCn" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>名称(繁体)</span></label>
+                <div class="layui-inline">
+                    <input type="text" value="<%=data.dictNameTw%>" <%=data.disabled%> <%=data.read%> lay-verify="dictNameTw" name="dictNameTw" id="dictNameTw" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline sort-td">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>排序</span></label>
+                <div class="layui-inline">
+                    <button  <%=data.disabled%> class="layui-btn layui-btn-xs decrease"><i class="layui-icon">&#xe603;</i></button>  
+                    <input type="text" <%=data.disabled%> lay-verify="orderCode" name="orderCode" value="<%=data.orderCode%>" id="orderCode" class="layui-input layui-input-reset">
+                    <button <%=data.disabled%> class="layui-btn layui-btn-xs add"><i class="layui-icon">&#xe602;</i></button>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>状态</span></label>
+                <div class="layui-inline">
+                    <select name="enableFlag" lay-verify="enableFlag" id=""  <%=data.disabled%>>
+                        <option <%if(data.enableFlag == 'Y'){%> selected <%}%>  value="Y" >启用</option>
+                        <option <%if(data.enableFlag == 'N'){%> selected <%}%> value="N" >禁用</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>所属公司</span></label>
+                <div class="layui-inline">
+                    <select name="companyId" id="companyId" <%=data.disabled%> >
+                        <option value="" selected>--共有公司公用--</option>
+                        <% companyList.forEach(function(item, index){ %>
+                            <option value="<%=item.id%>" <%if(item.id==data.companyId){%>selected<%}%>    ><%=item.name%></option>
+                        <%})%>
+                    </select>
+                </div>
+            </div>
+        </div>        
+        <div style="display: none;">
+            <button class="node-submit" lay-submit lay-filter="seeAddRow"></button>
+        </div>
+    </form>
+<%}else{%>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>上级编号</span></label>
+                <div class="layui-inline">
+                    <input type="text" name="parentDictCode" id="parentDictCode" class="layui-input"
+                    <%if(data.dictType == 2){%>value="<%=data.parentDictCode%>"<%}%>   
+                    <%if(data.dictType == 1){%>disabled<%}%>   
+                        >
+                    <input type="hidden" name="dictType" value="<%=data.dictType%>"  />
+                    <input type="hidden" name="dictId" value="<%=data.dictId%>"  />
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>编号</span></label>
+                <div class="layui-inline">
+                    <input type="text" value="<%=data.dictCode%>"  lay-verify="required|dictCode" lay-verType="tips"  name="dictCode" id="dictCode" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>名称(英文)</span></label>
+                <div class="layui-inline">
+                    <input type="text" value="<%=data.dictNameEn%>" lay-verify="required|dictNameEn"  lay-verType="tips" name="dictNameEn" id="dictNameEn" class="layui-input">                    
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>名称(简体)</span></label>
+                <div class="layui-inline">
+                    <input type="text"  value="<%=data.dictNameCn%>"  lay-verify="required|dictNameCn" lay-verType="tips"  name="dictNameCn" id="dictNameCn" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>名称(繁体)</span></label>
+                <div class="layui-inline">
+                    <input type="text"  value="<%=data.dictNameTw%>" lay-verify="required|dictNameTw" lay-verType="tips"  name="dictNameTw" id="dictNameTw" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>排序</span></label>
+                <div class="layui-inline sort-td">
+                    <button class="layui-btn layui-btn-xs decrease"><i class="layui-icon">&#xe603;</i></button>  
+                    <input type="text"  lay-verify="required|orderCode"  lay-verType="tips" name="orderCode" value="1" id="orderCode" class="layui-input layui-input-reset">
+                    <button class="layui-btn layui-btn-xs add"><i class="layui-icon">&#xe602;</i></button>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>状态</span></label>
+                <div class="layui-inline">
+                    <select name="enableFlag" lay-verify="enableFlag" id="" lay-verify="required"  lay-verType="tips" >
+                        <option value="Y" selected>启用</option>
+                        <option value="N" >禁用</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label flex flex-align-items"><em class="required">*</em><span>所属公司</span></label>
+                <div class="layui-inline">
+                    <select name="companyId" id="companyId">
+                        <%companyList.forEach(function(item,index){%>
+                            <option value="<%=item.id%>"><%=item.name%></option>
+                        <%})%>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div style="display: none;">
+            <button class="node-submit" lay-submit lay-filter="seeAddRow"></button>
+        </div>
+    </form>
+<%}%>

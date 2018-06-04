@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>交易记录查询</title>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/iconfont.css">
+    <link rel="stylesheet" href="/css/normalize.min.css">
+    <link rel="stylesheet" href="/css/base.min.css">
+	<link rel="stylesheet" href="/css/layuireset.min.css">
+</head>
+<body>
+    <div class="m-container">
+        <div class="layui-searchPanel">
+            <div class="layui-searchPanel-item">
+                <h2 class="layui-searchPanel-title">
+                    <span>查询条件</span>
+                    <i class="icon-tips"></i>
+                    <span class="tips">查询时，请选择开/平仓！</span>
+                    <span class="tips">查询时，请选择账号类型！</span>
+                    <span class="tips">查询时，请输入交易时间查询！</span>
+                </h2>
+                <div class="layui-searchPanel-content">
+                    <form class="layui-form">
+                        <div class="layui-form-item layui-row">
+                            <div class="layui-col-md3 layui-row">
+                                <div class="search-item layui-col-md10 layui-row">
+                                    <label class="layui-form-grid-label layui-col-md3"><em class="required">*</em>账号</label>
+                                    <div class="layui-col-md9">
+                                        <input type="text" class="layui-input" name="accountNo" lay-verify="required" lay-verType="tips">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md3 layui-row">
+                                <div class="search-item layui-col-md10 layui-row">
+                                    <label class="layui-form-grid-label layui-col-md3">平台</label>
+                                    <div class="layui-col-md9">
+                                        <select name="platform"  id="platform"></select>   
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md3 layui-row">
+                                <div class="search-item layui-col-md10 layui-row">
+                                    <label class="layui-form-grid-label layui-col-md4"><em class="required">*</em><span>开/平仓</span></label>
+                                    <div class="layui-col-md8">
+                                        <select name="tradeType"  id="tradeType" lay-verify="required" lay-verType="tips" >
+                                            <option value="in">开仓</option>
+                                            <option value="out">平仓</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search-btns layui-col-md3 layui-row">
+                                <div class="activeButton layui-col-md10">
+                                    <button class="layui-btn node-search" lay-submit lay-filter="search">查询</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary reset">重置</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-row">
+                            <div class="layui-col-md3 layui-row">
+                                <div class="search-item layui-col-md10 layui-row">
+                                    <label class="layui-form-grid-label layui-col-md4">持仓Id</label>
+                                    <div class="layui-col-md7">
+                                        <input type="text" class="layui-input" name="positionId">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md3 layui-row">
+                                <div class="search-item layui-col-md10 layui-row">
+                                    <label class="layui-form-grid-label layui-col-md3">产品</label>
+                                    <div class="layui-col-md7">
+                                        <input type="text" class="layui-input" name="product">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md3 layui-row">
+                                <div class="search-item layui-col-md10 layui-row">
+                                    <label class="layui-form-grid-label layui-col-md4">
+                                        <em class="required">*</em><span>账号类型</span>
+                                    </label>
+                                    <div class="layui-col-md8">
+                                        <select name="env"  id="env" lay-verify="required" lay-verType="tips" >
+                                            <option value="">--请选择--</option>
+                                            <option value="real">真实账户</option>
+                                            <option value="demo">模拟账户</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                        <div class="layui-form-item layui-row">
+                            <div class="layui-col-md3 layui-row">
+                                <div class="search-item layui-col-md10 layui-row">
+                                    <label class="layui-form-grid-label layui-col-md4"><em class="required">*</em>创建时间</label>
+                                    <div class="layui-col-md7">
+                                        <input type="text" class="layui-input date-input"  name="tradeStartTime" id="tradeStartTime"
+                                        placeholder="yyyy-MM-dd HH:mm:ss" lay-verify="required"  lay-verType="tips">
+                                    </div>
+                                </div>
+                                <div class="layui-col-md2 date-str">至</div>
+                            </div>
+                            <div class="layui-col-md3 layui-row">
+                                <input type="text" class="layui-input date-input end layui-col-md10" 
+                                        name="tradeEndTime" id="tradeEndTime" 
+                                        placeholder="yyyy-MM-dd HH:mm:ss"  
+                                        lay-verify="required"  lay-verType="tips">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="layout-2">
+            <button class="layui-btn layui-btn layui-btn-sm node-refresh"><i class="iconfont icon-refresh"></i><span class="btn-text">刷新</span></button>
+        </div>
+        <div class="layout-3">
+            <table id="data-table" lay-filter="dataTable"></table>
+        </div>
+    </div>
+</body>
+<script src="/js/vendor/jquery-2.0.0.min.js"></script>
+<script src="/js/vendor/ejs_production.js"></script>
+<script src="/js/vendor/parseUrl.js"></script>
+<script src="/js/tools/ajaxInterceptor.js"></script>
+<script src="/js/api/api.js"></script>
+<script src="/js/tools/date.js"></script>
+<script src="/js/tools/act.js"></script>
+<script src="/layui/layui.js"></script>
+<script src="/js/tools/initial.js"></script>
+<script src="./main.js"></script>
+<script src="/js/tools/power.js"></script>
+</html>

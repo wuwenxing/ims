@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+       
+    <!-- <dubbo:application name="ims-activity-api-consumer" />
+	<dubbo:registry protocol="zookeeper" address="${zk.address}" /> -->
+	
+	<dubbo:reference id="seqDubboService" interface="com.gwghk.ims.common.inf.SeqDubboService"
+		check="false" timeout="100000"/>
+	
+	<dubbo:reference id="systemDictDubboService" interface="com.gwghk.ims.common.inf.mis.sys.SystemDictDubboService"
+		check="false" timeout="100000"/>
+
+		
+	<dubbo:reference id="onlineDubboService" interface="com.gwghk.ims.common.inf.external.marketingtool.OnlineDubboService"
+		check="false" timeout="100000"/>
+		
+	<dubbo:reference id="flowDubboService" interface="com.gwghk.ims.common.inf.external.marketingtool.FlowDubboService"
+		check="false" timeout="100000"/>
+		
+	<dubbo:reference id="camiDubboService" interface="com.gwghk.ims.common.inf.external.marketingtool.CamiDubboService"
+		check="false" timeout="100000"/>
+	
+	<dubbo:reference id="misKeyValDubboService" interface="com.gwghk.ims.common.inf.mis.base.MisKeyValDubboService"
+		check="false" timeout="100000"/>
+ 
+</beans>

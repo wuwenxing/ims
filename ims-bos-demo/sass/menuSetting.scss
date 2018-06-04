@@ -1,0 +1,34 @@
+.layui-container{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    position: relative;
+    padding-left: 290px;
+    .left{
+        position: absolute;
+        padding-right: 10px;
+        left: 0;
+        top: 0;
+        height: 100%;
+        border-right: solid 1px #eee;
+        .list li {
+            margin-bottom: 5px;
+        }
+    }
+    .right{
+        width: 100%;
+        height: 100%;
+        display: none;
+    }
+    .btns {
+        .layui-btn:first-child{
+            margin-right: 10px;
+        }
+    }
+}
+.layui-input-reset{
+    display: inline-block;
+    width: auto;
+    text-align: center;
+}
+

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActStringCodeDao" >
+   <sql id="Base_Column_sql" >
+     select a.*,c.activity_name from act_string_code a
+     inner join  act_items_setting b on b.item_number = a.item_number
+     left join act_setting c on c.activity_periods=a.activity_periods 
+     WHERE 1 = 1
+  </sql>
+  <select id="findListBySearch" resultType="ActStringCodeWrapper"  parameterType="java.util.Map" >
+      <include refid="Base_Column_sql" />
+      <if test="itemNumber != null and itemNumber !='' ">
+        and a.item_number = #{itemNumber}
+      </if>
+       <if test="itemName != null and itemName !='' ">
+        and b.item_name = #{itemName}
+      </if>
+       <if test="status != null and status!=''">
+        and a.status = #{status}
+      </if>
+       <if test="companyId != null  and companyId != ''" >
+        and a.company_id = #{companyId}
+      </if>
+      <if test="order != null  and order != ''">
+		    order by ${order} 
+		</if>
+  </select>
+ 
+  <select id="findAllStringCodes" resultType="java.lang.String">
+      select string_code from act_string_code
+  </select>
+  
+   <select id="findObject" resultType="ActStringCode">
+    select * from act_string_code
+    where id = #{id}
+  </select>
+  
+   <select id="findObjectByMap" resultType="ActStringCode">
+    select * from act_string_code where string_code = #{stringCode} limit 1
+  </select>
+ 
+   <select id="checkStringCode" resultType="java.lang.Integer">
+    select  count(*) from act_string_code
+    where 1=1 
+    AND string_code = #{stringCode}
+     <if test="id != null" >
+       AND id != #{id}
+     </if>
+  </select>
+ 
+   <delete id="deleteBatch">
+	 delete from  act_string_code
+	 WHERE  id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+  </delete>
+ 
+  <insert id="save" parameterType="ActStringCode" >
+    insert into act_string_code (id,item_number, 
+      string_code,status,activity_periods,task_title, account_no,
+      create_date, create_ip, create_user, delete_flag, enable_flag, update_date, update_ip, 
+      update_user, version_no, company_id 
+      )
+    values (#{id}, #{itemNumber}, 
+      #{stringCode}, #{status},#{activityPeriods},#{taskTitle},#{accountNo},  
+      #{createDate}, 
+      #{createIp}, #{createUser}, #{deleteFlag}, 
+      #{enableFlag}, #{updateDate}, #{updateIp}, 
+      #{updateUser}, #{versionNo}, #{companyId}
+      )
+  </insert>
+  <update id="update" parameterType="ActStringCode" >
+    update act_string_code
+    <set >
+      <if test="stringCode != null and stringCode != '' " >
+        string_code = #{stringCode},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="activityPeriods != null and activityPeriods != '' " >
+          activity_periods = #{activityPeriods},
+      </if>
+      <if test="taskTitle != null and taskTitle != '' " >
+          task_title = #{taskTitle},
+      </if>
+      <if test="accountNo != null and accountNo != null " >
+        account_no = #{accountNo},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag},
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag = #{enableFlag},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+
+  <update id="updateByStringCode" parameterType="ActStringCode" >
+    update act_string_code
+    <set >
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="activityPeriods != null and activityPeriods != '' " >
+          activity_periods = #{activityPeriods},
+      </if>
+      <if test="taskTitle != null and taskTitle != '' " >
+          task_title = #{taskTitle},
+      </if>
+      <if test="accountNo != null and accountNo != null " >
+        account_no = #{accountNo},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag},
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag = #{enableFlag},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId},
+      </if>
+    </set>
+    where string_code = #{stringCode}
+  </update>
+  
+  <update id="updateStatusByStringCode" parameterType="ActStringCode" >
+    update act_string_code
+    <set >
+       status = #{status},
+       activity_periods = #{activityPeriods},
+       task_title = #{taskTitle},
+       account_no = #{accountNo},
+       update_date = #{updateDate},
+    </set>
+    where string_code = #{stringCode}
+  </update>
+  
+  <select id="findTotal" resultType="Integer">
+    SELECT COUNT(1) FROM act_string_code
+    WHERE   1=1
+       <if test="itemNumber != null and itemNumber !='' ">
+        and item_number = #{itemNumber}
+       </if>
+       <if test="status != null" >
+         and status = #{status}
+       </if>
+       <if test="companyId != null" >
+        and company_id = #{companyId}
+      </if>
+       <if test="deleteFlag != null and deleteFlag !='' ">
+         and delete_flag = #{deleteFlag}
+       </if>
+  </select>  
+</mapper>

@@ -1,0 +1,87 @@
+<%actTaskSettings.forEach(function(item, index){%>
+<form class="layui-form task-form" >
+  <div class="task">
+    <h3 class="taskNum">活动任务<%=index+1%></h3>
+    <h4 class="task-name"><%=item.taskItemStr%></h4>
+
+    <div class="layui-inline prizeItem">
+      <%if(item.subTaskSettings && item.subTaskSettings.length){%>
+        <%item.subTaskSettings.forEach(function(itm, idx){%>
+          <div class="layui-form-item prize-name flex">
+            <label class="layui-form-label flex flex-align-items">
+              <span class="bolder"><%= idx == 0 ? '奖励物品' : '' %></span>
+            </label>
+            <div class="layui-inline prize-params flex flex-align-items">
+              <span class="mr-8">第<%=idx+1%>层级(<%=itm.taskItemVal%>-<%=itm.taskItemVal2%>)</span>
+              <%if(itm.actTaskItems && itm.actTaskItems.length){%>
+                <%itm.actTaskItems.forEach(function(titm,tidx){%>
+                  <strong class="prefix mr-8"><%=titm.itemName%></strong>
+                  <span class="num"><%=titm.itemParamVar%></span>
+                  <span class="unit"><%=titm.itemParamVarUnitStr%></span>
+                <%})%>
+              <%}%>
+            </div>
+          </div>
+        <%})%>
+      <%}else if(item.actTaskItems && item.actTaskItems.length){%>
+        <%item.actTaskItems.forEach(function(itm,idx){%>
+          <div class="layui-form-item prize-name flex">
+            <label class="layui-form-label flex flex-align-items">
+              <span class="bolder"><%= idx == 0 ? '奖励物品' : '' %></span>
+            </label>
+            <div class="layui-inline prize-params flex flex-align-items">
+              <strong class="prefix mr-8"><%=itm.itemName%></strong>
+              <span class="num"><%=itm.itemParamVar%></span>
+              <span class="unit"><%=itm.itemParamVarUnitStr%></span>
+            </div>
+          </div>
+        <%})%>
+      <%}%>
+    </div>
+
+    <%if(item.subTaskSettings && item.subTaskSettings.length){%>
+      <%item.subTaskSettings.forEach(function(itm, idx){%>
+        <div class="layui-form-item">
+          <label for="" class="layui-form-label flex flex-align-items">
+            <em class="required"><%= idx == 0 ? '*' : '' %></em>
+            <span><%= idx == 0 ? '推送条件' : '' %></span>
+          </label>
+          <div class="layui-inline">
+            <div class="layui-inline prize-params flex flex-align-items">
+              <span class="prize-name mr-8">达到第<%=idx+1%>层级(<%=itm.taskItemVal%>-<%=itm.taskItemVal2%>)</span>
+              <div class="layui-inline">
+                <input type="text" class="layui-input">
+                <span class="append">%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <%})%>
+    <%}%>
+
+    <div class="layui-form-item">
+      <label for="" class="layui-form-label flex flex-align-items">
+        <em class="required">*</em>
+        <span>推送内容</span>
+      </label>
+      <div class="layui-inline">
+        <input type="radio" name="selectTplRadio_content" value="Y" title="使用模板" lay-filter="pushModel" checked>
+        <input type="radio" name="selectTplRadio_content" value="N" title="自定义" lay-filter="pushModel">
+      </div>
+    </div>
+    <div class="taskPushContent">
+      <div class="layui-form-item">
+        <label for="" class="layui-form-label"></label>
+        <div class="layui-inline">
+          <select name="" id="">
+            <option value="">--请选择--</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="display:none;">
+    <button class="layui-btn task-submit" lay-filter="taskSubmit" lay-submit></button>
+  </div>
+</form>
+<%})%>

@@ -1,0 +1,45 @@
+.layui-logo {
+  overflow: hidden;
+}
+
+.menuFold {
+  position: absolute;
+  left: 200px;
+  height: 100%;
+}
+
+.menuFold .layui-btn-xs {
+  height: 38px;
+  margin-top: 11px;
+}
+
+.menuFold .layui-icon-reset {
+  margin-right: 0;
+  vertical-align: middle;
+}
+
+.layui-layout-left {
+  left: 220px;
+}
+
+.layui-side {
+  transition: all 0.5s;
+  transform: translateX(0);
+}
+
+.layui-side.active {
+  transition: all 0.5s;
+  transform: translateX(-100%);
+}
+
+.layui-side.active ~ div.layui-body {
+  left: 0;
+}
+
+.layui-xs {
+  display: none;
+}
+
+.layui-xs a {
+  color: #fff;
+}

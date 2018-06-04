@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<dubbo:application name="ims-mis-gateway-consumer" />
+
+	<dubbo:registry protocol="zookeeper" address="${zk.address}" />
+
+	<dubbo:reference id="misSystemLogDubboService"
+		interface="com.gwghk.ims.common.inf.mis.sys.MisSystemLogDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misSystemUserDubboService"
+		interface="com.gwghk.ims.common.inf.mis.sys.MisSystemUserDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misSystemMenuDubboService"
+		interface="com.gwghk.ims.common.inf.mis.sys.MisSystemMenuDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misSystemRoleDubboService"
+		interface="com.gwghk.ims.common.inf.mis.sys.MisSystemRoleDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misSystemMenuRoleDubboService"
+		interface="com.gwghk.ims.common.inf.mis.sys.MisSystemMenuRoleDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misSystemDictDubboService"
+		interface="com.gwghk.ims.common.inf.mis.sys.MisSystemDictDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misKeyValDubboService"
+		interface="com.gwghk.ims.common.inf.mis.base.MisKeyValDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misActTagDubboService"
+		interface="com.gwghk.ims.common.inf.mis.base.MisActTagDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misActTaskCustomSettingDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActTaskCustomSettingDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misActMaintenanceSettingDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActMaintenanceSettingDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misActSettingDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActSettingDubboService"
+		retries="0" check="false" timeout="1000000" />
+    
+    <dubbo:reference id="misActTaskSettingDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActTaskSettingDubboService"
+		retries="0" check="false" timeout="1000000" />
+		
+	<dubbo:reference id="misActTaskItemsDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActTaskItemsDubboService"
+		retries="0" check="false" timeout="1000000" />	
+		
+	<dubbo:reference id="misActItemsSettingDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActItemsSettingDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misActStringCodeDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActStringCodeDubboService"
+		retries="0" check="false" timeout="1000000" />
+	<dubbo:reference id="misActCustomerInfoDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActCustomerInfoDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misActCashinRealDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActCashinRealDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misActThirdCallRecordDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActThirdCallRecordDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misActTradeRecordDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActTradeRecordDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misPrizeRecordRedoDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisPrizeRecordRedoDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misCashoutRealDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActCashoutRealDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misActBlackListDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActBlackListDubboService"
+		retries="0" check="false" timeout="1000000" />
+		
+	<dubbo:reference id="misActWhiteListDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActWhiteListDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misImsOrderDubboService"
+		interface="com.gwghk.ims.common.inf.mis.order.MisOrderDubboService"
+		retries="0" check="false" timeout="1000000" />
+		
+	<dubbo:reference id="misMallItemsDubboService"
+		interface="com.gwghk.ims.common.inf.mis.mall.MisMallItemsDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misSystemRoleColumnAuthDubboService"
+		interface="com.gwghk.ims.common.inf.mis.sys.MisSystemRoleColumnAuthDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misImsMsgAppLogDubboService"
+		interface="com.gwghk.ims.common.inf.mis.marketingtool.MisImsMsgAppLogDubboService"
+		retries="0" check="false" timeout="1000000" />
+		
+	<dubbo:reference id="misImsMsgAppTplDubboService"
+		interface="com.gwghk.ims.common.inf.mis.marketingtool.MisImsMsgAppTplDubboService"
+		retries="0" check="false" timeout="1000000" />
+		
+	<dubbo:reference id="misImsMsgSmsLogDubboService"
+		interface="com.gwghk.ims.common.inf.mis.marketingtool.MisImsMsgSmsLogDubboService"
+		retries="0" check="false" timeout="1000000" />
+		
+	<dubbo:reference id="misImsMsgSmsTplDubboService"
+		interface="com.gwghk.ims.common.inf.mis.marketingtool.MisImsMsgSmsTplDubboService"
+		retries="0" check="false" timeout="1000000" />
+		
+	<dubbo:reference id="misImsMsgBindDubboService"
+		interface="com.gwghk.ims.common.inf.mis.marketingtool.MisImsMsgBindDubboService"
+		retries="0" check="false" timeout="1000000" />
+		
+	<dubbo:reference id="misImsRechargeLogDetailDubboService"
+		interface="com.gwghk.ims.common.inf.mis.marketingtool.MisImsRechargeLogDetailDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misImsBlackListDubboService"
+		interface="com.gwghk.ims.common.inf.mis.base.MisImsBlackListDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misActProductDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActProductDubboService"
+		retries="0" check="false" timeout="1000000" />
+
+	<dubbo:reference id="misActAccountActiviStatDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActAccountActiviStatDubboService"
+		retries="0" check="false" timeout="1000000" />
+		
+	<dubbo:reference id="misImsPrizeRecordDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisImsPrizeRecordDubboService"
+		retries="0" check="false" timeout="1000000" />
+		
+	<dubbo:reference id="misImsPrizeRecordWaitingDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisImsPrizeRecordWaitingDubboService"
+		retries="0" check="false" timeout="1000000" />
+		
+	<dubbo:reference id="misActProposalModifyDubboService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisActProposalModifyDubboService"
+		retries="0" check="false" timeout="1000000" />
+		
+	<dubbo:reference id="misGts2symbolDemoRealService"
+		interface="com.gwghk.ims.common.inf.mis.activity.MisGts2symbolDemoRealService"
+		retries="0" check="false" timeout="1000000" />
+		
+	<dubbo:reference id="actSettlementDubboService"
+		interface="com.gwghk.ims.common.inf.external.activity.ActSettlementDubboService"
+		retries="0" check="false" timeout="1000000" />
+		
+		
+</beans>

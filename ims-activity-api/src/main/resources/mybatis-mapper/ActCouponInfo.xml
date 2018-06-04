@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.activity.dao.inf.ActCouponInfoDao" >
+  <select id="findListByMap" resultType="ActCouponInfo" parameterType="java.util.Map" >
+    select * from act_coupon_info where companyId = #{companyId}
+    <if test="activityCode != null and activityCode != ''" >
+		and activity_code = #{activityCode}
+    </if>
+    <if test="triggerType != null and triggerType != ''" >
+		and trigger_type = #{triggerType}
+    </if>
+  </select>
+  <select id="findObject" resultType="ActCouponInfo" parameterType="java.lang.Integer" >
+    select * from act_coupon_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <delete id="deleteBatch">
+		delete from act_coupon_info where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from act_coupon_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="ActCouponInfo" >
+    insert into act_coupon_info (id, activity_code, amount, 
+      trigger_type, start_time, end_time, 
+      remark, create_user, create_ip, 
+      create_date, update_user, update_ip, 
+      update_date, version_no, delete_flag, 
+      enable_flag, company_id)
+    values (#{id,jdbcType=INTEGER}, #{activityCode,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, 
+      #{triggerType,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{createIp,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateIp,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{versionNo,jdbcType=BIGINT}, #{deleteFlag,jdbcType=VARCHAR}, 
+      #{enableFlag,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER})
+  </insert>
+  <update id="update" parameterType="ActCouponInfo" >
+    update act_coupon_info
+    set activity_code = #{activityCode,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      trigger_type = #{triggerType,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_ip = #{updateIp,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      version_no = #{versionNo,jdbcType=BIGINT},
+      delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

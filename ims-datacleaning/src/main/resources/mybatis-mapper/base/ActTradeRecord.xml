@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwghk.ims.datacleaning.dao.inf.base.ActTradeRecordDao" >
+  
+  <sql id="Base_Column_List" >
+    id, order_no, platform, account_no, product_type, trade_type, trade_lot, profit,
+    trade_time, create_date, create_ip, create_user, delete_flag,update_date, update_ip,
+     update_user, version_no, company_id
+  </sql>
+  
+  <select id="selectLastActTradeRecord" parameterType="java.lang.String"  resultType="ActTradeRecord">
+ 	select * from act_trade_record_${env} where source=${source} order by trade_time desc limit 1
+ </select>
+ 
+   <insert id="insertGts2Trade" parameterType="java.util.Map" >
+   	insert into act_trade_record_${env} (
+		company_id,
+		account_no,
+		platform,
+		position_no,
+		order_no,
+		product,
+		product_type,
+		trade_type,
+		trade_lot,
+		profit,
+		commission,
+		swap,
+		trade_time,
+		create_date,
+		update_date,
+		enable_flag,delete_flag,
+		push_flag
+	) select
+		account.company_id,
+		account_no,
+		account.platform platform,
+		positionid,
+		p_id,
+		displayname,
+		type,
+		(case 
+			when reason in(1,2,4,81,82,84) then 'in'
+			else 'out'
+		end),
+		execvolume,
+		profit,
+		commission,
+		swap,
+		date_add(exectime, interval 8 hour),
+		now() create_date,
+		now() update_date,
+		'Y','N','0'
+	from
+		gts2deal_${env} deal
+	inner join t_account_info_${env} account 
+		on deal.accountid = account.gts2_account_id 
+			and account.company_id=${companyId}
+	left join (
+		select distinct
+			name,
+			displayname,
+			type
+		FROM
+			gts2symbol_${env}
+		where
+			status = 0
+			and companyid=${companyId}
+	) s on deal.symbol = s. name
+	where
+		reason in (1,2,4,8, 16, 32, 64,81,82,84, 128,160, 161,162)
+		and account_no is not null
+	<if test="lastUpdateDate != null" >
+	    and exectime &gt;= #{lastUpdateDate} and exectime &lt; #{lastUpdateDateEnd}
+	</if>
+	<if test="lastUpdateDateBegin!=null and lastUpdateDateEnd!=null">
+	    and exectime between  #{lastUpdateDateBegin} and #{lastUpdateDateEnd}
+	</if>
+	order by exectime asc 
+	on duplicate key update profit = deal.profit,
+		commission = deal.commission,
+		swap = deal.swap,
+		position_no=deal.positionid,
+		product = displayname,
+		product_type = type,
+		update_date=now()
+  </insert>
+
+  <insert id="saveOrUpdateRealManual" parameterType="ActTradeRecord" >
+  	insert into act_trade_record_real (company_id, account_no, 
+      platform, position_no, order_no, 
+      product, product_type, trade_type, 
+      trade_lot, profit, commission, 
+      swap, trade_time, delete_flag, 
+      create_date,  update_date,  source,enable_flag,push_flag
+      )
+    values ( #{companyId,jdbcType=INTEGER}, #{accountNo,jdbcType=VARCHAR}, 
+      #{platform,jdbcType=VARCHAR}, #{positionNo,jdbcType=BIGINT}, #{orderNo,jdbcType=BIGINT}, 
+      #{product,jdbcType=VARCHAR}, #{productType,jdbcType=VARCHAR}, #{tradeType,jdbcType=VARCHAR}, 
+      #{tradeLot,jdbcType=DOUBLE}, #{profit,jdbcType=DOUBLE}, #{commission,jdbcType=DOUBLE}, 
+      #{swap,jdbcType=DOUBLE}, #{tradeTime,jdbcType=TIMESTAMP},  #{deleteFlag,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},  #{source,jdbcType=VARCHAR},'Y','0'
+      )
+    on duplicate key update
+       <if test="product != null" >
+        product = #{product,jdbcType=VARCHAR}
+      </if>
+      <if test="positionNo != null" >
+        ,position_no = #{positionNo,jdbcType=BIGINT}
+      </if>
+      <if test="orderNo != null" >
+        ,order_no = #{orderNo,jdbcType=BIGINT}
+      </if>
+      
+      <if test="productType != null" >
+       	,product_type = #{productType,jdbcType=VARCHAR}
+      </if>
+      <if test="tradeType != null" >
+        ,trade_type = #{tradeType,jdbcType=VARCHAR}
+      </if>
+      <if test="tradeLot != null" >
+        ,trade_lot = #{tradeLot,jdbcType=DOUBLE}
+      </if>
+      <if test="profit != null" >
+        ,profit = #{profit,jdbcType=DOUBLE}
+      </if>
+      <if test="commission != null" >
+        ,commission = #{commission,jdbcType=DOUBLE}
+      </if>
+      <if test="swap != null" >
+        ,swap = #{swap,jdbcType=DOUBLE}
+      </if>
+      <if test="tradeTime != null" >
+        ,trade_time = #{tradeTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="deleteFlag != null" >
+        ,delete_flag = #{deleteFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="updateDate != null" >
+        ,update_date = #{updateDate,jdbcType=TIMESTAMP}
+      </if>
+  </insert>
+   
+    <insert id="saveOrUpdateDemoManual" parameterType="ActTradeRecord" >
+  	insert into act_trade_record_demo (company_id, account_no, 
+      platform, position_no, order_no, 
+      product, product_type, trade_type, 
+      trade_lot, profit, commission, 
+      swap, trade_time, delete_flag, 
+      create_date,  update_date,  source,enable_flag,push_flag
+      )
+    values ( #{companyId,jdbcType=INTEGER}, #{accountNo,jdbcType=VARCHAR}, 
+      #{platform,jdbcType=VARCHAR}, #{positionNo,jdbcType=BIGINT}, #{orderNo,jdbcType=BIGINT}, 
+      #{product,jdbcType=VARCHAR}, #{productType,jdbcType=VARCHAR}, #{tradeType,jdbcType=VARCHAR}, 
+      #{tradeLot,jdbcType=DOUBLE}, #{profit,jdbcType=DOUBLE}, #{commission,jdbcType=DOUBLE}, 
+      #{swap,jdbcType=DOUBLE}, #{tradeTime,jdbcType=TIMESTAMP},  #{deleteFlag,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},  #{source,jdbcType=VARCHAR},'Y','0'
+      )
+    on duplicate key update
+       <if test="product != null" >
+        product = #{product,jdbcType=VARCHAR}
+      </if>
+      <if test="positionNo != null" >
+        ,position_no = #{positionNo,jdbcType=BIGINT}
+      </if>
+      <if test="orderNo != null" >
+        ,order_no = #{orderNo,jdbcType=BIGINT}
+      </if>
+      
+      <if test="productType != null" >
+       	,product_type = #{productType,jdbcType=VARCHAR}
+      </if>
+      <if test="tradeType != null" >
+        ,trade_type = #{tradeType,jdbcType=VARCHAR}
+      </if>
+      <if test="tradeLot != null" >
+        ,trade_lot = #{tradeLot,jdbcType=DOUBLE}
+      </if>
+      <if test="profit != null" >
+        ,profit = #{profit,jdbcType=DOUBLE}
+      </if>
+      <if test="commission != null" >
+        ,commission = #{commission,jdbcType=DOUBLE}
+      </if>
+      <if test="swap != null" >
+        ,swap = #{swap,jdbcType=DOUBLE}
+      </if>
+      <if test="tradeTime != null" >
+        ,trade_time = #{tradeTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="deleteFlag != null" >
+        ,delete_flag = #{deleteFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="updateDate != null" >
+        ,update_date = #{updateDate,jdbcType=TIMESTAMP}
+      </if>
+  </insert>
+  
+  <select id="selectByParams" parameterType="ActTradeRecord" resultType="ActTradeRecord">
+  	select * from act_trade_record_${env} 
+  		where order_no = #{orderNo} and account_no = #{accountNo} and platform=#{platform} and trade_type=#{tradeType}
+  </select>
+  
+  <insert id="save" parameterType="ActTradeRecord">
+  	insert into act_trade_record_${env} (company_id, account_no, 
+      platform, position_no, order_no, 
+      product, product_type, trade_type, 
+      trade_lot, profit, commission, 
+      swap, trade_time, delete_flag, 
+      create_date,  update_date,  source,enable_flag
+      )
+    values ( #{companyId,jdbcType=INTEGER}, #{accountNo,jdbcType=VARCHAR}, 
+      #{platform,jdbcType=VARCHAR}, #{positionNo,jdbcType=BIGINT}, #{orderNo,jdbcType=BIGINT}, 
+      #{product,jdbcType=VARCHAR}, #{productType,jdbcType=VARCHAR}, #{tradeType,jdbcType=VARCHAR}, 
+      #{tradeLot,jdbcType=DOUBLE}, #{profit,jdbcType=DOUBLE}, #{commission,jdbcType=DOUBLE}, 
+      #{swap,jdbcType=DOUBLE}, #{tradeTime,jdbcType=TIMESTAMP},  #{deleteFlag,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},  #{source,jdbcType=VARCHAR},'Y'
+      )
+  </insert>
+  
+  <update id="update" parameterType="ActTradeRecord">
+  		update act_trade_record_${env}
+  		<set>
+  			<if test="product != null" >
+		        product = #{product,jdbcType=VARCHAR},
+		      </if>
+		      <if test="positionNo != null" >
+		        position_no = #{positionNo,jdbcType=BIGINT},
+		      </if>
+		      <if test="orderNo != null" >
+		        order_no = #{orderNo,jdbcType=BIGINT},
+		      </if>
+		      
+		      <if test="productType != null" >
+		       	product_type = #{productType,jdbcType=VARCHAR},
+		      </if>
+		      <if test="tradeType != null" >
+		        trade_type = #{tradeType,jdbcType=VARCHAR},
+		      </if>
+		      <if test="tradeLot != null" >
+		        trade_lot = #{tradeLot,jdbcType=DOUBLE},
+		      </if>
+		      <if test="profit != null" >
+		        profit = #{profit,jdbcType=DOUBLE},
+		      </if>
+		      <if test="commission != null" >
+		        commission = #{commission,jdbcType=DOUBLE},
+		      </if>
+		      <if test="swap != null" >
+		        swap = #{swap,jdbcType=DOUBLE},
+		      </if>
+		      <if test="tradeTime != null" >
+		        trade_time = #{tradeTime,jdbcType=TIMESTAMP},
+		      </if>
+		      <if test="deleteFlag != null" >
+		        delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+		      </if>
+		      <if test="updateDate != null" >
+		        update_date = #{updateDate,jdbcType=TIMESTAMP},
+		      </if>
+  		</set>
+  		where 
+  			id=#{id}
+  </update>
+  
+    <select id="findUnpushTrashRecord" resultType="ActTradeRecord">
+		select id,account_no,platform from act_trade_record_${env} where push_flag='0' order by id asc;
+	</select>
+	
+	<update id="batchUpdatePushStatus">
+		update act_trade_record_${env} set push_flag='1' where push_flag='0' and id &lt;= #{id}
+	</update>
+</mapper>
